@@ -11,7 +11,7 @@ export const metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="ko">
       <body className={inter.className}>
         <TanstackQueryProvider>{children}</TanstackQueryProvider>
       </body>
