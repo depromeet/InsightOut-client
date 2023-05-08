@@ -1,6 +1,5 @@
 'use client';
 import { colors } from '@/styles/theme/foundations/colors';
-import { fonts } from '@/styles/theme/foundations/fonts';
 import { textStyles } from '@/styles/theme/foundations/textStyles';
 import { Box } from '@chakra-ui/react';
 

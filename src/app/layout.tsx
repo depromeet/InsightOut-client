@@ -1,6 +1,7 @@
 import './globals.css';
 import { PropsWithChildren } from 'react';
 import TanstackQueryProvider from '@/providers/TanstackQueryProvider';
+import localFont from 'next/font/local';
 import ChakraUIProvider from '@/providers/ChakraProvider';
 
 export const metadata = {
@@ -11,7 +12,7 @@ export const metadata = {
 export default function RootLayout({ children }: PropsWithChildren) {
   return (
     <html lang="ko">
-      <body>
+      <body className={pretendard.className}>
         <TanstackQueryProvider>
           <ChakraUIProvider>{children}</ChakraUIProvider>
         </TanstackQueryProvider>
@@ -19,3 +20,24 @@ export default function RootLayout({ children }: PropsWithChildren) {
     </html>
   );
 }
+
+const pretendard = localFont({
+  src: './fonts/PretendardVariable.woff2',
+  display: 'swap',
+  fallback: [
+    'Pretendard',
+    '-apple-system',
+    'BlinkMacSystemFont',
+    'system-ui',
+    'Roboto',
+    'Helvetica Neue',
+    'Segoe UI',
+    'Apple SD Gothic Neo',
+    'Noto Sans KR',
+    'Malgun Gothic',
+    'Apple Color Emoji',
+    'Segoe UI Emoji',
+    'Segoe UI Symbol',
+    'sans-serif',
+  ],
+});
