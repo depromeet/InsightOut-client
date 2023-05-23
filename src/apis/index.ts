@@ -20,13 +20,11 @@ instance.interceptors.response.use(
     /**
      * @description Access Token이 만료될 경우 Refresh Token으로 재발급합니다.
      */
-    if (data.statusCode === 401) {
-      if (data.statusCode === 401 && data.message === 'Unauthorized') {
-        const response = await authApi.reIssue();
-        const accessToken = response.data.accessToken;
-        axios.defaults.headers['Authorization'] = `Bearer ${accessToken}`;
-        return axios(originalRequest);
-      }
+    if (data.statusCode === 401 && data.message === 'Unauthorized') {
+      const response = await authApi.reIssue();
+      const accessToken = response.data.accessToken;
+      axios.defaults.headers['Authorization'] = `Bearer ${accessToken}`;
+      return axios(originalRequest);
     }
 
     /**
