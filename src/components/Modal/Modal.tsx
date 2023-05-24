@@ -5,7 +5,7 @@ import { Modal as ModalWrapper, ModalOverlay, ModalContent, ModalCloseButton, us
 import { PropsWithChildren, ReactElement } from 'react';
 
 interface ModalProps {
-  size?: 'sm' | 'ml';
+  size?: 'sm' | 'md';
   header?: ReactElement;
   additionalFooter?: ReactElement;
   closeButtonContent?: string;
@@ -16,7 +16,7 @@ interface ModalProps {
 
 const Modal = (props: PropsWithChildren<ModalProps>) => {
   const {
-    size = 'ml',
+    size = 'md',
     header,
     children,
     additionalFooter,
@@ -33,7 +33,7 @@ const Modal = (props: PropsWithChildren<ModalProps>) => {
         {openButtonContent}
       </Button>
 
-      <ModalWrapper isOpen={isOpen} onClose={onClose} size={size}>
+      <ModalWrapper isOpen={isOpen} onClose={onClose} size={size} isCentered>
         <ModalOverlay />
         <ModalContent alignItems="center">
           <ModalHeader textAlign="center">{header}</ModalHeader>
