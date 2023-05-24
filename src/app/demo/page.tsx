@@ -11,7 +11,7 @@ const Page = () => {
         openButtonContent="모달 열기"
         header={<ModalHeader title="타이틀" subTitle="서브타이틀" />}
         closeButtonContent="닫기"
-        footer={<ModalFooterWithAdditionalButton content="추가 버튼" />}>
+        additionalFooter={<ModalFooterWithAdditionalButton content="추가 버튼" />}>
         <div>
           <p>모달 테스트</p>
         </div>
