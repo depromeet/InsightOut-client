@@ -1,9 +1,9 @@
 import { colors } from './colors';
-import { shadow } from './shadow';
+import { boxShadow } from './boxShadow';
 import { textStyles } from './textStyles';
 
 export const foundations = {
   colors,
   textStyles,
-  shadow,
+  boxShadow,
 };

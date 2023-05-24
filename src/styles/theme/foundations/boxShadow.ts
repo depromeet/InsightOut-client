@@ -1,4 +1,4 @@
-export const shadow = {
+export const boxShadow = {
   /**
    * @usage
    * 맞춤법검사
