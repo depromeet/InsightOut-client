@@ -7,7 +7,7 @@ import { PropsWithChildren, ReactElement } from 'react';
 interface ModalProps {
   size?: 'sm' | 'ml';
   header?: ReactElement;
-  footer: ReactElement;
+  additionalFooter?: ReactElement;
   closeButtonContent: string;
   closeButtonProps?: ButtonProps;
   openButtonContent?: string;
@@ -19,7 +19,7 @@ const Modal = (props: PropsWithChildren<ModalProps>) => {
     size = 'ml',
     header,
     children,
-    footer,
+    additionalFooter,
     closeButtonContent,
     closeButtonProps,
     openButtonContent,
@@ -46,7 +46,7 @@ const Modal = (props: PropsWithChildren<ModalProps>) => {
             ) : (
               ''
             )}
-            {footer}
+            {additionalFooter}
           </ModalFooter>
           <ModalCloseButton />
         </ModalContent>
