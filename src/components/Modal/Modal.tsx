@@ -8,7 +8,7 @@ interface ModalProps {
   size?: 'sm' | 'ml';
   header?: ReactElement;
   additionalFooter?: ReactElement;
-  closeButtonContent: string;
+  closeButtonContent?: string;
   closeButtonProps?: ButtonProps;
   openButtonContent?: string;
   openButtonProps?: ButtonProps;
