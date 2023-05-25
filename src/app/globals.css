@@ -1,3 +1,116 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+}
+
+@layer components {
+  /* header */
+  .h1 {
+    font-weight: 700;
+    font-size: 60px;
+    line-height: 80px;
+    letter-spacing: -0.6px;
+  }
+  .h2 {
+    font-weight: 700;
+    font-size: 44px;
+    line-height: 56px;
+    letter-spacing: -0.6px;
+  }
+  .h3 {
+    font-weight: 700;
+    font-size: 40px;
+    line-height: 52px;
+    letter-spacing: -0.6px;
+  }
+  .h4 {
+    font-weight: 700;
+    font-size: 36px;
+    line-height: 48px;
+    letter-spacing: -0.6px;
+  }
+  .h5 {
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 42px;
+    letter-spacing: -0.6px;
+  }
+  .h6 {
+    font-weight: 700;
+    font-size: 28px;
+    line-height: 38px;
+    letter-spacing: -0.6px;
+  }
+  .subhead1 {
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 32px;
+    letter-spacing: -0.6px;
+  }
+  .subhead2 {
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 28px;
+    letter-spacing: -0.6px;
+  }
+  .subhead3 {
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 28px;
+    letter-spacing: -0.6px;
+  }
+
+  /* body */
+  .b1 {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 27px;
+    letter-spacing: -0.6px;
+  }
+  .b2 {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 27px;
+    letter-spacing: -0.6px;
+  }
+  .b3 {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 21px;
+    letter-spacing: -0.6px;
+  }
+  .b4 {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 21px;
+    letter-spacing: -0.6px;
+  }
+
+  /* caption */
+  .c1 {
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: -0.6px;
+  }
+  .c2 {
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: -0.6px;
+  }
+  .c3 {
+    font-weight: 500;
+    font-size: 10px;
+    line-height: 14px;
+    letter-spacing: -0.6px;
+  }
+  .c4 {
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 14px;
+    letter-spacing: -0.6px;
+  }
+}

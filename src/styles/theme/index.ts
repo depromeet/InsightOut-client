@@ -16,24 +16,7 @@ const theme = extendTheme({
   styles,
   config,
   ...foundations,
-  components: {
-    // Components
-    // @FIXME: example 삭제하기
-    Textarea: {
-      variants: {
-        outline: {
-          _placeholder: {
-            color: `${foundations.colors.grey[3]}`,
-          },
-        },
-        unstyled: {
-          _placeholder: {
-            color: `${foundations.colors.grey[3]}`,
-          },
-        },
-      },
-    },
-  },
+  components: {},
 }) as Theme;
 
 type Theme = ChakraTheme & typeof foundations;
