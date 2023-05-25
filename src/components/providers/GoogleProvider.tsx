@@ -6,7 +6,7 @@ import axios from 'axios';
 import { getCookie } from 'cookies-next';
 import authApi from '@/apis/auth';
 
-export default function GoogleLoginProvider({ children }: StrictPropsWithChildren) {
+export default function GoogleProvider({ children }: StrictPropsWithChildren) {
   useEffect(() => {
     if (typeof window === 'undefined') return;
 
