@@ -1,9 +1,9 @@
 import { colors } from './colors';
-import { semanticTokens } from './semanticTokens';
+import { boxShadow } from './boxShadow';
 import { textStyles } from './textStyles';
 
 export const foundations = {
   colors,
-  semanticTokens,
   textStyles,
+  boxShadow,
 };

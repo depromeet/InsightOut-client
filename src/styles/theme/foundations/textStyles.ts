@@ -1,83 +1,109 @@
-// @TODO: 디자인 나오면 변경하기
 export const textStyles = {
+  //header
   h1: {
-    fontWeight: 600,
-    fontSize: '32px',
-    lineHeight: '38px',
-    letterSpacing: '-0.01em',
+    fontWeight: 700,
+    fontSize: '60px',
+    lineHeight: '80px',
+    letterSpacing: '-0.6px',
   },
   h2: {
-    fontWeight: 600,
-    fontSize: '24px',
-    lineHeight: '29px',
-    letterSpacing: '-0.01em',
+    fontWeight: 700,
+    fontSize: '44px',
+    lineHeight: '56px',
+    letterSpacing: '-0.6px',
   },
   h3: {
-    fontWeight: 600,
-    fontSize: '18px',
-    lineHeight: '22px',
-    letterSpacing: '-0.01em',
+    fontWeight: 700,
+    fontSize: '40px',
+    lineHeight: '52px',
+    letterSpacing: '-0.6px',
   },
-  body1: {
+  h4: {
+    fontWeight: 700,
+    fontSize: '36px',
+    lineHeight: '48px',
+    letterSpacing: '-0.6px',
+  },
+  h5: {
+    fontWeight: 700,
+    fontSize: '32px',
+    lineHeight: '42px',
+    letterSpacing: '-0.6px',
+  },
+  h6: {
+    fontWeight: 700,
+    fontSize: '28px',
+    lineHeight: '38px',
+    letterSpacing: '-0.6px',
+  },
+  subhead1: {
+    fontWeight: 700,
+    fontSize: '24px',
+    lineHeight: '32px',
+    letterSpacing: '-0.6px',
+  },
+  subhead2: {
+    fontWeight: 700,
+    fontSize: '20px',
+    lineHeight: '28px',
+    letterSpacing: '-0.6px',
+  },
+  subhead3: {
+    fontWeight: 500,
+    fontSize: '20px',
+    lineHeight: '28px',
+    letterSpacing: '-0.6px',
+  },
+
+  // body
+  b1: {
     fontWeight: 500,
     fontSize: '16px',
-    lineHeight: '100%',
-    letterSpacing: '-0.01em',
+    lineHeight: '27px',
+    letterSpacing: '-0.6px',
   },
-  multiBody1: {
-    fontWeight: 500,
+  b2: {
+    fontWeight: 400,
     fontSize: '16px',
-    lineHeight: '150%',
-    letterSpacing: '-0.01em',
+    lineHeight: '27px',
+    letterSpacing: '-0.6px',
   },
-  body2: {
+  b3: {
+    fontWeight: 500,
+    fontSize: '14px',
+    lineHeight: '21px',
+    letterSpacing: '-0.6px',
+  },
+  b4: {
     fontWeight: 400,
     fontSize: '14px',
-    lineHeight: '100%',
-    letterSpacing: '-0.01em',
+    lineHeight: '21px',
+    letterSpacing: '-0.6px',
   },
-  multiBody2: {
-    fontWeight: 400,
-    fontSize: '14px',
-    lineHeight: '150%',
-    letterSpacing: '-0.01em',
-  },
-  body3: {
-    fontWeight: 400,
-    fontSize: '13px',
-    lineHeight: '100%',
-    letterSpacing: '-0.01em',
-  },
-  multiBody3: {
-    fontWeight: 400,
-    fontSize: '13px',
-    lineHeight: '150%',
-    letterSpacing: '-0.01em',
-  },
-  caption: {
+
+  // caption
+  c1: {
     fontWeight: 500,
     fontSize: '12px',
-    lineHeight: '100%',
-    letterSpacing: '-0.01em',
+    lineHeight: '16px',
+    letterSpacing: '-0.6px',
   },
-  multiCaption: {
-    fontWeight: 500,
+  c2: {
+    fontWeight: 400,
     fontSize: '12px',
-    lineHeight: '150%',
-    letterSpacing: '-0.01em',
+    lineHeight: '16px',
+    letterSpacing: '-0.6px',
   },
-  buttonMedium: {
-    fontWeight: 600,
-    fontSize: '16px',
-    lineHeight: '100%',
-    letterSpacing: '-0.01em',
-    color: '#FF6F1E',
-  },
-  buttonSmall: {
+  c3: {
     fontWeight: 500,
-    fontSize: '14px',
-    lineHeight: '100%',
-    letterSpacing: '-0.01em',
-    color: '#FF6F1E',
+    fontSize: '10px',
+    lineHeight: '14px',
+    letterSpacing: '-0.6px',
   },
-};
+  c4: {
+    fontWeight: 400,
+    fontSize: '10px',
+    lineHeight: '14px',
+    letterSpacing: '-0.6px',
+  },
+} as const;
