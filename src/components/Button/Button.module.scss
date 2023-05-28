@@ -1,0 +1,135 @@
+// Base
+
+.root {
+  @apply flex justify-center items-center rounded-[26px] outline-none border-none cursor-pointer;
+}
+
+// Variant
+
+.primary {
+  @apply text-white bg-gray-900;
+}
+
+.secondary {
+  @apply text-white bg-purple-500;
+}
+
+.tertiary {
+  @apply text-gray-900 bg-gray-200;
+}
+
+.secondary-green {
+  @apply text-main bg-green-200;
+}
+
+.outlined {
+  @apply text-purple-300 bg-white;
+  border: 1px solid #a19afb;
+}
+
+// Sizes
+
+.sm {
+  @apply px-[8px] py-[4px] text-[12px] leading-[16px] font-medium gap-[5.51px];
+}
+
+.md {
+  @apply px-[12px] py-[5.5px] text-[14px] leading-[21px] font-normal gap-[6.07px];
+}
+
+.lg {
+  @apply px-[16px] py-[7.5px] text-[16px] leading-[28px] font-bold gap-[6.26px];
+}
+
+.xl {
+  @apply py-[12px] px-[24px] text-[20px] leading-[28px] font-bold gap-[10.26px];
+}
+
+// Hover
+
+.primary {
+  @apply hover:bg-purple-300 hover:text-white;
+}
+
+.secondary {
+  @apply hover:bg-purple-400 hover:text-white;
+}
+
+.tertiary {
+  @apply hover:bg-gray-100 hover:text-gray-900;
+}
+
+.secondary-green {
+  @apply hover:text-main hover:bg-green-50;
+}
+
+.outlined {
+  @apply hover:text-purple-500 hover:bg-purple-50;
+}
+
+// Pressed
+
+.primary {
+  @apply active:bg-gray-950 active:text-white;
+}
+
+.secondary {
+  @apply active:bg-purple-600 active:text-white;
+}
+
+.tertiary {
+  @apply active:bg-gray-400 active:text-main;
+}
+
+.secondary-green {
+  @apply active:bg-green-300 active:text-main;
+}
+
+.outlined {
+  @apply active:bg-purple-100 active:text-purple-500;
+}
+
+// Focused
+
+.primary {
+  @apply focus:bg-gray-950 focus:text-white;
+}
+
+.secondary {
+  @apply focus:bg-purple-500 focus:text-white;
+}
+
+.tertiary {
+  @apply focus:bg-gray-400 focus:text-main;
+}
+
+.secondary-green {
+  @apply focus:bg-green-300 focus:text-main;
+}
+
+.outlined {
+  @apply focus:bg-purple-300 focus:text-purple-500;
+}
+
+// Disabled
+
+.primary {
+  @apply disabled:text-light disabled:bg-gray-300 disabled:cursor-not-allowed;
+}
+
+.secondary {
+  @apply disabled:text-purple-200 disabled:bg-purple-100 disabled:cursor-not-allowed;
+}
+
+.tertiary {
+  @apply disabled:text-light disabled:bg-gray-300 disabled:cursor-not-allowed;
+}
+
+.secondary-green {
+  @apply disabled:bg-green-200 disabled:text-green-500 disabled:cursor-not-allowed;
+}
+
+.outlined {
+  @apply disabled:bg-purple-50 disabled:text-purple-200 disabled:cursor-not-allowed;
+  border: 1px solid #c0bbfc;
+}
