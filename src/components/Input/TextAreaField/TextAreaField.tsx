@@ -10,6 +10,11 @@ type TextAreaFieldProps = ComponentPropsWithRef<'textarea'> & {
   value?: string;
 };
 
+/**
+ * @param showCount true일 경우에 글자 수가 보입니다.
+ * @param error true일 경우에 텍스트 필드가 error 상태로 스타일링됩니다.
+ * @param errorMessage error가 true인 경우에 사용. 텍스트 필드 하단에 보이는 메시지
+ */
 const TextAreaField = ({ showCount, value, maxLength, error, errorMessage, ...props }: TextAreaFieldProps) => {
   return (
     <div className="relative">
