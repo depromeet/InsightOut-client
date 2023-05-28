@@ -136,7 +136,25 @@
   }
 }
 
-// Icon
+// Icon Size
+
+.sm svg {
+  @apply w-[16px] h-[16px];
+}
+
+.md svg {
+  @apply w-[22px] h-[22px];
+}
+
+.lg svg {
+  @apply w-[24px] h-[24px];
+}
+
+.xl svg {
+  @apply w-[24px] h-[24px];
+}
+
+// Icon Color
 .primary path {
   @apply fill-white;
 }
@@ -176,4 +194,22 @@
 
 .outlined:disabled path {
   @apply fill-purple-200;
+}
+
+// Icon Only
+
+.sm.icon-only {
+  @apply py-[2px] px-[8px];
+}
+
+.md.icon-only {
+  @apply py-[4px] px-[14px];
+}
+
+.lg.icon-only {
+  @apply py-[9.5px] px-[16px];
+}
+
+.xl.icon-only {
+  @apply p-[14px];
 }

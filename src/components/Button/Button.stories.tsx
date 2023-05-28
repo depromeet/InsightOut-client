@@ -223,6 +223,138 @@ export const DefaultButton: Story = {
   },
 };
 
+export const IconOnlyButton: Story = {
+  render: () => {
+    return (
+      <Flex flexDirection={'column'} gap={50}>
+        <Flex flexDirection={'column'}>
+          <Heading>Primary</Heading>
+          <Heading as={'h4'}>Small</Heading>
+          <Flex gap={10}>
+            <Button size="sm" variant="primary" onlyIcon={<IconHeart />} />
+            <Button size="sm" variant="primary" disabled onlyIcon={<IconHeart />} />
+          </Flex>
+          <Heading as={'h4'}>Medium</Heading>
+          <Flex gap={10}>
+            <Button size="md" variant="primary" onlyIcon={<IconHeart />} />
+            <Button size="md" variant="primary" disabled onlyIcon={<IconHeart />} />
+          </Flex>
+          <Heading as={'h4'}>Large</Heading>
+          <Flex gap={10}>
+            <Button size="lg" variant="primary" onlyIcon={<IconHeart />} />
+            <Button size="lg" variant="primary" disabled onlyIcon={<IconHeart />} />
+          </Flex>
+          <Heading as={'h4'}>XLarge</Heading>
+          <Flex gap={10}>
+            <Button size="xl" variant="primary" onlyIcon={<IconHeart />} />
+            <Button size="xl" variant="primary" disabled onlyIcon={<IconHeart />} />
+          </Flex>
+        </Flex>
+        <Flex flexDirection={'column'}>
+          <Flex flexDirection={'column'}>
+            <Heading>Secondary</Heading>
+            <Heading as={'h4'}>Small</Heading>
+            <Flex gap={10}>
+              <Button size="sm" variant="secondary" onlyIcon={<IconHeart />} />
+              <Button size="sm" variant="secondary" disabled onlyIcon={<IconHeart />} />
+            </Flex>
+            <Heading as={'h4'}>Medium</Heading>
+            <Flex gap={10}>
+              <Button size="md" variant="secondary" onlyIcon={<IconHeart />} />
+              <Button size="md" variant="secondary" disabled onlyIcon={<IconHeart />} />
+            </Flex>
+            <Heading as={'h4'}>Large</Heading>
+            <Flex gap={10}>
+              <Button size="lg" variant="secondary" onlyIcon={<IconHeart />} />
+              <Button size="lg" variant="secondary" disabled onlyIcon={<IconHeart />} />
+            </Flex>
+            <Heading as={'h4'}>XLarge</Heading>
+            <Flex gap={10}>
+              <Button size="xl" variant="secondary" onlyIcon={<IconHeart />} />
+              <Button size="xl" variant="secondary" disabled onlyIcon={<IconHeart />} />
+            </Flex>
+          </Flex>
+        </Flex>
+        <Flex flexDirection={'column'}>
+          <Flex flexDirection={'column'}>
+            <Heading>Tertiary</Heading>
+            <Heading as={'h4'}>Small</Heading>
+            <Flex gap={10}>
+              <Button size="sm" variant="tertiary" onlyIcon={<IconHeart />} />
+              <Button size="sm" variant="tertiary" disabled onlyIcon={<IconHeart />} />
+            </Flex>
+            <Heading as={'h4'}>Medium</Heading>
+            <Flex gap={10}>
+              <Button size="md" variant="tertiary" onlyIcon={<IconHeart />} />
+              <Button size="md" variant="tertiary" disabled onlyIcon={<IconHeart />} />
+            </Flex>
+            <Heading as={'h4'}>Large</Heading>
+            <Flex gap={10}>
+              <Button size="lg" variant="tertiary" onlyIcon={<IconHeart />} />
+              <Button size="lg" variant="tertiary" disabled onlyIcon={<IconHeart />} />
+            </Flex>
+            <Heading as={'h4'}>XLarge</Heading>
+            <Flex gap={10}>
+              <Button size="xl" variant="tertiary" onlyIcon={<IconHeart />} />
+              <Button size="xl" variant="tertiary" disabled onlyIcon={<IconHeart />} />
+            </Flex>
+          </Flex>
+        </Flex>
+        <Flex flexDirection={'column'}>
+          <Flex flexDirection={'column'}>
+            <Heading>Secondary-Green</Heading>
+            <Heading as={'h4'}>Small</Heading>
+            <Flex gap={10}>
+              <Button size="sm" variant="secondary-green" onlyIcon={<IconHeart />} />
+              <Button size="sm" variant="secondary-green" disabled onlyIcon={<IconHeart />} />
+            </Flex>
+            <Heading as={'h4'}>Medium</Heading>
+            <Flex gap={10}>
+              <Button size="md" variant="secondary-green" onlyIcon={<IconHeart />} />
+              <Button size="md" variant="secondary-green" disabled onlyIcon={<IconHeart />} />
+            </Flex>
+            <Heading as={'h4'}>Large</Heading>
+            <Flex gap={10}>
+              <Button size="lg" variant="secondary-green" onlyIcon={<IconHeart />} />
+              <Button size="lg" variant="secondary-green" disabled onlyIcon={<IconHeart />} />
+            </Flex>
+            <Heading as={'h4'}>XLarge</Heading>
+            <Flex gap={10}>
+              <Button size="xl" variant="secondary-green" onlyIcon={<IconHeart />} />
+              <Button size="xl" variant="secondary-green" disabled onlyIcon={<IconHeart />} />
+            </Flex>
+          </Flex>
+        </Flex>
+        <Flex flexDirection={'column'}>
+          <Flex flexDirection={'column'}>
+            <Heading>Outlined</Heading>
+            <Heading as={'h4'}>Small</Heading>
+            <Flex gap={10}>
+              <Button size="sm" variant="outlined" onlyIcon={<IconHeart />} />
+              <Button size="sm" variant="outlined" disabled onlyIcon={<IconHeart />} />
+            </Flex>
+            <Heading as={'h4'}>Medium</Heading>
+            <Flex gap={10}>
+              <Button size="md" variant="outlined" onlyIcon={<IconHeart />} />
+              <Button size="md" variant="outlined" disabled onlyIcon={<IconHeart />} />
+            </Flex>
+            <Heading as={'h4'}>Large</Heading>
+            <Flex gap={10}>
+              <Button size="lg" variant="outlined" onlyIcon={<IconHeart />} />
+              <Button size="lg" variant="outlined" disabled onlyIcon={<IconHeart />} />
+            </Flex>
+            <Heading as={'h4'}>XLarge</Heading>
+            <Flex gap={10}>
+              <Button size="xl" variant="outlined" onlyIcon={<IconHeart />} />
+              <Button size="xl" variant="outlined" disabled onlyIcon={<IconHeart />} />
+            </Flex>
+          </Flex>
+        </Flex>
+      </Flex>
+    );
+  },
+};
+
 export const LeftIconButton: Story = {
   render: () => {
     return (
