@@ -5,7 +5,6 @@ import { TextLengthMessage } from '../TextLengthMessage';
 
 type TextFieldProps = ComponentPropsWithRef<'input'> & {
   mode?: 'default' | 'naming' | 'password' | 'email' | 'chip';
-  inputSize?: 'small' | 'middle';
   error?: boolean;
   errorMessage?: string;
   emailDomain?: string;
@@ -14,21 +13,11 @@ type TextFieldProps = ComponentPropsWithRef<'input'> & {
 
 /**
  * @param mode 텍스트 필드의 종류
- * @param inputSize 텍스트 필드의 크기
  * @param error true일 경우에 텍스트 필드가 error 상태로 스타일링됩니다.
  * @param errorMessage error가 true인 경우에 사용. 텍스트 필드 하단에 보이는 메시지
  * @param emailDomain mode="email"인 경우에 사용. 텍스트 필드의 오른쪽에 이메일 도메인 주소가 보입니다 (ex. '@'gmail.com)
  */
-const TextField = ({
-  mode,
-  inputSize,
-  error,
-  errorMessage,
-  emailDomain,
-  value,
-  maxLength,
-  ...props
-}: TextFieldProps) => {
+const TextField = ({ mode, error, errorMessage, emailDomain, value, maxLength, ...props }: TextFieldProps) => {
   return (
     <div className="relative">
       <label htmlFor="">{mode === 'chip' && <Chip />}</label>
