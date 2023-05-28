@@ -11,118 +11,211 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof Button>;
 
-export const Variant: Story = {
-  args: { size: 'lg' },
-  render: ({ ...args }) => {
+export const DefaultButton: Story = {
+  render: () => {
     return (
       <Flex flexDirection={'column'} gap={50}>
         <Flex flexDirection={'column'}>
           <Heading>Primary</Heading>
+          <Heading as={'h4'}>Small</Heading>
           <Flex gap={10}>
-            <Button {...args} variant="primary">
+            <Button size="sm" variant="primary">
               BUTTON
             </Button>
-            <Button {...args} variant="primary" disabled>
+            <Button size="sm" variant="primary" disabled>
+              DISABLED
+            </Button>
+          </Flex>
+          <Heading as={'h4'}>Medium</Heading>
+          <Flex gap={10}>
+            <Button size="md" variant="primary">
+              BUTTON
+            </Button>
+            <Button size="md" variant="primary" disabled>
+              DISABLED
+            </Button>
+          </Flex>
+          <Heading as={'h4'}>Large</Heading>
+          <Flex gap={10}>
+            <Button size="lg" variant="primary">
+              BUTTON
+            </Button>
+            <Button size="lg" variant="primary" disabled>
+              DISABLED
+            </Button>
+          </Flex>
+          <Heading as={'h4'}>XLarge</Heading>
+          <Flex gap={10}>
+            <Button size="xl" variant="primary">
+              BUTTON
+            </Button>
+            <Button size="xl" variant="primary" disabled>
               DISABLED
             </Button>
           </Flex>
         </Flex>
         <Flex flexDirection={'column'}>
-          <Heading>Secondary</Heading>
-          <Flex gap={10}>
-            <Button {...args} variant="secondary">
-              BUTTON
-            </Button>
-            <Button {...args} variant="secondary" disabled>
-              DISABLED
-            </Button>
+          <Flex flexDirection={'column'}>
+            <Heading>Secondary</Heading>
+            <Heading as={'h4'}>Small</Heading>
+            <Flex gap={10}>
+              <Button size="sm" variant="secondary">
+                BUTTON
+              </Button>
+              <Button size="sm" variant="secondary" disabled>
+                DISABLED
+              </Button>
+            </Flex>
+            <Heading as={'h4'}>Medium</Heading>
+            <Flex gap={10}>
+              <Button size="md" variant="secondary">
+                BUTTON
+              </Button>
+              <Button size="md" variant="secondary" disabled>
+                DISABLED
+              </Button>
+            </Flex>
+            <Heading as={'h4'}>Large</Heading>
+            <Flex gap={10}>
+              <Button size="lg" variant="secondary">
+                BUTTON
+              </Button>
+              <Button size="lg" variant="secondary" disabled>
+                DISABLED
+              </Button>
+            </Flex>
+            <Heading as={'h4'}>XLarge</Heading>
+            <Flex gap={10}>
+              <Button size="xl" variant="secondary">
+                BUTTON
+              </Button>
+              <Button size="xl" variant="secondary" disabled>
+                DISABLED
+              </Button>
+            </Flex>
           </Flex>
         </Flex>
         <Flex flexDirection={'column'}>
-          <Heading>Tertiary</Heading>
-          <Flex gap={10}>
-            <Button {...args} variant="tertiary">
-              BUTTON
-            </Button>
-            <Button {...args} variant="tertiary" disabled>
-              DISABLED
-            </Button>
+          <Flex flexDirection={'column'}>
+            <Heading>Tertiary</Heading>
+            <Heading as={'h4'}>Small</Heading>
+            <Flex gap={10}>
+              <Button size="sm" variant="tertiary">
+                BUTTON
+              </Button>
+              <Button size="sm" variant="tertiary" disabled>
+                DISABLED
+              </Button>
+            </Flex>
+            <Heading as={'h4'}>Medium</Heading>
+            <Flex gap={10}>
+              <Button size="md" variant="tertiary">
+                BUTTON
+              </Button>
+              <Button size="md" variant="tertiary" disabled>
+                DISABLED
+              </Button>
+            </Flex>
+            <Heading as={'h4'}>Large</Heading>
+            <Flex gap={10}>
+              <Button size="lg" variant="tertiary">
+                BUTTON
+              </Button>
+              <Button size="lg" variant="tertiary" disabled>
+                DISABLED
+              </Button>
+            </Flex>
+            <Heading as={'h4'}>XLarge</Heading>
+            <Flex gap={10}>
+              <Button size="xl" variant="tertiary">
+                BUTTON
+              </Button>
+              <Button size="xl" variant="tertiary" disabled>
+                DISABLED
+              </Button>
+            </Flex>
           </Flex>
         </Flex>
         <Flex flexDirection={'column'}>
-          <Heading>Secondary-Green</Heading>
-          <Flex gap={10}>
-            <Button {...args} variant="secondary-green">
-              BUTTON
-            </Button>
-            <Button {...args} variant="secondary-green" disabled>
-              DISABLED
-            </Button>
+          <Flex flexDirection={'column'}>
+            <Heading>Secondary-Green</Heading>
+            <Heading as={'h4'}>Small</Heading>
+            <Flex gap={10}>
+              <Button size="sm" variant="secondary-green">
+                BUTTON
+              </Button>
+              <Button size="sm" variant="secondary-green" disabled>
+                DISABLED
+              </Button>
+            </Flex>
+            <Heading as={'h4'}>Medium</Heading>
+            <Flex gap={10}>
+              <Button size="md" variant="secondary-green">
+                BUTTON
+              </Button>
+              <Button size="md" variant="secondary-green" disabled>
+                DISABLED
+              </Button>
+            </Flex>
+            <Heading as={'h4'}>Large</Heading>
+            <Flex gap={10}>
+              <Button size="lg" variant="secondary-green">
+                BUTTON
+              </Button>
+              <Button size="lg" variant="secondary-green" disabled>
+                DISABLED
+              </Button>
+            </Flex>
+            <Heading as={'h4'}>XLarge</Heading>
+            <Flex gap={10}>
+              <Button size="xl" variant="secondary-green">
+                BUTTON
+              </Button>
+              <Button size="xl" variant="secondary-green" disabled>
+                DISABLED
+              </Button>
+            </Flex>
           </Flex>
         </Flex>
         <Flex flexDirection={'column'}>
-          <Heading>Outlined</Heading>
-          <Flex gap={10}>
-            <Button {...args} variant="outlined">
-              BUTTON
-            </Button>
-            <Button {...args} variant="outlined" disabled>
-              DISABLED
-            </Button>
-          </Flex>
-        </Flex>
-      </Flex>
-    );
-  },
-};
-
-export const Sizes: Story = {
-  args: { variant: 'primary' },
-  render: ({ ...args }) => {
-    return (
-      <Flex flexDirection={'column'} gap={50}>
-        <Flex flexDirection={'column'}>
-          <Heading>Small</Heading>
-          <Flex gap={10}>
-            <Button {...args} size="sm">
-              BUTTON
-            </Button>
-            <Button {...args} size="sm" disabled>
-              DISABLED
-            </Button>
-          </Flex>
-        </Flex>
-        <Flex flexDirection={'column'}>
-          <Heading>Medium</Heading>
-          <Flex gap={10}>
-            <Button {...args} size="md">
-              BUTTON
-            </Button>
-            <Button {...args} size="md" disabled>
-              DISABLED
-            </Button>
-          </Flex>
-        </Flex>
-        <Flex flexDirection={'column'}>
-          <Heading>Large</Heading>
-          <Flex gap={10}>
-            <Button {...args} size="lg">
-              BUTTON
-            </Button>
-            <Button {...args} size="lg" disabled>
-              DISABLED
-            </Button>
-          </Flex>
-        </Flex>
-        <Flex flexDirection={'column'}>
-          <Heading>XLarge</Heading>
-          <Flex gap={10}>
-            <Button {...args} size="xl">
-              BUTTON
-            </Button>
-            <Button {...args} size="xl" disabled>
-              DISABLED
-            </Button>
+          <Flex flexDirection={'column'}>
+            <Heading>Outlined</Heading>
+            <Heading as={'h4'}>Small</Heading>
+            <Flex gap={10}>
+              <Button size="sm" variant="outlined">
+                BUTTON
+              </Button>
+              <Button size="sm" variant="outlined" disabled>
+                DISABLED
+              </Button>
+            </Flex>
+            <Heading as={'h4'}>Medium</Heading>
+            <Flex gap={10}>
+              <Button size="md" variant="outlined">
+                BUTTON
+              </Button>
+              <Button size="md" variant="outlined" disabled>
+                DISABLED
+              </Button>
+            </Flex>
+            <Heading as={'h4'}>Large</Heading>
+            <Flex gap={10}>
+              <Button size="lg" variant="outlined">
+                BUTTON
+              </Button>
+              <Button size="lg" variant="outlined" disabled>
+                DISABLED
+              </Button>
+            </Flex>
+            <Heading as={'h4'}>XLarge</Heading>
+            <Flex gap={10}>
+              <Button size="xl" variant="outlined">
+                BUTTON
+              </Button>
+              <Button size="xl" variant="outlined" disabled>
+                DISABLED
+              </Button>
+            </Flex>
           </Flex>
         </Flex>
       </Flex>
