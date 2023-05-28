@@ -9,7 +9,8 @@
     "lint": "next lint",
     "prepare": "husky install",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "chromatic": "npx chromatic --project-token=chpt_1339f61e98475e1"
   },
   "dependencies": {
     "@chakra-ui/react": "^2.6.1",
@@ -50,6 +51,7 @@
     "@svgr/webpack": "^8.0.1",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^14.0.0",
+    "chromatic": "^6.17.4",
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-storybook": "^0.6.12",
@@ -65,5 +67,7 @@
       "prettier --write",
       "eslint --fix"
     ]
-  }
+  },
+  "readme": "ERROR: No README data found!",
+  "_id": "13th-4team-client@0.1.0"
 }
