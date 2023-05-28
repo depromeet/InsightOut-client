@@ -1,0 +1,125 @@
+.root {
+  @apply flex flex-col justify-center items-center rounded-[26px] outline-none border-none cursor-pointer;
+  background: transparent;
+}
+
+.root span {
+  @apply flex  justify-center items-center;
+}
+
+// Size
+
+.sm span {
+  @apply text-[12px] leading-[16px] font-normal gap-[4px];
+}
+
+.md span {
+  @apply text-[14px] leading-[22px] font-normal gap-[4px];
+}
+
+.lg span {
+  @apply text-[16px] leading-[27px] font-normal gap-[4px];
+}
+
+.xl span {
+  @apply text-[20px] leading-[28px] font-bold gap-[8px];
+}
+
+// Hover
+
+.root {
+  @apply hover:text-purple-400;
+}
+
+// Pressed
+
+.root {
+  @apply active:text-purple-600;
+}
+
+// Focused
+
+.root {
+  @apply focus:text-purple-500;
+}
+
+// Disabled
+
+.root {
+  @apply disabled:text-purple-200 disabled:cursor-not-allowed;
+}
+
+// Icon Size
+
+.sm svg {
+  @apply w-[20px] h-[20px];
+}
+
+.md svg {
+  @apply w-[22px] h-[22px];
+}
+
+.lg svg {
+  @apply w-[24px] h-[24px];
+}
+
+.xl svg {
+  @apply w-[24px] h-[24px];
+}
+
+// Icon Color
+
+.root path {
+  @apply fill-main;
+}
+
+.root:hover path {
+  @apply fill-purple-400;
+}
+
+.root:active path {
+  @apply fill-purple-600;
+}
+
+.root:focus path {
+  @apply fill-purple-500;
+}
+
+.root:disabled path {
+  @apply fill-purple-200;
+}
+
+// Underline Base
+
+.underline {
+  @apply gap-0;
+}
+
+.underline::after {
+  content: '';
+  @apply w-full h-[1px] bg-main;
+}
+
+// Underline Hover
+
+.underline:hover::after {
+  @apply bg-purple-400;
+}
+
+// Underline Pressed
+
+.underline:active::after {
+  @apply bg-purple-600;
+}
+
+// Underline Focused
+
+.underline:focus::after {
+  @apply bg-purple-500;
+}
+
+// Underline Disabled
+
+.underline:disabled::after {
+  @apply bg-purple-200;
+}
