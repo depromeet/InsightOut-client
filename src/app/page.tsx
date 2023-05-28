@@ -7,6 +7,7 @@ import { colors } from '@/styles/theme/foundations/colors';
 import { boxShadow } from '@/styles/theme/foundations/boxShadow';
 import { textStyles } from '@/styles/theme/foundations/textStyles';
 import instance from '@/apis';
+import Button from '@/components/Button/Button';
 
 export default function Home() {
   const { onSuccess, onFailure } = useGoogleLogin();
@@ -35,7 +36,9 @@ export default function Home() {
         onSuccess={onSuccess}
         onFailure={onFailure}
       />
-      <button onClick={handleAnotherApi}>테스트를 위해 다른 API 호출</button>
+      <Button variant="primary" size="lg" onClick={handleAnotherApi}>
+        테스트를 위해 다른 API 호출
+      </Button>
     </main>
   );
 }
