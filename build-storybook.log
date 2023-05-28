@@ -1,11 +1,11 @@
 @storybook/cli v7.0.9
 
-info => Cleaning outputDir: /var/folders/yz/h345gv391bq7kftjnpscwrt80000gn/T/chromatic--14550-LSS2zqSk6SVq
+info => Cleaning outputDir: /var/folders/yz/h345gv391bq7kftjnpscwrt80000gn/T/chromatic--15057-bi0hPmsw7ziB
 info => Loading presets
 info => Building manager..
-info => Manager built (286 ms)
+info => Manager built (806 ms)
 info => Compiling preview..
-info => Copying static files: /Users/yoonsangjoon/Programming/insight-out/feat_button/node_modules/@storybook/manager/static at /var/folders/yz/h345gv391bq7kftjnpscwrt80000gn/T/chromatic--14550-LSS2zqSk6SVq/sb-common-assets
+info => Copying static files: /Users/yoonsangjoon/Programming/insight-out/feat_button/node_modules/@storybook/manager/static at /var/folders/yz/h345gv391bq7kftjnpscwrt80000gn/T/chromatic--15057-bi0hPmsw7ziB/sb-common-assets
 WARN No story files found for the specified pattern: src/components/**/*.mdx
 WARN You (or an addon) are using the 'config' preset field. This has been replaced by 'previewAnnotations' and will be removed in 8.0
 info Addon-docs: using MDX2
@@ -112,21 +112,21 @@ info => Using default Webpack5 setup
 <s> [webpack.Progress] 9% setup compilation
 <s> [webpack.Progress] 10% building
 <s> [webpack.Progress] 10% building 0/1 entries 0/0 dependencies 0/0 modules
-info => Copying static files: /Users/yoonsangjoon/Programming/insight-out/feat_button/public at /var/folders/yz/h345gv391bq7kftjnpscwrt80000gn/T/chromatic--14550-LSS2zqSk6SVq/
 <s> [webpack.Progress] 28% building import loader ./node_modules/babel-loader/lib/index.js
 <s> [webpack.Progress] 28% building 0/1 entries 12/24 dependencies 4/12 modules
+info => Copying static files: /Users/yoonsangjoon/Programming/insight-out/feat_button/public at /var/folders/yz/h345gv391bq7kftjnpscwrt80000gn/T/chromatic--15057-bi0hPmsw7ziB/
 <s> [webpack.Progress] 27% building import loader ./node_modules/unplugin/dist/webpack/loaders/load.js
 <s> [webpack.Progress] 27% building 0/1 entries 40/78 dependencies 9/29 modules
-<s> [webpack.Progress] 45% building import loader ./node_modules/style-loader/dist/cjs.js
-<s> [webpack.Progress] 45% building import loader ./node_modules/css-loader/dist/cjs.js
-<s> [webpack.Progress] 45% building import loader ./node_modules/postcss-loader/dist/cjs.js
-<s> [webpack.Progress] 45% building import loader ./node_modules/resolve-url-loader/index.js
-<s> [webpack.Progress] 45% building import loader ./node_modules/sass-loader/dist/cjs.js
-<s> [webpack.Progress] 45% building 0/1 entries 410/430 dependencies 111/171 modules
-<s> [webpack.Progress] 46% building 0/1 entries 450/526 dependencies 132/200 modules
-<s> [webpack.Progress] 32% building 0/1 entries 2100/2284 dependencies 338/840 modules
-<s> [webpack.Progress] 32% building 0/1 entries 2237/2300 dependencies 346/853 modules
-<s> [webpack.Progress] 52% building 0/1 entries 3881/4000 dependencies 1018/1327 modules
+<s> [webpack.Progress] 47% building import loader ./node_modules/style-loader/dist/cjs.js
+<s> [webpack.Progress] 47% building import loader ./node_modules/css-loader/dist/cjs.js
+<s> [webpack.Progress] 47% building import loader ./node_modules/postcss-loader/dist/cjs.js
+<s> [webpack.Progress] 47% building import loader ./node_modules/resolve-url-loader/index.js
+<s> [webpack.Progress] 47% building import loader ./node_modules/sass-loader/dist/cjs.js
+<s> [webpack.Progress] 47% building 0/1 entries 411/431 dependencies 117/171 modules
+<s> [webpack.Progress] 43% building 0/1 entries 500/574 dependencies 137/224 modules
+<s> [webpack.Progress] 32% building 0/1 entries 2200/2379 dependencies 353/848 modules
+<s> [webpack.Progress] 32% building 0/1 entries 2359/2400 dependencies 355/858 modules
+<s> [webpack.Progress] 55% building 0/1 entries 3977/4055 dependencies 1100/1334 modules
 <s> [webpack.Progress] 65% building 1/1 entries 4284/4284 dependencies 1443/1443 modules
 <s> [webpack.Progress] 65% building
 <s> [webpack.Progress] 69% building finish
@@ -339,4 +339,4 @@ WARN
 <s> [webpack.Progress] 99% cache shutdown
 <s> [webpack.Progress] 100% 
 
-info => Output directory: /var/folders/yz/h345gv391bq7kftjnpscwrt80000gn/T/chromatic--14550-LSS2zqSk6SVq
+info => Output directory: /var/folders/yz/h345gv391bq7kftjnpscwrt80000gn/T/chromatic--15057-bi0hPmsw7ziB
