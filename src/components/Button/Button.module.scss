@@ -131,5 +131,49 @@
 
 .outlined {
   @apply disabled:bg-purple-50 disabled:text-purple-200 disabled:cursor-not-allowed;
-  border: 1px solid #c0bbfc;
+  &:disabled {
+    border: 1px solid #c0bbfc;
+  }
+}
+
+// Icon
+.primary path {
+  @apply fill-white;
+}
+
+.secondary path {
+  @apply fill-white;
+}
+
+.tertiary path {
+  @apply fill-main;
+}
+
+.secondary-green path {
+  @apply fill-main;
+}
+
+.outlined path {
+  @apply fill-purple-500;
+}
+
+// Icon Disabled
+.primary:disabled path {
+  @apply fill-light;
+}
+
+.secondary:disabled path {
+  @apply fill-purple-200;
+}
+
+.tertiary:disabled path {
+  @apply fill-light;
+}
+
+.secondary-green:disabled path {
+  @apply fill-green-500;
+}
+
+.outlined:disabled path {
+  @apply fill-purple-200;
 }
