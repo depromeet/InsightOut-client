@@ -9,7 +9,7 @@ on:
 
 # List of jobs
 jobs:
-  test:
+  storybook:
     # Operating System
     runs-on: ubuntu-20.04
     outputs:
