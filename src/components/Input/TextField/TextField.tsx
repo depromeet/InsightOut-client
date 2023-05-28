@@ -35,6 +35,7 @@ const TextField = ({
       <input
         type={mode === 'password' ? 'password' : 'text'}
         value={value}
+        maxLength={maxLength}
         className={`form w-full ${value ? 'form-typed' : ''} ${error ? 'form-error' : ''}`}
         {...props}
       />

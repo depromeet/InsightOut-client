@@ -15,6 +15,7 @@ const TextAreaField = ({ showCount, value, maxLength, error, errorMessage, ...pr
     <div className="relative">
       <textarea
         value={value}
+        maxLength={maxLength}
         className={`form resize-none ${value ? 'form-typed' : ''} ${error ? 'form-error' : ''}`}
         {...props}
       />
