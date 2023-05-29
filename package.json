@@ -10,7 +10,7 @@
     "prepare": "husky install",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "chromatic": "npx chromatic --project-token=chpt_1339f61e98475e1"
+    "chromatic": "bash ./scripts/chromatic_publish.sh"
   },
   "dependencies": {
     "@chakra-ui/react": "^2.6.1",
