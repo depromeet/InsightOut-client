@@ -1,9 +1,11 @@
+'use client';
+
 import { useEffect } from 'react';
 import axios from 'axios';
 import { getCookie } from 'cookies-next';
 import authApi from '@/apis/auth';
 
-export default function GoogleProvider({ children }: StrictPropsWithChildren) {
+export default function AuthProvider() {
   useEffect(() => {
     const accessToken = axios.defaults.headers['Authorization'];
     const refreshToken = getCookie('refreshToken');
@@ -16,5 +18,5 @@ export default function GoogleProvider({ children }: StrictPropsWithChildren) {
     })();
   }, []);
 
-  return <>{children}</>;
+  return <></>;
 }
