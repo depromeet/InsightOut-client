@@ -56,4 +56,7 @@ export const colors = {
     800: '#21563D',
     900: '#0A321F',
   },
+
+  // etc color
+  transparent: 'transparent',
 } as const;

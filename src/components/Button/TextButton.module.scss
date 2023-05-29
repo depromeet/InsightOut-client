@@ -1,6 +1,5 @@
 .root {
-  @apply flex flex-col justify-center items-center rounded-[26px] outline-none border-none cursor-pointer;
-  background: transparent;
+  @apply flex flex-col justify-center items-center rounded-[26px] outline-none border-none cursor-pointer bg-transparent;
 }
 
 .root span {
