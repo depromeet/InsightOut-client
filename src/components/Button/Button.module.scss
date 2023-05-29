@@ -23,8 +23,7 @@
 }
 
 .outlined {
-  @apply text-purple-300 bg-white;
-  border: 1px solid #a19afb;
+  @apply text-purple-300 bg-white border-[1px] border-solid border-purple-300;
 }
 
 // Sizes
@@ -132,7 +131,7 @@
 .outlined {
   @apply disabled:bg-purple-50 disabled:text-purple-200 disabled:cursor-not-allowed;
   &:disabled {
-    border: 1px solid #c0bbfc;
+    @apply border-[1px] border-solid border-purple-200;
   }
 }
 
