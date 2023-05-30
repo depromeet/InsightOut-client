@@ -1,8 +1,9 @@
 import './globals.css';
 import { PropsWithChildren } from 'react';
-import TanstackQueryProvider from '@/providers/TanstackQueryProvider';
 import localFont from 'next/font/local';
-import ChakraUIProvider from '@/providers/ChakraProvider';
+import TanstackQueryProvider from '@/components/providers/TanstackQueryProvider';
+import ChakraUIProvider from '@/components/providers/ChakraProvider';
+import AuthProvider from '@/components/providers/AuthProvider';
 
 export const metadata = {
   title: 'Create Next App',
@@ -12,9 +13,12 @@ export const metadata = {
 export default function RootLayout({ children }: PropsWithChildren) {
   return (
     <html lang="ko">
-      <body className={pretendard.className}>
+      <body className={pretendard.className} suppressContentEditableWarning suppressHydrationWarning>
         <TanstackQueryProvider>
-          <ChakraUIProvider>{children}</ChakraUIProvider>
+          <ChakraUIProvider>
+            <AuthProvider />
+            {children}
+          </ChakraUIProvider>
         </TanstackQueryProvider>
       </body>
     </html>
