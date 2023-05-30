@@ -5,8 +5,8 @@ import authApi from './auth';
  * @description CORS 등의 이슈로 인해 로컬 서버 주소로 임시 대체합니다.
  */
 const instance = axios.create({
-  // baseURL: 'http://insight-out-eb-instance-env.eba-wiaanpdd.ap-northeast-2.elasticbeanstalk.com',
-  baseURL: 'http://localhost:8080',
+  baseURL: 'http://dev.insightout.kr/api',
+  // baseURL: 'http://localhost:8080',
   withCredentials: true,
 });
 
