@@ -24,8 +24,10 @@ const TextAreaField = ({ showCount, value, maxLength, error, errorMessage, ...pr
         className={`form resize-none ${value ? 'form-typed' : ''} ${error ? 'form-error' : ''}`}
         {...props}
       />
-      {showCount && <TextLengthMessage currentLength={value?.length || 0} maxLength={maxLength || 0} />}
-      {error && <ErrorMessage>{errorMessage}</ErrorMessage>}
+      {showCount && (
+        <TextLengthMessage className="absolute right-0" currentLength={value?.length || 0} maxLength={maxLength || 0} />
+      )}
+      {error && !value && <ErrorMessage>{errorMessage}</ErrorMessage>}
     </div>
   );
 };
