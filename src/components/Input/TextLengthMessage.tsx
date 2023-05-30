@@ -8,7 +8,7 @@ type TextLengthMessageProps = ComponentPropsWithRef<'p'> & {
 };
 
 export const TextLengthMessage = ({ currentLength, maxLength, className, ...props }: TextLengthMessageProps) => (
-  <p className={tw('mt-2 text-gray-500 c1', className)} {...props}>
+  <p className={tw('text-gray-500 c1', className)} {...props}>
     <span className={currentLength > 0 ? 'text-green-400' : ''}>
       {formatCurrentTextLength(currentLength, maxLength)}
     </span>

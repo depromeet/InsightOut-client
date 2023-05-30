@@ -27,7 +27,7 @@ const TextAreaField = ({
   ...props
 }: TextAreaFieldProps) => {
   return (
-    <div className="relative">
+    <div>
       <textarea
         value={value}
         maxLength={maxLength}
@@ -35,7 +35,7 @@ const TextAreaField = ({
         {...props}
       />
       {showCount && (
-        <TextLengthMessage className="absolute right-0" currentLength={value?.length || 0} maxLength={maxLength || 0} />
+        <TextLengthMessage className="float-right mt-2" currentLength={value?.length || 0} maxLength={maxLength || 0} />
       )}
       {error && !value && <ErrorMessage>{errorMessage}</ErrorMessage>}
     </div>
