@@ -1,5 +1,7 @@
 import { ComponentPropsWithRef, PropsWithChildren } from 'react';
 
+import { tw } from '@/services/utils/tailwindMerge';
+
 import { ErrorMessage } from '../ErrorMessage';
 import { TextLengthMessage } from '../TextLengthMessage';
 
@@ -17,7 +19,16 @@ type TextFieldProps = ComponentPropsWithRef<'input'> & {
  * @param errorMessage error가 true인 경우에 사용. 텍스트 필드 하단에 보이는 메시지
  * @param emailDomain mode="email"인 경우에 사용. 텍스트 필드의 오른쪽에 이메일 도메인 주소가 보입니다 (ex. '@'gmail.com)
  */
-const TextField = ({ mode, error, errorMessage, emailDomain, value, maxLength, ...props }: TextFieldProps) => {
+const TextField = ({
+  mode,
+  error,
+  errorMessage,
+  emailDomain,
+  value,
+  maxLength,
+  className,
+  ...props
+}: TextFieldProps) => {
   return (
     <div className="relative">
       <label htmlFor="">{mode === 'chip' && <Chip />}</label>
@@ -25,7 +36,7 @@ const TextField = ({ mode, error, errorMessage, emailDomain, value, maxLength, .
         type={mode === 'password' ? 'password' : 'text'}
         value={value}
         maxLength={maxLength}
-        className={`form w-full ${value ? 'form-typed' : ''} ${error ? 'form-error' : ''}`}
+        className={tw(`form w-full ${value ? 'form-typed' : ''} ${error ? 'form-error' : ''}`, className)}
         {...props}
       />
       <RightContent>
