@@ -9,7 +9,8 @@
     "lint": "next lint",
     "prepare": "husky install",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "chromatic": "bash ./scripts/chromatic_publish.sh"
   },
   "dependencies": {
     "@chakra-ui/react": "^2.6.1",
@@ -22,6 +23,7 @@
     "@types/react-dom": "18.2.4",
     "autoprefixer": "10.4.14",
     "axios": "^1.4.0",
+    "classnames": "^2.3.2",
     "cookies-next": "^2.1.1",
     "eslint": "8.40.0",
     "eslint-config-next": "13.4.1",
@@ -32,6 +34,7 @@
     "postcss": "8.4.23",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "sass": "^1.62.1",
     "tailwindcss": "3.3.2",
     "typescript": "5.0.4",
     "zustand": "^4.3.8"
@@ -44,8 +47,10 @@
     "@storybook/nextjs": "^7.0.9",
     "@storybook/react": "^7.0.9",
     "@storybook/testing-library": "^0.0.14-next.2",
+    "@svgr/webpack": "^8.0.1",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^14.0.0",
+    "chromatic": "^6.17.4",
     "encoding": "^0.1.13",
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-prettier": "^4.2.1",
@@ -62,5 +67,7 @@
       "prettier --write",
       "eslint --fix"
     ]
-  }
+  },
+  "readme": "ERROR: No README data found!",
+  "_id": "13th-4team-client@0.1.0"
 }
