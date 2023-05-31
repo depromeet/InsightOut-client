@@ -1,15 +1,18 @@
-import { ComponentPropsWithRef, forwardRef } from 'react';
+import { forwardRef } from 'react';
 import cn from 'classnames';
 import styles from './Chip.module.scss';
 
-interface ChipProps extends Omit<ComponentPropsWithRef<'button'>, 'children' | 'disabled'> {
-  /** @description 칩 종류 (primary, secondary) */
-  variant: ChipVariant;
-  /** @description 칩 크기 (sm, md) */
-  size: ChipSize;
-  /** @description 칩 텍스트 */
-  children: string;
-}
+type ChipProps = MergeComponentProps<
+  'button',
+  {
+    /** @description 칩 종류 (primary, secondary) */
+    variant: ChipVariant;
+    /** @description 칩 크기 (sm, md) */
+    size: ChipSize;
+    /** @description 칩 텍스트 */
+    children: string;
+  }
+>;
 
 /**
  * @name 칩컴포넌트
