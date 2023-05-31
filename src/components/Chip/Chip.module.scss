@@ -33,3 +33,9 @@
 .secondary {
   @apply active:text-green-800 active:border-[1px] active:border-solid active:border-green-400 active:bg-green-50 active:m-[-1px];
 }
+
+// With Badge
+
+.badge {
+  @apply gap-[4px];
+}

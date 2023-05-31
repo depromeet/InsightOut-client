@@ -1,6 +1,7 @@
 import { Box, Flex, Heading } from '@chakra-ui/react';
 import Chip from './Chip';
 import { Meta, StoryObj } from '@storybook/react';
+import Badge from './Badge';
 
 const meta = {
   title: 'Components/Chip',
@@ -37,6 +38,35 @@ export const DefaultChip: Story = {
           </Chip>
         </Box>
       </Flex>
+    </Flex>
+  ),
+};
+
+export const ChipWithBadge: Story = {
+  render: () => (
+    <Flex flexDirection={'column'} gap={50}>
+      <Box>
+        <Heading>Primary</Heading>
+        <Heading as={'h4'}>Small</Heading>
+        <Chip size="sm" variant="primary" badge={<Badge />}>
+          CHIP
+        </Chip>
+        <Heading as={'h4'}>Medium</Heading>
+        <Chip size="md" variant="primary" badge={<Badge />}>
+          CHIP
+        </Chip>
+      </Box>
+      <Box>
+        <Heading>Secondary</Heading>
+        <Heading as={'h4'}>Small</Heading>
+        <Chip size="sm" variant="secondary" badge={<Badge />}>
+          CHIP
+        </Chip>
+        <Heading as={'h4'}>Medium</Heading>
+        <Chip size="md" variant="secondary" badge={<Badge />}>
+          CHIP
+        </Chip>
+      </Box>
     </Flex>
   ),
 };
