@@ -1,7 +1,9 @@
 /* eslint-disable unused-imports/no-unused-vars */
 
-// Merge Component Props
-
+/**
+ * @name MergeComponentProps
+ * @description ComponentPropsWithRef와 커스텀 Props 타입을 병합합니다.
+ */
 type MergeComponentProps<T extends React.ElementType, P extends object = {}> = Omit<
   React.ComponentPropsWithRef<T>,
   keyof P
