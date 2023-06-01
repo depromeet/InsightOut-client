@@ -1,7 +1,8 @@
 /* eslint-disable react/display-name */
 import { ModalHeader as ModalHeaderWrapper } from '@chakra-ui/react';
+import { PropsWithChildren } from 'react';
 
-const ModalHeader = () => <ModalHeaderWrapper />;
+const ModalHeader = ({ children }: PropsWithChildren) => <ModalHeaderWrapper>{children}</ModalHeaderWrapper>;
 
 type TiTleProps = {
   title: string;
@@ -10,10 +11,10 @@ type TiTleProps = {
 
 ModalHeader.Title = ({ title, subTitle }: TiTleProps) => {
   return (
-    <div>
-      <h5 className="h5">{title}</h5>
+    <ModalHeader>
+      <h5 className="h5 tex">{title}</h5>
       <p className="b1">{subTitle}</p>
-    </div>
+    </ModalHeader>
   );
 };
 

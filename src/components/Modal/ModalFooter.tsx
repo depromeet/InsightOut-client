@@ -1,8 +1,9 @@
 /* eslint-disable react/display-name */
 import { ModalFooter as ModalFooterWrapper } from '@chakra-ui/react';
 import Button from '../Button/Button';
+import { PropsWithChildren } from 'react';
 
-const ModalFooter = () => <ModalFooterWrapper />;
+const ModalFooter = ({ children }: PropsWithChildren) => <ModalFooterWrapper>{children}</ModalFooterWrapper>;
 
 type OneButtonProps = {
   textContent: string;
@@ -11,9 +12,11 @@ type OneButtonProps = {
 
 ModalFooter.OneButton = ({ textContent, handleClick }: OneButtonProps) => {
   return (
-    <Button variant="primary" size="xl" onClick={handleClick}>
-      {textContent}
-    </Button>
+    <ModalFooter>
+      <Button variant="primary" size="xl" onClick={handleClick}>
+        {textContent}
+      </Button>
+    </ModalFooter>
   );
 };
 
@@ -26,14 +29,16 @@ type TwoButtonProps = {
 
 ModalFooter.TwoButton = ({ leftTextContent, handleLeftClick, rightTextContent, handleRightClick }: TwoButtonProps) => {
   return (
-    <div className="flex flex-row gap-3 my-10">
-      <Button variant="tertiary" size="xl" onClick={handleLeftClick}>
-        {leftTextContent}
-      </Button>
-      <Button variant="primary" size="xl" onClick={handleRightClick}>
-        {rightTextContent}
-      </Button>
-    </div>
+    <ModalFooter>
+      <div className="flex flex-row gap-3">
+        <Button variant="tertiary" size="xl" onClick={handleLeftClick}>
+          {leftTextContent}
+        </Button>
+        <Button variant="primary" size="xl" onClick={handleRightClick}>
+          {rightTextContent}
+        </Button>
+      </div>
+    </ModalFooter>
   );
 };
 

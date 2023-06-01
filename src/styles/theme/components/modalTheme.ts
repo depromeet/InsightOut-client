@@ -1,12 +1,23 @@
 import { modalAnatomy as parts } from '@chakra-ui/anatomy';
-import { createMultiStyleConfigHelpers } from '@chakra-ui/styled-system';
+import { createMultiStyleConfigHelpers, defineStyle } from '@chakra-ui/styled-system';
 
 const { definePartsStyle, defineMultiStyleConfig } = createMultiStyleConfigHelpers(parts.keys);
 
+const sm = defineStyle({
+  w: '632px',
+});
+const md = defineStyle({
+  w: '767px',
+});
+
+const sizes = {
+  sm: definePartsStyle({ dialog: sm }),
+  md: definePartsStyle({ dialog: md }),
+};
+
 const baseStyle = definePartsStyle({
-  // define the part you're going to style
   overlay: {
-    bg: 'rgba(62, 64, 76, 0.7);', //change the background
+    bg: 'rgba(62, 64, 76, 0.7);',
   },
   dialog: {
     display: 'flex',
@@ -16,14 +27,28 @@ const baseStyle = definePartsStyle({
     borderRadius: '24px',
     padding: '40px',
   },
+  closeButton: {
+    _hover: {
+      bg: 'none',
+    },
+    top: '1.25rem',
+    right: '1.25rem',
+  },
   header: {
-    marginBottom: '40px',
+    padding: 0,
+    margin: '0 0 20px 0',
+  },
+  body: {
+    padding: 0,
+    margin: '40px 0',
   },
   footer: {
-    marginTop: '40px',
+    padding: 0,
+    margin: '40px 0 0 0',
   },
 });
 
 export const modalTheme = defineMultiStyleConfig({
   baseStyle,
+  sizes,
 });
