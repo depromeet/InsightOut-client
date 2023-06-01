@@ -38,7 +38,7 @@ export const ModalWithHeaderTitle = (): JSX.Element => {
       </Button>
       <Modal size="md" isOpen={isOpen} onClose={onClose}>
         <ModalHeader.Title title="텍스트를 입력해주세요입력해주세요" subTitle="추가 설명이 필요할 경우 기재해주세요" />
-        제목이 있는 모달입니다.
+        <div>제목이 있는 모달입니다.</div>
       </Modal>
     </>
   );
@@ -53,7 +53,7 @@ export const ModalWithFooterOneButton = (): JSX.Element => {
         Open Modal with Footer 1 Button
       </Button>
       <Modal size="md" isOpen={isOpen} onClose={onClose}>
-        제목이 있는 모달입니다.
+        <div>버튼 하나가 있는 모달입니다.</div>
         <ModalFooter.OneButton textContent="button" handleClick={onClose} />
       </Modal>
     </>
@@ -69,7 +69,7 @@ export const ModalWithFooterTwoButton = (): JSX.Element => {
         Open Modal with Footer 2 Button
       </Button>
       <Modal size="md" isOpen={isOpen} onClose={onClose}>
-        제목이 있는 모달입니다.
+        <div>버튼 두 개가 있는 모달입니다.</div>
         <ModalFooter.TwoButton
           leftTextContent="Button"
           handleLeftClick={onClose}
@@ -91,7 +91,7 @@ export const FullModal = (): JSX.Element => {
       </Button>
       <Modal size="md" isOpen={isOpen} onClose={onClose}>
         <ModalHeader.Title title="텍스트를 입력해주세요입력해주세요" subTitle="추가 설명이 필요할 경우 기재해주세요" />
-        제목이 있는 모달입니다.
+        <div>제목과 버튼 두 개가 있는 모달입니다.</div>
         <ModalFooter.TwoButton
           leftTextContent="Button"
           handleLeftClick={onClose}

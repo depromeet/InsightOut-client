@@ -10,10 +10,10 @@ type TiTleProps = {
 
 ModalHeader.Title = ({ title, subTitle }: TiTleProps) => {
   return (
-    <>
+    <div>
       <h5 className="h5">{title}</h5>
       <p className="b1">{subTitle}</p>
-    </>
+    </div>
   );
 };
 

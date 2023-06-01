@@ -26,7 +26,7 @@ type TwoButtonProps = {
 
 ModalFooter.TwoButton = ({ leftTextContent, handleLeftClick, rightTextContent, handleRightClick }: TwoButtonProps) => {
   return (
-    <div className="flex gap-3">
+    <div className="flex flex-row gap-3 my-10">
       <Button variant="tertiary" size="xl" onClick={handleLeftClick}>
         {leftTextContent}
       </Button>

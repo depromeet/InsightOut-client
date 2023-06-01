@@ -6,6 +6,7 @@ import styles from './styles';
 
 // Foundations
 import { foundations } from './foundations';
+import { modalTheme } from './components/modalTheme';
 
 const config: ThemeConfig = {
   initialColorMode: 'light',
@@ -16,7 +17,7 @@ const theme = extendTheme({
   styles,
   config,
   ...foundations,
-  components: {},
+  components: { Modal: modalTheme },
 }) as Theme;
 
 type Theme = ChakraTheme & typeof foundations;
