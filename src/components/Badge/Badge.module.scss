@@ -1,0 +1,45 @@
+// Base
+
+.root {
+  @apply flex justify-center items-center rounded-[8px] border-[1px] border-solid;
+}
+
+// Styles
+
+.tertiary {
+  @apply text-sub bg-gray-300;
+}
+
+.outlined-purple {
+  @apply text-purple-500 bg-purple-50 border-purple-200;
+}
+
+.outlined-green {
+  @apply text-green-700 bg-green-50 border-green-300;
+}
+
+.filled-purple {
+  @apply text-white bg-purple-500;
+}
+
+.filled-green {
+  @apply text-white bg-green-400;
+}
+
+.dark {
+  @apply text-white bg-gray-900;
+}
+
+// Sizes
+
+.sm {
+  @apply py-[2px] px-[6px] text-[12px] font-medium leading-[16px];
+}
+
+.md {
+  @apply py-[2px] px-[8px] text-[14px] font-medium leading-[22px];
+}
+
+.lg {
+  @apply py-[2px] px-[8px] text-[16px] font-medium leading-[27px];
+}
