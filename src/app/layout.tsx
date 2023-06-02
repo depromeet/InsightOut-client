@@ -25,7 +25,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
   );
 }
 
-const pretendard = localFont({
+export const pretendard = localFont({
   src: './fonts/PretendardVariable.woff2',
   display: 'swap',
   fallback: [

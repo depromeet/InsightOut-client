@@ -4,6 +4,7 @@ import type { Preview } from '@storybook/react';
 
 import theme from '../src/styles/theme';
 import '../src/app/globals.css';
+import { pretendard } from '../src/app/layout';
 
 const OriginalNextImage = NextImage.default;
 
@@ -28,6 +29,13 @@ const preview: Preview = {
       theme,
     },
   },
+  decorators: [
+    (Story) => (
+      <div className={pretendard.className}>
+        <Story />
+      </div>
+    ),
+  ],
 };
 
 export default preview;
