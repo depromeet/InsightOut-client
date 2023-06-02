@@ -19,3 +19,8 @@ type ButtonSize = 'sm' | 'md' | 'lg' | 'xl';
 
 type ChipVariant = 'primary' | 'secondary';
 type ChipSize = 'sm' | 'md';
+
+// Badge
+
+type BadgeStyle = 'tertiary' | 'outlined-purple' | 'outlined-green' | 'filled-purple' | 'filled-green' | 'dark';
+type BadgeSize = 'sm' | 'md' | 'lg';
