@@ -1,8 +1,6 @@
 import React from 'react';
 import * as NextImage from 'next/image';
 import type { Preview } from '@storybook/react';
-import theme from '../src/styles/theme';
-import '../src/app/globals.css';
 
 import theme from '../src/styles/theme';
 import '../src/app/globals.css';
@@ -29,9 +27,6 @@ const preview: Preview = {
     },
     nextjs: {
       appDirectory: true,
-    },
-    chakra: {
-      theme,
     },
   },
   decorators: [
