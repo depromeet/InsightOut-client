@@ -30,7 +30,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       styles.root,
       styles[variant],
       styles[size],
-      isIconOnlyButton && styles['icon-only'],
+      { [styles['icon-only']]: isIconOnlyButton },
       className
     );
 
