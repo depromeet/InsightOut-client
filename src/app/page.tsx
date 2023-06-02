@@ -30,7 +30,9 @@ export default function Home() {
       <Box css={textStyles.subhead1} color={colors.gray[900]} boxShadow={boxShadow.S5}>
         head1 - chakra-ui custom theme
       </Box>
-      <Button variant="primary" size="lg" onClick={signIn}>구글 로그인</Button>
+      <Button variant="primary" size="lg" onClick={signIn}>
+        구글 로그인
+      </Button>
       <Button variant="primary" size="lg" onClick={handleAnotherApi}>
         테스트를 위해 다른 API 호출
       </Button>

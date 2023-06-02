@@ -1,0 +1,41 @@
+// Base
+
+.root {
+  @apply flex justify-center items-center font-bold leading-[28px] text-light bg-gray-50 rounded-[24px] outline-none border-none cursor-pointer;
+}
+
+// Sizes
+
+.sm {
+  @apply text-[16px] px-[12px] py-[0px];
+}
+
+.md {
+  @apply text-[20px] py-[4px] px-[12px];
+}
+
+// Hover
+
+.primary {
+  @apply hover:text-purple-400;
+}
+
+.secondary {
+  @apply hover:text-green-500;
+}
+
+// Pressed
+
+.primary {
+  @apply active:text-purple-700 active:border-[1px] active:border-solid active:border-purple-400 active:bg-purple-50 active:m-[-1px];
+}
+
+.secondary {
+  @apply active:text-green-800 active:border-[1px] active:border-solid active:border-green-400 active:bg-green-50 active:m-[-1px];
+}
+
+// With Badge
+
+.badge {
+  @apply gap-[4px];
+}
