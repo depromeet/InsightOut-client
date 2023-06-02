@@ -1,0 +1,33 @@
+.root {
+  @apply text-center rounded-lg font-medium text-sm leading-[22px];
+}
+
+// Variant
+.primary {
+  @apply bg-purple-50 text-purple-400;
+}
+
+.secondary {
+  @apply bg-purple-500 text-white;
+}
+
+.tertiary {
+  @apply bg-gray-100 text-gray-700;
+}
+
+.darkmode {
+  @apply bg-gray-800 text-white;
+}
+
+// Size
+.s1 {
+  @apply px-2 py-1;
+}
+
+.s2 {
+  @apply px-3 py-1.5;
+}
+
+.s3 {
+  @apply px-4 py-2;
+}
