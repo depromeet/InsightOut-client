@@ -1,5 +1,5 @@
 .root {
-  @apply text-center rounded-lg font-medium text-sm leading-[22px];
+  @apply text-center rounded-lg font-medium;
 }
 
 // Variant
@@ -21,13 +21,13 @@
 
 // Size
 .s1 {
-  @apply px-2 py-1;
+  @apply px-2 py-1 text-xs;
 }
 
 .s2 {
-  @apply px-3 py-1.5;
+  @apply px-3 py-1.5 text-sm leading-[22px];
 }
 
 .s3 {
-  @apply px-4 py-2;
+  @apply px-4 py-2 text-xl;
 }
