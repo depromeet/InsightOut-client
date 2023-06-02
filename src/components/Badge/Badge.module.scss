@@ -1,7 +1,7 @@
 // Base
 
 .root {
-  @apply flex justify-center items-center rounded-[8px] border-[1px] border-solid;
+  @apply flex justify-center items-center rounded-[8px];
 }
 
 // Styles
@@ -11,11 +11,11 @@
 }
 
 .outlined-purple {
-  @apply text-purple-500 bg-purple-50 border-purple-200;
+  @apply text-purple-500 bg-purple-50 border-[1px] border-solid border-purple-200;
 }
 
 .outlined-green {
-  @apply text-green-700 bg-green-50 border-green-300;
+  @apply text-green-700 bg-green-50 border-[1px] border-solid border-green-300;
 }
 
 .filled-purple {
