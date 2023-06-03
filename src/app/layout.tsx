@@ -4,6 +4,7 @@ import localFont from 'next/font/local';
 import TanstackQueryProvider from '@/components/providers/TanstackQueryProvider';
 import ChakraUIProvider from '@/components/providers/ChakraProvider';
 import AuthProvider from '@/components/providers/AuthProvider';
+import classNames from 'classnames';
 
 export const metadata = {
   title: 'Create Next App',
@@ -13,7 +14,10 @@ export const metadata = {
 export default function RootLayout({ children }: PropsWithChildren) {
   return (
     <html lang="ko">
-      <body className={pretendard.className} suppressContentEditableWarning suppressHydrationWarning>
+      <body
+        className={classNames(pretendard.className, ' bg-[#f5f5f5]')}
+        suppressContentEditableWarning
+        suppressHydrationWarning>
         <TanstackQueryProvider>
           <ChakraUIProvider>
             <AuthProvider />
