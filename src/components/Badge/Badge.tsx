@@ -9,7 +9,7 @@ type BadgeProps = MergeComponentProps<
     /** @description 뱃지 사이즈 (sm, md, lg) */
     size: BadgeSize;
     /** @description 뱃지 텍스트 */
-    children: string;
+    children: string | number;
   }
 >;
 
