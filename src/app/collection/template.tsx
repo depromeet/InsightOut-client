@@ -2,9 +2,8 @@
 
 import Badge from '@/components/Badge/Badge';
 import Tab from '@/components/Tab/Tab';
-// import { usePathname } from 'next/navigation';
 import { useRouter, usePathname } from 'next/navigation';
-import { COLLECTION_TABS } from '../shared/constants/tabs';
+import { COLLECTION_TABS } from '@/shared/constants/tabs';
 
 const Template = ({ children }: { children: React.ReactNode }) => {
   const router = useRouter();

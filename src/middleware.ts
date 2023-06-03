@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
-import { COLLECTION_TABS } from './app/shared/constants/tabs';
+import { COLLECTION_TABS } from './shared/constants/tabs';
 
 export const middleware = (request: NextRequest) => {
   if (request.nextUrl.pathname.startsWith('/collection')) {
