@@ -1,5 +1,6 @@
 import cn from 'classnames';
 import styles from './Badge.module.scss';
+import { forwardRef } from 'react';
 
 type BadgeProps = MergeComponentProps<
   'div',
@@ -16,14 +17,18 @@ type BadgeProps = MergeComponentProps<
 /**
  * @name 뱃지컴포넌트
  */
-const Badge = ({ style = 'tertiary', size = 'md', children, className, ...props }: BadgeProps) => {
-  const rootClassName = cn(styles.root, styles[style], styles[size], className);
+const Badge = forwardRef<HTMLDivElement, BadgeProps>(
+  ({ style = 'tertiary', size = 'md', children, className, ...props }, ref) => {
+    const rootClassName = cn(styles.root, styles[style], styles[size], className);
 
-  return (
-    <div className={rootClassName} {...props}>
-      {children}
-    </div>
-  );
-};
+    return (
+      <div ref={ref} className={rootClassName} {...props}>
+        {children}
+      </div>
+    );
+  }
+);
+
+Badge.displayName = 'Badge';
 
 export default Badge;
