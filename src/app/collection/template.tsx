@@ -24,7 +24,7 @@ const Template = ({ children }: { children: React.ReactNode }) => {
                 {count}
               </Badge>
             }
-            className={currentPath === `/collection/${pathname}` ? 'selected' : ''}
+            variant={currentPath === `/collection/${pathname}` ? 'pressed' : 'default'}
             onClick={() => {
               router.push(`/collection/${pathname}`);
             }}>

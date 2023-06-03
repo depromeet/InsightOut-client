@@ -11,14 +11,16 @@ type TabProps = MergeComponentProps<
     size: TabSize;
     /** @description Badge 컴포넌트 */
     badge?: ReactElement;
+
+    variant?: TabVariant;
   }
 >;
 
 /**
  * @name 탭컴포넌트
  */
-const Tab = ({ href, size, className, children, badge, ...props }: TabProps) => {
-  const rootClassName = cn(styles.root, styles[size], { [styles.badge]: !!badge }, className);
+const Tab = ({ variant = 'default', href, size, className, children, badge, ...props }: TabProps) => {
+  const rootClassName = cn(styles.root, styles[variant], styles[size], { [styles.badge]: !!badge }, className);
 
   return (
     <Link href={href} className={rootClassName} {...props}>

@@ -28,3 +28,4 @@ type BadgeSize = 'sm' | 'md' | 'lg';
 // Tab
 
 type TabSize = 'xs' | 'sm' | 'md' | 'lg';
+type TabVariant = 'default' | 'pressed';
