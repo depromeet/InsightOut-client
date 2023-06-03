@@ -23,7 +23,7 @@ type TextButtonProps = MergeComponentProps<
  */
 const TextButton = forwardRef<HTMLButtonElement, TextButtonProps>(
   ({ size = 'md', children, className, leftIcon, rightIcon, underline, ...props }, ref) => {
-    const rootClassName = cn(styles.root, styles[size], underline && styles['underline'], className);
+    const rootClassName = cn(styles.root, styles[size], { [styles['underline']]: underline }, className);
 
     return (
       <button ref={ref} className={rootClassName} {...props}>

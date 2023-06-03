@@ -1,0 +1,39 @@
+// Base
+
+.root {
+  @apply flex justify-center items-center text-light font-bold cursor-pointer;
+}
+
+// Size
+
+.xs {
+  @apply text-[16px] leading-[28px];
+}
+
+.sm {
+  @apply text-[20px] leading-[28px];
+}
+
+.md {
+  @apply text-[28px] leading-[38px];
+}
+
+.lg {
+  @apply text-[36px] leading-[48px];
+}
+
+// Pressed
+
+.root:active {
+  @apply text-main;
+
+  div {
+    @apply text-white bg-gray-900;
+  }
+}
+
+// With Badge
+
+.root.badge {
+  @apply gap-[4px];
+}

@@ -24,3 +24,7 @@ type ChipSize = 'sm' | 'md';
 
 type BadgeStyle = 'tertiary' | 'outlined-purple' | 'outlined-green' | 'filled-purple' | 'filled-green' | 'dark';
 type BadgeSize = 'sm' | 'md' | 'lg';
+
+// Tab
+
+type TabSize = 'xs' | 'sm' | 'md' | 'lg';
