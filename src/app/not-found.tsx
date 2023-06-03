@@ -1,8 +1,8 @@
 import React from 'react';
 
-// @FIXME: 잘 동작하도록 수정하기
 const NotFound = () => {
-  return <div>error</div>;
+  // TODO: 404 페이지 만들기
+  return <div>404 페이지</div>;
 };
 
 export default NotFound;
