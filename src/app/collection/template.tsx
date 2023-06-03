@@ -16,7 +16,7 @@ const Template = ({ children }: { children: React.ReactNode }) => {
       <div className="flex flex-row gap-5">
         {COLLECTION_TABS.map(({ title, pathname, count }) => (
           <Tab
-            // href={`/collection/${pathname}`}
+            href={`/collection/${pathname}`}
             key={title}
             size="lg"
             badge={
