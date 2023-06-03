@@ -1,11 +1,11 @@
 import React from 'react';
 
-interface LayoutProps {
+export interface LayoutProps {
   children: React.ReactNode;
 }
 
 const Layout = ({ children }: LayoutProps) => {
-  return <div>{children}</div>;
+  return <div className="mt-[105px] mx-auto max-w-[1200px]">{children}</div>;
 };
 
 export default Layout;
