@@ -24,3 +24,16 @@ type ChipSize = 'sm' | 'md';
 
 type BadgeStyle = 'tertiary' | 'outlined-purple' | 'outlined-green' | 'filled-purple' | 'filled-green' | 'dark';
 type BadgeSize = 'sm' | 'md' | 'lg';
+
+// Tooltip
+
+type TooltipType = 'strong' | 'light';
+type TooltipPosition =
+  | 'center-top'
+  | 'center-bottom'
+  | 'right-top'
+  | 'right-bottom'
+  | 'left-top'
+  | 'left-bottom'
+  | 'side-left-center'
+  | 'side-right-center';
