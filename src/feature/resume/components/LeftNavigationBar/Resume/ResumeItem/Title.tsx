@@ -25,9 +25,17 @@ const Title = ({ title = '자기소개서 예시', selected }: TitleProps) => {
     setIsEditMode(true);
   };
 
+  /** FIXME: EditInput과 관련한 이벤트 추상화 */
   const handleEditInputBlur = () => {
     /** PATCH 요청 */
     setIsEditMode(false);
+  };
+
+  const handleEditInputEnterKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      /** PATCH 요청 */
+      setIsEditMode(false);
+    }
   };
 
   /**
@@ -47,9 +55,11 @@ const Title = ({ title = '자기소개서 예시', selected }: TitleProps) => {
         <IconFolder className="mr-[6px]" />
         {isEditMode ? (
           <input
+            autoFocus
             defaultValue={title}
             onBlur={handleEditInputBlur}
             onClick={handleEditInputClick}
+            onKeyUp={handleEditInputEnterKeyPress}
             className="px-1 border-[1px] border-gray-400 text-sub max-w-[170px]"
           />
         ) : (
