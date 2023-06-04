@@ -21,7 +21,7 @@ type ChipProps = MergeComponentProps<
  */
 const Chip = forwardRef<HTMLButtonElement, ChipProps>(
   ({ variant, size, children, className, badge, ...props }, ref) => {
-    const rootClassName = cn(styles.root, styles[variant], styles[size], badge && styles.badge, className);
+    const rootClassName = cn(styles.root, styles[variant], styles[size], { [styles.badge]: !!badge }, className);
 
     return (
       <button ref={ref} className={rootClassName} {...props}>

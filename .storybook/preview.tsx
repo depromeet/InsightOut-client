@@ -1,8 +1,10 @@
 import React from 'react';
 import * as NextImage from 'next/image';
 import type { Preview } from '@storybook/react';
+
 import theme from '../src/styles/theme';
 import '../src/app/globals.css';
+import { pretendard } from '../src/app/layout';
 
 const OriginalNextImage = NextImage.default;
 
@@ -27,6 +29,13 @@ const preview: Preview = {
       appDirectory: true,
     },
   },
+  decorators: [
+    (Story) => (
+      <div className={pretendard.className}>
+        <Story />
+      </div>
+    ),
+  ],
 };
 
 export default preview;
