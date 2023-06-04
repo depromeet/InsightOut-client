@@ -2,12 +2,10 @@
 
 import Badge from '@/components/Badge/Badge';
 import Tab from '@/components/Tab/Tab';
-import { useRouter, usePathname } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import { COLLECTION_TABS } from '@/shared/constants/tabs';
 
 const Template = ({ children }: { children: React.ReactNode }) => {
-  const router = useRouter();
-
   const currentPath = usePathname();
 
   return (
@@ -23,10 +21,7 @@ const Template = ({ children }: { children: React.ReactNode }) => {
                 {count}
               </Badge>
             }
-            variant={currentPath === `/collection/${pathname}` ? 'pressed' : 'default'}
-            onClick={() => {
-              router.push(`/collection/${pathname}`);
-            }}>
+            variant={currentPath === `/collection/${pathname}` ? 'pressed' : 'default'}>
             {title}
           </Tab>
         ))}
