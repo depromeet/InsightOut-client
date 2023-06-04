@@ -12,7 +12,7 @@ type MergeComponentProps<T extends React.ElementType, P extends object = {}> = O
 
 // Button
 
-type ButtonVariant = 'primary' | 'secondary' | 'tertiary' | 'secondary-green' | 'outlined';
+type ButtonVariant = 'primary' | 'secondary' | 'tertiary' | 'secondary-secondary' | 'outlined';
 type ButtonSize = 'sm' | 'md' | 'lg' | 'xl';
 
 // Chip
@@ -22,7 +22,13 @@ type ChipSize = 'sm' | 'md';
 
 // Badge
 
-type BadgeStyle = 'tertiary' | 'outlined-purple' | 'outlined-green' | 'filled-purple' | 'filled-green' | 'dark';
+type BadgeStyle =
+  | 'tertiary'
+  | 'outlined-primary'
+  | 'outlined-secondary'
+  | 'filled-primary'
+  | 'filled-secondary'
+  | 'dark';
 type BadgeSize = 'sm' | 'md' | 'lg';
 
 // Tab
