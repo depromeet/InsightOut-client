@@ -17,21 +17,21 @@
 // Hover
 
 .primary {
-  @apply hover:text-purple-400;
+  @apply hover:text-primary-400;
 }
 
 .secondary {
-  @apply hover:text-cyan-500;
+  @apply hover:text-secondary-500;
 }
 
 // Pressed
 
 .primary {
-  @apply active:text-purple-700 active:border-[1px] active:border-solid active:border-purple-400 active:bg-purple-50 active:m-[-1px];
+  @apply active:text-primary-700 active:border-[1px] active:border-solid active:border-primary-400 active:bg-primary-50 active:m-[-1px];
 }
 
 .secondary {
-  @apply active:text-cyan-800 active:border-[1px] active:border-solid active:border-cyan-400 active:bg-cyan-50 active:m-[-1px];
+  @apply active:text-secondary-800 active:border-[1px] active:border-solid active:border-secondary-400 active:bg-secondary-50 active:m-[-1px];
 }
 
 // With Badge

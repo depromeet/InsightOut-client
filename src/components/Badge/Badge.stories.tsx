@@ -38,11 +38,11 @@ export const DefaultBadge: Story = {
           </Badge>
         </Flex>
       </Flex>
-      <Heading>Outlined Purple</Heading>
+      <Heading>Outlined Primary</Heading>
       <Flex flexDirection={'column'}>
         <Heading as={'h4'}>Small</Heading>
         <Flex>
-          <Badge style="outlined-purple" size="sm">
+          <Badge style="outlined-primary" size="sm">
             Badge
           </Badge>
         </Flex>
@@ -50,7 +50,7 @@ export const DefaultBadge: Story = {
       <Flex flexDirection={'column'}>
         <Heading as={'h4'}>Medium</Heading>
         <Flex>
-          <Badge style="outlined-purple" size="md">
+          <Badge style="outlined-primary" size="md">
             Badge
           </Badge>
         </Flex>
@@ -58,16 +58,16 @@ export const DefaultBadge: Story = {
       <Flex flexDirection={'column'}>
         <Heading as={'h4'}>Large</Heading>
         <Flex>
-          <Badge style="outlined-purple" size="lg">
+          <Badge style="outlined-primary" size="lg">
             Badge
           </Badge>
         </Flex>
       </Flex>
-      <Heading>Outlined Cyan</Heading>
+      <Heading>Outlined Secondary</Heading>
       <Flex flexDirection={'column'}>
         <Heading as={'h4'}>Small</Heading>
         <Flex>
-          <Badge style="outlined-cyan" size="sm">
+          <Badge style="outlined-secondary" size="sm">
             Badge
           </Badge>
         </Flex>
@@ -75,7 +75,7 @@ export const DefaultBadge: Story = {
       <Flex flexDirection={'column'}>
         <Heading as={'h4'}>Medium</Heading>
         <Flex>
-          <Badge style="outlined-cyan" size="md">
+          <Badge style="outlined-secondary" size="md">
             Badge
           </Badge>
         </Flex>
@@ -83,16 +83,16 @@ export const DefaultBadge: Story = {
       <Flex flexDirection={'column'}>
         <Heading as={'h4'}>Large</Heading>
         <Flex>
-          <Badge style="outlined-cyan" size="lg">
+          <Badge style="outlined-secondary" size="lg">
             Badge
           </Badge>
         </Flex>
       </Flex>
-      <Heading>Filled Purple</Heading>
+      <Heading>Filled Primary</Heading>
       <Flex flexDirection={'column'}>
         <Heading as={'h4'}>Small</Heading>
         <Flex>
-          <Badge style="filled-purple" size="sm">
+          <Badge style="filled-primary" size="sm">
             Badge
           </Badge>
         </Flex>
@@ -100,7 +100,7 @@ export const DefaultBadge: Story = {
       <Flex flexDirection={'column'}>
         <Heading as={'h4'}>Medium</Heading>
         <Flex>
-          <Badge style="filled-purple" size="md">
+          <Badge style="filled-primary" size="md">
             Badge
           </Badge>
         </Flex>
@@ -108,16 +108,16 @@ export const DefaultBadge: Story = {
       <Flex flexDirection={'column'}>
         <Heading as={'h4'}>Large</Heading>
         <Flex>
-          <Badge style="filled-purple" size="lg">
+          <Badge style="filled-primary" size="lg">
             Badge
           </Badge>
         </Flex>
       </Flex>
-      <Heading>Filled Cyan</Heading>
+      <Heading>Filled Secondary</Heading>
       <Flex flexDirection={'column'}>
         <Heading as={'h4'}>Small</Heading>
         <Flex>
-          <Badge style="filled-cyan" size="sm">
+          <Badge style="filled-secondary" size="sm">
             Badge
           </Badge>
         </Flex>
@@ -125,7 +125,7 @@ export const DefaultBadge: Story = {
       <Flex flexDirection={'column'}>
         <Heading as={'h4'}>Medium</Heading>
         <Flex>
-          <Badge style="filled-cyan" size="md">
+          <Badge style="filled-secondary" size="md">
             Badge
           </Badge>
         </Flex>
@@ -133,7 +133,7 @@ export const DefaultBadge: Story = {
       <Flex flexDirection={'column'}>
         <Heading as={'h4'}>Large</Heading>
         <Flex>
-          <Badge style="filled-cyan" size="lg">
+          <Badge style="filled-secondary" size="lg">
             Badge
           </Badge>
         </Flex>

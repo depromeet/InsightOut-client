@@ -30,7 +30,7 @@ export const colors = {
   dark: '#252730',
 
   // primary color
-  purple: {
+  primary: {
     50: '#EFEEFE',
     100: '#E0DDFE',
     200: '#C0BBFC',
@@ -44,7 +44,7 @@ export const colors = {
   },
 
   // secondary color
-  cyan: {
+  secondary: {
     50: '#F3FBFC',
     100: '#D5F1F6',
     200: '#A6E3ED',

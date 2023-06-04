@@ -22,8 +22,8 @@ export default function Home() {
       <Box css={textStyles.h1} color={colors.error} boxShadow={boxShadow.toast}>
         head1 - chakra-ui custom theme
       </Box>
-      <span className="text-purple-300 h2 shadow-insightCard">head2</span>
-      <Box css={textStyles.h2} color={colors.purple['300']} boxShadow={boxShadow.insightCard}>
+      <span className="text-primary-300 h2 shadow-insightCard">head2</span>
+      <Box css={textStyles.h2} color={colors.primary['300']} boxShadow={boxShadow.insightCard}>
         head1 - chakra-ui custom theme
       </Box>
       <span className="text-gray-900 subhead1 shadow-S5">subhead1</span>

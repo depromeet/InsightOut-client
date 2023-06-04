@@ -77,7 +77,7 @@ export const ChipWithBadge: Story = {
           size="sm"
           variant="secondary"
           badge={
-            <Badge style="outlined-cyan" size="sm">
+            <Badge style="outlined-secondary" size="sm">
               99+
             </Badge>
           }>
@@ -88,7 +88,7 @@ export const ChipWithBadge: Story = {
           size="md"
           variant="secondary"
           badge={
-            <Badge style="outlined-cyan" size="sm">
+            <Badge style="outlined-secondary" size="sm">
               99+
             </Badge>
           }>

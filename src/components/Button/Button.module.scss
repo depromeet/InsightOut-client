@@ -11,19 +11,19 @@
 }
 
 .secondary {
-  @apply text-white bg-purple-500;
+  @apply text-white bg-primary-500;
 }
 
 .tertiary {
   @apply text-gray-900 bg-gray-200;
 }
 
-.secondary-cyan {
-  @apply text-main bg-cyan-200;
+.secondary-secondary {
+  @apply text-main bg-secondary-200;
 }
 
 .outlined {
-  @apply text-purple-300 bg-white border-[1px] border-solid border-purple-300;
+  @apply text-primary-300 bg-white border-[1px] border-solid border-primary-300;
 }
 
 // Sizes
@@ -47,23 +47,23 @@
 // Hover
 
 .primary {
-  @apply hover:bg-purple-300 hover:text-white;
+  @apply hover:bg-primary-300 hover:text-white;
 }
 
 .secondary {
-  @apply hover:bg-purple-400 hover:text-white;
+  @apply hover:bg-primary-400 hover:text-white;
 }
 
 .tertiary {
   @apply hover:bg-gray-100 hover:text-gray-900;
 }
 
-.secondary-cyan {
-  @apply hover:text-main hover:bg-cyan-50;
+.secondary-secondary {
+  @apply hover:text-main hover:bg-secondary-50;
 }
 
 .outlined {
-  @apply hover:text-purple-500 hover:bg-purple-50;
+  @apply hover:text-primary-500 hover:bg-primary-50;
 }
 
 // Pressed
@@ -73,19 +73,19 @@
 }
 
 .secondary {
-  @apply active:bg-purple-600 active:text-white;
+  @apply active:bg-primary-600 active:text-white;
 }
 
 .tertiary {
   @apply active:bg-gray-400 active:text-main;
 }
 
-.secondary-cyan {
-  @apply active:bg-cyan-300 active:text-main;
+.secondary-secondary {
+  @apply active:bg-secondary-300 active:text-main;
 }
 
 .outlined {
-  @apply active:bg-purple-100 active:text-purple-500;
+  @apply active:bg-primary-100 active:text-primary-500;
 }
 
 // Focused
@@ -95,19 +95,19 @@
 }
 
 .secondary {
-  @apply focus:bg-purple-500 focus:text-white;
+  @apply focus:bg-primary-500 focus:text-white;
 }
 
 .tertiary {
   @apply focus:bg-gray-400 focus:text-main;
 }
 
-.secondary-cyan {
-  @apply focus:bg-cyan-300 focus:text-main;
+.secondary-secondary {
+  @apply focus:bg-secondary-300 focus:text-main;
 }
 
 .outlined {
-  @apply focus:bg-purple-300 focus:text-purple-500;
+  @apply focus:bg-primary-300 focus:text-primary-500;
 }
 
 // Disabled
@@ -117,21 +117,21 @@
 }
 
 .secondary {
-  @apply disabled:text-purple-200 disabled:bg-purple-100 disabled:cursor-not-allowed;
+  @apply disabled:text-primary-200 disabled:bg-primary-100 disabled:cursor-not-allowed;
 }
 
 .tertiary {
   @apply disabled:text-light disabled:bg-gray-300 disabled:cursor-not-allowed;
 }
 
-.secondary-cyan {
-  @apply disabled:bg-cyan-200 disabled:text-cyan-500 disabled:cursor-not-allowed;
+.secondary-secondary {
+  @apply disabled:bg-secondary-200 disabled:text-secondary-500 disabled:cursor-not-allowed;
 }
 
 .outlined {
-  @apply disabled:bg-purple-50 disabled:text-purple-200 disabled:cursor-not-allowed;
+  @apply disabled:bg-primary-50 disabled:text-primary-200 disabled:cursor-not-allowed;
   &:disabled {
-    @apply border-[1px] border-solid border-purple-200;
+    @apply border-[1px] border-solid border-primary-200;
   }
 }
 
@@ -166,12 +166,12 @@
   @apply fill-main;
 }
 
-.secondary-cyan path {
+.secondary-secondary path {
   @apply fill-main;
 }
 
 .outlined path {
-  @apply fill-purple-500;
+  @apply fill-primary-500;
 }
 
 // Icon Disabled
@@ -180,19 +180,19 @@
 }
 
 .secondary:disabled path {
-  @apply fill-purple-200;
+  @apply fill-primary-200;
 }
 
 .tertiary:disabled path {
   @apply fill-light;
 }
 
-.secondary-cyan:disabled path {
-  @apply fill-cyan-500;
+.secondary-secondary:disabled path {
+  @apply fill-secondary-500;
 }
 
 .outlined:disabled path {
-  @apply fill-purple-200;
+  @apply fill-primary-200;
 }
 
 // Icon Only
