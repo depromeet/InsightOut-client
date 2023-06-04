@@ -41,13 +41,13 @@ export const Default: Story = {
         </div>
         <h3>Primay-outline</h3>
         <div className="flex gap-6 ">
-          <Tag variant="primary-500" size="s1">
+          <Tag variant="primary-outline" size="s1">
             여기에키워드를써요
           </Tag>
-          <Tag variant="primary-500" size="s2">
+          <Tag variant="primary-outline" size="s2">
             여기에키워드를써요
           </Tag>
-          <Tag variant="primary-500" size="s3">
+          <Tag variant="primary-outline" size="s3">
             여기에키워드를써요
           </Tag>
         </div>

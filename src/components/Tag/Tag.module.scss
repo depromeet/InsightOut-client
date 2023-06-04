@@ -12,7 +12,7 @@
 }
 
 .primary-outline {
-  @apply bg-primary-50 text-primary-500 border-primary-300;
+  @apply bg-primary-50 text-primary-500 border border-primary-300;
 }
 
 .secondary {
@@ -20,7 +20,7 @@
 }
 
 .secondary-outline {
-  @apply bg-secondary-50 text-secondary-700 border-secondary-300;
+  @apply bg-secondary-50 text-secondary-700 border border-secondary-300;
 }
 
 .tertiary {
