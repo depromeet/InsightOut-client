@@ -5,7 +5,7 @@ export interface LayoutProps {
 }
 
 const Layout = ({ children }: LayoutProps) => {
-  return <div className="mt-[105px] mx-auto max-w-[1200px]">{children}</div>;
+  return <div className="pt-[105px] mx-auto max-w-[1200px] h-[100%]">{children}</div>;
 };
 
 export default Layout;
