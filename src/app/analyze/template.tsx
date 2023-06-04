@@ -6,12 +6,13 @@ import Button from '@/components/Button/Button';
 import { ROUTES } from '@/shared/constants/routes';
 import { usePathname, useRouter } from 'next/navigation';
 import Link from 'next/link';
+import { Route } from 'next';
 
 const Template = ({ children }: LayoutProps) => {
   const pathname = usePathname();
   const { back } = useRouter();
 
-  const nextHref = () => {
+  const handleNextButton = () => {
     switch (pathname) {
       case ROUTES.EXPERIENCE:
         return ROUTES.INFORMATION;
@@ -38,7 +39,7 @@ const Template = ({ children }: LayoutProps) => {
                 이전으로
               </Button>
             )}
-            <Link href={nextHref()}>
+            <Link href={handleNextButton() as Route}>
               <Button variant="primary" size="xl">
                 {pathname === ROUTES.VERIFY ? '경험카드 만들기' : '다음으로'}
               </Button>
