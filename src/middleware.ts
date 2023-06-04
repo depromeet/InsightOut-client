@@ -8,3 +8,7 @@ export const middleware = (request: NextRequest) => {
     if (!tab) return NextResponse.redirect(new URL('/collection/' + COLLECTION_TABS[0].pathname, request.nextUrl));
   }
 };
+
+export const config = {
+  matcher: ['/collection', '/collection/(experience|resumes|ai-recommends)/:path+'],
+};
