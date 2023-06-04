@@ -115,9 +115,6 @@
   .experience {
     @apply w-full border-[1px] border-purple-100 rounded-[24px] bg-white;
   }
-  .experience-container {
-    @apply :not(:last-child)
-  }
 }
 
 @layer components {
