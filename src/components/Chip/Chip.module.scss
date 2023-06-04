@@ -21,7 +21,7 @@
 }
 
 .secondary {
-  @apply hover:text-green-500;
+  @apply hover:text-cyan-500;
 }
 
 // Pressed
@@ -31,7 +31,7 @@
 }
 
 .secondary {
-  @apply active:text-green-800 active:border-[1px] active:border-solid active:border-green-400 active:bg-green-50 active:m-[-1px];
+  @apply active:text-cyan-800 active:border-[1px] active:border-solid active:border-cyan-400 active:bg-cyan-50 active:m-[-1px];
 }
 
 // With Badge

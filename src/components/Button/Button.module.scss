@@ -18,8 +18,8 @@
   @apply text-gray-900 bg-gray-200;
 }
 
-.secondary-green {
-  @apply text-main bg-green-200;
+.secondary-cyan {
+  @apply text-main bg-cyan-200;
 }
 
 .outlined {
@@ -58,8 +58,8 @@
   @apply hover:bg-gray-100 hover:text-gray-900;
 }
 
-.secondary-green {
-  @apply hover:text-main hover:bg-green-50;
+.secondary-cyan {
+  @apply hover:text-main hover:bg-cyan-50;
 }
 
 .outlined {
@@ -80,8 +80,8 @@
   @apply active:bg-gray-400 active:text-main;
 }
 
-.secondary-green {
-  @apply active:bg-green-300 active:text-main;
+.secondary-cyan {
+  @apply active:bg-cyan-300 active:text-main;
 }
 
 .outlined {
@@ -102,8 +102,8 @@
   @apply focus:bg-gray-400 focus:text-main;
 }
 
-.secondary-green {
-  @apply focus:bg-green-300 focus:text-main;
+.secondary-cyan {
+  @apply focus:bg-cyan-300 focus:text-main;
 }
 
 .outlined {
@@ -124,8 +124,8 @@
   @apply disabled:text-light disabled:bg-gray-300 disabled:cursor-not-allowed;
 }
 
-.secondary-green {
-  @apply disabled:bg-green-200 disabled:text-green-500 disabled:cursor-not-allowed;
+.secondary-cyan {
+  @apply disabled:bg-cyan-200 disabled:text-cyan-500 disabled:cursor-not-allowed;
 }
 
 .outlined {
@@ -166,7 +166,7 @@
   @apply fill-main;
 }
 
-.secondary-green path {
+.secondary-cyan path {
   @apply fill-main;
 }
 
@@ -187,8 +187,8 @@
   @apply fill-light;
 }
 
-.secondary-green:disabled path {
-  @apply fill-green-500;
+.secondary-cyan:disabled path {
+  @apply fill-cyan-500;
 }
 
 .outlined:disabled path {

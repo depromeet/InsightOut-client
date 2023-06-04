@@ -63,11 +63,11 @@ export const DefaultBadge: Story = {
           </Badge>
         </Flex>
       </Flex>
-      <Heading>Outlined Green</Heading>
+      <Heading>Outlined Cyan</Heading>
       <Flex flexDirection={'column'}>
         <Heading as={'h4'}>Small</Heading>
         <Flex>
-          <Badge style="outlined-green" size="sm">
+          <Badge style="outlined-cyan" size="sm">
             Badge
           </Badge>
         </Flex>
@@ -75,7 +75,7 @@ export const DefaultBadge: Story = {
       <Flex flexDirection={'column'}>
         <Heading as={'h4'}>Medium</Heading>
         <Flex>
-          <Badge style="outlined-green" size="md">
+          <Badge style="outlined-cyan" size="md">
             Badge
           </Badge>
         </Flex>
@@ -83,7 +83,7 @@ export const DefaultBadge: Story = {
       <Flex flexDirection={'column'}>
         <Heading as={'h4'}>Large</Heading>
         <Flex>
-          <Badge style="outlined-green" size="lg">
+          <Badge style="outlined-cyan" size="lg">
             Badge
           </Badge>
         </Flex>
@@ -113,11 +113,11 @@ export const DefaultBadge: Story = {
           </Badge>
         </Flex>
       </Flex>
-      <Heading>Filled Green</Heading>
+      <Heading>Filled Cyan</Heading>
       <Flex flexDirection={'column'}>
         <Heading as={'h4'}>Small</Heading>
         <Flex>
-          <Badge style="filled-green" size="sm">
+          <Badge style="filled-cyan" size="sm">
             Badge
           </Badge>
         </Flex>
@@ -125,7 +125,7 @@ export const DefaultBadge: Story = {
       <Flex flexDirection={'column'}>
         <Heading as={'h4'}>Medium</Heading>
         <Flex>
-          <Badge style="filled-green" size="md">
+          <Badge style="filled-cyan" size="md">
             Badge
           </Badge>
         </Flex>
@@ -133,7 +133,7 @@ export const DefaultBadge: Story = {
       <Flex flexDirection={'column'}>
         <Heading as={'h4'}>Large</Heading>
         <Flex>
-          <Badge style="filled-green" size="lg">
+          <Badge style="filled-cyan" size="lg">
             Badge
           </Badge>
         </Flex>
