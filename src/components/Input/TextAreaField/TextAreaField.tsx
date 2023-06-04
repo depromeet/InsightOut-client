@@ -45,7 +45,7 @@ const TextAreaField = ({
       {showCount && (
         <TextLengthMessage className="float-right mt-2" currentLength={value?.length || 0} maxLength={maxLength || 0} />
       )}
-      {error && !value && <ErrorMessage>{errorMessage}</ErrorMessage>}
+      {error && !value && <ErrorMessage hasIcon>{errorMessage}</ErrorMessage>}
     </div>
   );
 };

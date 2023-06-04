@@ -34,7 +34,7 @@ const TextField = ({
   ...props
 }: TextFieldProps) => {
   return (
-    <>
+    <div>
       {chipTitle && (
         <Tag variant="tertiary" size="s1" className="inline-block mb-2">
           {chipTitle}
@@ -53,9 +53,9 @@ const TextField = ({
           {mode === 'password' && <IconPassword />}
           {mode === 'email' && <p>{emailDomain}</p>}
         </RightContent>
-        {error && <ErrorMessage>{errorMessage}</ErrorMessage>}
       </div>
-    </>
+      {error && <ErrorMessage>{errorMessage}</ErrorMessage>}
+    </div>
   );
 };
 
