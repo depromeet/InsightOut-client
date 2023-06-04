@@ -19,7 +19,7 @@ const Page = () => {
         <TextField mode="naming" maxLength={10} placeholder="abc@gmail.com" />
         <TextField mode="password" />
         <TextField mode="email" emailDomain="@gmail.com" />
-        <TextField mode="chip" placeholder="abc@gmail.com" />
+        <TextField chipTitle="chipTitle" placeholder="abc@gmail.com" />
       </div>
     </>
   );
