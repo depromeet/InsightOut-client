@@ -3,19 +3,31 @@
 }
 
 // Variant
-.primary {
+.primary-50 {
   @apply bg-primary-50 text-primary-400;
 }
 
-.secondary {
+.primary-500 {
   @apply bg-primary-500 text-white;
+}
+
+.primary-outline {
+  @apply bg-primary-50 text-primary-500 border border-primary-300;
+}
+
+.secondary {
+  @apply bg-secondary-500 text-white;
+}
+
+.secondary-outline {
+  @apply bg-secondary-50 text-secondary-700 border border-secondary-300;
 }
 
 .tertiary {
   @apply bg-gray-100 text-gray-700;
 }
 
-.darkmode {
+.gray-800 {
   @apply bg-gray-800 text-white;
 }
 
