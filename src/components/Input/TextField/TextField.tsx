@@ -2,12 +2,14 @@ import { ComponentPropsWithRef, PropsWithChildren } from 'react';
 
 import { tw } from '@/services/utils/tailwindMerge';
 import IconPassword from '@/components/Icon/IconPassword';
+import Tag from '@/components/Tag/Tag';
 
 import { ErrorMessage } from '../ErrorMessage';
 import { TextLengthMessage } from '../TextLengthMessage';
 
 type TextFieldProps = ComponentPropsWithRef<'input'> & {
-  mode?: 'default' | 'naming' | 'password' | 'email' | 'chip';
+  mode?: 'default' | 'naming' | 'password' | 'email';
+  chipTitle?: string;
   error?: boolean;
   errorMessage?: string;
   emailDomain?: string;
@@ -22,6 +24,7 @@ type TextFieldProps = ComponentPropsWithRef<'input'> & {
  */
 const TextField = ({
   mode,
+  chipTitle,
   error,
   errorMessage,
   emailDomain,
@@ -31,22 +34,28 @@ const TextField = ({
   ...props
 }: TextFieldProps) => {
   return (
-    <div className="relative">
-      <label htmlFor="">{mode === 'chip' && <Chip />}</label>
-      <input
-        type={mode === 'password' ? 'password' : 'text'}
-        value={value}
-        maxLength={maxLength}
-        className={tw(`form w-full ${value ? 'form-typed' : ''} ${error ? 'form-error' : ''}`, className)}
-        {...props}
-      />
-      <RightContent>
-        {mode === 'naming' && <TextLengthMessage currentLength={value?.length || 0} maxLength={maxLength || 0} />}
-        {mode === 'password' && <IconPassword />}
-        {mode === 'email' && <p>{emailDomain}</p>}
-      </RightContent>
-      {error && <ErrorMessage>{errorMessage}</ErrorMessage>}
-    </div>
+    <>
+      {chipTitle && (
+        <Tag variant="tertiary" size="s1" className="inline-block mb-2">
+          {chipTitle}
+        </Tag>
+      )}
+      <div className="relative">
+        <input
+          type={mode === 'password' ? 'password' : 'text'}
+          value={value}
+          maxLength={maxLength}
+          className={tw(`form w-full ${value ? 'form-typed' : ''} ${error ? 'form-error' : ''}`, className)}
+          {...props}
+        />
+        <RightContent>
+          {mode === 'naming' && <TextLengthMessage currentLength={value?.length || 0} maxLength={maxLength || 0} />}
+          {mode === 'password' && <IconPassword />}
+          {mode === 'email' && <p>{emailDomain}</p>}
+        </RightContent>
+        {error && <ErrorMessage>{errorMessage}</ErrorMessage>}
+      </div>
+    </>
   );
 };
 
@@ -55,8 +64,3 @@ const RightContent = ({ children }: PropsWithChildren) => {
 };
 
 export default TextField;
-
-/**
- * 아래는 임시 컴포넌트들입니다
- */
-const Chip = () => <label className="bg-gray-300 ">나의 역할</label>;

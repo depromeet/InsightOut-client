@@ -1,11 +1,13 @@
 import { ComponentPropsWithRef } from 'react';
 
 import { tw } from '@/services/utils/tailwindMerge';
+import Tag from '@/components/Tag/Tag';
 
 import { ErrorMessage } from '../ErrorMessage';
 import { TextLengthMessage } from '../TextLengthMessage';
 
 type TextAreaFieldProps = ComponentPropsWithRef<'textarea'> & {
+  chipTitle?: string;
   showCount?: boolean;
   error?: boolean;
   errorMessage?: string;
@@ -18,6 +20,7 @@ type TextAreaFieldProps = ComponentPropsWithRef<'textarea'> & {
  * @param errorMessage error가 true인 경우에 사용. 텍스트 필드 하단에 보이는 메시지
  */
 const TextAreaField = ({
+  chipTitle,
   showCount,
   value,
   maxLength,
@@ -28,6 +31,11 @@ const TextAreaField = ({
 }: TextAreaFieldProps) => {
   return (
     <div>
+      {chipTitle && (
+        <Tag variant="tertiary" size="s1" className="inline-block mb-2">
+          {chipTitle}
+        </Tag>
+      )}
       <textarea
         value={value}
         maxLength={maxLength}
