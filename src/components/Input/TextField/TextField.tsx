@@ -31,6 +31,7 @@ const TextField = ({
   value,
   maxLength,
   className,
+  readOnly,
   ...props
 }: TextFieldProps) => {
   return (
@@ -46,11 +47,12 @@ const TextField = ({
           value={value}
           maxLength={maxLength}
           className={tw(
-            `form w-full read-only:bg-primary-50 read-only:text-primary-500 ${value ? 'form-typed' : ''} ${
+            `form w-full ${readOnly ? 'bg-primary-50 text-primary-500' : ''} ${value ? 'form-typed' : ''} ${
               error ? 'form-error' : ''
             }`,
             className
           )}
+          readOnly
           {...props}
         />
         <RightContent>
