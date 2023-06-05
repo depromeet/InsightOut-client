@@ -116,7 +116,7 @@
 
   /* form에 해당하는 모든 컴포넌트: select, input */
   .form {
-    @apply w-full p-4 b2 text-gray-300 bg-white border-[1px] rounded-2xl border-gray-300 hover:text-gray-500 hover:border-gray-500 focus:text-main focus:border-primary-500 disabled:text-gray-500 disabled:bg-gray-100 disabled:border-gray-200 focus-visible:outline-none read-only:bg-primary-50 read-only:text-primary-500;
+    @apply w-full p-4 b2 text-gray-300 bg-white border-[1px] rounded-2xl border-gray-300 hover:text-gray-500 hover:border-gray-500 focus:text-main focus:border-primary-500 disabled:text-gray-500 disabled:bg-gray-100 disabled:border-gray-200 focus-visible:outline-none read-only:cursor-not-allowed;
   }
 
   .form-typed {
