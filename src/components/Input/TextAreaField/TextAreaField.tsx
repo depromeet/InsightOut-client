@@ -1,6 +1,7 @@
 import { ComponentPropsWithRef, forwardRef } from 'react';
 
 import { tw } from '@/services/utils/tailwindMerge';
+import { useForwardRef } from '@/hooks/useForwardRef';
 import { useAutoSizeTextArea } from '@/hooks/useAutoSizeTextArea';
 import Tag from '@/components/Tag/Tag';
 
@@ -21,7 +22,8 @@ type TextAreaFieldProps = ComponentPropsWithRef<'textarea'> & {
  */
 const TextAreaField = forwardRef<HTMLTextAreaElement, TextAreaFieldProps>(
   ({ chipTitle, value, maxLength, error, errorMessage, className, autoSize = false, ...props }, ref) => {
-    useAutoSizeTextArea({ value, autoSize }, ref);
+    const forwardRef = useForwardRef<HTMLTextAreaElement>(ref);
+    const textareaRef = useAutoSizeTextArea({ value, autoSize }, forwardRef);
 
     return (
       <div>
@@ -31,7 +33,7 @@ const TextAreaField = forwardRef<HTMLTextAreaElement, TextAreaFieldProps>(
           </Tag>
         )}
         <textarea
-          ref={ref}
+          ref={textareaRef}
           value={value}
           maxLength={maxLength}
           className={tw(`form resize-none ${value ? 'form-typed' : ''} ${error ? 'form-error' : ''}`, className)}
