@@ -2,7 +2,6 @@ import React, { ReactElement } from 'react';
 import cn from 'classnames';
 import styles from './Tab.module.scss';
 import Link from 'next/link';
-import { LinkHref } from '@/shared/@types/route';
 
 type TabProps = MergeComponentProps<
   'a',
