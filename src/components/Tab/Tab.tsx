@@ -2,12 +2,12 @@ import React, { ReactElement } from 'react';
 import cn from 'classnames';
 import styles from './Tab.module.scss';
 import Link from 'next/link';
-import { UrlObject } from 'url';
+import { LinkHref } from '@/shared/@types/route';
 
 type TabProps = MergeComponentProps<
   'a',
   {
-    href: UrlObject | __next_route_internal_types__.RouteImpl<string>;
+    href: LinkHref;
     /** @description 탭 크기 (xs, sm, md, lg) */
     size: TabSize;
     /** @description Badge 컴포넌트 */
