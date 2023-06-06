@@ -2,7 +2,8 @@ import { ComponentPropsWithRef, forwardRef } from 'react';
 
 import { tw } from '@/services/utils/tailwindMerge';
 import { useForwardRef } from '@/hooks/useForwardRef';
-import { useAutoSizeTextArea } from '@/hooks/useAutoSizeTextArea';
+// import { useAutoSizeTextArea } from '@/hooks/useAutoSizeTextArea';
+import { resizeHeight } from '@/services/utils/autoSizeTextarea';
 import Tag from '@/components/Tag/Tag';
 
 import { ErrorMessage } from '../ErrorMessage';
@@ -23,7 +24,12 @@ type TextAreaFieldProps = ComponentPropsWithRef<'textarea'> & {
 const TextAreaField = forwardRef<HTMLTextAreaElement, TextAreaFieldProps>(
   ({ chipTitle, value, maxLength, error, errorMessage, className, autoSize = false, ...props }, ref) => {
     const forwardRef = useForwardRef<HTMLTextAreaElement>(ref);
-    const textareaRef = useAutoSizeTextArea({ value, autoSize }, forwardRef);
+
+    /** 1. useAutoSizeTextArea 커스텀 훅 */
+    // const textareaRef = useAutoSizeTextArea({ value, autoSize }, forwardRef);
+
+    /** 2. resizeHeight */
+    const handleTextareaChange = () => autoSize && resizeHeight(forwardRef);
 
     return (
       <div>
@@ -33,10 +39,11 @@ const TextAreaField = forwardRef<HTMLTextAreaElement, TextAreaFieldProps>(
           </Tag>
         )}
         <textarea
-          ref={textareaRef}
+          ref={forwardRef}
           value={value}
           maxLength={maxLength}
           className={tw(`form resize-none ${value ? 'form-typed' : ''} ${error ? 'form-error' : ''}`, className)}
+          onChange={handleTextareaChange}
           {...props}
         />
         {maxLength && (

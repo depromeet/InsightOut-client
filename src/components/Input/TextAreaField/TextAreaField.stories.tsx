@@ -22,7 +22,7 @@ export const Default: Story = {
 export const Example: Story = {
   render: () => (
     <Flex flexDirection={'column'} gap={10}>
-      <TextAreaField placeholder="Default" />
+      <TextAreaField autoSize placeholder="Default" />
       <TextAreaField disabled placeholder="Disabled" />
       <TextAreaField chipTitle="Chip Title" placeholder="chipTitle 속성에 문자열을 넣어보세요" />
       <TextAreaField
