@@ -2,7 +2,7 @@ import type { StorybookConfig } from '@storybook/nextjs';
 import path from 'path';
 
 const config: StorybookConfig = {
-  stories: ['../src/components/**/*.mdx', '../src/components/**/*.stories.@(js|jsx|ts|tsx)'],
+  stories: ['../src/components/**/*.mdx', '../src/**/components/**/*.stories.@(js|jsx|ts|tsx)'],
   addons: [
     '@storybook/addon-links',
     '@storybook/addon-essentials',
@@ -11,8 +11,6 @@ const config: StorybookConfig = {
     {
       name: '@storybook/addon-styling',
       options: {
-        // Check out https://github.com/storybookjs/addon-styling/blob/main/docs/api.md
-        // For more details on this addon's options.
         postCss: true,
       },
     },
@@ -24,6 +22,12 @@ const config: StorybookConfig = {
   docs: {
     autodocs: 'tag',
   },
+  staticDirs: [
+    {
+      from: '../src/app/fonts',
+      to: 'src/app/fonts',
+    },
+  ],
   webpackFinal: async (config) => {
     if (!config.resolve) return config;
 

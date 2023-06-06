@@ -5,7 +5,7 @@ import styles from './Button.module.scss';
 type ButtonProps = MergeComponentProps<
   'button',
   {
-    /** @description 버튼 종류 (primary, secondary, tertiary, secondary-green, outlined) */
+    /** @description 버튼 종류 (primary, secondary, tertiary, secondary-secondary, outlined) */
     variant: ButtonVariant;
     /** @description 버튼 사이즈 (sm, md, lg, xl) */
     size: ButtonSize;
@@ -30,7 +30,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       styles.root,
       styles[variant],
       styles[size],
-      isIconOnlyButton && styles['icon-only'],
+      { [styles['icon-only']]: isIconOnlyButton },
       className
     );
 

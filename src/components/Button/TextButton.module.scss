@@ -27,25 +27,25 @@
 // Hover
 
 .root {
-  @apply hover:text-purple-400;
+  @apply hover:text-primary-400;
 }
 
 // Pressed
 
 .root {
-  @apply active:text-purple-600;
+  @apply active:text-primary-600;
 }
 
 // Focused
 
 .root {
-  @apply focus:text-purple-500;
+  @apply focus:text-primary-500;
 }
 
 // Disabled
 
 .root {
-  @apply disabled:text-purple-200 disabled:cursor-not-allowed;
+  @apply disabled:text-primary-200 disabled:cursor-not-allowed;
 }
 
 // Icon Size
@@ -73,19 +73,19 @@
 }
 
 .root:hover path {
-  @apply fill-purple-400;
+  @apply fill-primary-400;
 }
 
 .root:active path {
-  @apply fill-purple-600;
+  @apply fill-primary-600;
 }
 
 .root:focus path {
-  @apply fill-purple-500;
+  @apply fill-primary-500;
 }
 
 .root:disabled path {
-  @apply fill-purple-200;
+  @apply fill-primary-200;
 }
 
 // Underline Base
@@ -102,23 +102,23 @@
 // Underline Hover
 
 .underline:hover::after {
-  @apply bg-purple-400;
+  @apply bg-primary-400;
 }
 
 // Underline Pressed
 
 .underline:active::after {
-  @apply bg-purple-600;
+  @apply bg-primary-600;
 }
 
 // Underline Focused
 
 .underline:focus::after {
-  @apply bg-purple-500;
+  @apply bg-primary-500;
 }
 
 // Underline Disabled
 
 .underline:disabled::after {
-  @apply bg-purple-200;
+  @apply bg-primary-200;
 }

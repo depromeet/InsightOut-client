@@ -1,0 +1,45 @@
+.root {
+  @apply text-center rounded-lg font-medium h-max;
+}
+
+// Variant
+.primary-50 {
+  @apply bg-primary-50 text-primary-400;
+}
+
+.primary-500 {
+  @apply bg-primary-500 text-white;
+}
+
+.primary-outline {
+  @apply bg-primary-50 text-primary-500 border border-primary-300;
+}
+
+.secondary {
+  @apply bg-secondary-500 text-white;
+}
+
+.secondary-outline {
+  @apply bg-secondary-50 text-secondary-700 border border-secondary-300;
+}
+
+.tertiary {
+  @apply bg-gray-100 text-gray-700;
+}
+
+.gray-800 {
+  @apply bg-gray-800 text-white;
+}
+
+// Size
+.s1 {
+  @apply px-2 py-1 text-xs;
+}
+
+.s2 {
+  @apply px-3 py-1.5 text-sm leading-[22px];
+}
+
+.s3 {
+  @apply px-4 py-2 text-xl;
+}

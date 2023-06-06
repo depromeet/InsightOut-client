@@ -1,7 +1,7 @@
 // Base
 
 .root {
-  @apply flex justify-center items-center rounded-[8px] border-[1px] border-solid;
+  @apply flex justify-center items-center rounded-[8px];
 }
 
 // Styles
@@ -10,20 +10,20 @@
   @apply text-sub bg-gray-300;
 }
 
-.outlined-purple {
-  @apply text-purple-500 bg-purple-50 border-purple-200;
+.outlined-primary {
+  @apply text-primary-500 bg-primary-50 border-[1px] border-solid border-primary-200;
 }
 
-.outlined-green {
-  @apply text-green-700 bg-green-50 border-green-300;
+.outlined-secondary {
+  @apply text-secondary-700 bg-secondary-50 border-[1px] border-solid border-secondary-300;
 }
 
-.filled-purple {
-  @apply text-white bg-purple-500;
+.filled-primary {
+  @apply text-white bg-primary-500;
 }
 
-.filled-green {
-  @apply text-white bg-green-400;
+.filled-secondary {
+  @apply text-white bg-secondary-400;
 }
 
 .dark {

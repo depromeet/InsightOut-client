@@ -124,7 +124,7 @@
   }
 
   .form-typed {
-    @apply border-purple-200 form text-main bg-purple-50;
+    @apply border-primary-200 form text-main bg-primary-50;
   }
 
   .form-error {
