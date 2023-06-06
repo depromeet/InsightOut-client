@@ -8,7 +8,6 @@ import { TextLengthMessage } from '../TextLengthMessage';
 
 type TextAreaFieldProps = ComponentPropsWithRef<'textarea'> & {
   chipTitle?: string;
-  showCount?: boolean;
   error?: boolean;
   errorMessage?: string;
   value?: string;
@@ -21,7 +20,6 @@ type TextAreaFieldProps = ComponentPropsWithRef<'textarea'> & {
  */
 const TextAreaField = ({
   chipTitle,
-  showCount,
   value,
   maxLength,
   error,
@@ -42,7 +40,7 @@ const TextAreaField = ({
         className={tw(`form resize-none ${value ? 'form-typed' : ''} ${error ? 'form-error' : ''}`, className)}
         {...props}
       />
-      {showCount && (
+      {maxLength && (
         <TextLengthMessage className="float-right mt-2" currentLength={value?.length || 0} maxLength={maxLength || 0} />
       )}
       {error && !value && <ErrorMessage hasIcon>{errorMessage}</ErrorMessage>}

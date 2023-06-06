@@ -32,7 +32,7 @@ export const Example: Story = {
       />
       <TextAreaField value="Typed" />
       <TextAreaField readOnly value="Readonly" />
-      <TextAreaField showCount maxLength={100} placeholder="showCount 속성과 maxLength를 함께 전달해주세요" />
+      <TextAreaField maxLength={100} placeholder="showCount 속성과 maxLength를 함께 전달해주세요" />
     </Flex>
   ),
 };
