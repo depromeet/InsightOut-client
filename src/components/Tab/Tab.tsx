@@ -6,7 +6,7 @@ import Link from 'next/link';
 type TabProps = MergeComponentProps<
   'a',
   {
-    href: string;
+    href: UrlObject | RouteImpl<string>;
     /** @description 탭 크기 (xs, sm, md, lg) */
     size: TabSize;
     /** @description Badge 컴포넌트 */
