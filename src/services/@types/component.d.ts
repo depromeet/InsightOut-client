@@ -10,9 +10,12 @@ type MergeComponentProps<T extends React.ElementType, P extends object = {}> = O
 > &
   P;
 
+// color scale
+type colorScale = 50 | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900;
+
 // Button
 
-type ButtonVariant = 'primary' | 'secondary' | 'tertiary' | 'secondary-green' | 'outlined';
+type ButtonVariant = 'primary' | 'secondary' | 'tertiary' | 'secondary-secondary' | 'outlined';
 type ButtonSize = 'sm' | 'md' | 'lg' | 'xl';
 
 // Chip
@@ -22,10 +25,29 @@ type ChipSize = 'sm' | 'md';
 
 // Badge
 
-type BadgeStyle = 'tertiary' | 'outlined-purple' | 'outlined-green' | 'filled-purple' | 'filled-green' | 'dark';
+type BadgeStyle =
+  | 'tertiary'
+  | 'outlined-primary'
+  | 'outlined-secondary'
+  | 'filled-primary'
+  | 'filled-secondary'
+  | 'dark';
 type BadgeSize = 'sm' | 'md' | 'lg';
 
 // Tab
 
 type TabSize = 'xs' | 'sm' | 'md' | 'lg';
 type TabVariant = 'default' | 'pressed';
+
+// Tag
+
+type TagVariant =
+  | 'primary-50'
+  | 'primary-500'
+  | 'primary-outline'
+  | 'secondary'
+  | 'secondary-outline'
+  | 'tertiary'
+  | 'gray-800';
+type TagSize = 's1' | 's2' | 's3';
+

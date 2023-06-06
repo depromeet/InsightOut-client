@@ -138,40 +138,40 @@ export const DefaultButton: Story = {
         </Flex>
         <Flex flexDirection={'column'}>
           <Flex flexDirection={'column'}>
-            <Heading>Secondary-Green</Heading>
+            <Heading>Secondary-Secondary</Heading>
             <Heading as={'h4'}>Small</Heading>
             <Flex gap={10}>
-              <Button size="sm" variant="secondary-green">
+              <Button size="sm" variant="secondary-secondary">
                 BUTTON
               </Button>
-              <Button size="sm" variant="secondary-green" disabled>
+              <Button size="sm" variant="secondary-secondary" disabled>
                 DISABLED
               </Button>
             </Flex>
             <Heading as={'h4'}>Medium</Heading>
             <Flex gap={10}>
-              <Button size="md" variant="secondary-green">
+              <Button size="md" variant="secondary-secondary">
                 BUTTON
               </Button>
-              <Button size="md" variant="secondary-green" disabled>
+              <Button size="md" variant="secondary-secondary" disabled>
                 DISABLED
               </Button>
             </Flex>
             <Heading as={'h4'}>Large</Heading>
             <Flex gap={10}>
-              <Button size="lg" variant="secondary-green">
+              <Button size="lg" variant="secondary-secondary">
                 BUTTON
               </Button>
-              <Button size="lg" variant="secondary-green" disabled>
+              <Button size="lg" variant="secondary-secondary" disabled>
                 DISABLED
               </Button>
             </Flex>
             <Heading as={'h4'}>XLarge</Heading>
             <Flex gap={10}>
-              <Button size="xl" variant="secondary-green">
+              <Button size="xl" variant="secondary-secondary">
                 BUTTON
               </Button>
-              <Button size="xl" variant="secondary-green" disabled>
+              <Button size="xl" variant="secondary-secondary" disabled>
                 DISABLED
               </Button>
             </Flex>
@@ -302,26 +302,26 @@ export const IconOnlyButton: Story = {
         </Flex>
         <Flex flexDirection={'column'}>
           <Flex flexDirection={'column'}>
-            <Heading>Secondary-Green</Heading>
+            <Heading>Secondary-Secondary</Heading>
             <Heading as={'h4'}>Small</Heading>
             <Flex gap={10}>
-              <Button size="sm" variant="secondary-green" onlyIcon={<IconHeart />} />
-              <Button size="sm" variant="secondary-green" disabled onlyIcon={<IconHeart />} />
+              <Button size="sm" variant="secondary-secondary" onlyIcon={<IconHeart />} />
+              <Button size="sm" variant="secondary-secondary" disabled onlyIcon={<IconHeart />} />
             </Flex>
             <Heading as={'h4'}>Medium</Heading>
             <Flex gap={10}>
-              <Button size="md" variant="secondary-green" onlyIcon={<IconHeart />} />
-              <Button size="md" variant="secondary-green" disabled onlyIcon={<IconHeart />} />
+              <Button size="md" variant="secondary-secondary" onlyIcon={<IconHeart />} />
+              <Button size="md" variant="secondary-secondary" disabled onlyIcon={<IconHeart />} />
             </Flex>
             <Heading as={'h4'}>Large</Heading>
             <Flex gap={10}>
-              <Button size="lg" variant="secondary-green" onlyIcon={<IconHeart />} />
-              <Button size="lg" variant="secondary-green" disabled onlyIcon={<IconHeart />} />
+              <Button size="lg" variant="secondary-secondary" onlyIcon={<IconHeart />} />
+              <Button size="lg" variant="secondary-secondary" disabled onlyIcon={<IconHeart />} />
             </Flex>
             <Heading as={'h4'}>XLarge</Heading>
             <Flex gap={10}>
-              <Button size="xl" variant="secondary-green" onlyIcon={<IconHeart />} />
-              <Button size="xl" variant="secondary-green" disabled onlyIcon={<IconHeart />} />
+              <Button size="xl" variant="secondary-secondary" onlyIcon={<IconHeart />} />
+              <Button size="xl" variant="secondary-secondary" disabled onlyIcon={<IconHeart />} />
             </Flex>
           </Flex>
         </Flex>
@@ -482,40 +482,40 @@ export const LeftIconButton: Story = {
         </Flex>
         <Flex flexDirection={'column'}>
           <Flex flexDirection={'column'}>
-            <Heading>Secondary-Green</Heading>
+            <Heading>Secondary-Secondary</Heading>
             <Heading as={'h4'}>Small</Heading>
             <Flex gap={10}>
-              <Button size="sm" variant="secondary-green" leftIcon={<IconHeart />}>
+              <Button size="sm" variant="secondary-secondary" leftIcon={<IconHeart />}>
                 BUTTON
               </Button>
-              <Button size="sm" variant="secondary-green" disabled leftIcon={<IconHeart />}>
+              <Button size="sm" variant="secondary-secondary" disabled leftIcon={<IconHeart />}>
                 DISABLED
               </Button>
             </Flex>
             <Heading as={'h4'}>Medium</Heading>
             <Flex gap={10}>
-              <Button size="md" variant="secondary-green" leftIcon={<IconHeart />}>
+              <Button size="md" variant="secondary-secondary" leftIcon={<IconHeart />}>
                 BUTTON
               </Button>
-              <Button size="md" variant="secondary-green" disabled leftIcon={<IconHeart />}>
+              <Button size="md" variant="secondary-secondary" disabled leftIcon={<IconHeart />}>
                 DISABLED
               </Button>
             </Flex>
             <Heading as={'h4'}>Large</Heading>
             <Flex gap={10}>
-              <Button size="lg" variant="secondary-green" leftIcon={<IconHeart />}>
+              <Button size="lg" variant="secondary-secondary" leftIcon={<IconHeart />}>
                 BUTTON
               </Button>
-              <Button size="lg" variant="secondary-green" disabled leftIcon={<IconHeart />}>
+              <Button size="lg" variant="secondary-secondary" disabled leftIcon={<IconHeart />}>
                 DISABLED
               </Button>
             </Flex>
             <Heading as={'h4'}>XLarge</Heading>
             <Flex gap={10}>
-              <Button size="xl" variant="secondary-green" leftIcon={<IconHeart />}>
+              <Button size="xl" variant="secondary-secondary" leftIcon={<IconHeart />}>
                 BUTTON
               </Button>
-              <Button size="xl" variant="secondary-green" disabled leftIcon={<IconHeart />}>
+              <Button size="xl" variant="secondary-secondary" disabled leftIcon={<IconHeart />}>
                 DISABLED
               </Button>
             </Flex>
@@ -694,40 +694,40 @@ export const RightIconButton: Story = {
         </Flex>
         <Flex flexDirection={'column'}>
           <Flex flexDirection={'column'}>
-            <Heading>Secondary-Green</Heading>
+            <Heading>Secondary-Secondary</Heading>
             <Heading as={'h4'}>Small</Heading>
             <Flex gap={10}>
-              <Button size="sm" variant="secondary-green" rightIcon={<IconHeart />}>
+              <Button size="sm" variant="secondary-secondary" rightIcon={<IconHeart />}>
                 BUTTON
               </Button>
-              <Button size="sm" variant="secondary-green" disabled rightIcon={<IconHeart />}>
+              <Button size="sm" variant="secondary-secondary" disabled rightIcon={<IconHeart />}>
                 DISABLED
               </Button>
             </Flex>
             <Heading as={'h4'}>Medium</Heading>
             <Flex gap={10}>
-              <Button size="md" variant="secondary-green" rightIcon={<IconHeart />}>
+              <Button size="md" variant="secondary-secondary" rightIcon={<IconHeart />}>
                 BUTTON
               </Button>
-              <Button size="md" variant="secondary-green" disabled rightIcon={<IconHeart />}>
+              <Button size="md" variant="secondary-secondary" disabled rightIcon={<IconHeart />}>
                 DISABLED
               </Button>
             </Flex>
             <Heading as={'h4'}>Large</Heading>
             <Flex gap={10}>
-              <Button size="lg" variant="secondary-green" rightIcon={<IconHeart />}>
+              <Button size="lg" variant="secondary-secondary" rightIcon={<IconHeart />}>
                 BUTTON
               </Button>
-              <Button size="lg" variant="secondary-green" disabled rightIcon={<IconHeart />}>
+              <Button size="lg" variant="secondary-secondary" disabled rightIcon={<IconHeart />}>
                 DISABLED
               </Button>
             </Flex>
             <Heading as={'h4'}>XLarge</Heading>
             <Flex gap={10}>
-              <Button size="xl" variant="secondary-green" rightIcon={<IconHeart />}>
+              <Button size="xl" variant="secondary-secondary" rightIcon={<IconHeart />}>
                 BUTTON
               </Button>
-              <Button size="xl" variant="secondary-green" disabled rightIcon={<IconHeart />}>
+              <Button size="xl" variant="secondary-secondary" disabled rightIcon={<IconHeart />}>
                 DISABLED
               </Button>
             </Flex>

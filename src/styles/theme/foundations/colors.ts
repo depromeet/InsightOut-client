@@ -30,7 +30,7 @@ export const colors = {
   dark: '#252730',
 
   // primary color
-  purple: {
+  primary: {
     50: '#EFEEFE',
     100: '#E0DDFE',
     200: '#C0BBFC',
@@ -44,17 +44,17 @@ export const colors = {
   },
 
   // secondary color
-  green: {
-    50: '#E7F7EF',
-    100: '#CBF5E1',
-    200: '#AAEECE',
-    300: '#7DE6B4',
-    400: '#76DBAB',
-    500: '#66C296',
-    600: '#4F9E78',
-    700: '#387A5B',
-    800: '#21563D',
-    900: '#0A321F',
+  secondary: {
+    50: '#F3FBFC',
+    100: '#D5F1F6',
+    200: '#A6E3ED',
+    300: '#7ED9E7',
+    400: '#52CDE0',
+    500: '#1EBAD2',
+    600: '#1FA8BD',
+    700: '#2095A7',
+    800: '#217E8C',
+    900: '#23707B',
   },
 
   // etc color

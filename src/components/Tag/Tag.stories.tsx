@@ -15,27 +15,39 @@ export const Default: Story = {
   render: () => {
     return (
       <div className="flex flex-col gap-4">
-        <h3>Tertiary</h3>
+        <h3>Primay-50</h3>
         <div className="flex gap-6 ">
-          <Tag variant="tertiary" size="s1">
+          <Tag variant="primary-50" size="s1">
             여기에키워드를써요
           </Tag>
-          <Tag variant="tertiary" size="s2">
+          <Tag variant="primary-50" size="s2">
             여기에키워드를써요
           </Tag>
-          <Tag variant="tertiary" size="s3">
+          <Tag variant="primary-50" size="s3">
             여기에키워드를써요
           </Tag>
         </div>
-        <h3>Primay</h3>
+        <h3>Primay-500</h3>
         <div className="flex gap-6 ">
-          <Tag variant="primary" size="s1">
+          <Tag variant="primary-500" size="s1">
             여기에키워드를써요
           </Tag>
-          <Tag variant="primary" size="s2">
+          <Tag variant="primary-500" size="s2">
             여기에키워드를써요
           </Tag>
-          <Tag variant="primary" size="s3">
+          <Tag variant="primary-500" size="s3">
+            여기에키워드를써요
+          </Tag>
+        </div>
+        <h3>Primay-outline</h3>
+        <div className="flex gap-6 ">
+          <Tag variant="primary-outline" size="s1">
+            여기에키워드를써요
+          </Tag>
+          <Tag variant="primary-outline" size="s2">
+            여기에키워드를써요
+          </Tag>
+          <Tag variant="primary-outline" size="s3">
             여기에키워드를써요
           </Tag>
         </div>
@@ -51,15 +63,39 @@ export const Default: Story = {
             여기에키워드를써요
           </Tag>
         </div>
-        <h3>Darkmode</h3>
+        <h3>Secondary-outline</h3>
         <div className="flex gap-6 ">
-          <Tag variant="darkmode" size="s1">
+          <Tag variant="secondary-outline" size="s1">
             여기에키워드를써요
           </Tag>
-          <Tag variant="darkmode" size="s2">
+          <Tag variant="secondary-outline" size="s2">
             여기에키워드를써요
           </Tag>
-          <Tag variant="darkmode" size="s3">
+          <Tag variant="secondary-outline" size="s3">
+            여기에키워드를써요
+          </Tag>
+        </div>
+        <h3>Tertiary</h3>
+        <div className="flex gap-6 ">
+          <Tag variant="tertiary" size="s1">
+            여기에키워드를써요
+          </Tag>
+          <Tag variant="tertiary" size="s2">
+            여기에키워드를써요
+          </Tag>
+          <Tag variant="tertiary" size="s3">
+            여기에키워드를써요
+          </Tag>
+        </div>
+        <h3>Gray-800</h3>
+        <div className="flex gap-6 ">
+          <Tag variant="gray-800" size="s1">
+            여기에키워드를써요
+          </Tag>
+          <Tag variant="gray-800" size="s2">
+            여기에키워드를써요
+          </Tag>
+          <Tag variant="gray-800" size="s3">
             여기에키워드를써요
           </Tag>
         </div>
