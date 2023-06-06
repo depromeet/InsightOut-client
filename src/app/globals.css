@@ -3,15 +3,14 @@
 @tailwind utilities;
 
 @layer base {
+  /* layout */
   .layout {
     @apply max-w-[1200px] mx-auto;
   }
   .layout-mt-40 {
     @apply mt-10 layout;
   }
-}
 
-@layer components {
   /* header */
   .h1 {
     font-weight: 700;
