@@ -113,7 +113,7 @@
 
   /* 경험 분해 - 카드 */
   .experience {
-    @apply w-full border-[1px] border-purple-100 rounded-[24px] bg-white;
+    @apply w-full border-[1px] border-primary-100 rounded-[24px] bg-white;
   }
 }
 
