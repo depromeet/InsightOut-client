@@ -34,6 +34,19 @@ type BadgeStyle =
   | 'dark';
 type BadgeSize = 'sm' | 'md' | 'lg';
 
+// Tooltip
+
+type TooltipType = 'strong' | 'light';
+type TooltipPosition =
+  | 'center-top'
+  | 'center-bottom'
+  | 'right-top'
+  | 'right-bottom'
+  | 'left-top'
+  | 'left-bottom'
+  | 'side-left-center'
+  | 'side-right-center';
+
 // Tab
 
 type TabSize = 'xs' | 'sm' | 'md' | 'lg';
