@@ -37,8 +37,10 @@ type BadgeSize = 'sm' | 'md' | 'lg';
 // Tab
 
 type TabSize = 'xs' | 'sm' | 'md' | 'lg';
+type TabVariant = 'default' | 'pressed';
 
 // Tag
+
 type TagVariant =
   | 'primary-50'
   | 'primary-500'
@@ -48,3 +50,4 @@ type TagVariant =
   | 'tertiary'
   | 'gray-800';
 type TagSize = 's1' | 's2' | 's3';
+
