@@ -54,6 +54,12 @@ export const textStyles = {
     lineHeight: '28px',
     letterSpacing: '-0.6px',
   },
+  subhead4: {
+    fontWeight: 700,
+    fontSize: '16px',
+    lineHeight: '28px',
+    letterSpacing: '-0.6px',
+  },
 
   // body
   b1: {
