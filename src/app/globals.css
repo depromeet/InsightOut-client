@@ -3,9 +3,14 @@
 @tailwind utilities;
 
 @layer base {
-}
+  /* layout */
+  .layout {
+    @apply max-w-[1200px] mx-auto;
+  }
+  .layout-mt-40 {
+    @apply mt-10 layout;
+  }
 
-@layer components {
   /* header */
   .h1 {
     font-weight: 700;
@@ -114,16 +119,26 @@
     letter-spacing: -0.6px;
   }
 
+  /* 경험 분해 - 카드 */
+  .experience {
+    @apply w-full border-[1px] border-primary-100 rounded-[24px] bg-white;
+  }
+}
+
+@layer components {
   /* form에 해당하는 모든 컴포넌트: select, input */
   .form {
     @apply w-full p-4 b2 text-gray-300 bg-white border-[1px] rounded-2xl border-gray-300 hover:text-gray-500 hover:border-gray-500 focus:text-main focus:border-gray-600 disabled:text-gray-500 disabled:bg-gray-100 disabled:border-gray-200 focus-visible:outline-none;
   }
 
   .form-typed {
-    @apply border-purple-200 form text-main bg-purple-50;
+    @apply border-primary-200 form text-main bg-primary-50;
   }
 
   .form-error {
     @apply form border-error;
+  }
+  .flex-center {
+    @apply flex items-center justify-center;
   }
 }

@@ -1,7 +1,25 @@
 // Base
 
 .root {
-  @apply flex justify-center items-center text-light font-bold cursor-pointer;
+  @apply flex justify-center items-center font-bold cursor-pointer;
+}
+
+// Variant
+
+.default {
+  @apply text-light;
+
+  div {
+    @apply text-white bg-gray-300;
+  }
+}
+
+.pressed {
+  @apply text-main;
+
+  div {
+    @apply text-white bg-gray-900;
+  }
 }
 
 // Size

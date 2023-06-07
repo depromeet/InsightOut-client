@@ -1,5 +1,6 @@
 const { colors } = require('./src/styles/theme/foundations/colors');
 const { boxShadow } = require('./src/styles/theme/foundations/boxShadow');
+const { dropShadow } = require('./src/styles/theme/foundations/dropShadow');
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
@@ -11,6 +12,7 @@ module.exports = {
   theme: {
     colors,
     boxShadow,
+    dropShadow,
   },
   plugins: [],
 };
