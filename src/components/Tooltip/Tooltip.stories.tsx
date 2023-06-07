@@ -106,6 +106,49 @@ export const StrongTooltip: Story = {
           </Tooltip>
         </Flex>
       </Flex>
+      <Flex flexDirection={'column'} alignItems={'center'} gap={5}>
+        <Heading>Always Opened Strong Tooltip</Heading>
+        <Flex>
+          <Tooltip {...args} position="center-top" content="This is tooltip" alwaysOpen>
+            CENTER TOP TOOLTIP
+          </Tooltip>
+        </Flex>
+        <Flex>
+          <Tooltip {...args} position="center-bottom" content="This is tooltip" alwaysOpen>
+            CENTER BOTTOM TOOLTIP
+          </Tooltip>
+        </Flex>
+        <Flex>
+          <Tooltip {...args} position="right-top" content="This is tooltip" alwaysOpen>
+            RIGHT TOP TOOLTIP
+          </Tooltip>
+        </Flex>
+        <Flex>
+          <Tooltip {...args} position="right-bottom" content="This is tooltip" alwaysOpen>
+            RIGHT BOTTOM TOOLTIP
+          </Tooltip>
+        </Flex>
+        <Flex>
+          <Tooltip {...args} position="left-top" content="This is tooltip" alwaysOpen>
+            LEFT TOP TOOLTIP
+          </Tooltip>
+        </Flex>
+        <Flex>
+          <Tooltip {...args} position="left-bottom" content="This is tooltip" alwaysOpen>
+            LEFT BOTTOM TOOLTIP
+          </Tooltip>
+        </Flex>
+        <Flex>
+          <Tooltip {...args} position="side-left-center" content="This is tooltip" alwaysOpen>
+            SIDE LEFT CENTER TOOLTIP
+          </Tooltip>
+        </Flex>
+        <Flex>
+          <Tooltip {...args} position="side-right-center" content="This is tooltip" alwaysOpen>
+            SIDE RIGHT CENTER TOOLTIP
+          </Tooltip>
+        </Flex>
+      </Flex>
     </Flex>
   ),
 };
@@ -202,6 +245,49 @@ export const LightTooltip: Story = {
         </Flex>
         <Flex>
           <Tooltip {...args} position="side-right-center" content="일이삼사오육칠팔구십일이삼사오육칠팔구십">
+            SIDE RIGHT CENTER TOOLTIP
+          </Tooltip>
+        </Flex>
+      </Flex>
+      <Flex flexDirection={'column'} alignItems={'center'} gap={5}>
+        <Heading>Always Opened Light Tooltip</Heading>
+        <Flex>
+          <Tooltip {...args} position="center-top" content="This is tooltip" alwaysOpen>
+            CENTER TOP TOOLTIP
+          </Tooltip>
+        </Flex>
+        <Flex>
+          <Tooltip {...args} position="center-bottom" content="This is tooltip" alwaysOpen>
+            CENTER BOTTOM TOOLTIP
+          </Tooltip>
+        </Flex>
+        <Flex>
+          <Tooltip {...args} position="right-top" content="This is tooltip" alwaysOpen>
+            RIGHT TOP TOOLTIP
+          </Tooltip>
+        </Flex>
+        <Flex>
+          <Tooltip {...args} position="right-bottom" content="This is tooltip" alwaysOpen>
+            RIGHT BOTTOM TOOLTIP
+          </Tooltip>
+        </Flex>
+        <Flex>
+          <Tooltip {...args} position="left-top" content="This is tooltip" alwaysOpen>
+            LEFT TOP TOOLTIP
+          </Tooltip>
+        </Flex>
+        <Flex>
+          <Tooltip {...args} position="left-bottom" content="This is tooltip" alwaysOpen>
+            LEFT BOTTOM TOOLTIP
+          </Tooltip>
+        </Flex>
+        <Flex>
+          <Tooltip {...args} position="side-left-center" content="This is tooltip" alwaysOpen>
+            SIDE LEFT CENTER TOOLTIP
+          </Tooltip>
+        </Flex>
+        <Flex>
+          <Tooltip {...args} position="side-right-center" content="This is tooltip" alwaysOpen>
             SIDE RIGHT CENTER TOOLTIP
           </Tooltip>
         </Flex>

@@ -13,13 +13,15 @@ type TooltipProps = MergeComponentProps<
     position: TooltipPosition;
     /** @description 툴팁 텍스트 */
     content: string;
+    /** @description 출력된 채로 고정 여부 */
+    alwaysOpen?: boolean;
   }
 >;
 
 /**
  * @name 툴팁컴포넌트
  */
-const Tooltip = ({ type, position, content, children }: TooltipProps) => {
+const Tooltip = ({ type, position, content, children, alwaysOpen }: TooltipProps) => {
   const childrenRef = useRef<HTMLDivElement>(null);
 
   const [isOpen, setIsOpen] = useState(false);
@@ -39,7 +41,13 @@ const Tooltip = ({ type, position, content, children }: TooltipProps) => {
         {children}
       </div>
       {tooltipPlacement && (
-        <TooltipContent type={type} position={position} content={content} isOpen={isOpen} style={tooltipPlacement} />
+        <TooltipContent
+          type={type}
+          position={position}
+          content={content}
+          isOpen={alwaysOpen ? true : isOpen}
+          style={tooltipPlacement}
+        />
       )}
     </div>
   );
