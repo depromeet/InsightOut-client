@@ -10,9 +10,9 @@ type TextLengthMessageProps = ComponentPropsWithRef<'p'> & {
 export const TextLengthMessage = ({ currentLength, maxLength, className, ...props }: TextLengthMessageProps) => (
   <p className={tw('text-gray-500 c1', className)} {...props}>
     <span className={currentLength > 0 ? 'text-secondary-400' : ''}>
-      {formatCurrentTextLength(currentLength, maxLength)}
+      {formatCurrentTextLength(currentLength, maxLength)}자
     </span>
-    <span>/{maxLength}</span>
+    <span>/{maxLength}자(공백포함)</span>
   </p>
 );
 

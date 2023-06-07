@@ -16,11 +16,15 @@ export const DefaultTab: Story = {
     <Flex flexDirection={'column'} gap={10}>
       <Heading as={'h4'}>Small</Heading>
       <Flex>
-        <Tab size="sm">Tab</Tab>
+        <Tab href="/?path=/story/components-tab--default-tab" size="sm">
+          Tab
+        </Tab>
       </Flex>
       <Heading as={'h4'}>Medium</Heading>
       <Flex>
-        <Tab size="md">Tab</Tab>
+        <Tab href="/?path=/story/components-tab--default-tab" size="md">
+          Tab
+        </Tab>
       </Flex>
     </Flex>
   ),
@@ -32,6 +36,7 @@ export const TabWithBadge: Story = {
       <Heading as={'h4'}>Small</Heading>
       <Flex>
         <Tab
+          href="/?path=/story/components-tab--default-tab"
           size="sm"
           badge={
             <Badge style="tertiary" size="sm">
@@ -44,6 +49,7 @@ export const TabWithBadge: Story = {
       <Heading as={'h4'}>Medium</Heading>
       <Flex>
         <Tab
+          href="/?path=/story/components-tab--default-tab"
           size="md"
           badge={
             <Badge style="tertiary" size="sm">

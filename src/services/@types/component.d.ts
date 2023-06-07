@@ -34,11 +34,26 @@ type BadgeStyle =
   | 'dark';
 type BadgeSize = 'sm' | 'md' | 'lg';
 
+// Tooltip
+
+type TooltipType = 'strong' | 'light';
+type TooltipPosition =
+  | 'center-top'
+  | 'center-bottom'
+  | 'right-top'
+  | 'right-bottom'
+  | 'left-top'
+  | 'left-bottom'
+  | 'side-left-center'
+  | 'side-right-center';
+
 // Tab
 
 type TabSize = 'xs' | 'sm' | 'md' | 'lg';
+type TabVariant = 'default' | 'pressed';
 
 // Tag
+
 type TagVariant =
   | 'primary-50'
   | 'primary-500'
@@ -48,3 +63,4 @@ type TagVariant =
   | 'tertiary'
   | 'gray-800';
 type TagSize = 's1' | 's2' | 's3';
+
