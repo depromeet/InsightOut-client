@@ -43,6 +43,11 @@ type TooltipPosition =
   | 'left-bottom'
   | 'side-left-center'
   | 'side-right-center';
+type TooltipPlacement = {
+  top: string;
+  left: string;
+  transform: string;
+};
 
 // Tab
 
