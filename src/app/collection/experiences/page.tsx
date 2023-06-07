@@ -153,7 +153,7 @@ const Page = () => {
                 </div>
                 <div>
                   <span className="mb-4 subhead4">AI추천 키워드</span>
-                  <div className="grid grid-cols-2 grid-rows-2 gap-[4px] mb-[10px]">
+                  <div className="grid grid-cols-2 grid-rows-1 gap-[4px] mb-[10px]">
                     <Tag variant="secondary-outline" size="s2">
                       일이삼사오육칠팔구십
                     </Tag>
