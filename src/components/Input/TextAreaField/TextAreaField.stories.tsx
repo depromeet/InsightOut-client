@@ -30,7 +30,6 @@ export const Example: Story = {
         errorMessage="에러 메시지"
         placeholder="error 속성과 errorMessage 속성을 함께 전달해주세요"
       />
-      <TextAreaField value="Typed" />
       <TextAreaField readOnly value="Readonly" />
       <TextAreaField maxLength={100} placeholder="showCount 속성과 maxLength를 함께 전달해주세요" />
     </Flex>

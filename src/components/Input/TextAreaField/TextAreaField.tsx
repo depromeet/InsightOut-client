@@ -42,7 +42,7 @@ const TextAreaField = forwardRef<HTMLTextAreaElement, TextAreaFieldProps>(
           ref={forwardRef}
           value={value}
           maxLength={maxLength}
-          className={tw(`form resize-none ${value ? 'form-typed' : ''} ${error ? 'form-error' : ''}`, className)}
+          className={tw(`form resize-none ${error ? 'form-error' : ''}`, className)}
           onChange={handleTextareaChange}
           {...props}
         />

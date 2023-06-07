@@ -31,7 +31,6 @@ export const Example: Story = {
           errorMessage="답변을 작성해주세요!"
           placeholder="ex.개발자와 협업 역량을 쌓기 위해 it 동아리에 들어감"
         />
-        <TextField value="Typed TextField" />
         <TextField readOnly value="Readonly TextField" />
       </Flex>
     </Flex>

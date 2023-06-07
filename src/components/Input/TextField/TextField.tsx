@@ -31,7 +31,6 @@ const TextField = ({
   value,
   maxLength,
   className,
-  readOnly,
   ...props
 }: TextFieldProps) => {
   return (
@@ -46,13 +45,7 @@ const TextField = ({
           type={mode === 'password' ? 'password' : 'text'}
           value={value}
           maxLength={maxLength}
-          className={tw(
-            `form w-full ${readOnly ? 'bg-primary-50 text-primary-500' : ''} ${value ? 'form-typed' : ''} ${
-              error ? 'form-error' : ''
-            }`,
-            className
-          )}
-          readOnly
+          className={tw(`form w-full ${error ? 'form-error' : ''}`, className)}
           {...props}
         />
         <RightContent>
