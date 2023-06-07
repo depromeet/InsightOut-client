@@ -32,7 +32,7 @@ const TooltipContent = forwardRef<HTMLDivElement, TooltipProps>(
         {isOpen && (
           <div ref={ref} className={rootClassName} {...props}>
             {wrappedContent}
-            <TooltipArrow className={styles.arrow} position={position} />
+            <TooltipArrow className={styles.arrow} type={type} position={position} />
           </div>
         )}
       </Portal>

@@ -9,6 +9,8 @@ import { tw } from '@/services/utils/tailwindMerge';
 type TooltipArrowProps = {
   /** @description 클래스네임 */
   className: string;
+  /** @description 툴팁 타입 (strong, light) */
+  type: TooltipType;
   /** @description 툴팁 포지션 (center-top, center-bottom, right-top, right-bottom, left-top, left-bottom, side-left-center, side-right-center) */
   position: TooltipPosition;
 };
@@ -16,8 +18,8 @@ type TooltipArrowProps = {
 /**
  * @name 툴팁화살표컴포넌트
  */
-const TooltipArrow = ({ className, position }: TooltipArrowProps) => {
-  const rootClassName = tw(styles.root, styles[position], className);
+const TooltipArrow = ({ className, type, position }: TooltipArrowProps) => {
+  const rootClassName = tw(styles.root, styles[type], styles[position], className);
 
   const TooltipArrowElement = useMemo(() => {
     switch (position) {
