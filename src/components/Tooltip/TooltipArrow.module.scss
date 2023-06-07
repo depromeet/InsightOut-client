@@ -1,0 +1,43 @@
+// Base
+
+.root {
+  @apply absolute;
+}
+
+.light path {
+  @apply fill-white;
+}
+
+// Position
+
+.center-top {
+  @apply left-[50%] bottom-[-9px] translate-x-[-50%];
+}
+
+.center-bottom {
+  @apply left-[50%] top-[-9px] translate-x-[-50%];
+}
+
+.left-top {
+  @apply left-[8px] bottom-[-9px];
+}
+
+.left-bottom {
+  @apply left-[8px] top-[-9px];
+}
+
+.right-top {
+  @apply right-[8px] bottom-[-9px];
+}
+
+.right-bottom {
+  @apply right-[8px] top-[-9px];
+}
+
+.side-right-center {
+  @apply left-[-9px] top-[50%] translate-y-[-50%];
+}
+
+.side-left-center {
+  @apply right-[-9px] top-[50%] translate-y-[-50%];
+}

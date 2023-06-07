@@ -1,0 +1,15 @@
+// Base
+
+.root {
+  @apply absolute flex justify-center items-center py-[12px] px-[16px] rounded-[8px] font-normal text-[16px] leading-[27px] drop-shadow-tooltip;
+}
+
+// Type
+
+.strong {
+  @apply bg-gray-950 text-white;
+}
+
+.light {
+  @apply bg-white text-dark;
+}
