@@ -1,3 +1,5 @@
+'use client';
+
 import TextAreaField from '@/components/Input/TextAreaField/TextAreaField';
 import TextField from '@/components/Input/TextField/TextField';
 
