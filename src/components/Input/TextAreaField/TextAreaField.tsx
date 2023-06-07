@@ -2,7 +2,6 @@ import { ComponentPropsWithRef, forwardRef } from 'react';
 
 import { tw } from '@/services/utils/tailwindMerge';
 import { useForwardRef } from '@/hooks/useForwardRef';
-// import { useAutoSizeTextArea } from '@/hooks/useAutoSizeTextArea';
 import { resizeHeight } from '@/services/utils/autoSizeTextarea';
 import Tag from '@/components/Tag/Tag';
 
@@ -25,10 +24,6 @@ const TextAreaField = forwardRef<HTMLTextAreaElement, TextAreaFieldProps>(
   ({ chipTitle, value, maxLength, error, errorMessage, className, autoSize = false, ...props }, ref) => {
     const forwardRef = useForwardRef<HTMLTextAreaElement>(ref);
 
-    /** 1. useAutoSizeTextArea 커스텀 훅 */
-    // const textareaRef = useAutoSizeTextArea({ value, autoSize }, forwardRef);
-
-    /** 2. resizeHeight */
     const handleTextareaChange = () => autoSize && resizeHeight(forwardRef);
 
     return (
