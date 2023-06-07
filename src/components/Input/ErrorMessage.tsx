@@ -2,9 +2,11 @@ import { PropsWithChildren } from 'react';
 
 import IconError from '../Icon/IconError';
 
-export const ErrorMessage = ({ children }: PropsWithChildren) => (
+type ErrorMessageProps = PropsWithChildren & { hasIcon?: boolean };
+
+export const ErrorMessage = ({ hasIcon, children }: ErrorMessageProps) => (
   <p className="flex gap-[6px] mt-2 ml-3 text-xs text-error">
-    <IconError />
+    {hasIcon && <IconError />}
     {children}
   </p>
 );
