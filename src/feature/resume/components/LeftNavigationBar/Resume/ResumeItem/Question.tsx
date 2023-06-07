@@ -22,7 +22,7 @@ const ResumeQuestion = ({ id, title, active }: ResumeQuestionProps) => {
     <div
       className={tw(
         `flex items-center justify-between py-2 px-4 text-sub hover:bg-gray-100 ${
-          active ? 'bg-purple-50 text-purple-500 stroke-purple-500 hover:bg-purple-50' : 'stroke-gray-600'
+          active ? 'bg-primary-50 text-primary-500 stroke-primary-500 hover:bg-primary-50' : 'stroke-gray-600'
         }`
       )}>
       <Link href={`${ROUTES.RESUMES}/${id}`} className={`flex w-full b3`}>
