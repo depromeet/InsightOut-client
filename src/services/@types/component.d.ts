@@ -63,4 +63,3 @@ type TagVariant =
   | 'tertiary'
   | 'gray-800';
 type TagSize = 's1' | 's2' | 's3';
-
