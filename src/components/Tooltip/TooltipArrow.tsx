@@ -1,10 +1,10 @@
 import React, { useMemo } from 'react';
-import cn from 'classnames';
-import IconTooltipTailTop from '@/components/Icon/IconTooltipTailTop';
-import IconTooltipTailBottom from '@/components/Icon/IconTooltipTailBottom';
-import IconTooltipTailLeft from '@/components/Icon/IconTooltipTailLeft';
-import IconTooltipTailRight from '@/components/Icon/IconTooltipTailRight';
+import IconTooltipArrowTop from '@/components/Icon/IconTooltipArrowTop';
+import IconTooltipArrowBottom from '@/components/Icon/IconTooltipArrowBottom';
+import IconTooltipArrowLeft from '@/components/Icon/IconTooltipArrowLeft';
+import IconTooltipArrowRight from '@/components/Icon/IconTooltipArrowRight';
 import styles from './TooltipArrow.module.scss';
+import { tw } from '@/services/utils/tailwindMerge';
 
 type TooltipArrowProps = {
   /** @description 클래스네임 */
@@ -17,24 +17,24 @@ type TooltipArrowProps = {
  * @name 툴팁화살표컴포넌트
  */
 const TooltipArrow = ({ className, position }: TooltipArrowProps) => {
-  const rootClassName = cn(styles.root, styles[position], className);
+  const rootClassName = tw(styles.root, styles[position], className);
 
   const TooltipArrowElement = useMemo(() => {
     switch (position) {
       case 'center-top':
       case 'left-top':
       case 'right-top':
-        return <IconTooltipTailBottom className={rootClassName} />;
+        return <IconTooltipArrowBottom className={rootClassName} />;
       case 'center-bottom':
       case 'left-bottom':
       case 'right-bottom':
-        return <IconTooltipTailTop className={rootClassName} />;
+        return <IconTooltipArrowTop className={rootClassName} />;
       case 'side-left-center':
-        return <IconTooltipTailRight className={rootClassName} />;
+        return <IconTooltipArrowRight className={rootClassName} />;
       case 'side-right-center':
-        return <IconTooltipTailLeft className={rootClassName} />;
+        return <IconTooltipArrowLeft className={rootClassName} />;
       default:
-        return <IconTooltipTailTop className={rootClassName} />;
+        return <IconTooltipArrowTop className={rootClassName} />;
     }
   }, [position, rootClassName]);
 
