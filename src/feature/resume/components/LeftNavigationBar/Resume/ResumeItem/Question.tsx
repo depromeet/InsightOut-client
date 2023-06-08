@@ -1,15 +1,14 @@
 import Link from 'next/link';
 
 import { tw } from '@/services/utils/tailwindMerge';
+import { ROUTES } from '@/shared/constants/routes';
+import { QuestionData } from '@/services/@types/data/question';
 
 import ActionList from '@/components/ActionList/ActionList';
-import IconMore from '@/components/Icon/IconMoreVertical';
+import IconMoreVertical from '@/components/Icon/IconMoreVertical';
 import IconDocument from '@/components/Icon/IconDocument';
 
-/** FIXME: response 타입과 연관되게 수정 예정  */
-type ResumeQuestionProps = {
-  id: number;
-  title: string;
+type ResumeQuestionProps = QuestionData & {
   active?: boolean;
 };
 
@@ -26,14 +25,14 @@ const ResumeQuestion = ({ id, title, active }: ResumeQuestionProps) => {
           active ? 'bg-purple-50 text-purple-500 stroke-purple-500 hover:bg-purple-50' : 'stroke-gray-600'
         }`
       )}>
-      <Link href={`/resume/${id}`} className={`flex w-full b3`}>
+      <Link href={`${ROUTES.RESUMES}/${id}`} className={`flex w-full b3`}>
         <IconDocument className="mr-[6px]" />
         <span className="max-w-[217px] text-ellipsis overflow-hidden whitespace-nowrap">{title}</span>
       </Link>
 
       <ActionList>
         <ActionList.Button>
-          <IconMore />
+          <IconMoreVertical />
         </ActionList.Button>
         <ActionList.ItemWrapper>
           <ActionList.Item onClick={handleDeleteButtonClick}>삭제하기</ActionList.Item>
