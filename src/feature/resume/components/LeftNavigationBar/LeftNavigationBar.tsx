@@ -1,6 +1,6 @@
 'use client';
 
-import { ResumeData } from '@/services/@types/data/resume';
+import { ResumeData } from '@/shared/@types/data/resume';
 
 import Button from '@/components/Button/Button';
 import IconPencil from '@/components/Icon/IconPencil';

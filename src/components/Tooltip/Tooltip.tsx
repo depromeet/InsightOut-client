@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import TooltipContent from '@/components/Tooltip/TooltipContent';
-import getPlacement from '@/services/utils/tooltip/getPlacement';
-import { OFFSET } from '@/services/constants/tooltip';
+import getPlacement from '@/shared/utils/tooltip/getPlacement';
+import { OFFSET } from '@/shared/constants/tooltip';
 import styles from './Tooltip.module.scss';
 
 type TooltipProps = MergeComponentProps<

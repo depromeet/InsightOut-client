@@ -1,8 +1,8 @@
 import Link from 'next/link';
 
-import { tw } from '@/services/utils/tailwindMerge';
+import { tw } from '@/shared/utils/tailwindMerge';
 import { ROUTES } from '@/shared/constants/routes';
-import { QuestionData } from '@/services/@types/data/question';
+import { QuestionData } from '@/shared/@types/data/question';
 
 import ActionList from '@/components/ActionList/ActionList';
 import IconMoreVertical from '@/components/Icon/IconMoreVertical';
