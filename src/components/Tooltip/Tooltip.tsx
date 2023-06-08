@@ -1,10 +1,7 @@
-import React, { forwardRef, useMemo } from 'react';
-import cn from 'classnames';
-import IconTooltipTailTop from '@/components/Icon/IconTooltipTailTop';
-import IconTooltipTailBottom from '@/components/Icon/IconTooltipTailBottom';
-import IconTooltipTailLeft from '@/components/Icon/IconTooltipTailLeft';
-import IconTooltipTailRight from '@/components/Icon/IconTooltipTailRight';
-import wrapTooltipChildren from '@/services/utils/wrapTooltipChildren';
+import { useEffect, useRef, useState } from 'react';
+import TooltipContent from '@/components/Tooltip/TooltipContent';
+import getPlacement from '@/services/utils/tooltip/getPlacement';
+import { OFFSET } from '@/services/constants/tooltip';
 import styles from './Tooltip.module.scss';
 
 type TooltipProps = MergeComponentProps<
@@ -15,46 +12,45 @@ type TooltipProps = MergeComponentProps<
     /** @description 툴팁 포지션 (center-top, center-bottom, right-top, right-bottom, left-top, left-bottom, side-left-center, side-right-center) */
     position: TooltipPosition;
     /** @description 툴팁 텍스트 */
-    children: string;
+    content: string;
+    /** @description 출력된 채로 고정 여부 */
+    alwaysOpen?: boolean;
   }
 >;
 
 /**
  * @name 툴팁컴포넌트
  */
-const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
-  ({ type = 'strong', position = 'center-top', children, className, ...props }, ref) => {
-    const rootClassName = cn(styles.root, styles[type], styles[position], className);
-    const wrappedChildren = wrapTooltipChildren(children);
+const Tooltip = ({ type, position, content, children, alwaysOpen }: TooltipProps) => {
+  const childrenRef = useRef<HTMLDivElement>(null);
 
-    const tooltipTail = useMemo(() => {
-      switch (position) {
-        case 'center-top':
-        case 'left-top':
-        case 'right-top':
-          return <IconTooltipTailBottom className={styles.tail} />;
-        case 'center-bottom':
-        case 'left-bottom':
-        case 'right-bottom':
-          return <IconTooltipTailTop className={styles.tail} />;
-        case 'side-left-center':
-          return <IconTooltipTailRight className={styles.tail} />;
-        case 'side-right-center':
-          return <IconTooltipTailLeft className={styles.tail} />;
-        default:
-          return <IconTooltipTailTop className={styles.tail} />;
-      }
-    }, [position]);
+  const [isOpen, setIsOpen] = useState(false);
+  const [childrenRect, setChildrenRect] = useState<DOMRect>();
 
-    return (
-      <div ref={ref} className={rootClassName} {...props}>
-        {wrappedChildren}
-        {tooltipTail}
+  const tooltipPlacement = getPlacement(position, OFFSET, childrenRect);
+
+  useEffect(() => {
+    const childrenElement = childrenRef.current;
+    if (!childrenElement) return;
+    setChildrenRect(childrenElement.getBoundingClientRect());
+  }, []);
+
+  return (
+    <div className={styles.root} onMouseEnter={() => setIsOpen(true)} onMouseLeave={() => setIsOpen(false)}>
+      <div ref={childrenRef} className={styles.children}>
+        {children}
       </div>
-    );
-  }
-);
-
-Tooltip.displayName = 'Tooltip';
+      {tooltipPlacement && (
+        <TooltipContent
+          type={type}
+          position={position}
+          content={content}
+          isOpen={alwaysOpen ? true : isOpen}
+          style={tooltipPlacement}
+        />
+      )}
+    </div>
+  );
+};
 
 export default Tooltip;

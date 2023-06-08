@@ -65,7 +65,7 @@ export const textStyles = {
   b2: {
     fontWeight: 400,
     fontSize: '16px',
-    lineHeight: '27px',
+    lineHeight: '24px',
     letterSpacing: '-0.6px',
   },
   b3: {

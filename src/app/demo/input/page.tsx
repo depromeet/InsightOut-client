@@ -1,3 +1,5 @@
+'use client';
+
 import TextAreaField from '@/components/Input/TextAreaField/TextAreaField';
 import TextField from '@/components/Input/TextField/TextField';
 
@@ -7,7 +9,7 @@ const Page = () => {
       <div className="flex flex-col gap-4 p-10">
         <TextAreaField placeholder="ex.개발자와 협업 역량을 쌓기 위해 it 동아리에 들어감" />
         <TextAreaField value="ex.개발자와 협업 역량을 쌓기 위해 it 동아리에 들어감" />
-        <TextAreaField showCount maxLength={100} placeholder="ex.개발자와 협업 역량을 쌓기 위해 it 동아리에 들어감" />
+        <TextAreaField maxLength={100} placeholder="ex.개발자와 협업 역량을 쌓기 위해 it 동아리에 들어감" />
         <TextAreaField disabled placeholder="ex.개발자와 협업 역량을 쌓기 위해 it 동아리에 들어감" />
         <TextAreaField error errorMessage="필수 입력사항입니다" />
       </div>
@@ -19,7 +21,7 @@ const Page = () => {
         <TextField mode="naming" maxLength={10} placeholder="abc@gmail.com" />
         <TextField mode="password" />
         <TextField mode="email" emailDomain="@gmail.com" />
-        <TextField mode="chip" placeholder="abc@gmail.com" />
+        <TextField chipTitle="chipTitle" placeholder="abc@gmail.com" />
       </div>
     </>
   );
