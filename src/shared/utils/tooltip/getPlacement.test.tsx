@@ -1,5 +1,5 @@
 import getPlacement from './getPlacement';
-import { OFFSET } from '@/services/constants/tooltip';
+import { OFFSET } from '@/shared/constants/tooltip';
 
 describe('getPlacement', () => {
   const rect = {

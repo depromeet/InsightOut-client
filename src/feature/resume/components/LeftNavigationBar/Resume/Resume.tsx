@@ -2,7 +2,7 @@ import { AccordionItem, AccordionPanel } from '@chakra-ui/react';
 
 import { colors } from '@/styles/theme/foundations/colors';
 
-import { ResumeData } from '@/services/@types/data/resume';
+import { ResumeData } from '@/shared/@types/data/resume';
 
 import Title from './ResumeItem/Title';
 import Question from './ResumeItem/Question';

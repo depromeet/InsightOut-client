@@ -1,8 +1,8 @@
 import { ComponentPropsWithRef, forwardRef } from 'react';
 
-import { tw } from '@/services/utils/tailwindMerge';
+import { tw } from '@/shared/utils/tailwindMerge';
 import { useForwardRef } from '@/hooks/useForwardRef';
-import { resizeHeight } from '@/services/utils/autoSizeTextarea';
+import { resizeHeight } from '@/shared/utils/autoSizeTextarea';
 import Tag from '@/components/Tag/Tag';
 
 import { ErrorMessage } from '../ErrorMessage';

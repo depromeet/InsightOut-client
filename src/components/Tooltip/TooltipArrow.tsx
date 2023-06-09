@@ -4,7 +4,7 @@ import IconTooltipArrowBottom from '@/components/Icon/IconTooltipArrowBottom';
 import IconTooltipArrowLeft from '@/components/Icon/IconTooltipArrowLeft';
 import IconTooltipArrowRight from '@/components/Icon/IconTooltipArrowRight';
 import styles from './TooltipArrow.module.scss';
-import { tw } from '@/services/utils/tailwindMerge';
+import { tw } from '@/shared/utils/tailwindMerge';
 
 type TooltipArrowProps = {
   /** @description 클래스네임 */

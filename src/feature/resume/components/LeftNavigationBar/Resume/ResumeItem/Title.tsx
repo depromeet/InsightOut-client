@@ -48,7 +48,7 @@ const Title = ({ title = '자기소개서 예시', selected }: TitleProps) => {
   return (
     <div
       className={`flex items-center pr-4 rounded-t-[10px] border-b-2 border-b-[#F5F6F7] font-semibold cursor-pointer hover:bg-gray-100 ${
-        selected ? 'bg-purple-50 text-purple-500 stroke-purple-500' : 'stroke-gray-600 text-sub'
+        selected ? 'bg-primary-50 text-primary-500 stroke-primary-500' : 'stroke-gray-600 text-sub'
       }`}>
       <AccordionButton as="div" paddingY="12px" _hover={{ backgroundColor: 'none' }}>
         <AccordionIcon marginRight="12px" />
