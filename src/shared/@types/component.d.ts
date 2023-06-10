@@ -60,11 +60,11 @@ type TabVariant = 'default' | 'pressed';
 // Tag
 
 type TagVariant =
-  | 'primary-50'
-  | 'primary-500'
-  | 'primary-outline'
-  | 'secondary'
-  | 'secondary-outline'
-  | 'tertiary'
-  | 'gray-800';
-type TagSize = 's1' | 's2' | 's3';
+  | 'primary500'
+  | 'primary50'
+  | 'primary50-outline'
+  | 'secondary500'
+  | 'secondary50-outline'
+  | 'gray100'
+  | 'gray800';
+type TagSize = 'S' | 'M' | 'L';
