@@ -18,7 +18,7 @@ export const DefaultModal = (): JSX.Element => {
 
   return (
     <div>
-      <Button size="md" variant="primary" onClick={onOpen}>
+      <Button size="M" variant="gray900" onClick={onOpen}>
         Open Default Modal
       </Button>
       <Modal size="sm" isOpen={isOpen} onClose={onClose}>
@@ -33,7 +33,7 @@ export const ModalWithHeaderTitle = (): JSX.Element => {
 
   return (
     <>
-      <Button size="md" variant="primary" onClick={onOpen}>
+      <Button size="M" variant="gray900" onClick={onOpen}>
         Open Modal with Title
       </Button>
       <Modal size="md" isOpen={isOpen} onClose={onClose}>
@@ -51,7 +51,7 @@ export const ModalWithFooterOneButton = (): JSX.Element => {
 
   return (
     <>
-      <Button size="md" variant="primary" onClick={onOpen}>
+      <Button size="M" variant="gray900" onClick={onOpen}>
         Open Modal with Footer 1 Button
       </Button>
       <Modal size="md" isOpen={isOpen} onClose={onClose}>
@@ -69,7 +69,7 @@ export const ModalWithFooterTwoButton = (): JSX.Element => {
 
   return (
     <>
-      <Button size="md" variant="primary" onClick={onOpen}>
+      <Button size="M" variant="gray900" onClick={onOpen}>
         Open Modal with Footer 2 Button
       </Button>
       <Modal size="md" isOpen={isOpen} onClose={onClose}>
@@ -92,7 +92,7 @@ export const FullModal = (): JSX.Element => {
 
   return (
     <>
-      <Button size="md" variant="primary" onClick={onOpen}>
+      <Button size="M" variant="gray900" onClick={onOpen}>
         Open Full Modal
       </Button>
       <Modal size="md" isOpen={isOpen} onClose={onClose}>

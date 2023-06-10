@@ -13,7 +13,7 @@ type OneButtonProps = {
 ModalFooter.OneButton = ({ textContent, handleClick }: OneButtonProps) => {
   return (
     <ModalFooter>
-      <Button variant="primary" size="xl" onClick={handleClick}>
+      <Button variant="gray900" size="XL" onClick={handleClick}>
         {textContent}
       </Button>
     </ModalFooter>
@@ -31,10 +31,10 @@ ModalFooter.TwoButton = ({ leftTextContent, handleLeftClick, rightTextContent, h
   return (
     <ModalFooter>
       <div className="flex flex-row gap-3">
-        <Button variant="tertiary" size="xl" onClick={handleLeftClick}>
+        <Button variant="gray200" size="XL" onClick={handleLeftClick}>
           {leftTextContent}
         </Button>
-        <Button variant="primary" size="xl" onClick={handleRightClick}>
+        <Button variant="gray900" size="XL" onClick={handleRightClick}>
           {rightTextContent}
         </Button>
       </div>
