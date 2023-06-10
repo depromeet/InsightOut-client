@@ -20,19 +20,19 @@ type ButtonSize = 'sm' | 'md' | 'lg' | 'xl';
 
 // Chip
 
-type ChipVariant = 'primary' | 'secondary';
-type ChipSize = 'sm' | 'md';
+type ChipVariant = 'primary' | 'secondary' | 'primary-pressed' | 'secondary-pressed';
+type ChipSize = 'S' | 'M';
 
 // Badge
 
-type BadgeStyle =
-  | 'tertiary'
-  | 'outlined-primary'
-  | 'outlined-secondary'
-  | 'filled-primary'
-  | 'filled-secondary'
-  | 'dark';
-type BadgeSize = 'sm' | 'md' | 'lg';
+type BadgeVariant =
+  | 'primary-500'
+  | 'primary-50-outline'
+  | 'secondary-400'
+  | 'secondary-50-outline'
+  | 'gray-100-outline'
+  | 'gray-900';
+type BadgeSize = 'S' | 'M' | 'L';
 
 // Tooltip
 

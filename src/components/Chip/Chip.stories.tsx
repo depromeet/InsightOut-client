@@ -17,11 +17,12 @@ export const DefaultChip: Story = {
       <Box>
         <Heading>Primary</Heading>
         <Heading as={'h4'}>Small</Heading>
-        <Chip size="sm" variant="primary">
+        <Chip size="S" variant="primary">
           CHIP
         </Chip>
+
         <Heading as={'h4'}>Medium</Heading>
-        <Chip size="md" variant="primary">
+        <Chip size="M" variant="primary">
           CHIP
         </Chip>
       </Box>
@@ -29,11 +30,24 @@ export const DefaultChip: Story = {
         <Box>
           <Heading>Secondary</Heading>
           <Heading as={'h4'}>Small</Heading>
-          <Chip size="sm" variant="secondary">
+          <Chip size="S" variant="secondary">
             CHIP
           </Chip>
           <Heading as={'h4'}>Medium</Heading>
-          <Chip size="md" variant="secondary">
+          <Chip size="M" variant="secondary">
+            CHIP
+          </Chip>
+        </Box>
+      </Flex>
+      <Flex flexDirection={'column'}>
+        <Box>
+          <Heading>Pressed</Heading>
+          <Heading as={'h4'}>Small</Heading>
+          <Chip size="S" variant="primary-pressed">
+            CHIP
+          </Chip>
+          <Heading as={'h4'}>Medium</Heading>
+          <Chip size="M" variant="secondary-pressed">
             CHIP
           </Chip>
         </Box>
@@ -49,10 +63,10 @@ export const ChipWithBadge: Story = {
         <Heading>Primary</Heading>
         <Heading as={'h4'}>Small</Heading>
         <Chip
-          size="sm"
+          size="S"
           variant="primary"
           badge={
-            <Badge style="tertiary" size="sm">
+            <Badge varient="gray-100-outline" size="S">
               99+
             </Badge>
           }>
@@ -60,10 +74,10 @@ export const ChipWithBadge: Story = {
         </Chip>
         <Heading as={'h4'}>Medium</Heading>
         <Chip
-          size="md"
+          size="M"
           variant="primary"
           badge={
-            <Badge style="tertiary" size="sm">
+            <Badge varient="gray-100-outline" size="S">
               99+
             </Badge>
           }>
@@ -74,10 +88,10 @@ export const ChipWithBadge: Story = {
         <Heading>Secondary</Heading>
         <Heading as={'h4'}>Small</Heading>
         <Chip
-          size="sm"
+          size="S"
           variant="secondary"
           badge={
-            <Badge style="outlined-secondary" size="sm">
+            <Badge varient="gray-100-outline" size="S">
               99+
             </Badge>
           }>
@@ -85,10 +99,35 @@ export const ChipWithBadge: Story = {
         </Chip>
         <Heading as={'h4'}>Medium</Heading>
         <Chip
-          size="md"
+          size="M"
           variant="secondary"
           badge={
-            <Badge style="outlined-secondary" size="sm">
+            <Badge varient="gray-100-outline" size="S">
+              99+
+            </Badge>
+          }>
+          CHIP
+        </Chip>
+      </Box>
+      <Box>
+        <Heading>Pressed</Heading>
+        <Heading as={'h4'}>Small</Heading>
+        <Chip
+          size="M"
+          variant="primary-pressed"
+          badge={
+            <Badge varient="gray-100-outline" size="S">
+              99+
+            </Badge>
+          }>
+          CHIP
+        </Chip>
+        <Heading as={'h4'}>Medium</Heading>
+        <Chip
+          size="M"
+          variant="secondary-pressed"
+          badge={
+            <Badge varient="gray-100-outline" size="S">
               99+
             </Badge>
           }>
