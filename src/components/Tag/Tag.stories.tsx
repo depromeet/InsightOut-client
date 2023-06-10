@@ -17,25 +17,25 @@ export const Default: Story = {
       <div className="flex flex-col gap-4">
         <h3>Primay-50</h3>
         <div className="flex gap-6 ">
-          <Tag variant="primary-50" size="s1">
+          <Tag variant="primary50" size="s1">
             여기에키워드를써요
           </Tag>
-          <Tag variant="primary-50" size="s2">
+          <Tag variant="primary50" size="s2">
             여기에키워드를써요
           </Tag>
-          <Tag variant="primary-50" size="s3">
+          <Tag variant="primary50" size="s3">
             여기에키워드를써요
           </Tag>
         </div>
         <h3>Primay-500</h3>
         <div className="flex gap-6 ">
-          <Tag variant="primary-500" size="s1">
+          <Tag variant="primary500" size="s1">
             여기에키워드를써요
           </Tag>
-          <Tag variant="primary-500" size="s2">
+          <Tag variant="primary500" size="s2">
             여기에키워드를써요
           </Tag>
-          <Tag variant="primary-500" size="s3">
+          <Tag variant="primary500" size="s3">
             여기에키워드를써요
           </Tag>
         </div>
@@ -89,13 +89,13 @@ export const Default: Story = {
         </div>
         <h3>Gray-800</h3>
         <div className="flex gap-6 ">
-          <Tag variant="gray-800" size="s1">
+          <Tag variant="gray800" size="s1">
             여기에키워드를써요
           </Tag>
-          <Tag variant="gray-800" size="s2">
+          <Tag variant="gray800" size="s2">
             여기에키워드를써요
           </Tag>
-          <Tag variant="gray-800" size="s3">
+          <Tag variant="gray800" size="s3">
             여기에키워드를써요
           </Tag>
         </div>

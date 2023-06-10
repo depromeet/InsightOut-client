@@ -26,12 +26,12 @@ type ChipSize = 'S' | 'M';
 // Badge
 
 type BadgeVariant =
-  | 'primary-500'
-  | 'primary-50-outline'
-  | 'secondary-400'
-  | 'secondary-50-outline'
-  | 'gray-100-outline'
-  | 'gray-900';
+  | 'primary500'
+  | 'primary50-outline'
+  | 'secondary400'
+  | 'secondary50-outline'
+  | 'gray100-outline'
+  | 'gray900';
 type BadgeSize = 'S' | 'M' | 'L';
 
 // Tooltip
@@ -60,11 +60,11 @@ type TabVariant = 'default' | 'pressed';
 // Tag
 
 type TagVariant =
-  | 'primary-50'
-  | 'primary-500'
+  | 'primary50'
+  | 'primary500'
   | 'primary-outline'
   | 'secondary'
   | 'secondary-outline'
   | 'tertiary'
-  | 'gray-800';
+  | 'gray800';
 type TagSize = 's1' | 's2' | 's3';
