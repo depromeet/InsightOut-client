@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import wrapTooltipChildren from './wrapTooltipChildren';
+import wrapTooltipChildren from '../tooltip/wrapTooltipChildren';
 
 describe('wrapTooltipChildren', () => {
   it('children의 길이가 15보다 클 경우 <br /> 로 감싸져야 합니다.', () => {

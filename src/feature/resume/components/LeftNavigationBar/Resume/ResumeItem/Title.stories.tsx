@@ -4,7 +4,7 @@ import Title from './Title';
 import { Accordion, AccordionItem } from '@chakra-ui/react';
 
 const meta: Meta<typeof Title> = {
-  title: 'Components/LNB/Title',
+  title: 'Components/LNB/ResumeItem/Title',
   component: Title,
 };
 
