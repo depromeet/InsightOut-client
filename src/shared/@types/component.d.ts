@@ -46,6 +46,11 @@ type TooltipPosition =
   | 'left-bottom'
   | 'side-left-center'
   | 'side-right-center';
+type TooltipPlacement = {
+  top: string;
+  left: string;
+  transform: string;
+};
 
 // Tab
 
@@ -63,4 +68,3 @@ type TagVariant =
   | 'tertiary'
   | 'gray-800';
 type TagSize = 's1' | 's2' | 's3';
-
