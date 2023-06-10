@@ -39,7 +39,7 @@ export const TabWithBadge: Story = {
           href="/?path=/story/components-tab--default-tab"
           size="sm"
           badge={
-            <Badge style="tertiary" size="sm">
+            <Badge varient="gray-100-outline" size="S">
               작성중
             </Badge>
           }>
@@ -52,7 +52,7 @@ export const TabWithBadge: Story = {
           href="/?path=/story/components-tab--default-tab"
           size="md"
           badge={
-            <Badge style="tertiary" size="sm">
+            <Badge varient="gray-100-outline" size="S">
               작성중
             </Badge>
           }>
