@@ -23,7 +23,7 @@
 }
 
 .outlined {
-  @apply text-primary-300 bg-white border-[1px] border-solid border-primary-300;
+  @apply text-primary-500 bg-white border-[1px] border-solid border-primary-300;
 }
 
 // Sizes
@@ -59,7 +59,7 @@
 }
 
 .secondary-secondary {
-  @apply hover:text-main hover:bg-secondary-50;
+  @apply hover:text-main hover:bg-secondary-100;
 }
 
 .outlined {
@@ -81,11 +81,11 @@
 }
 
 .secondary-secondary {
-  @apply active:bg-secondary-300 active:text-main;
+  @apply active:bg-secondary-400 active:text-main;
 }
 
 .outlined {
-  @apply active:bg-primary-100 active:text-primary-500;
+  @apply active:bg-primary-200 active:text-primary-500;
 }
 
 // Focused
@@ -95,7 +95,7 @@
 }
 
 .secondary {
-  @apply focus:bg-primary-500 focus:text-white;
+  @apply focus:bg-primary-600 focus:text-white;
 }
 
 .tertiary {
@@ -103,7 +103,7 @@
 }
 
 .secondary-secondary {
-  @apply focus:bg-secondary-300 focus:text-main;
+  @apply focus:bg-secondary-400 focus:text-main;
 }
 
 .outlined {
@@ -125,7 +125,7 @@
 }
 
 .secondary-secondary {
-  @apply disabled:bg-secondary-200 disabled:text-secondary-500 disabled:cursor-not-allowed;
+  @apply disabled:bg-secondary-100 disabled:text-secondary-300 disabled:cursor-not-allowed;
 }
 
 .outlined {
