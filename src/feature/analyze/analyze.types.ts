@@ -19,12 +19,16 @@ export interface ExperienceFormValues {
   motivation: string;
   /**
    * 경험 기간 시작 일자 (/analyze/experience)
+   * startYYYY, startMM 합쳐서 제출할 땐 startDate: `${startYYYY}${startMM}` 로 보내기
    */
-  startDate: string;
+  startYYYY: string;
+  startMM: string;
   /**
    * 경험 기간 종료 일자 (/analyze/experience)
+   * endYYYY, endMM 합쳐서 제출할 땐 endDate: `${endYYYY}${endMM}` 로 보내기
    */
-  endDate: string;
+  endYYYY: string;
+  endMM: string;
   /**
    * 경험 내용(STAR) 중 S (/analyze/information)
    */
