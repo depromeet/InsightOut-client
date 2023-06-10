@@ -29,7 +29,7 @@ const TextAreaField = forwardRef<HTMLTextAreaElement, TextAreaFieldProps>(
     return (
       <div>
         {chipTitle && (
-          <Tag variant="tertiary" size="s1" className="inline-block mb-2">
+          <Tag variant="gray100" size="S" className="inline-block mb-2">
             {chipTitle}
           </Tag>
         )}
