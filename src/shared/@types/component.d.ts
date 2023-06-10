@@ -15,8 +15,8 @@ type colorScale = 50 | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900;
 
 // Button
 
-type ButtonVariant = 'primary' | 'secondary' | 'tertiary' | 'secondary-secondary' | 'outlined';
-type ButtonSize = 'sm' | 'md' | 'lg' | 'xl';
+type ButtonVariant = 'gray900' | 'primary' | 'secondary' | 'gray200' | 'outlined';
+type ButtonSize = 'S' | 'M' | 'L' | 'XL';
 
 // Chip
 
