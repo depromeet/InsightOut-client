@@ -1,0 +1,7 @@
+.root {
+  @apply flex justify-center items-center px-[16px] py-[7.5px] bg-white border-[1px] border-solid border-primary-300 rounded-[26px] gap-[4px];
+
+  span {
+    @apply font-bold text-[16px] leading-[28px] text-primary-500;
+  }
+}

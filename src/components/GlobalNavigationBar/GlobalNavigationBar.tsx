@@ -4,21 +4,22 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Flex } from '@chakra-ui/react';
 import cn from 'classnames';
-import IconGoogleLogo from '@/components/Icon/IconGoogleLogo';
 import { tw } from '@/shared/utils/tailwindMerge';
 import { ROUTES } from '@/shared/constants/routes';
 import useGoogleLogin from '@/feature/auth/hooks/useGoogleLogin';
+import GoogleLoginButton from '@/feature/auth/components/GoogleLoginButton';
 import styles from './GNB.module.scss';
+import { ComponentPropsWithoutRef } from 'react';
 
-type GlobalNavigationBarProps = MergeComponentProps<'header', { className?: string }>;
+type GlobalNavigationBarProps = ComponentPropsWithoutRef<'header'>;
 
-const GlobalNavigationBar = ({ className }: GlobalNavigationBarProps) => {
+const GlobalNavigationBar = ({ className, ...props }: GlobalNavigationBarProps) => {
   const rootClassName = tw(styles.root, className);
   const pathName = usePathname();
-  const { isSignedIn, signIn } = useGoogleLogin();
+  const { isSignedIn } = useGoogleLogin();
 
   return (
-    <header className={rootClassName}>
+    <header {...props} className={rootClassName}>
       <Flex alignItems={'center'} gap={'115px'}>
         <Link
           className={cn(styles.link, { [styles.focus]: pathName === ROUTES.HOME })}
@@ -51,12 +52,7 @@ const GlobalNavigationBar = ({ className }: GlobalNavigationBarProps) => {
           </Flex>
         </Link>
       ) : (
-        <>
-          <button className={styles['google-login-button']} onClick={signIn}>
-            <IconGoogleLogo />
-            <span>구글 로그인</span>
-          </button>
-        </>
+        <GoogleLoginButton />
       )}
     </header>
   );
