@@ -6,7 +6,6 @@ import authApi from './auth';
  */
 const instance = axios.create({
   baseURL: 'http://dev.insightout.kr/api',
-  // baseURL: 'http://localhost:8080',
   withCredentials: true,
 });
 
