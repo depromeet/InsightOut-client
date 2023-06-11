@@ -57,7 +57,6 @@ const Experience = () => {
                   ref={ref}
                   placeholder="YYYY"
                   maxLength={4}
-                  max={4}
                   onChange={handlePeriodChange(onChange, 4, 'startMM')}
                   value={value || ''}
                 />
