@@ -1,17 +1,18 @@
 'use client';
 
 import React from 'react';
-import QuestionCard from '@/components/QuestionCard/QuestionCard';
 import { Controller, useFormContext } from 'react-hook-form';
+import PeriodContainer from '@/feature/analyze/experience/PeriodContainer';
 import { ExperienceFormValues } from '@/feature/analyze/analyze.types';
+import QuestionCard from '@/components/QuestionCard/QuestionCard';
 import TextAreaField from '@/components/Input/TextAreaField/TextAreaField';
-import { callbackRefWithResizeHeight } from '@/shared/utils/callbackRefWithResizeHeight';
 import TextField from '@/components/Input/TextField/TextField';
+import { callbackRefWithResizeHeight } from '@/shared/utils/callbackRefWithResizeHeight';
 
 const Experience = () => {
   const { control, setFocus } = useFormContext<ExperienceFormValues>();
 
-  const handleYYYYMMChange =
+  const handlePeriodChange =
     (
       // eslint-disable-next-line unused-imports/no-unused-vars
       onChange: (e: React.ChangeEvent<HTMLInputElement>) => void,
@@ -46,64 +47,65 @@ const Experience = () => {
               />
             )}
           />
-          <Controller
-            control={control}
-            name="startYYYY"
-            render={({ field: { ref, onChange, value } }) => (
-              <TextField
-                type="number"
-                ref={ref}
-                placeholder="YYYY"
-                chipTitle="기간"
-                maxLength={4}
-                max={4}
-                onChange={handleYYYYMMChange(onChange, 4, 'startMM')}
-                value={value || ''}
-              />
-            )}
-          />
-          <Controller
-            control={control}
-            name="startMM"
-            render={({ field: { ref, onChange, value } }) => (
-              <TextField
-                type="number"
-                ref={ref}
-                placeholder="MM"
-                maxLength={2}
-                onChange={handleYYYYMMChange(onChange, 2, 'endYYYY')}
-                value={value || ''}
-              />
-            )}
-          />
-          <Controller
-            control={control}
-            name="endYYYY"
-            render={({ field: { ref, onChange, value } }) => (
-              <TextField
-                type="number"
-                ref={ref}
-                placeholder="YYYY"
-                onChange={handleYYYYMMChange(onChange, 4, 'endMM')}
-                maxLength={4}
-                value={value || ''}
-              />
-            )}
-          />
-          <Controller
-            control={control}
-            name="endMM"
-            render={({ field: { ref, onChange, value } }) => (
-              <TextField
-                type="number"
-                ref={ref}
-                placeholder="MM"
-                onChange={handleYYYYMMChange(onChange, 2, 'experienceRole')}
-                maxLength={2}
-                value={value || ''}
-              />
-            )}
-          />
+          <PeriodContainer>
+            <Controller
+              control={control}
+              name="startYYYY"
+              render={({ field: { ref, onChange, value } }) => (
+                <TextField
+                  type="number"
+                  ref={ref}
+                  placeholder="YYYY"
+                  maxLength={4}
+                  max={4}
+                  onChange={handlePeriodChange(onChange, 4, 'startMM')}
+                  value={value || ''}
+                />
+              )}
+            />
+            <Controller
+              control={control}
+              name="startMM"
+              render={({ field: { ref, onChange, value } }) => (
+                <TextField
+                  type="number"
+                  ref={ref}
+                  placeholder="MM"
+                  maxLength={2}
+                  onChange={handlePeriodChange(onChange, 2, 'endYYYY')}
+                  value={value || ''}
+                />
+              )}
+            />
+            <Controller
+              control={control}
+              name="endYYYY"
+              render={({ field: { ref, onChange, value } }) => (
+                <TextField
+                  type="number"
+                  ref={ref}
+                  placeholder="YYYY"
+                  onChange={handlePeriodChange(onChange, 4, 'endMM')}
+                  maxLength={4}
+                  value={value || ''}
+                />
+              )}
+            />
+            <Controller
+              control={control}
+              name="endMM"
+              render={({ field: { ref, onChange, value } }) => (
+                <TextField
+                  type="number"
+                  ref={ref}
+                  placeholder="MM"
+                  onChange={handlePeriodChange(onChange, 2, 'experienceRole')}
+                  maxLength={2}
+                  value={value || ''}
+                />
+              )}
+            />
+          </PeriodContainer>
         </>
       </QuestionCard>
       <QuestionCard title="내가 맡았던 역할은 무엇인가요?">
