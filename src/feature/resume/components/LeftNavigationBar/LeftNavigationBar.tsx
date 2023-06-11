@@ -23,7 +23,7 @@ const LeftNavigationBar = ({ resumeList }: LeftNavigationBarProps) => {
           <IconPencil />
           <span>내 자기소개서</span>
         </h1>
-        <Button variant="secondary" size="md" onClick={handleAddFolderButtonClick}>
+        <Button variant="secondary" size="M" onClick={handleAddFolderButtonClick}>
           자기소개서 추가
         </Button>
       </header>

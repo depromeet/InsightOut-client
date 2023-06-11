@@ -6,7 +6,7 @@ type BadgeProps = MergeComponentProps<
   'div',
   {
     /** @description 뱃지 스타일 (tertiary, outlined-primary, outlined-secondary, filled-primary, filled-secondary, dark) */
-    style: BadgeStyle;
+    varient: BadgeVariant;
     /** @description 뱃지 사이즈 (sm, md, lg) */
     size: BadgeSize;
     /** @description 뱃지 텍스트 */
@@ -18,8 +18,8 @@ type BadgeProps = MergeComponentProps<
  * @name 뱃지컴포넌트
  */
 const Badge = forwardRef<HTMLDivElement, BadgeProps>(
-  ({ style = 'tertiary', size = 'md', children, className, ...props }, ref) => {
-    const rootClassName = cn(styles.root, styles[style], styles[size], className);
+  ({ varient = 'gray-100-outline', size = 'md', children, className, ...props }, ref) => {
+    const rootClassName = cn(styles.root, styles[varient], styles[size], className);
 
     return (
       <div ref={ref} className={rootClassName} {...props}>
