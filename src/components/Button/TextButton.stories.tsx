@@ -19,14 +19,14 @@ export const DefaultTextButton: Story = {
           Small
         </Heading>
         <Flex gap={10}>
-          <TextButton size="sm">BUTTON</TextButton>
-          <TextButton size="sm" disabled>
+          <TextButton size="S">BUTTON</TextButton>
+          <TextButton size="S" disabled>
             DISABLED
           </TextButton>
-          <TextButton size="sm" underline>
+          <TextButton size="S" underline>
             BUTTON
           </TextButton>
-          <TextButton size="sm" disabled underline>
+          <TextButton size="S" disabled underline>
             DISABLED
           </TextButton>
         </Flex>
@@ -34,14 +34,14 @@ export const DefaultTextButton: Story = {
           Medium
         </Heading>
         <Flex gap={10}>
-          <TextButton size="md">BUTTON</TextButton>
-          <TextButton size="md" disabled>
+          <TextButton size="M">BUTTON</TextButton>
+          <TextButton size="M" disabled>
             DISABLED
           </TextButton>
-          <TextButton size="md" underline>
+          <TextButton size="M" underline>
             BUTTON
           </TextButton>
-          <TextButton size="md" disabled underline>
+          <TextButton size="M" disabled underline>
             DISABLED
           </TextButton>
         </Flex>
@@ -49,14 +49,14 @@ export const DefaultTextButton: Story = {
           Large
         </Heading>
         <Flex gap={10}>
-          <TextButton size="lg">BUTTON</TextButton>
-          <TextButton size="lg" disabled>
+          <TextButton size="L">BUTTON</TextButton>
+          <TextButton size="L" disabled>
             DISABLED
           </TextButton>
-          <TextButton size="lg" underline>
+          <TextButton size="L" underline>
             BUTTON
           </TextButton>
-          <TextButton size="lg" disabled underline>
+          <TextButton size="L" disabled underline>
             DISABLED
           </TextButton>
         </Flex>
@@ -64,14 +64,14 @@ export const DefaultTextButton: Story = {
           XLarge
         </Heading>
         <Flex gap={10}>
-          <TextButton size="xl">BUTTON</TextButton>
-          <TextButton size="xl" disabled>
+          <TextButton size="XL">BUTTON</TextButton>
+          <TextButton size="XL" disabled>
             DISABLED
           </TextButton>
-          <TextButton size="xl" underline>
+          <TextButton size="XL" underline>
             BUTTON
           </TextButton>
-          <TextButton size="xl" disabled underline>
+          <TextButton size="XL" disabled underline>
             DISABLED
           </TextButton>
         </Flex>
@@ -89,16 +89,16 @@ export const LeftIconTextButton: Story = {
             Small
           </Heading>
           <Flex gap={10}>
-            <TextButton size="sm" leftIcon={<IconHeart />}>
+            <TextButton size="S" leftIcon={<IconHeart />}>
               BUTTON
             </TextButton>
-            <TextButton size="sm" disabled leftIcon={<IconHeart />}>
+            <TextButton size="S" disabled leftIcon={<IconHeart />}>
               DISABLED
             </TextButton>
-            <TextButton size="sm" leftIcon={<IconHeart />} underline>
+            <TextButton size="S" leftIcon={<IconHeart />} underline>
               BUTTON
             </TextButton>
-            <TextButton size="sm" disabled leftIcon={<IconHeart />} underline>
+            <TextButton size="S" disabled leftIcon={<IconHeart />} underline>
               DISABLED
             </TextButton>
           </Flex>
@@ -106,16 +106,16 @@ export const LeftIconTextButton: Story = {
             Medium
           </Heading>
           <Flex gap={10}>
-            <TextButton size="md" leftIcon={<IconHeart />}>
+            <TextButton size="M" leftIcon={<IconHeart />}>
               BUTTON
             </TextButton>
-            <TextButton size="md" disabled leftIcon={<IconHeart />}>
+            <TextButton size="M" disabled leftIcon={<IconHeart />}>
               DISABLED
             </TextButton>
-            <TextButton size="md" leftIcon={<IconHeart />} underline>
+            <TextButton size="M" leftIcon={<IconHeart />} underline>
               BUTTON
             </TextButton>
-            <TextButton size="md" disabled leftIcon={<IconHeart />} underline>
+            <TextButton size="M" disabled leftIcon={<IconHeart />} underline>
               DISABLED
             </TextButton>
           </Flex>
@@ -123,16 +123,16 @@ export const LeftIconTextButton: Story = {
             Large
           </Heading>
           <Flex gap={10}>
-            <TextButton size="lg" leftIcon={<IconHeart />}>
+            <TextButton size="L" leftIcon={<IconHeart />}>
               BUTTON
             </TextButton>
-            <TextButton size="lg" disabled leftIcon={<IconHeart />}>
+            <TextButton size="L" disabled leftIcon={<IconHeart />}>
               DISABLED
             </TextButton>
-            <TextButton size="lg" leftIcon={<IconHeart />} underline>
+            <TextButton size="L" leftIcon={<IconHeart />} underline>
               BUTTON
             </TextButton>
-            <TextButton size="lg" disabled leftIcon={<IconHeart />} underline>
+            <TextButton size="L" disabled leftIcon={<IconHeart />} underline>
               DISABLED
             </TextButton>
           </Flex>
@@ -140,16 +140,16 @@ export const LeftIconTextButton: Story = {
             XLarge
           </Heading>
           <Flex gap={10}>
-            <TextButton size="xl" leftIcon={<IconHeart />}>
+            <TextButton size="XL" leftIcon={<IconHeart />}>
               BUTTON
             </TextButton>
-            <TextButton size="xl" disabled leftIcon={<IconHeart />}>
+            <TextButton size="XL" disabled leftIcon={<IconHeart />}>
               DISABLED
             </TextButton>
-            <TextButton size="xl" leftIcon={<IconHeart />} underline>
+            <TextButton size="XL" leftIcon={<IconHeart />} underline>
               BUTTON
             </TextButton>
-            <TextButton size="xl" disabled leftIcon={<IconHeart />} underline>
+            <TextButton size="XL" disabled leftIcon={<IconHeart />} underline>
               DISABLED
             </TextButton>
           </Flex>
@@ -168,16 +168,16 @@ export const RightIconTextButton: Story = {
             Small
           </Heading>
           <Flex gap={10}>
-            <TextButton size="sm" rightIcon={<IconHeart />}>
+            <TextButton size="S" rightIcon={<IconHeart />}>
               BUTTON
             </TextButton>
-            <TextButton size="sm" disabled rightIcon={<IconHeart />}>
+            <TextButton size="S" disabled rightIcon={<IconHeart />}>
               DISABLED
             </TextButton>
-            <TextButton size="sm" rightIcon={<IconHeart />} underline>
+            <TextButton size="S" rightIcon={<IconHeart />} underline>
               BUTTON
             </TextButton>
-            <TextButton size="sm" disabled rightIcon={<IconHeart />} underline>
+            <TextButton size="S" disabled rightIcon={<IconHeart />} underline>
               DISABLED
             </TextButton>
           </Flex>
@@ -185,16 +185,16 @@ export const RightIconTextButton: Story = {
             Medium
           </Heading>
           <Flex gap={10}>
-            <TextButton size="md" rightIcon={<IconHeart />}>
+            <TextButton size="M" rightIcon={<IconHeart />}>
               BUTTON
             </TextButton>
-            <TextButton size="md" disabled rightIcon={<IconHeart />}>
+            <TextButton size="M" disabled rightIcon={<IconHeart />}>
               DISABLED
             </TextButton>
-            <TextButton size="md" rightIcon={<IconHeart />} underline>
+            <TextButton size="M" rightIcon={<IconHeart />} underline>
               BUTTON
             </TextButton>
-            <TextButton size="md" disabled rightIcon={<IconHeart />} underline>
+            <TextButton size="M" disabled rightIcon={<IconHeart />} underline>
               DISABLED
             </TextButton>
           </Flex>
@@ -202,16 +202,16 @@ export const RightIconTextButton: Story = {
             Large
           </Heading>
           <Flex gap={10}>
-            <TextButton size="lg" rightIcon={<IconHeart />}>
+            <TextButton size="L" rightIcon={<IconHeart />}>
               BUTTON
             </TextButton>
-            <TextButton size="lg" disabled rightIcon={<IconHeart />}>
+            <TextButton size="L" disabled rightIcon={<IconHeart />}>
               DISABLED
             </TextButton>
-            <TextButton size="lg" rightIcon={<IconHeart />} underline>
+            <TextButton size="L" rightIcon={<IconHeart />} underline>
               BUTTON
             </TextButton>
-            <TextButton size="lg" disabled rightIcon={<IconHeart />} underline>
+            <TextButton size="L" disabled rightIcon={<IconHeart />} underline>
               DISABLED
             </TextButton>
           </Flex>
@@ -219,16 +219,16 @@ export const RightIconTextButton: Story = {
             XLarge
           </Heading>
           <Flex gap={10}>
-            <TextButton size="xl" rightIcon={<IconHeart />}>
+            <TextButton size="XL" rightIcon={<IconHeart />}>
               BUTTON
             </TextButton>
-            <TextButton size="xl" disabled rightIcon={<IconHeart />}>
+            <TextButton size="XL" disabled rightIcon={<IconHeart />}>
               DISABLED
             </TextButton>
-            <TextButton size="xl" rightIcon={<IconHeart />} underline>
+            <TextButton size="XL" rightIcon={<IconHeart />} underline>
               BUTTON
             </TextButton>
-            <TextButton size="xl" disabled rightIcon={<IconHeart />} underline>
+            <TextButton size="XL" disabled rightIcon={<IconHeart />} underline>
               DISABLED
             </TextButton>
           </Flex>

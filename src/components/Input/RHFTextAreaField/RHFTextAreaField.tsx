@@ -2,14 +2,13 @@
 
 import React, { ComponentPropsWithRef, ForwardedRef, forwardRef } from 'react';
 
-import { tw } from '@/services/utils/tailwindMerge';
-
 import { ErrorMessage } from '../ErrorMessage';
 import { TextLengthMessage } from '../TextLengthMessage';
 import { FieldValues, Path, RegisterOptions, useFormContext } from 'react-hook-form';
 import { useForwardRef } from '@/hooks/useForwardRef';
-import { resizeHeight } from '@/services/utils/autoSizeTextarea';
 import Tag from '@/components/Tag/Tag';
+import { resizeHeight } from '@/shared/utils/autoSizeTextarea';
+import { tw } from '@/shared/utils/tailwindMerge';
 
 interface TextAreaFieldProps<TFieldValues extends FieldValues = FieldValues> extends ComponentPropsWithRef<'textarea'> {
   chipTitle?: string;

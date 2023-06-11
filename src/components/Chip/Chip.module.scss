@@ -6,32 +6,66 @@
 
 // Sizes
 
-.sm {
+.S {
   @apply text-[16px] px-[12px] py-[0px];
 }
 
-.md {
+.M {
   @apply text-[20px] py-[4px] px-[12px];
 }
 
 // Hover
 
-.primary {
-  @apply hover:text-primary-400;
+.primary:hover {
+  @apply text-primary-400;
+
+  div {
+    @apply text-primary-500 bg-primary-50 border-[1px] border-solid border-primary-200 m-[-1px];
+  }
 }
 
-.secondary {
-  @apply hover:text-secondary-500;
+.secondary:hover {
+  @apply text-secondary-500;
+
+  div {
+    @apply text-secondary-700 bg-secondary-50 border-[1px] border-solid border-secondary-300 m-[-1px];
+  }
+}
+
+// active
+
+.primary:active {
+  @apply text-primary-700 border-[1px] border-solid border-primary-400 bg-primary-50 m-[-1px];
+
+  div {
+    @apply text-white bg-primary-500  border-none;
+  }
+}
+
+.secondary:active {
+  @apply text-secondary-800 border-[1px] border-solid border-secondary-400 bg-secondary-50 m-[-1px];
+
+  div {
+    @apply text-white bg-secondary-400  border-none;
+  }
 }
 
 // Pressed
 
-.primary {
-  @apply active:text-primary-700 active:border-[1px] active:border-solid active:border-primary-400 active:bg-primary-50 active:m-[-1px];
+.primary-pressed {
+  @apply text-primary-700 border-[1px] border-solid border-primary-400 bg-primary-50 m-[-1px];
+
+  div {
+    @apply text-white bg-primary-500  border-none;
+  }
 }
 
-.secondary {
-  @apply active:text-secondary-800 active:border-[1px] active:border-solid active:border-secondary-400 active:bg-secondary-50 active:m-[-1px];
+.secondary-pressed {
+  @apply text-secondary-800 border-[1px] border-solid border-secondary-400 bg-secondary-50 m-[-1px];
+
+  div {
+    @apply text-white bg-secondary-400  border-none;
+  }
 }
 
 // With Badge

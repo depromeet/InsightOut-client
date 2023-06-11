@@ -8,7 +8,7 @@ interface TagProps extends Omit<ComponentProps<'span'>, 'children'> {
   children: string;
 }
 
-const Tag = ({ variant = 'primary-50', size, children, className, ...props }: TagProps) => {
+const Tag = ({ variant = 'primary50', size, children, className, ...props }: TagProps) => {
   const rootClassName = cn(styles.root, styles[variant], styles[size], className);
 
   return (

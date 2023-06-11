@@ -8,19 +8,19 @@
 
 // Size
 
-.sm span {
+.S span {
   @apply text-[12px] leading-[16px] font-normal gap-[4px];
 }
 
-.md span {
+.M span {
   @apply text-[14px] leading-[22px] font-normal gap-[4px];
 }
 
-.lg span {
+.L span {
   @apply text-[16px] leading-[27px] font-normal gap-[4px];
 }
 
-.xl span {
+.XL span {
   @apply text-[20px] leading-[28px] font-bold gap-[8px];
 }
 
@@ -50,19 +50,19 @@
 
 // Icon Size
 
-.sm svg {
+.S svg {
   @apply w-[20px] h-[20px];
 }
 
-.md svg {
+.M svg {
   @apply w-[22px] h-[22px];
 }
 
-.lg svg {
+.L svg {
   @apply w-[24px] h-[24px];
 }
 
-.xl svg {
+.XL svg {
   @apply w-[24px] h-[24px];
 }
 
