@@ -1,10 +1,11 @@
 import './globals.css';
 import { PropsWithChildren } from 'react';
 import localFont from 'next/font/local';
-import TanstackQueryProvider from '@/components/providers/TanstackQueryProvider';
-import ChakraUIProvider from '@/components/providers/ChakraProvider';
-import AuthProvider from '@/components/providers/AuthProvider';
 import classNames from 'classnames';
+import TanstackQueryProvider from '@/components/Providers/TanstackQueryProvider';
+import ChakraUIProvider from '@/components/Providers/ChakraProvider';
+import AuthProvider from '@/components/Providers/AuthProvider';
+import GlobalNavigationBar from '@/components/GlobalNavigationBar/GlobalNavigationBar';
 
 export const metadata = {
   title: 'Create Next App',
@@ -20,8 +21,10 @@ export default function RootLayout({ children }: PropsWithChildren) {
         suppressHydrationWarning>
         <TanstackQueryProvider>
           <ChakraUIProvider>
-            <AuthProvider />
-            {children}
+            <AuthProvider>
+              <GlobalNavigationBar />
+              {children}
+            </AuthProvider>
           </ChakraUIProvider>
         </TanstackQueryProvider>
       </body>

@@ -1,0 +1,32 @@
+.root {
+  @apply flex items-center justify-between bg-dark w-full h-[56px] px-[120px];
+}
+
+.link {
+  @apply font-medium text-[20px] leading-[28px] text-light;
+
+  // Hover
+  @apply hover:text-primary-400;
+
+  // Focused
+  &.focus {
+    @apply relative text-white;
+
+    &:not(.myPage)::after {
+      content: '';
+      @apply absolute bottom-[-11px] left-[50%] translate-x-[-50%] w-full h-[3px] bg-white;
+    }
+  }
+}
+
+.google-login-button {
+  @apply flex justify-center items-center px-[16px] py-[7.5px] bg-white border-[1px] border-solid border-primary-300 rounded-[26px] gap-[4px];
+
+  span {
+    @apply font-bold text-[16px] leading-[28px] text-primary-500;
+  }
+}
+
+.user-profile {
+  @apply w-[32px] h-[32px] bg-white border-[1px] border-solid border-primary-50 rounded-[12px] drop-shadow-user-profile;
+}
