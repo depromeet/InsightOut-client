@@ -16,7 +16,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
   return (
     <html lang="ko">
       <body
-        className={classNames(pretendard.className, ' bg-[#f5f5f5]')}
+        className={classNames(pretendard.className, 'bg-[#f5f5f5]')}
         suppressContentEditableWarning
         suppressHydrationWarning>
         <TanstackQueryProvider>

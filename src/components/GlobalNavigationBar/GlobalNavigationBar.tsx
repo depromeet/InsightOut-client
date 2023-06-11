@@ -2,14 +2,14 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { ComponentPropsWithoutRef } from 'react';
 import { Flex } from '@chakra-ui/react';
 import cn from 'classnames';
 import { tw } from '@/shared/utils/tailwindMerge';
 import { ROUTES } from '@/shared/constants/routes';
 import useGoogleLogin from '@/feature/auth/hooks/useGoogleLogin';
 import GoogleLoginButton from '@/feature/auth/components/GoogleLoginButton';
-import styles from './GNB.module.scss';
-import { ComponentPropsWithoutRef } from 'react';
+import styles from './GlobalNavigationBar.module.scss';
 
 type GlobalNavigationBarProps = ComponentPropsWithoutRef<'header'>;
 
