@@ -5,10 +5,10 @@ import { usePathname } from 'next/navigation';
 import { ComponentPropsWithoutRef } from 'react';
 import { Flex } from '@chakra-ui/react';
 import cn from 'classnames';
+import GoogleLoginButton from '@/components/Button/GoogleLoginButton';
 import { tw } from '@/shared/utils/tailwindMerge';
 import { ROUTES } from '@/shared/constants/routes';
 import useGoogleLogin from '@/feature/auth/hooks/useGoogleLogin';
-import GoogleLoginButton from '@/feature/auth/components/GoogleLoginButton';
 import styles from './GlobalNavigationBar.module.scss';
 
 type GlobalNavigationBarProps = ComponentPropsWithoutRef<'header'>;
@@ -16,7 +16,7 @@ type GlobalNavigationBarProps = ComponentPropsWithoutRef<'header'>;
 const GlobalNavigationBar = ({ className, ...props }: GlobalNavigationBarProps) => {
   const rootClassName = tw(styles.root, className);
   const pathName = usePathname();
-  const { isSignedIn } = useGoogleLogin();
+  const { isSignedIn, signIn } = useGoogleLogin();
 
   return (
     <header {...props} className={rootClassName}>
@@ -52,7 +52,7 @@ const GlobalNavigationBar = ({ className, ...props }: GlobalNavigationBarProps) 
           </Flex>
         </Link>
       ) : (
-        <GoogleLoginButton />
+        <GoogleLoginButton onClick={signIn} />
       )}
     </header>
   );
