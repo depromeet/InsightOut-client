@@ -8,21 +8,22 @@ import cn from 'classnames';
 import GoogleLoginButton from '@/components/Button/GoogleLoginButton';
 import { tw } from '@/shared/utils/tailwindMerge';
 import { ROUTES } from '@/shared/constants/routes';
-import useGoogleLogin from '@/feature/auth/hooks/useGoogleLogin';
 import styles from './GlobalNavigationBar.module.scss';
-import emptyFunction from '@/shared/utils/emptyFunction';
 
 type GlobalNavigationBarProps = ComponentPropsWithoutRef<'header'> & {
   /**
-   * Storybook 에서 렌더링 되는지 여부
+   * 로그인 되어있는지 여부
    */
-  storybook?: boolean;
+  isSignedIn: boolean;
+  /**
+   * 구글 로그인 함수
+   */
+  signIn: () => void;
 };
 
-const GlobalNavigationBar = ({ className, storybook, ...props }: GlobalNavigationBarProps) => {
+const GlobalNavigationBar = ({ className, isSignedIn, signIn, ...props }: GlobalNavigationBarProps) => {
   const rootClassName = tw(styles.root, className);
   const pathName = usePathname();
-  const { isSignedIn, signIn } = useGoogleLogin();
 
   return (
     <header {...props} className={rootClassName}>
@@ -58,7 +59,7 @@ const GlobalNavigationBar = ({ className, storybook, ...props }: GlobalNavigatio
           </Flex>
         </Link>
       ) : (
-        <GoogleLoginButton onClick={storybook ? emptyFunction : signIn} />
+        <GoogleLoginButton onClick={signIn} />
       )}
     </header>
   );
