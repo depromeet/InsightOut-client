@@ -10,5 +10,6 @@ export default meta;
 type Story = StoryObj<typeof GoogleLoginButton>;
 
 export const _GoogleLoginButton: Story = {
-  render: () => <GoogleLoginButton />,
+  args: { onClick: () => {} },
+  render: ({ onClick }) => <GoogleLoginButton onClick={onClick} />,
 };
