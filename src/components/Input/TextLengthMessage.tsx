@@ -1,6 +1,6 @@
 import { ComponentPropsWithRef } from 'react';
 
-import { tw } from '@/services/utils/tailwindMerge';
+import { tw } from '@/shared/utils/tailwindMerge';
 
 type TextLengthMessageProps = ComponentPropsWithRef<'p'> & {
   currentLength: number;

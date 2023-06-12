@@ -15,24 +15,24 @@ type colorScale = 50 | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900;
 
 // Button
 
-type ButtonVariant = 'primary' | 'secondary' | 'tertiary' | 'secondary-secondary' | 'outlined';
-type ButtonSize = 'sm' | 'md' | 'lg' | 'xl';
+type ButtonVariant = 'gray900' | 'primary' | 'secondary' | 'gray200' | 'outlined';
+type ButtonSize = 'S' | 'M' | 'L' | 'XL';
 
 // Chip
 
-type ChipVariant = 'primary' | 'secondary';
-type ChipSize = 'sm' | 'md';
+type ChipVariant = 'primary' | 'secondary' | 'primary-pressed' | 'secondary-pressed';
+type ChipSize = 'S' | 'M';
 
 // Badge
 
-type BadgeStyle =
-  | 'tertiary'
-  | 'outlined-primary'
-  | 'outlined-secondary'
-  | 'filled-primary'
-  | 'filled-secondary'
-  | 'dark';
-type BadgeSize = 'sm' | 'md' | 'lg';
+type BadgeVariant =
+  | 'primary500'
+  | 'primary50-outline'
+  | 'secondary400'
+  | 'secondary50-outline'
+  | 'gray100-outline'
+  | 'gray900';
+type BadgeSize = 'S' | 'M' | 'L';
 
 // Tooltip
 
@@ -60,12 +60,11 @@ type TabVariant = 'default' | 'pressed';
 // Tag
 
 type TagVariant =
-  | 'primary-50'
-  | 'primary-500'
-  | 'primary-outline'
-  | 'secondary'
-  | 'secondary-outline'
-  | 'tertiary'
-  | 'gray-800';
-type TagSize = 's1' | 's2' | 's3';
-
+  | 'primary500'
+  | 'primary50'
+  | 'primary50-outline'
+  | 'secondary500'
+  | 'secondary50-outline'
+  | 'gray100'
+  | 'gray800';
+type TagSize = 'S' | 'M' | 'L';

@@ -35,12 +35,12 @@ const Template = ({ children }: LayoutProps) => {
           {children}
           <div className="flex-center mt-[32px] gap-[12px]">
             {pathname === ROUTES.EXPERIENCE ? null : (
-              <Button variant="tertiary" size="xl" onClick={back}>
+              <Button variant="gray200" size="XL" onClick={back}>
                 이전으로
               </Button>
             )}
             <Link href={handleNextButton() as Route}>
-              <Button variant="primary" size="xl">
+              <Button variant="gray900" size="XL">
                 {pathname === ROUTES.VERIFY ? '경험카드 만들기' : '다음으로'}
               </Button>
             </Link>

@@ -5,9 +5,9 @@ import styles from './Button.module.scss';
 type ButtonProps = MergeComponentProps<
   'button',
   {
-    /** @description 버튼 종류 (primary, secondary, tertiary, secondary-secondary, outlined) */
+    /** @description 버튼 종류 (gray900, primary, secondary, gray200, outlined) */
     variant: ButtonVariant;
-    /** @description 버튼 사이즈 (sm, md, lg, xl) */
+    /** @description 버튼 사이즈 (S, M, L, XL) */
     size: ButtonSize;
     /** @description 버튼 텍스트 */
     children?: string;
@@ -24,7 +24,7 @@ type ButtonProps = MergeComponentProps<
  * @name 버튼컴포넌트
  */
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ variant = 'primary', size = 'md', children, className, leftIcon, rightIcon, onlyIcon, ...props }, ref) => {
+  ({ variant = 'primary', size = 'M', children, className, leftIcon, rightIcon, onlyIcon, ...props }, ref) => {
     const isIconOnlyButton = !!onlyIcon;
     const rootClassName = cn(
       styles.root,

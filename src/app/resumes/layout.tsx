@@ -26,7 +26,7 @@ const Layout = ({ children }: PropsWithChildren) => {
       <LeftNavigationBar resumeList={demoResponse} />
       <div className="mx-[10px] mt-[19px]">{children}</div>
       <div className="mx-[10px] mt-[19px]">
-        <section className="flex flex-col min-w-[699px] border-[1px] border-purple-100 shadow-toast rounded-3xl bg-white">
+        <section className="flex flex-col min-w-[699px] border-[1px] border-primary-100 shadow-toast rounded-3xl bg-white">
           {/* 경험 카드 리스트 */}
         </section>
       </div>

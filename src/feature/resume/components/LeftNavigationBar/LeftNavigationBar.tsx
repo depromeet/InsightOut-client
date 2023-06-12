@@ -1,9 +1,6 @@
 'use client';
 
-import Link from 'next/link';
-
-import { ROUTES } from '@/shared/constants/routes';
-import { ResumeData } from '@/services/@types/data/resume';
+import { ResumeData } from '@/shared/@types/data/resume';
 
 import Button from '@/components/Button/Button';
 import IconPencil from '@/components/Icon/IconPencil';
@@ -22,11 +19,11 @@ const LeftNavigationBar = ({ resumeList }: LeftNavigationBarProps) => {
   return (
     <nav className="min-w-[363px] py-12 px-[30px]">
       <header className="flex items-center justify-between mb-7">
-        <Link href={ROUTES.RESUMES} className="flex gap-[6px]">
+        <h1 className="flex gap-[6px] subhead1">
           <IconPencil />
-          <h1 className="subhead1">내 자기소개서</h1>
-        </Link>
-        <Button variant="secondary" size="md" onClick={handleAddFolderButtonClick}>
+          <span>내 자기소개서</span>
+        </h1>
+        <Button variant="secondary" size="M" onClick={handleAddFolderButtonClick}>
           자기소개서 추가
         </Button>
       </header>

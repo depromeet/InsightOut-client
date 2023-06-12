@@ -6,40 +6,40 @@
 
 // Styles
 
-.tertiary {
-  @apply text-sub bg-gray-300;
+.gray-100-outline {
+  @apply text-sub bg-gray-100 border-[1px] border-solid border-gray-400 m-[-1px];
 }
 
-.outlined-primary {
-  @apply text-primary-500 bg-primary-50 border-[1px] border-solid border-primary-200;
+.primary-50-outline {
+  @apply text-primary-500 bg-primary-50 border-[1px] border-solid border-primary-200 m-[-1px];
 }
 
-.outlined-secondary {
-  @apply text-secondary-700 bg-secondary-50 border-[1px] border-solid border-secondary-300;
+.secondary-50-outline {
+  @apply text-secondary-700 bg-secondary-50 border-[1px] border-solid border-secondary-300 m-[-1px];
 }
 
-.filled-primary {
-  @apply text-white bg-primary-500;
+.primary-500 {
+  @apply text-white bg-primary-500 border-none;
 }
 
-.filled-secondary {
-  @apply text-white bg-secondary-400;
+.secondary-400 {
+  @apply text-white bg-secondary-400  border-none;
 }
 
-.dark {
-  @apply text-white bg-gray-900;
+.gray-900 {
+  @apply text-white bg-gray-900  border-none;
 }
 
 // Sizes
 
-.sm {
+.S {
   @apply py-[2px] px-[6px] text-[12px] font-medium leading-[16px];
 }
 
-.md {
+.M {
   @apply py-[2px] px-[8px] text-[14px] font-medium leading-[22px];
 }
 
-.lg {
+.L {
   @apply py-[2px] px-[8px] text-[16px] font-medium leading-[27px];
 }

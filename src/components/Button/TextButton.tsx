@@ -5,7 +5,7 @@ import styles from './TextButton.module.scss';
 type TextButtonProps = MergeComponentProps<
   'button',
   {
-    /** @description 버튼 사이즈 (sm, md, lg, xl) */
+    /** @description 버튼 사이즈 (S, M, L, XL) */
     size: ButtonSize;
     /** @description 버튼 텍스트 */
     children?: string;
@@ -22,7 +22,7 @@ type TextButtonProps = MergeComponentProps<
  * @name 텍스트버튼컴포넌트
  */
 const TextButton = forwardRef<HTMLButtonElement, TextButtonProps>(
-  ({ size = 'md', children, className, leftIcon, rightIcon, underline, ...props }, ref) => {
+  ({ size = 'M', children, className, leftIcon, rightIcon, underline, ...props }, ref) => {
     const rootClassName = cn(styles.root, styles[size], { [styles['underline']]: underline }, className);
 
     return (

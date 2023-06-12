@@ -1,8 +1,8 @@
 import { ComponentPropsWithRef, forwardRef } from 'react';
 
-import { tw } from '@/services/utils/tailwindMerge';
+import { tw } from '@/shared/utils/tailwindMerge';
 import { useForwardRef } from '@/hooks/useForwardRef';
-import { resizeHeight } from '@/services/utils/autoSizeTextarea';
+import { resizeHeight } from '@/shared/utils/autoSizeTextarea';
 import Tag from '@/components/Tag/Tag';
 
 import { ErrorMessage } from '../ErrorMessage';
@@ -29,7 +29,7 @@ const TextAreaField = forwardRef<HTMLTextAreaElement, TextAreaFieldProps>(
     return (
       <div>
         {chipTitle && (
-          <Tag variant="tertiary" size="s1" className="inline-block mb-2">
+          <Tag variant="gray100" size="S" className="inline-block mb-2">
             {chipTitle}
           </Tag>
         )}
