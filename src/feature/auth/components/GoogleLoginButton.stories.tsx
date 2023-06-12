@@ -9,6 +9,6 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof GoogleLoginButton>;
 
-export const _GlobalNavigationBar: Story = {
+export const _GoogleLoginButton: Story = {
   render: () => <GoogleLoginButton />,
 };
