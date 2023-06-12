@@ -57,7 +57,6 @@ const Experience = () => {
                   ref={ref}
                   placeholder="YYYY"
                   maxLength={4}
-                  max={4}
                   onChange={handlePeriodChange(onChange, 4, 'startMM')}
                   value={value || ''}
                 />
@@ -66,7 +65,8 @@ const Experience = () => {
             <Controller
               control={control}
               name="startMM"
-              render={({ field: { ref, onChange, value } }) => (
+              rules={MMRules}
+              render={({ field: { ref, onChange, value }, formState: { errors } }) => (
                 <TextField
                   type="number"
                   ref={ref}
@@ -74,6 +74,8 @@ const Experience = () => {
                   maxLength={2}
                   onChange={handlePeriodChange(onChange, 2, 'endYYYY')}
                   value={value || ''}
+                  error={!!errors.startMM}
+                  errorMessage={errors.startMM?.message}
                 />
               )}
             />
@@ -94,7 +96,8 @@ const Experience = () => {
             <Controller
               control={control}
               name="endMM"
-              render={({ field: { ref, onChange, value } }) => (
+              rules={MMRules}
+              render={({ field: { ref, onChange, value }, formState: { errors } }) => (
                 <TextField
                   type="number"
                   ref={ref}
@@ -102,6 +105,8 @@ const Experience = () => {
                   onChange={handlePeriodChange(onChange, 2, 'experienceRole')}
                   maxLength={2}
                   value={value || ''}
+                  error={!!errors.endMM}
+                  errorMessage={errors.endMM?.message}
                 />
               )}
             />
@@ -147,3 +152,10 @@ const Experience = () => {
 };
 
 export default Experience;
+
+const MMRules = {
+  pattern: {
+    value: /(0[1-9]|1[0-2])/,
+    message: '정확한 날짜를 입력해 주세요',
+  },
+};
