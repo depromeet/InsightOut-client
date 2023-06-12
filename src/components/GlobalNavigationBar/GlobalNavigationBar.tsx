@@ -10,10 +10,16 @@ import { tw } from '@/shared/utils/tailwindMerge';
 import { ROUTES } from '@/shared/constants/routes';
 import useGoogleLogin from '@/feature/auth/hooks/useGoogleLogin';
 import styles from './GlobalNavigationBar.module.scss';
+import emptyFunction from '@/shared/utils/emptyFunction';
 
-type GlobalNavigationBarProps = ComponentPropsWithoutRef<'header'>;
+type GlobalNavigationBarProps = ComponentPropsWithoutRef<'header'> & {
+  /**
+   * Storybook 에서 렌더링 되는지 여부
+   */
+  storybook?: boolean;
+};
 
-const GlobalNavigationBar = ({ className, ...props }: GlobalNavigationBarProps) => {
+const GlobalNavigationBar = ({ className, storybook, ...props }: GlobalNavigationBarProps) => {
   const rootClassName = tw(styles.root, className);
   const pathName = usePathname();
   const { isSignedIn, signIn } = useGoogleLogin();
@@ -52,7 +58,7 @@ const GlobalNavigationBar = ({ className, ...props }: GlobalNavigationBarProps) 
           </Flex>
         </Link>
       ) : (
-        <GoogleLoginButton onClick={signIn} />
+        <GoogleLoginButton onClick={storybook ? emptyFunction : signIn} />
       )}
     </header>
   );

@@ -10,5 +10,6 @@ export default meta;
 type Story = StoryObj<typeof GlobalNavigationBar>;
 
 export const _GlobalNavigationBar: Story = {
-  render: () => <GlobalNavigationBar />,
+  args: { storybook: true },
+  render: ({ ...args }) => <GlobalNavigationBar {...args} />,
 };
