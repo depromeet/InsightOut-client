@@ -37,6 +37,8 @@ const data = {
 };
 const entriesData = Object.entries(data);
 
+const deDuplicatedKeywordList = (arr: [string, boolean][]) => Object.entries(Object.fromEntries(arr));
+
 // TODO: 경험 분해 키워드 가져오기 API (/experience/capability/{experienceId}) 요청으로 키워드 불러오기
 // TODO: 경험 분해 키워드 임시 저장 API (/experience/capability) 로 요청 보내기, 요청body: Object.fromEntries(keywordList.filter((keyword) => keyword[1] === true))
 // MINOR_TODO: input checkbox로 리팩토링? (Tag 컴포넌트 수정)
@@ -59,7 +61,7 @@ const Keyword = () => {
 
   const addKeywordAndInitializeTextField = () => {
     if (!text.trim()) return;
-    setKeywordList((prev) => [...prev, [text, false]]);
+    setKeywordList((prev) => deDuplicatedKeywordList([...prev, [text, false]]));
     setText('');
   };
 
@@ -85,19 +87,24 @@ const Keyword = () => {
             );
           })}
         </KeywordContainer>
-        <div className="flex items-start justify-center" onKeyDown={handleEnterKeyDown}>
+        <div className="flex items-start justify-center" onKeyPress={handleEnterKeyDown}>
           <div className="w-[356px] mr-[6px] [&_p]:mt-0">
             <TextAreaField
               className="px-[16px] py-[10px]"
               placeholder="키워드 직접 입력하기(ex. 문제해결역량)"
               maxLength={10}
               rows={1}
-              onKeyDown={exceptEnter}
+              onKeyPress={exceptEnter}
               value={text}
               onChange={onChangeText}
             />
           </div>
-          <Button type="button" variant="gray200" size="L" disabled={!text} onClick={addKeywordAndInitializeTextField}>
+          <Button
+            type="button"
+            variant="gray200"
+            size="L"
+            disabled={!text.trim()}
+            onClick={addKeywordAndInitializeTextField}>
             추가하기
           </Button>
         </div>
