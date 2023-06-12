@@ -3,7 +3,7 @@
 }
 
 .link {
-  @apply font-medium text-[20px] leading-[28px] text-light;
+  @apply font-medium text-[20px] leading-[28px] text-light shrink-0;
 
   // Hover
   @apply hover:text-primary-400;
@@ -20,5 +20,5 @@
 }
 
 .user-profile {
-  @apply w-[32px] h-[32px] bg-white border-[1px] border-solid border-primary-50 rounded-[12px] drop-shadow-user-profile;
+  @apply w-[32px] h-[32px] bg-white border-[1px] border-solid border-primary-50 rounded-[12px] drop-shadow-user-profile shrink-0;
 }
