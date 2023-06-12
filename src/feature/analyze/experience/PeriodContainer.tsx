@@ -4,7 +4,7 @@ import Tag from '@/components/Tag/Tag';
 const PeriodContainer = ({ children }: StrictPropsWithChildren) => {
   return (
     <div className="mt-[40px]">
-      <Tag variant="tertiary" size="s1" className="inline-block mb-2">
+      <Tag variant="gray100" size="S" className="inline-block mb-2">
         기간
       </Tag>
       <div className="flex items-center [&>div:nth-of-type(odd)_input]:w-[73px] [&>div:nth-of-type(odd)_input]:mr-[10px] [&>div:nth-of-type(even)_input]:w-[60px]">
