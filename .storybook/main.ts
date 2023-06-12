@@ -45,5 +45,8 @@ const config: StorybookConfig = {
 
     return config;
   },
+  env: (config) => ({
+    ...config,
+  }),
 };
 export default config;
