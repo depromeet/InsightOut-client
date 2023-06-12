@@ -1,5 +1,5 @@
 import { ComponentProps } from 'react';
-import { tw } from '@/services/utils/tailwindMerge';
+import { tw } from '@/shared/utils/tailwindMerge';
 
 const IconClock = ({ className, ...props }: ComponentProps<'svg'>) => (
   <svg

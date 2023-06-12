@@ -77,10 +77,10 @@ const Page = () => {
             // TODO: Chip & Badge 컴포넌트 varient 수정해야함
             <Chip
               key={id}
-              size="md"
+              size="M"
               variant="secondary"
               badge={
-                <Badge style="tertiary" size="sm">
+                <Badge varient="gray100-outline" size="S">
                   {count}
                 </Badge>
               }>
@@ -90,7 +90,7 @@ const Page = () => {
         </section>
         <section>
           {/* TODO: TextButton Svg 색상 처리 필요 */}
-          <TextButton size="lg" leftIcon={<IconClock className="fill-none" />} onClick={handleTimeSortOnClick}>
+          <TextButton size="L" leftIcon={<IconClock className="fill-none" />} onClick={handleTimeSortOnClick}>
             {EXPERIENCE_FILTER_BY_TIME[+filterByTime]}
           </TextButton>
         </section>
@@ -105,7 +105,7 @@ const Page = () => {
                   <Image src={cardImage} alt="경험카드" width={250} height={250} />
                 </div>
                 {/* 상태 */}
-                <Badge style="tertiary" size="sm" className="absolute top-[16px] left-[16px]">
+                <Badge varient="gray100-outline" size="S" className="absolute top-[16px] left-[16px]">
                   작성중
                 </Badge>
                 {/* 액션버튼 */}
@@ -120,10 +120,10 @@ const Page = () => {
                 </ActionList>
                 {/* 카드 키워드 */}
                 <div className="flex flex-row gap-[12px] absolute bottom-[16px] left-[16px]">
-                  <Tag variant="gray-800" size="s2">
+                  <Tag variant="gray800" size="M">
                     협동력
                   </Tag>
-                  <Tag variant="gray-800" size="s2">
+                  <Tag variant="gray800" size="M">
                     상상력
                   </Tag>
                 </div>
@@ -140,13 +140,13 @@ const Page = () => {
                 <div>
                   <span className="mb-4 subhead4">직무영략 키워드</span>
                   <div className="grid grid-cols-2 grid-rows-2 gap-[4px] mb-[10px]">
-                    <Tag variant="primary-outline" size="s2">
+                    <Tag variant="primary50-outline" size="M">
                       일이삼사오육칠팔구십
                     </Tag>
-                    <Tag variant="primary-outline" size="s2">
+                    <Tag variant="primary50-outline" size="M">
                       일이삼사오육칠팔구십
                     </Tag>
-                    <Tag variant="primary-outline" size="s2">
+                    <Tag variant="primary50-outline" size="M">
                       일이삼사오육칠팔구십
                     </Tag>
                   </div>
@@ -154,10 +154,10 @@ const Page = () => {
                 <div>
                   <span className="mb-4 subhead4">AI추천 키워드</span>
                   <div className="grid grid-cols-2 grid-rows-1 gap-[4px] mb-[10px]">
-                    <Tag variant="secondary-outline" size="s2">
+                    <Tag variant="secondary50-outline" size="M">
                       일이삼사오육칠팔구십
                     </Tag>
-                    <Tag variant="secondary-outline" size="s2">
+                    <Tag variant="secondary50-outline" size="M">
                       일이삼사오육칠팔구십
                     </Tag>
                   </div>
