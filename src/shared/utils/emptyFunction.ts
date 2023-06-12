@@ -1,4 +1,3 @@
-/* eslint-disable unused-imports/no-unused-vars */
-const emptyFunction = (args: any) => {};
+const emptyFunction = () => {};
 
 export default emptyFunction;

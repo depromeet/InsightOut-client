@@ -5,8 +5,6 @@ import classNames from 'classnames';
 import TanstackQueryProvider from '@/components/Providers/TanstackQueryProvider';
 import ChakraUIProvider from '@/components/Providers/ChakraProvider';
 import AuthProvider from '@/components/Providers/AuthProvider';
-import GlobalNavigationBar from '@/components/GlobalNavigationBar/GlobalNavigationBar';
-import useGoogleLogin from '@/feature/auth/hooks/useGoogleLogin';
 
 export const metadata = {
   title: 'Create Next App',
@@ -14,8 +12,6 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }: PropsWithChildren) {
-  const { isSignedIn, signIn } = useGoogleLogin();
-
   return (
     <html lang="ko">
       <body
@@ -24,10 +20,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
         suppressHydrationWarning>
         <TanstackQueryProvider>
           <ChakraUIProvider>
-            <AuthProvider>
-              <GlobalNavigationBar isSignedIn={isSignedIn} signIn={signIn} />
-              {children}
-            </AuthProvider>
+            <AuthProvider>{children}</AuthProvider>
           </ChakraUIProvider>
         </TanstackQueryProvider>
       </body>
