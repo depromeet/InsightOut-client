@@ -3,9 +3,9 @@
 import { useRef, ChangeEvent } from 'react';
 
 import { useResumeStore } from '@/shared/store/resume/resume';
-import { MAX_LENGTH } from '@/services/constants/maxLength';
-import { resizeHeight } from '@/services/utils/autoSizeTextarea';
-import { QuestionData } from '@/services/@types/data/question';
+import { MAX_LENGTH } from '@/shared/constants/maxLength';
+import { resizeHeight } from '@/shared/utils/autoSizeTextarea';
+import { QuestionData } from '@/shared/@types/data/question';
 
 import { TextLengthMessage } from '@/components/Input/TextLengthMessage';
 import Button from '@/components/Button/Button';
@@ -40,7 +40,7 @@ const ResumeForm = ({ id, title: initialTitle, answer: initialAnswer, updatedAt 
         <SavingCaption updatedAt={updatedAt} currentSavingStatus="loading" />
         <div className="flex items-center gap-4">
           <TextLengthMessage currentLength={answer.length} maxLength={MAX_LENGTH.QUESTION} />
-          <Button variant={'primary'} size="md" disabled={answer.length === 0}>
+          <Button variant="gray900" size="M" disabled={answer.length === 0}>
             임시 저장
           </Button>
         </div>
