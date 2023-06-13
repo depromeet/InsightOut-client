@@ -2,7 +2,7 @@ import { initializeApp } from 'firebase/app';
 import { GoogleAuthProvider, getAuth, signInWithPopup } from 'firebase/auth';
 import axios, { AxiosError } from 'axios';
 import authApi from '@/apis/auth';
-import { useAuthStore } from '@/feature/auth/store/auth.store';
+import { useIsSignedIn } from '../store';
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -19,7 +19,7 @@ const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
 
 const useGoogleLogin = () => {
-  const { isSignedIn } = useAuthStore();
+  const isSignedIn = useIsSignedIn();
 
   const signIn = async () => {
     const response = await signInWithPopup(auth, provider);

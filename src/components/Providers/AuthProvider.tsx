@@ -3,11 +3,11 @@
 import { useEffect } from 'react';
 import axios from 'axios';
 import { getCookie } from 'cookies-next';
+import { useAuthActions } from '@/feature/auth/store';
 import authApi from '@/apis/auth';
-import { useAuthStore } from '@/feature/auth/store/auth.store';
 
 export default function AuthProvider({ children }: StrictPropsWithChildren) {
-  const { setIsSignedIn } = useAuthStore();
+  const { setIsSignedIn } = useAuthActions();
 
   useEffect(() => {
     const accessToken = axios.defaults.headers['Authorization'];
