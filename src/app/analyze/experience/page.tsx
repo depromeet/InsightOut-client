@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
-import PeriodContainer from '@/feature/analyze/experience/PeriodContainer';
+import PickerFieldContainer from '@/feature/analyze/experience/PickerFieldContainer';
 import { ExperienceFormValues } from '@/feature/analyze/analyze.types';
 import QuestionCard from '@/components/QuestionCard/QuestionCard';
 import TextAreaField from '@/components/Input/TextAreaField/TextAreaField';
@@ -47,7 +47,7 @@ const Experience = () => {
               />
             )}
           />
-          <PeriodContainer>
+          <PickerFieldContainer>
             <Controller
               control={control}
               name="startYYYY"
@@ -110,7 +110,7 @@ const Experience = () => {
                 />
               )}
             />
-          </PeriodContainer>
+          </PickerFieldContainer>
         </>
       </QuestionCard>
       <QuestionCard title="내가 맡았던 역할은 무엇인가요?">
