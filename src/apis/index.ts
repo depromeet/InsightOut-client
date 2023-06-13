@@ -5,7 +5,7 @@ import authApi from './auth';
  * @description CORS 등의 이슈로 인해 로컬 서버 주소로 임시 대체합니다.
  */
 const instance = axios.create({
-  baseURL: 'http://dev.insightout.kr/api',
+  baseURL: 'https://dev.insightout.kr/api',
   withCredentials: true,
 });
 
