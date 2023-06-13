@@ -3,10 +3,11 @@ import { usePathname } from 'next/navigation';
 import { ComponentPropsWithoutRef } from 'react';
 import { Flex } from '@chakra-ui/react';
 import cn from 'classnames';
-import GoogleLoginButton from '@/components/Button/GoogleLoginButton';
 import { tw } from '@/shared/utils/tailwindMerge';
 import { ROUTES } from '@/shared/constants/routes';
 import styles from './GlobalNavigationBar.module.scss';
+import Button from '../Button/Button';
+import IconGoogleLogo from '../Icon/IconGoogleLogo';
 
 type GlobalNavigationBarProps = ComponentPropsWithoutRef<'header'> & {
   /**
@@ -57,7 +58,9 @@ const GlobalNavigationBar = ({ className, isSignedIn, signIn, ...props }: Global
           </Flex>
         </Link>
       ) : (
-        <GoogleLoginButton onClick={signIn} />
+        <Button variant="outlined" size="L" leftIcon={<IconGoogleLogo />} preserveOriginalIconColor onClick={signIn}>
+          구글 로그인
+        </Button>
       )}
     </header>
   );
