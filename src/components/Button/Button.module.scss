@@ -6,19 +6,19 @@
 
 // Variant
 
-.primary {
+.gray900 {
   @apply text-white bg-gray-900;
 }
 
-.secondary {
+.primary {
   @apply text-white bg-primary-500;
 }
 
-.tertiary {
+.gray200 {
   @apply text-gray-900 bg-gray-200;
 }
 
-.secondary-secondary {
+.secondary {
   @apply text-main bg-secondary-200;
 }
 
@@ -28,37 +28,37 @@
 
 // Sizes
 
-.sm {
+.S {
   @apply px-[8px] py-[4px] text-[12px] leading-[16px] font-medium gap-[5.51px];
 }
 
-.md {
+.M {
   @apply px-[12px] py-[5.5px] text-[14px] leading-[21px] font-normal gap-[6.07px];
 }
 
-.lg {
+.L {
   @apply px-[16px] py-[7.5px] text-[16px] leading-[28px] font-bold gap-[6.26px];
 }
 
-.xl {
+.XL {
   @apply py-[12px] px-[24px] text-[20px] leading-[28px] font-bold gap-[10.26px];
 }
 
 // Hover
 
-.primary {
+.gray900 {
   @apply hover:bg-primary-300 hover:text-white;
 }
 
-.secondary {
+.primary {
   @apply hover:bg-primary-400 hover:text-white;
 }
 
-.tertiary {
+.gray200 {
   @apply hover:bg-gray-100 hover:text-gray-900;
 }
 
-.secondary-secondary {
+.secondary {
   @apply hover:text-main hover:bg-secondary-100;
 }
 
@@ -68,19 +68,19 @@
 
 // Pressed
 
-.primary {
+.gray900 {
   @apply active:bg-gray-950 active:text-white;
 }
 
-.secondary {
+.primary {
   @apply active:bg-primary-600 active:text-white;
 }
 
-.tertiary {
+.gray200 {
   @apply active:bg-gray-400 active:text-main;
 }
 
-.secondary-secondary {
+.secondary {
   @apply active:bg-secondary-400 active:text-main;
 }
 
@@ -90,19 +90,19 @@
 
 // Focused
 
-.primary {
+.gray900 {
   @apply focus:bg-gray-950 focus:text-white;
 }
 
-.secondary {
+.primary {
   @apply focus:bg-primary-600 focus:text-white;
 }
 
-.tertiary {
+.gray200 {
   @apply focus:bg-gray-400 focus:text-main;
 }
 
-.secondary-secondary {
+.secondary {
   @apply focus:bg-secondary-400 focus:text-main;
 }
 
@@ -112,19 +112,19 @@
 
 // Disabled
 
+.gray900 {
+  @apply disabled:text-light disabled:bg-gray-300 disabled:cursor-not-allowed;
+}
+
 .primary {
+  @apply disabled:text-primary-200 disabled:bg-primary-100 disabled:cursor-not-allowed;
+}
+
+.gray200 {
   @apply disabled:text-light disabled:bg-gray-300 disabled:cursor-not-allowed;
 }
 
 .secondary {
-  @apply disabled:text-primary-200 disabled:bg-primary-100 disabled:cursor-not-allowed;
-}
-
-.tertiary {
-  @apply disabled:text-light disabled:bg-gray-300 disabled:cursor-not-allowed;
-}
-
-.secondary-secondary {
   @apply disabled:bg-secondary-100 disabled:text-secondary-300 disabled:cursor-not-allowed;
 }
 
@@ -137,36 +137,37 @@
 
 // Icon Size
 
-.sm svg {
+.S svg {
   @apply w-[16px] h-[16px];
 }
 
-.md svg {
+.M svg {
   @apply w-[22px] h-[22px];
 }
 
-.lg svg {
+.L svg {
   @apply w-[24px] h-[24px];
 }
 
-.xl svg {
+.XL svg {
   @apply w-[24px] h-[24px];
 }
 
 // Icon Color
+
+.gray900:not(.preserve-original-icon-color) path {
+  @apply fill-white;
+}
+
 .primary:not(.preserve-original-icon-color) path {
   @apply fill-white;
 }
 
-.secondary:not(.preserve-original-icon-color) path {
-  @apply fill-white;
-}
-
-.tertiary:not(.preserve-original-icon-color) path {
+.gray200:not(.preserve-original-icon-color) path {
   @apply fill-main;
 }
 
-.secondary-secondary:not(.preserve-original-icon-color) path {
+.secondary:not(.preserve-original-icon-color) path {
   @apply fill-main;
 }
 
@@ -175,19 +176,19 @@
 }
 
 // Icon Disabled
+.gray900:disabled path {
+  @apply fill-light;
+}
+
 .primary:disabled path {
+  @apply fill-primary-200;
+}
+
+.gray200:disabled path {
   @apply fill-light;
 }
 
 .secondary:disabled path {
-  @apply fill-primary-200;
-}
-
-.tertiary:disabled path {
-  @apply fill-light;
-}
-
-.secondary-secondary:disabled path {
   @apply fill-secondary-500;
 }
 
@@ -197,18 +198,19 @@
 
 // Icon Only
 
-.sm.icon-only {
+.S.icon-only {
   @apply py-[2px] px-[8px];
 }
 
-.md.icon-only {
+.M.icon-only {
   @apply py-[4px] px-[14px];
 }
 
-.lg.icon-only {
+.L.icon-only {
   @apply py-[9.5px] px-[16px];
 }
 
-.xl.icon-only {
+.XL.icon-only {
   @apply p-[14px];
 }
+
