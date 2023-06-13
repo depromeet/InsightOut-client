@@ -4,7 +4,7 @@ import localFont from 'next/font/local';
 import classNames from 'classnames';
 import TanstackQueryProvider from '@/components/Providers/TanstackQueryProvider';
 import ChakraUIProvider from '@/components/Providers/ChakraProvider';
-import AuthProvider from '@/components/Providers/AuthProvider';
+import AuthProvider from '@/feature/auth/components/Providers/AuthProvider';
 
 export const metadata = {
   title: 'Create Next App',
