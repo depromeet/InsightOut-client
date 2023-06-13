@@ -37,11 +37,17 @@ const Template = ({ children }: LayoutProps) => {
                 이전으로
               </Button>
             )}
-            <Link href={handleNextButton() as Route}>
-              <Button type={pathname === ROUTES.VERIFY ? 'submit' : 'button'} variant="gray900" size="XL">
-                {pathname === ROUTES.VERIFY ? '경험카드 만들기' : '다음으로'}
+            {pathname === ROUTES.VERIFY ? (
+              <Button type="submit" variant="gray900" size="XL">
+                경험카드 만들기
               </Button>
-            </Link>
+            ) : (
+              <Link href={handleNextButton() as Route}>
+                <Button type="button" variant="gray900" size="XL">
+                  다음으로
+                </Button>
+              </Link>
+            )}
           </div>
         </div>
         <div className="experience mb-[16px] px-[14px] py-[32px] h-[500px] top-[32px] sticky">{/** aside */}</div>
