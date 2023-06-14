@@ -1,0 +1,24 @@
+.root {
+  @apply fixed flex items-center justify-between bg-dark w-full h-[56px] px-[120px] z-10;
+}
+
+.link {
+  @apply font-medium text-[20px] leading-[28px] text-light shrink-0;
+
+  // Hover
+  @apply hover:text-primary-400;
+
+  // Focused
+  &.focus {
+    @apply relative text-white;
+
+    &:not(.myPage)::after {
+      content: '';
+      @apply absolute bottom-[-11px] left-[50%] translate-x-[-50%] w-full h-[3px] bg-white;
+    }
+  }
+}
+
+.user-profile {
+  @apply w-[32px] h-[32px] bg-white border-[1px] border-solid border-primary-50 rounded-[12px] drop-shadow-user-profile shrink-0;
+}
