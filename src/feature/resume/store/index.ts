@@ -1,18 +1,17 @@
 import { create } from 'zustand';
 
-type State = {
-  title: string;
-  answer: string;
-};
+import { ReusmeStore } from '../types/store';
 
-type Action = {
-  setTitle: (title: State['title']) => void;
-  setAnswer: (answer: State['answer']) => void;
-};
-
-export const useResumeStore = create<State & Action>((set) => ({
+export const useResumeStore = create<ReusmeStore>((set) => ({
   title: '',
   answer: '',
-  setTitle: (title) => set(() => ({ title: title })),
-  setAnswer: (answer) => set(() => ({ answer: answer })),
+  actions: {
+    setTitle: (title) => set(() => ({ title: title })),
+    setAnswer: (answer) => set(() => ({ answer: answer })),
+  },
 }));
+
+export const useTitle = () => useResumeStore((state) => state.title);
+export const useAnswer = () => useResumeStore((state) => state.answer);
+
+export const useResumeActions = () => useResumeStore((state) => state.actions);
