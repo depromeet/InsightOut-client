@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
-import PeriodContainer from '@/feature/analyze/experience/PeriodContainer';
+import PickerFieldContainer from '@/feature/analyze/experience/PickerFieldContainer';
 import { ExperienceFormValues } from '@/feature/analyze/analyze.types';
 import QuestionCard from '@/components/QuestionCard/QuestionCard';
 import TextAreaField from '@/components/Input/TextAreaField/TextAreaField';
@@ -47,7 +47,7 @@ const Experience = () => {
               />
             )}
           />
-          <PeriodContainer>
+          <PickerFieldContainer>
             <Controller
               control={control}
               name="startYYYY"
@@ -65,7 +65,8 @@ const Experience = () => {
             <Controller
               control={control}
               name="startMM"
-              render={({ field: { ref, onChange, value } }) => (
+              rules={MMRules}
+              render={({ field: { ref, onChange, value }, formState: { errors } }) => (
                 <TextField
                   type="number"
                   ref={ref}
@@ -73,6 +74,8 @@ const Experience = () => {
                   maxLength={2}
                   onChange={handlePeriodChange(onChange, 2, 'endYYYY')}
                   value={value || ''}
+                  error={!!errors.startMM}
+                  errorMessage={errors.startMM?.message}
                 />
               )}
             />
@@ -93,7 +96,8 @@ const Experience = () => {
             <Controller
               control={control}
               name="endMM"
-              render={({ field: { ref, onChange, value } }) => (
+              rules={MMRules}
+              render={({ field: { ref, onChange, value }, formState: { errors } }) => (
                 <TextField
                   type="number"
                   ref={ref}
@@ -101,10 +105,12 @@ const Experience = () => {
                   onChange={handlePeriodChange(onChange, 2, 'experienceRole')}
                   maxLength={2}
                   value={value || ''}
+                  error={!!errors.endMM}
+                  errorMessage={errors.endMM?.message}
                 />
               )}
             />
-          </PeriodContainer>
+          </PickerFieldContainer>
         </>
       </QuestionCard>
       <QuestionCard title="내가 맡았던 역할은 무엇인가요?">
@@ -146,3 +152,10 @@ const Experience = () => {
 };
 
 export default Experience;
+
+const MMRules = {
+  pattern: {
+    value: /(0[1-9]|1[0-2])/,
+    message: '정확한 날짜를 입력해 주세요',
+  },
+};

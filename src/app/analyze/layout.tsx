@@ -12,7 +12,7 @@ export interface LayoutProps {
 }
 const Layout = ({ children }: LayoutProps) => {
   const methods = useForm({
-    mode: 'onSubmit',
+    mode: 'all',
     defaultValues: initialValue,
   });
 
