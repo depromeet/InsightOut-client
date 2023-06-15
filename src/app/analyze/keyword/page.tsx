@@ -47,20 +47,26 @@ const Keyword = () => {
   const [text, onChangeText, setText] = useInput('');
   const [keywordList, setKeywordList] = useState(entriesData);
 
-  const handleClickKeyword = (index: number) => () => {
+  const handleClickKeyword = (newKeyword: string) => () => {
     setKeywordList((prev) => {
-      const selectedKeywordList = prev.filter((keyword) => keyword[1] === true);
+      const selectedKeywordList = prev.filter(([, isSelected]) => isSelected === true);
+      const selectedKeywordIndex = keywordList.findIndex(([prevKeyword]) => prevKeyword === newKeyword);
+      const newkeywordList = prev.map(([prevKeyword, prevSelected]) =>
+        prevKeyword === newKeyword ? [prevKeyword, !prevSelected] : [prevKeyword, prevSelected]
+      ) as [string, boolean][];
+
       if (selectedKeywordList.length >= 4) {
-        if (selectedKeywordList.length === 4 && selectedKeywordList.includes(keywordList[index]))
-          return [...prev.slice(0, index), [prev[index][0], !prev[index][1]], ...prev.slice(index + 1)];
+        if (selectedKeywordList.length === 4 && selectedKeywordList.includes(keywordList[selectedKeywordIndex]))
+          return newkeywordList;
         return prev;
       }
-      return [...prev.slice(0, index), [prev[index][0], !prev[index][1]], ...prev.slice(index + 1)];
+      return newkeywordList;
     });
   };
 
   const addKeywordAndInitializeTextField = () => {
     if (!text.trim()) return;
+    // TODO: 중복된 키워드면 토스트 띄워주기
     setKeywordList((prev) => deDuplicatedKeywordList([...prev, [text, false]]));
     setText('');
   };
@@ -73,7 +79,7 @@ const Keyword = () => {
     <QuestionCard title="경험으로 나타내고 싶은 직무역량 키워드를 선택하세요" subTitle="최대 4개까지 선택할 수 있어요">
       <>
         <KeywordContainer>
-          {keywordList.map((data, index) => {
+          {keywordList.map((data) => {
             const [keyword, isSelected] = data;
             return (
               <Tag
@@ -81,7 +87,7 @@ const Keyword = () => {
                 variant={isSelected ? 'primary500' : 'gray100'}
                 size="L"
                 key={keyword}
-                onClick={handleClickKeyword(index)}>
+                onClick={handleClickKeyword(keyword)}>
                 {keyword}
               </Tag>
             );
