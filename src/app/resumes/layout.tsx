@@ -1,6 +1,6 @@
 import { PropsWithChildren } from 'react';
 
-import LeftNavigationBar from '@/feature/resume/components/LeftNavigationBar/LeftNavigationBar';
+import LeftNavigationBar from '@/features/resume/components/LeftNavigationBar/LeftNavigationBar';
 
 const Layout = ({ children }: PropsWithChildren) => {
   /** TODO: fetch('/resumes') */
