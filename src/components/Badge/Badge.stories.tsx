@@ -17,7 +17,7 @@ export const DefaultBadge: Story = {
       <Flex flexDirection={'column'}>
         <Heading as={'h4'}>Small</Heading>
         <Flex>
-          <Badge varient="gray100-outline" size="S">
+          <Badge variant="gray100-outline" size="S">
             Badge
           </Badge>
         </Flex>
@@ -25,7 +25,7 @@ export const DefaultBadge: Story = {
       <Flex flexDirection={'column'}>
         <Heading as={'h4'}>Medium</Heading>
         <Flex>
-          <Badge varient="gray100-outline" size="M">
+          <Badge variant="gray100-outline" size="M">
             Badge
           </Badge>
         </Flex>
@@ -33,7 +33,7 @@ export const DefaultBadge: Story = {
       <Flex flexDirection={'column'}>
         <Heading as={'h4'}>Large</Heading>
         <Flex>
-          <Badge varient="gray100-outline" size="L">
+          <Badge variant="gray100-outline" size="L">
             Badge
           </Badge>
         </Flex>
@@ -42,7 +42,7 @@ export const DefaultBadge: Story = {
       <Flex flexDirection={'column'}>
         <Heading as={'h4'}>Small</Heading>
         <Flex>
-          <Badge varient="primary50-outline" size="S">
+          <Badge variant="primary50-outline" size="S">
             Badge
           </Badge>
         </Flex>
@@ -50,7 +50,7 @@ export const DefaultBadge: Story = {
       <Flex flexDirection={'column'}>
         <Heading as={'h4'}>Medium</Heading>
         <Flex>
-          <Badge varient="primary50-outline" size="M">
+          <Badge variant="primary50-outline" size="M">
             Badge
           </Badge>
         </Flex>
@@ -58,7 +58,7 @@ export const DefaultBadge: Story = {
       <Flex flexDirection={'column'}>
         <Heading as={'h4'}>Large</Heading>
         <Flex>
-          <Badge varient="primary50-outline" size="L">
+          <Badge variant="primary50-outline" size="L">
             Badge
           </Badge>
         </Flex>
@@ -67,7 +67,7 @@ export const DefaultBadge: Story = {
       <Flex flexDirection={'column'}>
         <Heading as={'h4'}>Small</Heading>
         <Flex>
-          <Badge varient="secondary50-outline" size="S">
+          <Badge variant="secondary50-outline" size="S">
             Badge
           </Badge>
         </Flex>
@@ -75,7 +75,7 @@ export const DefaultBadge: Story = {
       <Flex flexDirection={'column'}>
         <Heading as={'h4'}>Medium</Heading>
         <Flex>
-          <Badge varient="secondary50-outline" size="M">
+          <Badge variant="secondary50-outline" size="M">
             Badge
           </Badge>
         </Flex>
@@ -83,7 +83,7 @@ export const DefaultBadge: Story = {
       <Flex flexDirection={'column'}>
         <Heading as={'h4'}>Large</Heading>
         <Flex>
-          <Badge varient="secondary50-outline" size="L">
+          <Badge variant="secondary50-outline" size="L">
             Badge
           </Badge>
         </Flex>
@@ -92,7 +92,7 @@ export const DefaultBadge: Story = {
       <Flex flexDirection={'column'}>
         <Heading as={'h4'}>Small</Heading>
         <Flex>
-          <Badge varient="primary500" size="S">
+          <Badge variant="primary500" size="S">
             Badge
           </Badge>
         </Flex>
@@ -100,7 +100,7 @@ export const DefaultBadge: Story = {
       <Flex flexDirection={'column'}>
         <Heading as={'h4'}>Medium</Heading>
         <Flex>
-          <Badge varient="primary500" size="M">
+          <Badge variant="primary500" size="M">
             Badge
           </Badge>
         </Flex>
@@ -108,7 +108,7 @@ export const DefaultBadge: Story = {
       <Flex flexDirection={'column'}>
         <Heading as={'h4'}>Large</Heading>
         <Flex>
-          <Badge varient="primary500" size="L">
+          <Badge variant="primary500" size="L">
             Badge
           </Badge>
         </Flex>
@@ -117,7 +117,7 @@ export const DefaultBadge: Story = {
       <Flex flexDirection={'column'}>
         <Heading as={'h4'}>Small</Heading>
         <Flex>
-          <Badge varient="secondary400" size="S">
+          <Badge variant="secondary400" size="S">
             Badge
           </Badge>
         </Flex>
@@ -125,7 +125,7 @@ export const DefaultBadge: Story = {
       <Flex flexDirection={'column'}>
         <Heading as={'h4'}>Medium</Heading>
         <Flex>
-          <Badge varient="secondary400" size="M">
+          <Badge variant="secondary400" size="M">
             Badge
           </Badge>
         </Flex>
@@ -133,7 +133,7 @@ export const DefaultBadge: Story = {
       <Flex flexDirection={'column'}>
         <Heading as={'h4'}>Large</Heading>
         <Flex>
-          <Badge varient="secondary400" size="L">
+          <Badge variant="secondary400" size="L">
             Badge
           </Badge>
         </Flex>
@@ -142,7 +142,7 @@ export const DefaultBadge: Story = {
       <Flex flexDirection={'column'}>
         <Heading as={'h4'}>Small</Heading>
         <Flex>
-          <Badge varient="gray900" size="S">
+          <Badge variant="gray900" size="S">
             Badge
           </Badge>
         </Flex>
@@ -150,7 +150,7 @@ export const DefaultBadge: Story = {
       <Flex flexDirection={'column'}>
         <Heading as={'h4'}>Medium</Heading>
         <Flex>
-          <Badge varient="gray900" size="M">
+          <Badge variant="gray900" size="M">
             Badge
           </Badge>
         </Flex>
@@ -158,7 +158,7 @@ export const DefaultBadge: Story = {
       <Flex flexDirection={'column'}>
         <Heading as={'h4'}>Large</Heading>
         <Flex>
-          <Badge varient="gray900" size="L">
+          <Badge variant="gray900" size="L">
             Badge
           </Badge>
         </Flex>
