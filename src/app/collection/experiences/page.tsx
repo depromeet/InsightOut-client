@@ -10,6 +10,7 @@ import Image from 'next/image';
 import { useState } from 'react';
 import cardImage from '../../../../public/images/card1.png';
 import Tag from '@/components/Tag/Tag';
+import addPlusMarkOver99 from '@/shared/utils/addPlusMarkOver99';
 
 const Page = () => {
   const EXPERIENCE_FILTER_BY_TIME = ['경험시간순', '작성시간순'];
@@ -22,7 +23,7 @@ const Page = () => {
     {
       id: 124,
       keyword: '리더십',
-      count: 10,
+      count: 100,
     },
     {
       id: 125,
@@ -82,7 +83,7 @@ const Page = () => {
               variant={selectedCapacity.keyword === keyword ? 'secondary-pressed' : 'secondary'}
               badge={
                 <Badge varient="gray100-outline" size="S">
-                  {count}
+                  {addPlusMarkOver99(count)}
                 </Badge>
               }>
               {keyword}
