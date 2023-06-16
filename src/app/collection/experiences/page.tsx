@@ -73,21 +73,22 @@ const Page = () => {
 
   return (
     <>
-      <div className="flex flex-row justify-between">
-        <section className="flex flex-row gap-[8px] mt-[24px]">
+      <div className="flex flex-row justify-between items-center my-[24px]">
+        <section className="flex flex-row gap-[8px]">
           {capabilities.map(({ id, keyword, count }) => (
             // TODO: Chip & Badge 컴포넌트 varient 수정해야함
-            <Chip
-              key={id}
-              size="M"
-              variant={selectedCapacity.keyword === keyword ? 'secondary-pressed' : 'secondary'}
-              badge={
-                <Badge varient="gray100-outline" size="S">
-                  {addPlusMarkOver99(count)}
-                </Badge>
-              }>
-              {keyword}
-            </Chip>
+            <li key={id} className="list-none">
+              <Chip
+                size="M"
+                variant={selectedCapacity.keyword === keyword ? 'secondary-pressed' : 'secondary'}
+                badge={
+                  <Badge varient="gray100-outline" size="S">
+                    {addPlusMarkOver99(count)}
+                  </Badge>
+                }>
+                {keyword}
+              </Chip>
+            </li>
           ))}
         </section>
         <section>
