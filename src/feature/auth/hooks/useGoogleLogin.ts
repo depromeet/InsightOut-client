@@ -2,6 +2,7 @@ import { initializeApp } from 'firebase/app';
 import { GoogleAuthProvider, getAuth, signInWithPopup } from 'firebase/auth';
 import axios, { AxiosError } from 'axios';
 import authApi from '@/apis/auth';
+import { useIsSignedIn } from '../store';
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -11,13 +12,15 @@ const firebaseConfig = {
   messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
   appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
   measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID,
-};
+} as const;
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
 
 const useGoogleLogin = () => {
+  const isSignedIn = useIsSignedIn();
+
   const signIn = async () => {
     const response = await signInWithPopup(auth, provider);
     const idToken = await response.user.getIdToken();
@@ -38,6 +41,7 @@ const useGoogleLogin = () => {
   return {
     signIn,
     signOut,
+    isSignedIn,
   };
 };
 
