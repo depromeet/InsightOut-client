@@ -18,10 +18,10 @@ const ResumeForm = ({ id, title: initialTitle, answer: initialAnswer, updatedAt 
   const answer = useAnswer();
   const { setTitle, setAnswer } = useResumeActions();
 
-  const titleInputRef = useRef<HTMLTextAreaElement>(null);
+  const titleTextareaRef = useRef<HTMLTextAreaElement>(null);
 
   const handleTitleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    resizeHeight(titleInputRef);
+    resizeHeight(titleTextareaRef);
     setTitle(e.target.value);
   };
 
@@ -45,7 +45,7 @@ const ResumeForm = ({ id, title: initialTitle, answer: initialAnswer, updatedAt 
         </div>
       </header>
       <textarea
-        ref={titleInputRef}
+        ref={titleTextareaRef}
         value={title}
         onChange={handleTitleChange}
         maxLength={MAX_LENGTH.TITLE}
