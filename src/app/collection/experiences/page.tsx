@@ -55,6 +55,7 @@ const Page = () => {
   const [filterByTime, setFilterByTime] = useState(false);
   const [selectedCapacity, setselectedCapacity] = useState('전체');
 
+  // TODO: 경험카드 스키마 전달 받고 적용
   const experiences = [
     {
       id: 1,
@@ -94,7 +95,7 @@ const Page = () => {
                 size="M"
                 variant={selectedCapacity === keyword ? 'secondary-pressed' : 'secondary'}
                 badge={
-                  <Badge varient="gray100-outline" size="S">
+                  <Badge variant="gray100-outline" size="S">
                     {addPlusMarkOver99(count)}
                   </Badge>
                 }>
@@ -113,14 +114,14 @@ const Page = () => {
       <div className="mt-[24px]">
         <ul>
           <li>
-            <section className="w-[389px] p-[24px] border rounded-[16px]">
+            <section className="w-[389px] p-[24px] border rounded-[16px] hover:shadow-S4">
               <div className="relative w-[341px] h-[345px] bg-black rounded-[16px]">
                 {/* 카드 이미지 */}
                 <div className="w-[341px] h-[345px] flex items-center justify-center">
                   <Image src={cardImage} alt="경험카드" width={250} height={250} />
                 </div>
                 {/* 상태 */}
-                <Badge varient="gray100-outline" size="S" className="absolute top-[16px] left-[16px]">
+                <Badge variant="gray100-outline" size="S" className="absolute top-[16px] left-[16px]">
                   작성중
                 </Badge>
                 {/* 액션버튼 */}
