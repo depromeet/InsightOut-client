@@ -13,40 +13,41 @@ import Tag from '@/components/Tag/Tag';
 
 const Page = () => {
   const EXPERIENCE_FILTER_BY_TIME = ['경험시간순', '작성시간순'];
-  const [filterByTime, setFilterByTime] = useState(false);
-
   const capabilities = [
     {
       id: 123,
-      title: '팀워크',
+      keyword: '팀워크',
       count: 4,
     },
     {
       id: 124,
-      title: '리더십',
+      keyword: '리더십',
       count: 10,
     },
     {
       id: 125,
-      title: '분석능력',
+      keyword: '분석능력',
       count: 5,
     },
     {
       id: 126,
-      title: '설득력',
+      keyword: '설득력',
       count: 7,
     },
     {
       id: 127,
-      title: '책임감',
+      keyword: '책임감',
       count: 13,
     },
   ];
 
+  const [filterByTime, setFilterByTime] = useState(false);
+  const [selectedCapacity, setselectedCapacity] = useState(capabilities[0]);
+
   const experiences = [
     {
       id: 1,
-      title: '00직무 디자인 인턴',
+      keyword: '00직무 디자인 인턴',
       startDate: '2022-01',
       endDate: '2022-07',
       experienceStatus: 'INPROGRESS or DONE',
@@ -73,18 +74,18 @@ const Page = () => {
     <>
       <div className="flex flex-row justify-between">
         <section className="flex flex-row gap-[8px] mt-[24px]">
-          {capabilities.map(({ id, title, count }) => (
+          {capabilities.map(({ id, keyword, count }) => (
             // TODO: Chip & Badge 컴포넌트 varient 수정해야함
             <Chip
               key={id}
               size="M"
-              variant="secondary"
+              variant={selectedCapacity.keyword === keyword ? 'secondary-pressed' : 'secondary'}
               badge={
                 <Badge varient="gray100-outline" size="S">
                   {count}
                 </Badge>
               }>
-              {title}
+              {keyword}
             </Chip>
           ))}
         </section>
