@@ -51,15 +51,13 @@ const Keyword = () => {
     setKeywordList((prev) => {
       const selectedKeywordList = prev.filter(([, isSelected]) => isSelected === true);
       const selectedKeywordIndex = keywordList.findIndex(([prevKeyword]) => prevKeyword === newKeyword);
+      const toggleKeyword = selectedKeywordList.includes(keywordList[selectedKeywordIndex]);
       const newKeywordList = prev.map(([prevKeyword, prevSelected]) =>
         prevKeyword === newKeyword ? [prevKeyword, !prevSelected] : [prevKeyword, prevSelected]
       ) as [string, boolean][];
 
-      if (selectedKeywordList.length >= 4) {
-        if (selectedKeywordList.length === 4 && selectedKeywordList.includes(keywordList[selectedKeywordIndex]))
-          return newKeywordList;
-        return prev;
-      }
+      if (selectedKeywordList.length === 4 && toggleKeyword) return newKeywordList;
+      if (selectedKeywordList.length >= 4) return prev;
       return newKeywordList;
     });
   };
