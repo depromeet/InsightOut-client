@@ -17,6 +17,8 @@ type ButtonProps = MergeComponentProps<
     rightIcon?: ReactNode;
     /** @description Icon Only 버튼의 아이콘 (해당 Prop 사용 시 leftIcon, rightIcon, children은 렌더링되지 않습니다) */
     onlyIcon?: ReactNode;
+    /** @description 아이콘의 원래 색상을 유지할건지 여부 */
+    preserveOriginalIconColor?: boolean;
   }
 >;
 
@@ -24,13 +26,27 @@ type ButtonProps = MergeComponentProps<
  * @name 버튼컴포넌트
  */
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ variant = 'primary', size = 'M', children, className, leftIcon, rightIcon, onlyIcon, ...props }, ref) => {
+  (
+    {
+      variant = 'primary',
+      size = 'M',
+      children,
+      className,
+      leftIcon,
+      rightIcon,
+      onlyIcon,
+      preserveOriginalIconColor,
+      ...props
+    },
+    ref
+  ) => {
     const isIconOnlyButton = !!onlyIcon;
     const rootClassName = cn(
       styles.root,
       styles[variant],
       styles[size],
       { [styles['icon-only']]: isIconOnlyButton },
+      { [styles['preserve-original-icon-color']]: preserveOriginalIconColor },
       className
     );
 
