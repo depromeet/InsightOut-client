@@ -11,10 +11,11 @@ import { useState } from 'react';
 import cardImage from '../../../../public/images/card1.png';
 import Tag from '@/components/Tag/Tag';
 import addPlusMarkOver99 from '@/shared/utils/addPlusMarkOver99';
+import { Capacity } from '@/features/collection/types';
 
 const Page = () => {
   const EXPERIENCE_FILTER_BY_TIME = ['경험시간순', '작성시간순'];
-  const capabilities = [
+  const capabilities: Capacity[] = [
     {
       id: 123,
       keyword: '팀워크',
@@ -42,8 +43,17 @@ const Page = () => {
     },
   ];
 
+  const getAllCapacityBadgeItem = (target: Capacity[]): Capacity => {
+    console.log(target.reduce((acc, { count }) => acc + count, 0));
+    return {
+      id: 0,
+      keyword: '전체',
+      count: target.reduce((acc, { count }) => acc + count, 0),
+    };
+  };
+
   const [filterByTime, setFilterByTime] = useState(false);
-  const [selectedCapacity, setselectedCapacity] = useState(capabilities[0]);
+  const [selectedCapacity, setselectedCapacity] = useState('전체');
 
   const experiences = [
     {
@@ -71,16 +81,18 @@ const Page = () => {
     setFilterByTime((filterByTime) => !filterByTime);
   };
 
+  const shownCapacities: Capacity[] = [getAllCapacityBadgeItem(capabilities), ...capabilities];
+
   return (
     <>
       <div className="flex flex-row justify-between items-center my-[24px]">
         <section className="flex flex-row gap-[8px]">
-          {capabilities.map(({ id, keyword, count }) => (
+          {shownCapacities.map(({ id, keyword, count }) => (
             // TODO: Chip & Badge 컴포넌트 varient 수정해야함
             <li key={id} className="list-none">
               <Chip
                 size="M"
-                variant={selectedCapacity.keyword === keyword ? 'secondary-pressed' : 'secondary'}
+                variant={selectedCapacity === keyword ? 'secondary-pressed' : 'secondary'}
                 badge={
                   <Badge varient="gray100-outline" size="S">
                     {addPlusMarkOver99(count)}
