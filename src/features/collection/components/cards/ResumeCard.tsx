@@ -1,6 +1,7 @@
 import ActionList from '@/components/ActionList/ActionList';
 import IconMoreVertical from '@/components/Icon/IconMoreVertical';
 import formatUpdatedAt from '@/shared/utils/formatUpdateAt';
+import { useRef } from 'react';
 
 type Props = {
   updatedAt: string;
@@ -10,6 +11,10 @@ type Props = {
 
 const ResumeCard = ({ updatedAt, title, answer }: Props) => {
   const MAX_LENGTH = 2000;
+  const answerTextareaRef = useRef<HTMLTextAreaElement>(null);
+
+  // TODO: line-clamp 커스텀
+
   return (
     <div className="border rounded-[24px] hover:shadow-S4 p-[24px]">
       <header className="relative mb-[16px]">
@@ -28,7 +33,9 @@ const ResumeCard = ({ updatedAt, title, answer }: Props) => {
         </ActionList>
       </header>
       <div>
-        <textarea className="w-full bg-transparent resize-none b2">{answer}</textarea>
+        <textarea className="w-full bg-transparent resize-none line-clamp-5 b2" rows={5} ref={answerTextareaRef}>
+          {answer}
+        </textarea>
       </div>
       <footer className="flex flex-row-reverse mt-[8px] ">
         <b className="b3 text-light">
