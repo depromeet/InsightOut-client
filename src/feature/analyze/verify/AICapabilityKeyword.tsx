@@ -1,7 +1,7 @@
 import React from 'react';
 import Tag from '@/components/Tag/Tag';
 import Alert from '@/../public/icons/alert-circle-line.svg';
-import { renderRecommendKeyword } from '@/app/analyze/verify/page';
+import { renderRecommendKeyword } from './page';
 
 interface Props {
   recommendKeywordList: string[];
