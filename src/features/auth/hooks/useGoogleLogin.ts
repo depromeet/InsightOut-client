@@ -1,8 +1,9 @@
 import { initializeApp } from 'firebase/app';
 import { GoogleAuthProvider, getAuth, signInWithPopup } from 'firebase/auth';
-import axios, { AxiosError } from 'axios';
+import { AxiosError } from 'axios';
 import authApi from '@/apis/auth';
 import { useIsSignedIn } from '../store';
+import instance from '@/apis';
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -28,7 +29,7 @@ const useGoogleLogin = () => {
     try {
       const response = await authApi.signIn(idToken);
       const accessToken = response.data.data.accessToken;
-      axios.defaults.headers['Authorization'] = `Bearer ${accessToken}`;
+      instance.defaults.headers['Authorization'] = `Bearer ${accessToken}`;
     } catch (error) {
       if (error instanceof AxiosError) {
         console.error(error);
