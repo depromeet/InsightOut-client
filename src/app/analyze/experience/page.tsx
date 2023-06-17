@@ -3,11 +3,11 @@
 import React from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 import PickerFieldContainer from '@/feature/analyze/experience/PickerFieldContainer';
-import { ExperienceFormValues } from '@/feature/analyze/analyze.types';
 import QuestionCard from '@/components/QuestionCard/QuestionCard';
 import TextAreaField from '@/components/Input/TextAreaField/TextAreaField';
 import TextField from '@/components/Input/TextField/TextField';
 import { callbackRefWithResizeHeight } from '@/shared/utils/callbackRefWithResizeHeight';
+import { ExperienceFormValues } from '@/feature/analyze/types';
 
 const Experience = () => {
   const { control, setFocus } = useFormContext<ExperienceFormValues>();

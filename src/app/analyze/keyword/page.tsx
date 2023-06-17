@@ -8,7 +8,8 @@ import useInput from '@/hooks/useInput';
 import TextAreaField from '@/components/Input/TextAreaField/TextAreaField';
 import { exceptEnter } from '@/shared/utils/exceptEnter';
 import Button from '@/components/Button/Button';
-import type { Keyword } from '@/feature/analyze/types';
+
+type KeywordEntries = [string, boolean][];
 
 // FIXME: mock data
 const data = {
@@ -38,10 +39,10 @@ const data = {
 };
 const entriesData = Object.entries(data);
 
-const deDuplicatedKeywordList = (arr: Keyword) => Object.entries(Object.fromEntries(arr));
+const deDuplicatedKeywordList = (arr: KeywordEntries) => Object.entries(Object.fromEntries(arr));
 
 // TODO: 경험 분해 키워드 가져오기 API (/experience/capability/{experienceId}) 요청으로 키워드 불러오기
-// TODO: 경험 분해 키워드 임시 저장 API (/experience/capability) 로 요청 보내기, 요청body: Object.fromEntries(keywordList.filter((keyword) => keyword[1] === true))
+// TODO: 경험 분해 키워드 임시 저장 API (/experience/capability) 로 요청 보내기, 요청body: Object.fromEntries(keywordList.filter(([, isSelected]) => keyword[1] === true))
 // MINOR_TODO: input checkbox로 리팩토링? (Tag 컴포넌트 수정)
 
 const Keyword = () => {
@@ -55,7 +56,7 @@ const Keyword = () => {
       const toggleKeyword = selectedKeywordList.includes(keywordList[selectedKeywordIndex]);
       const newKeywordList = prev.map(([prevKeyword, prevSelected]) =>
         prevKeyword === newKeyword ? [prevKeyword, !prevSelected] : [prevKeyword, prevSelected]
-      ) as Keyword;
+      ) as KeywordEntries;
 
       if (selectedKeywordList.length === 4 && toggleKeyword) return newKeywordList;
       if (selectedKeywordList.length >= 4) return prev;

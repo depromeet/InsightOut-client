@@ -53,4 +53,4 @@ export interface ExperienceFormValues {
   experienceStatus: ExperienceStatus;
 }
 
-export type Keyword = [string, boolean][];
+export type Keyword = Record<string, boolean>;
