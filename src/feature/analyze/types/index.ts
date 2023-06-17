@@ -51,8 +51,6 @@ export interface ExperienceFormValues {
    * 경험 카드 작성 상태
    */
   experienceStatus: ExperienceStatus;
-  /**
-   * TODO: 아직 안정해짐 (/analyze/verify)
-   */
-  utilization: string;
 }
+
+export type Keyword = [string, boolean][];
