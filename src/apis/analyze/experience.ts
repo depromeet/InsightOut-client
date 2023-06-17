@@ -1,11 +1,10 @@
-import { ExperienceFormValues } from '@/feature/analyze/types';
 import instance from '..';
-import { ExperienceParams } from './types/experience';
+import { ExperienceParams, ExperienceResponse } from './types/experience';
 
 const experienceApi = {
-  get: () => instance.get<ExperienceFormValues, ExperienceFormValues>('/experience'),
-  post: ({ ...params }: ExperienceParams['post']) =>
-    instance.post<ExperienceFormValues, ExperienceFormValues>('/experience', params),
+  get: async () => await instance.get<ExperienceResponse, ExperienceResponse>('/experience'),
+  post: async ({ ...params }: ExperienceParams['post']) =>
+    await instance.post<ExperienceResponse, ExperienceResponse>('/experience', params),
 };
 
 export default experienceApi;
