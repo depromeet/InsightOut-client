@@ -1,4 +1,4 @@
-import { ComponentPropsWithRef, forwardRef } from 'react';
+import { ComponentPropsWithRef, forwardRef, useEffect } from 'react';
 
 import { tw } from '@/shared/utils/tailwindMerge';
 import { useForwardRef } from '@/hooks/useForwardRef';
@@ -26,6 +26,13 @@ const TextAreaField = forwardRef<HTMLTextAreaElement, TextAreaFieldProps>(
 
     const handleTextareaChange = () => autoSize && resizeHeight(forwardRef);
 
+    useEffect(() => {
+      // 마운트 됐을 때 defaultValue만큼 resize 해주기 위함
+      if (autoSize) {
+        resizeHeight(forwardRef);
+      }
+    }, []);
+
     return (
       <div>
         {chipTitle && (
@@ -42,11 +49,7 @@ const TextAreaField = forwardRef<HTMLTextAreaElement, TextAreaFieldProps>(
           {...props}
         />
         {maxLength && (
-          <TextLengthMessage
-            className="float-right mt-2"
-            currentLength={value?.length || 0}
-            maxLength={maxLength || 0}
-          />
+          <TextLengthMessage className="float-right" currentLength={value?.length || 0} maxLength={maxLength || 0} />
         )}
         {error && !value && <ErrorMessage hasIcon>{errorMessage}</ErrorMessage>}
       </div>
