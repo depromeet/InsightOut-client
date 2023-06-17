@@ -19,7 +19,7 @@ instance.interceptors.response.use(
      */
     if (data.statusCode === HTTP_STATUS_CODE.UNAUTHORIZED && data.message === 'Unauthorized') {
       const response = await authApi.reIssue();
-      const accessToken = response.data.accessToken;
+      const accessToken = response.data.data.accessToken;
       axios.defaults.headers['Authorization'] = `Bearer ${accessToken}`;
       return axios(originalRequest);
     }

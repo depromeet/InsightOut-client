@@ -17,7 +17,7 @@ export default function AuthProvider({ children }: StrictPropsWithChildren) {
 
     (async () => {
       const response = await authApi.reIssue();
-      const accessToken = response.data.accessToken;
+      const accessToken = response.data.data.accessToken;
       axios.defaults.headers['Authorization'] = `Bearer ${accessToken}`;
       setIsSignedIn(true);
     })();
