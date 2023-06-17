@@ -17,7 +17,7 @@ const Template = ({ children }: { children: React.ReactNode }) => {
             key={title}
             size="lg"
             badge={
-              <Badge varient="gray900" size="L">
+              <Badge variant="gray900" size="L">
                 {count}
               </Badge>
             }

@@ -66,7 +66,7 @@ export const ChipWithBadge: Story = {
           size="S"
           variant="primary"
           badge={
-            <Badge varient="gray100-outline" size="S">
+            <Badge variant="gray100-outline" size="S">
               99+
             </Badge>
           }>
@@ -77,7 +77,7 @@ export const ChipWithBadge: Story = {
           size="M"
           variant="primary"
           badge={
-            <Badge varient="gray100-outline" size="S">
+            <Badge variant="gray100-outline" size="S">
               99+
             </Badge>
           }>
@@ -91,7 +91,7 @@ export const ChipWithBadge: Story = {
           size="S"
           variant="secondary"
           badge={
-            <Badge varient="gray100-outline" size="S">
+            <Badge variant="gray100-outline" size="S">
               99+
             </Badge>
           }>
@@ -102,7 +102,7 @@ export const ChipWithBadge: Story = {
           size="M"
           variant="secondary"
           badge={
-            <Badge varient="gray100-outline" size="S">
+            <Badge variant="gray100-outline" size="S">
               99+
             </Badge>
           }>
@@ -116,7 +116,7 @@ export const ChipWithBadge: Story = {
           size="M"
           variant="primary-pressed"
           badge={
-            <Badge varient="gray100-outline" size="S">
+            <Badge variant="gray100-outline" size="S">
               99+
             </Badge>
           }>
@@ -127,7 +127,7 @@ export const ChipWithBadge: Story = {
           size="M"
           variant="secondary-pressed"
           badge={
-            <Badge varient="gray100-outline" size="S">
+            <Badge variant="gray100-outline" size="S">
               99+
             </Badge>
           }>
