@@ -50,7 +50,7 @@ const Template = ({ children }: LayoutProps) => {
             )}
           </div>
         </div>
-        <div className="experience mb-[16px] px-[14px] py-[32px] h-[500px] top-[32px] sticky">{/** aside */}</div>
+        <div className="experience mb-[16px] px-[14px] py-[32px] h-[500px] top-[88px] sticky">{/** aside */}</div>
       </div>
     </>
   );
