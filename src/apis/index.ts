@@ -1,11 +1,9 @@
 import axios from 'axios';
 import authApi from './auth';
+import { HTTP_BASE_URL, HTTP_STATUS_CODE } from '@/shared/constants/http';
 
-/**
- * @description CORS 등의 이슈로 인해 로컬 서버 주소로 임시 대체합니다.
- */
 const instance = axios.create({
-  baseURL: 'https://dev.insightout.kr/api',
+  baseURL: HTTP_BASE_URL,
   withCredentials: true,
 });
 
@@ -19,9 +17,9 @@ instance.interceptors.response.use(
     /**
      * @description Access Token이 만료될 경우 Refresh Token으로 재발급합니다.
      */
-    if (data.statusCode === 401 && data.message === 'Unauthorized') {
+    if (data.statusCode === HTTP_STATUS_CODE.UNAUTHORIZED && data.message === 'Unauthorized') {
       const response = await authApi.reIssue();
-      const accessToken = response.data.accessToken;
+      const accessToken = response.data.data.accessToken;
       axios.defaults.headers['Authorization'] = `Bearer ${accessToken}`;
       return axios(originalRequest);
     }
@@ -29,7 +27,7 @@ instance.interceptors.response.use(
     /**
      * @description Refresh Token까지 만료될 경우 로그인 화면으로 이동합니다.
      */
-    if (data.statusCode === 401 && data.message === '적절하지 않은 요청입니다.') {
+    if (data.statusCode === HTTP_STATUS_CODE.UNAUTHORIZED && data.message === '적절하지 않은 요청입니다.') {
       // window.location.href = '/signin';
       return Promise.reject(error);
     }
