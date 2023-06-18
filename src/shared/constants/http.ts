@@ -1,0 +1,12 @@
+export const HTTP_BASE_URL = 'https://dev.insightout.kr/api';
+
+export const HTTP_STATUS_CODE = {
+  BAD_REQUEST: 400,
+  UNAUTHORIZED: 401,
+  FORBIDDEN: 403,
+  NOTFOUND: 404,
+  UNPROCESSABLE_ENTITY: 422,
+  INTERNAL_SERVER_ERROR: 500,
+  BAD_GATEWAY: 502,
+  GATEWAY_TIMEOUT: 504,
+} as const;

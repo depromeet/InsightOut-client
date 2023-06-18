@@ -27,7 +27,7 @@ const useGoogleLogin = () => {
 
     try {
       const response = await authApi.signIn(idToken);
-      const accessToken = response.data.accessToken;
+      const accessToken = response.data.data.accessToken;
       axios.defaults.headers['Authorization'] = `Bearer ${accessToken}`;
     } catch (error) {
       if (error instanceof AxiosError) {
