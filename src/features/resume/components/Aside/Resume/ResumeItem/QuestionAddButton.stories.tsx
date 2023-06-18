@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import QuestionAddButton from './QuestionAddButton';
 
 const meta: Meta<typeof QuestionAddButton> = {
-  title: 'Resume/LNB/ResumeItem/QuestionAddButton',
+  title: 'Resume/Aside/ResumeItem/QuestionAddButton',
   component: QuestionAddButton,
 };
 
