@@ -1,7 +1,7 @@
 import React from 'react';
 import Tag from '@/components/Tag/Tag';
-import Alert from '@/../public/icons/alert-circle-line.svg';
 import { renderRecommendKeyword } from '@/app/analyze/verify/page';
+import { AlertCircleLine } from '@/components/Icon';
 
 interface Props {
   recommendKeywordList: string[];
@@ -28,7 +28,7 @@ const AICapabilityKeyword = ({ recommendKeywordList }: Props) => {
         ))}
       </div>
       <div className="flex-center">
-        <Alert />
+        <AlertCircleLine />
         <span className="c1">AI 역량 키워드는 최대 2개까지 추천돼요</span>
       </div>
     </div>
