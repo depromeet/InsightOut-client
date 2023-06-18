@@ -1,19 +1,13 @@
 'use client';
 
-import ActionList from '@/components/ActionList/ActionList';
 import Badge from '@/components/Badge/Badge';
 import TextButton from '@/components/Button/TextButton';
 import Chip from '@/components/Chip/Chip';
 import IconClock from '@/components/Icon/IconClock';
-import IconMoreVertical from '@/components/Icon/IconMoreVertical';
-import Image from 'next/image';
 import { useState } from 'react';
-import cardImage from '../../../../public/images/card1.png';
-import Tag from '@/components/Tag/Tag';
 import addPlusMarkOver99 from '@/shared/utils/addPlusMarkOver99';
 import { Capacity, Experience } from '@/features/collection/types';
-import getExperiencePeriod from '@/features/collection/utils/getExperiencePeriod';
-import Keyword from '@/app/analyze/keyword/page';
+import ExperienceCard from '@/features/collection/components/cards/ExperienceCard';
 
 const Page = () => {
   const EXPERIENCE_FILTER_BY_TIME = ['경험시간순', '작성시간순'];
@@ -333,82 +327,11 @@ const Page = () => {
       </section>
       <section className="mt-[24px]">
         <ul className="grid grid-cols-3 gap-[16px]">
-          {experiences.map(
-            ({ id, experienceStatus, summary, startDate, endDate, title, situation, capabilities }: Experience) => (
-              <li key={id}>
-                <section className="w-[389px] p-[24px] border rounded-[16px] hover:shadow-S4">
-                  <div className="relative w-[341px] h-[345px] bg-black rounded-[16px]">
-                    {/* 카드 이미지 */}
-                    <div className="w-[341px] h-[345px] flex items-center justify-center">
-                      {/* 🚨TODO: 키워드별 cardImage */}
-                      <Image src={cardImage} alt="경험카드" width={250} height={250} />
-                    </div>
-                    {/* 상태 */}
-                    {experienceStatus === 'INPROGRESS' && (
-                      <Badge variant="gray100-outline" size="S" className="absolute top-[16px] left-[16px]">
-                        작성중
-                      </Badge>
-                    )}
-                    {/* 액션버튼 */}
-                    <ActionList>
-                      <ActionList.Button className="absolute top-[16px] right-[16px]">
-                        <IconMoreVertical />
-                      </ActionList.Button>
-                      <ActionList.ItemWrapper>
-                        {/* 🚨TODO: 수정 삭제 이벤트 */}
-                        <ActionList.Item>수정하기</ActionList.Item>
-                        <ActionList.Item onClick={() => console.log('삭제 완')}>삭제하기</ActionList.Item>
-                      </ActionList.ItemWrapper>
-                    </ActionList>
-                    {/* 카드 키워드 */}
-                    <div className="flex flex-row gap-[12px] absolute bottom-[16px] left-[16px]">
-                      {summary.map((item, index) => (
-                        <Tag variant="gray800" size="M" key={`${id}-${index}-${item}`}>
-                          {item}
-                        </Tag>
-                      ))}
-                    </div>
-                  </div>
-                  <div className="mt-[24px] flex flex-col">
-                    <span className="b1 mb-[2px]">{getExperiencePeriod(startDate, endDate)}</span>
-                    <h5 className="h5 mb-[8px]">{title}</h5>
-                    <p className="b2 line-clamp-1">{situation}</p>
-                  </div>
-                  <div className="border-t-[1px] border-gray-200 my-[16px]"></div>
-                  <div>
-                    <div>
-                      <span className="mb-4 subhead4">직무영략 키워드</span>
-                      <div className="flex flex-row flex-wrap gap-x-[4px] gap-y-[2px] mb-[10px]">
-                        {capabilities
-                          .filter(({ isAi }) => !isAi)
-                          .map(({ id: capacityId, keyword }, index) => (
-                            <>
-                              <Tag key={`${id}-${capacityId}-${Keyword}`} variant="primary50-outline" size="M">
-                                {keyword}
-                              </Tag>
-                              {/* Question: CSS로 요소의 개수만큼 개행 처리를 할 수 있는 방법이 있을까요? */}
-                              {index % 2 ? <span className="basis-full" /> : ''}
-                            </>
-                          ))}
-                      </div>
-                    </div>
-                    <div>
-                      <span className="mb-4 subhead4">AI추천 키워드</span>
-                      <div className="flex flex-row flex-wrap gap-[4px] mb-[10px]">
-                        {capabilities
-                          .filter(({ isAi }) => isAi)
-                          .map(({ id: capacityId, keyword }) => (
-                            <Tag key={`${id}-${capacityId}-${Keyword}`} variant="secondary50-outline" size="M">
-                              {keyword}
-                            </Tag>
-                          ))}
-                      </div>
-                    </div>
-                  </div>
-                </section>
-              </li>
-            )
-          )}
+          {experiences.map((experience: Experience) => (
+            <li key={experience.id}>
+              <ExperienceCard {...experience} />
+            </li>
+          ))}
         </ul>
       </section>
     </>
