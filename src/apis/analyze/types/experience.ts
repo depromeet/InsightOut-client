@@ -1,6 +1,15 @@
 import { ExperienceFormValues } from '@/feature/analyze/types';
 
 export type ExperienceParams = {
+  get: {
+    id?: string;
+    last?: boolean;
+    capabilityId?: number;
+    situation?: boolean;
+    task?: boolean;
+    action?: boolean;
+    result?: boolean;
+  };
   post: Partial<ExperienceFormValues>;
 };
 
