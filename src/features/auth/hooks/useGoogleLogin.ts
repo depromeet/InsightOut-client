@@ -1,8 +1,10 @@
+'use client';
+
 import { initializeApp } from 'firebase/app';
 import { GoogleAuthProvider, getAuth, signInWithPopup } from 'firebase/auth';
 import { AxiosError } from 'axios';
 import authApi from '@/apis/auth';
-import { useIsSignedIn } from '../store';
+import { useAuthActions, useIsSignedIn } from '../store';
 import instance from '@/apis';
 
 const firebaseConfig = {
@@ -21,6 +23,7 @@ const provider = new GoogleAuthProvider();
 
 const useGoogleLogin = () => {
   const isSignedIn = useIsSignedIn();
+  const { setIsSignedIn } = useAuthActions();
 
   const signIn = async () => {
     const response = await signInWithPopup(auth, provider);
@@ -28,8 +31,9 @@ const useGoogleLogin = () => {
 
     try {
       const response = await authApi.signIn(idToken);
-      const accessToken = response.data.data.accessToken;
+      const accessToken = response.accessToken;
       instance.defaults.headers['Authorization'] = `Bearer ${accessToken}`;
+      setIsSignedIn(true);
     } catch (error) {
       if (error instanceof AxiosError) {
         console.error(error);
