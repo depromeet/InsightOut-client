@@ -2,11 +2,12 @@ import Link from 'next/link';
 
 import { tw } from '@/shared/utils/tailwindMerge';
 import { ROUTES } from '@/shared/constants/routes';
-import { QuestionData } from '@/shared/@types/data/question';
 
 import ActionList from '@/components/ActionList/ActionList';
 import IconMoreVertical from '@/components/Icon/IconMoreVertical';
 import IconDocument from '@/components/Icon/IconDocument';
+
+import { QuestionData } from '../../../../types/question';
 
 type ResumeQuestionProps = QuestionData & {
   active?: boolean;

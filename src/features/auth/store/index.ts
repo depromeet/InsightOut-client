@@ -1,6 +1,6 @@
 /* eslint-disable unused-imports/no-unused-vars */
 import { create } from 'zustand';
-import { AuthState } from '../types';
+import { AuthState } from '../types/store';
 
 const useAuthStore = create<AuthState>((set) => ({
   isSignedIn: false,
