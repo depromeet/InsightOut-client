@@ -10,7 +10,7 @@ const Template = ({ children }: { children: React.ReactNode }) => {
   const currentPath = usePathname();
 
   return (
-    <div>
+    <div className="min-w-[1200px]">
       <div className="flex flex-row gap-5">
         {COLLECTION_TABS.map(({ title, pathname, count }) => (
           <Tab
