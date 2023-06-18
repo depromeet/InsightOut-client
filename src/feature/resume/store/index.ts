@@ -1,8 +1,8 @@
 import { create } from 'zustand';
 
-import { ReusmeStore } from '../types/store';
+import { QuestionStore } from '../types/store';
 
-export const useResumeStore = create<ReusmeStore>((set) => ({
+export const useQuestionStore = create<QuestionStore>((set) => ({
   title: '',
   answer: '',
   actions: {
@@ -11,7 +11,7 @@ export const useResumeStore = create<ReusmeStore>((set) => ({
   },
 }));
 
-export const useTitle = () => useResumeStore((state) => state.title);
-export const useAnswer = () => useResumeStore((state) => state.answer);
+export const useTitle = () => useQuestionStore((state) => state.title);
+export const useAnswer = () => useQuestionStore((state) => state.answer);
 
-export const useResumeActions = () => useResumeStore((state) => state.actions);
+export const useQuestionActions = () => useQuestionStore((state) => state.actions);
