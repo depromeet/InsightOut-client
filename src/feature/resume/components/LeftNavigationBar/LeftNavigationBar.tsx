@@ -1,12 +1,12 @@
 'use client';
 
-import { ResumeData } from '@/shared/@types/data/resume';
-
 import Button from '@/components/Button/Button';
 import IconPencil from '@/components/Icon/IconPencil';
 
 import Resume from './Resume/Resume';
 import ResumeListContainer from './Resume/ResumeListContainer';
+
+import { ResumeData } from '../../types/resume';
 
 type LeftNavigationBarProps = { resumeList: ResumeData[] };
 

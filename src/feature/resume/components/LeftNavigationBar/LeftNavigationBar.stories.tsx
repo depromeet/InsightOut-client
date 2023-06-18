@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import LeftNavigationBar from './LeftNavigationBar';
 
 const meta: Meta<typeof LeftNavigationBar> = {
-  title: 'Components/LNB/LeftNavigationBar',
+  title: 'Resume/LNB/LeftNavigationBar',
   component: LeftNavigationBar,
 };
 
