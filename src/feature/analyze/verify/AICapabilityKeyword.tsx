@@ -1,7 +1,7 @@
 import React from 'react';
 import Tag from '@/components/Tag/Tag';
-import { renderRecommendKeyword } from '@/app/analyze/verify/page';
 import { AlertCircleLine } from '@/components/Icon';
+import RecommendKeyword from './RecommendKeyword';
 
 interface Props {
   recommendKeywordList: string[];
@@ -13,7 +13,7 @@ const AICapabilityKeyword = ({ recommendKeywordList }: Props) => {
       <div className="w-[132px] h-[132px] mb-[7px]">132x132 img or lottie</div>
       <div className="h6 break-keep mb-[16px]">
         잠깐, OOO님! <br />
-        직무역량 키워드에 {renderRecommendKeyword(recommendKeywordList)}을 추가해보면 어때요?
+        직무역량 키워드에 <RecommendKeyword keywordList={recommendKeywordList} />을 추가해보면 어때요?
       </div>
       <p className="b1 mb-[24px]">
         올때메로나님의 경험을 AI가 분석한 결과 창의력과 협동력 역량을 추천하고 싶어요! 개발자, 기획자를 비롯해 여러

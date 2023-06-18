@@ -6,20 +6,11 @@ import TextAreaField from '@/components/Input/TextAreaField/TextAreaField';
 import SelectedKeywordContainer from '@/feature/analyze/verify/SelectedKeywordContainer';
 import Tag from '@/components/Tag/Tag';
 import AICapabilityKeyword from '@/feature/analyze/verify/AICapabilityKeyword';
+import RecommendKeyword from '@/feature/analyze/verify/RecommendKeyword';
 
 const keywordList = ['도전정신', '추진력', '혁신사고력'];
 
 const recommendKeywordList = ['창의력', '협동력'];
-
-export const renderRecommendKeyword = (arr: string[]) => {
-  if (arr.length === 1) return <span className="text-secondary-500">{arr[0]}</span>;
-  return (
-    <span>
-      <span className="text-secondary-500">{arr[0]}</span>과&nbsp;
-      <span className="text-secondary-500">{arr[1]}</span>
-    </span>
-  );
-};
 
 const Verify = () => {
   return (
@@ -50,7 +41,7 @@ const Verify = () => {
       <QuestionCard
         title={
           <div className="h6">
-            {renderRecommendKeyword(recommendKeywordList)}을 활용해
+            <RecommendKeyword keywordList={recommendKeywordList} />을 활용해
             <br />
             이렇게 자기소개서를 써보는건 어떨까요?
           </div>
