@@ -1,3 +1,4 @@
+import { useParams } from 'next/navigation';
 import { AccordionItem, AccordionPanel } from '@chakra-ui/react';
 
 import { colors } from '@/styles/theme/foundations/colors';
@@ -8,7 +9,9 @@ import QuestionAddButton from './ResumeItem/QuestionAddButton';
 
 import { ResumeData } from '../../../types/resume';
 
-const Resume = ({ resume: { title, questions } }: { resume: ResumeData }) => {
+const Resume = ({ title, questions }: ResumeData) => {
+  const { questionId } = useParams();
+
   const handleAddQuestionButtonClick = () => {
     /** POST 요청 */
   };
@@ -20,7 +23,7 @@ const Resume = ({ resume: { title, questions } }: { resume: ResumeData }) => {
         <ul>
           {questions.map((question) => (
             <li key={question.id}>
-              <Question active {...question} />
+              <Question active={+questionId === question.id} {...question} />
             </li>
           ))}
         </ul>
