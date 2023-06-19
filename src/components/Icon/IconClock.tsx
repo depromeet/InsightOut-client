@@ -18,7 +18,7 @@ const IconClock = ({ className, ...props }: ComponentProps<'svg'>) => (
       strokeLinecap="round"
       strokeLinejoin="round"
     />
-    <path d="M12 8.5V12.5L8.5 14" stroke="#525463" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M12 8.5V12.5L8.5 14" stroke="#525463" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
   </svg>
 );
 
