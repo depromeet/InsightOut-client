@@ -298,10 +298,6 @@ const Page = () => {
     setFilterByTime((filterByTime) => !filterByTime);
   };
 
-  const changeCapacityId = (selectedId: number) => {
-    setSelectedCapacityId(selectedId);
-  };
-
   const getFilterExperiencesBySelecedId = (experiences: Experience[], selectedCapacityId: number) => {
     return selectedCapacityId === 0
       ? experiences
@@ -326,7 +322,7 @@ const Page = () => {
                     {addPlusMarkOver99(count)}
                   </Badge>
                 }
-                onClick={() => changeCapacityId(id)}>
+                onClick={() => setSelectedCapacityId(id)}>
                 {keyword}
               </Chip>
             </li>
