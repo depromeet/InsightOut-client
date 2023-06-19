@@ -7,6 +7,7 @@ import { LayoutProps } from './layout';
 import Button from '@/components/Button/Button';
 import { ROUTES } from '@/shared/constants/routes';
 import { usePathname, useRouter } from 'next/navigation';
+import Stepper from '@/components/Stepper/Stepper';
 
 const Template = ({ children }: LayoutProps) => {
   const pathname = usePathname();
@@ -27,7 +28,9 @@ const Template = ({ children }: LayoutProps) => {
 
   return (
     <>
-      <div className="experience h-[250px] px-[90.5px] py-[85px] mb-[32px]">{/** stepper */}</div>
+      <div className="experience px-[90.5px] py-[40px] mb-[32px]">
+        <Stepper />
+      </div>
       <div className="flex flex-row">
         <div className="min-w-[770px] mr-[46px] mb-[32px]">
           {children}
