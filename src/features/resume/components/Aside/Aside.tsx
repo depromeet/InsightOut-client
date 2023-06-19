@@ -6,14 +6,15 @@ import IconPencil from '@/components/Icon/IconPencil';
 import Resume from './Resume/Resume';
 import ResumeListContainer from './Resume/ResumeListContainer';
 
-import { ResumeData } from '../../types/resume';
+import useGetResumes from '../../apis/hooks/resume/useGetResumes';
+import useCreateResume from '../../apis/hooks/resume/useCreateResume';
 
-type AsideProps = { resumeList: ResumeData[] };
+const Aside = () => {
+  const { mutate: createResume } = useCreateResume();
+  const { data: resumeList } = useGetResumes();
 
-const Aside = ({ resumeList }: AsideProps) => {
   const handleAddFolderButtonClick = () => {
-    /** TODO:POST 요청
-     */
+    createResume();
   };
 
   return (
@@ -28,8 +29,8 @@ const Aside = ({ resumeList }: AsideProps) => {
         </Button>
       </header>
       <ResumeListContainer>
-        {resumeList.map((resume) => (
-          <Resume key={resume.id} resume={resume} />
+        {resumeList?.map((resume) => (
+          <Resume key={resume.id} {...resume} />
         ))}
       </ResumeListContainer>
     </aside>
