@@ -9,7 +9,7 @@ import QuestionAddButton from './ResumeItem/QuestionAddButton';
 
 import { ResumeData } from '../../../types/resume';
 
-const Resume = ({ title, questions }: ResumeData) => {
+const Resume = ({ id, title, questions }: ResumeData) => {
   const { questionId } = useParams();
 
   const handleAddQuestionButtonClick = () => {
@@ -18,7 +18,7 @@ const Resume = ({ title, questions }: ResumeData) => {
 
   return (
     <AccordionItem borderEndWidth={0} borderWidth={0} borderRadius="10px" backgroundColor={colors.white}>
-      <Title title={title} />
+      <Title resumeId={id} title={title} />
       <AccordionPanel display="flex" flexDirection="column" paddingX="0px" paddingY="8px">
         <ul>
           {questions.map((question) => (
