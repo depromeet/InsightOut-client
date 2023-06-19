@@ -52,8 +52,10 @@ const Page = () => {
     };
   };
 
+  const shownCapabilities: Capacity[] = [getAllCapacityBadgeItem(capabilities), ...capabilities];
+
   const [filterByTime, setFilterByTime] = useState(false);
-  const [selectedCapacity, setselectedCapacity] = useState('전체');
+  const [selectedCapacityId, setSelectedCapacityId] = useState(shownCapabilities[0].id);
 
   // TODO: 경험카드 스키마 전달 받고 적용
   const experiences: Experience[] = [
@@ -292,27 +294,39 @@ const Page = () => {
     },
   ];
 
-  const handleTimeSortOnClick = () => {
+  const handleTimeSortClick = () => {
     setFilterByTime((filterByTime) => !filterByTime);
   };
 
-  const showncapabilities: Capacity[] = [getAllCapacityBadgeItem(capabilities), ...capabilities];
+  const changeCapacityId = (selectedId: number) => {
+    setSelectedCapacityId(selectedId);
+  };
+
+  const getFilterExperiencesBySelecedId = (experiences: Experience[], selectedCapacityId: number) => {
+    return selectedCapacityId === 0
+      ? experiences
+      : experiences.filter((experience) =>
+          experience.capabilities.find((capacity) => capacity.id === selectedCapacityId)
+        );
+  };
+
+  const filteredExperiences = getFilterExperiencesBySelecedId(experiences, selectedCapacityId);
 
   return (
     <>
       <section className="flex flex-row justify-between items-center my-[24px]">
         <nav className="flex flex-row gap-[8px]">
-          {showncapabilities.map(({ id, keyword, count }) => (
-            // TODO: Chip & Badge 컴포넌트 varient 수정해야함
+          {shownCapabilities.map(({ id, keyword, count }) => (
             <li key={id} className="list-none">
               <Chip
                 size="M"
-                variant={selectedCapacity === keyword ? 'secondary-pressed' : 'secondary'}
+                variant={selectedCapacityId === id ? 'secondary-pressed' : 'secondary'}
                 badge={
                   <Badge variant="gray100-outline" size="S">
                     {addPlusMarkOver99(count)}
                   </Badge>
-                }>
+                }
+                onClick={() => changeCapacityId(id)}>
                 {keyword}
               </Chip>
             </li>
@@ -320,14 +334,14 @@ const Page = () => {
         </nav>
         <div>
           {/* TODO: TextButton Svg 색상 처리 필요 */}
-          <TextButton size="L" leftIcon={<IconClock className="fill-none" />} onClick={handleTimeSortOnClick}>
+          <TextButton size="L" leftIcon={<IconClock className="fill-none" />} onClick={handleTimeSortClick}>
             {EXPERIENCE_FILTER_BY_TIME[+filterByTime]}
           </TextButton>
         </div>
       </section>
       <section className="mt-[24px]">
         <ul className="grid grid-cols-3 gap-[16px]">
-          {experiences.map((experience: Experience) => (
+          {filteredExperiences.map((experience: Experience) => (
             <li key={experience.id}>
               <ExperienceCard {...experience} />
             </li>
