@@ -8,6 +8,7 @@ import Button from '@/components/Button/Button';
 import { ROUTES } from '@/shared/constants/routes';
 import { usePathname, useRouter } from 'next/navigation';
 import Stepper from '@/components/Stepper/Stepper';
+import Lottie from '@/components/Lottie/Lottie';
 
 const Template = ({ children }: LayoutProps) => {
   const pathname = usePathname();
@@ -53,7 +54,11 @@ const Template = ({ children }: LayoutProps) => {
             )}
           </div>
         </div>
-        <div className="experience mb-[16px] px-[14px] py-[32px] h-[500px] top-[88px] sticky">{/** aside */}</div>
+        <div className="experience flex justify-center mb-[16px] px-[14px] py-[32px] h-[500px] top-[88px] sticky">
+          <div className="w-[200px]">
+            <Lottie src="/lotties/lumos-smiling.json" />
+          </div>
+        </div>
       </div>
     </>
   );
