@@ -11,6 +11,7 @@ export interface Experience {
   title: string;
   startDate: string;
   endDate: string;
+  updatedAt: string;
   experienceStatus: 'INPROGRESS' | 'DONE'; // boolean으로 수정하는건 어떨까?
   situation?: string;
   task?: string;
