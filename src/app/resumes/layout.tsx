@@ -1,6 +1,6 @@
 import { PropsWithChildren } from 'react';
 
-import LeftNavigationBar from '@/feature/resume/components/LeftNavigationBar/LeftNavigationBar';
+import Aside from '@/features/resume/components/Aside/Aside';
 
 const Layout = ({ children }: PropsWithChildren) => {
   /** TODO: fetch('/resumes') */
@@ -23,7 +23,7 @@ const Layout = ({ children }: PropsWithChildren) => {
 
   return (
     <div className="flex h-full bg-gray-50">
-      <LeftNavigationBar resumeList={demoResponse} />
+      <Aside resumeList={demoResponse} />
       <div className="mx-[10px] mt-[19px]">{children}</div>
       <div className="mx-[10px] mt-[19px]">
         <section className="flex flex-col min-w-[699px] border-[1px] border-primary-100 shadow-toast rounded-3xl bg-white">

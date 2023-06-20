@@ -1,4 +1,4 @@
-import ResumeForm from '@/feature/resume/components/ResumeForm/ResumeForm';
+import ResumeForm from '@/features/resume/components/ResumeForm/ResumeForm';
 
 const Page = () => {
   /** FIXME: GET /resumes/questions/${questionId} */

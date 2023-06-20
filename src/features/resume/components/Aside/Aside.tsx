@@ -8,16 +8,16 @@ import ResumeListContainer from './Resume/ResumeListContainer';
 
 import { ResumeData } from '../../types/resume';
 
-type LeftNavigationBarProps = { resumeList: ResumeData[] };
+type AsideProps = { resumeList: ResumeData[] };
 
-const LeftNavigationBar = ({ resumeList }: LeftNavigationBarProps) => {
+const Aside = ({ resumeList }: AsideProps) => {
   const handleAddFolderButtonClick = () => {
     /** TODO:POST 요청
      */
   };
 
   return (
-    <nav className="min-w-[363px] py-12 px-[30px]">
+    <aside className="min-w-[363px] py-12 px-[30px]">
       <header className="flex items-center justify-between mb-7">
         <h1 className="flex gap-[6px] subhead1">
           <IconPencil />
@@ -32,8 +32,8 @@ const LeftNavigationBar = ({ resumeList }: LeftNavigationBarProps) => {
           <Resume key={resume.id} resume={resume} />
         ))}
       </ResumeListContainer>
-    </nav>
+    </aside>
   );
 };
 
-export default LeftNavigationBar;
+export default Aside;
