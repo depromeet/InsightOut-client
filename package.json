@@ -12,7 +12,8 @@
     "build-storybook": "storybook build",
     "chromatic": "bash ./scripts/chromatic_publish.sh",
     "test": "jest",
-    "test:all": "jest --watchAll"
+    "test:all": "jest --watchAll",
+    "icon": "npx @svgr/cli --out-dir src/components/Icon --typescript --ignore-existing public/icons"
   },
   "dependencies": {
     "@chakra-ui/react": "^2.6.1",
