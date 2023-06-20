@@ -9,10 +9,20 @@ import { ROUTES } from '@/shared/constants/routes';
 import { usePathname, useRouter } from 'next/navigation';
 import Stepper from '@/components/Stepper/Stepper';
 import Lottie from '@/components/Lottie/Lottie';
+import { STEPS } from '@/feature/analyze/constants';
+import TooltipRelativeContent from '@/components/Tooltip/TooltipRelativeContent';
 
 const Template = ({ children }: LayoutProps) => {
   const pathname = usePathname();
   const { back } = useRouter();
+  const tooltipIndex = (STEPS.find((v) => v.route === pathname)?.id ?? 1) - 1;
+
+  const TOOLTIP_CONTENTS = [
+    <>OOO님 좋은 시작이에요</>,
+    <>뭐든지 시작이 반이에요</>,
+    <>내용을 풍부하게 작성할수록 다양한 AI 직무 역량 키워드를 받을 수 있어요 최선을 다해 작성해주세요 :)</>,
+    <>AI 직무역량 키워드 추천을 통해 나의 직무역량을 다각도로 넓혀보세요</>,
+  ];
 
   const handleNextButton = () => {
     switch (pathname) {
@@ -54,7 +64,15 @@ const Template = ({ children }: LayoutProps) => {
             )}
           </div>
         </div>
-        <div className="experience flex justify-center mb-[16px] px-[14px] py-[32px] h-[500px] top-[88px] sticky">
+        <div className="experience flex flex-col items-center mb-[16px] px-[14px] py-[32px] h-[500px] top-[88px] sticky">
+          <div className="mb-[8px]">
+            <TooltipRelativeContent
+              type="primary"
+              position="center-top"
+              content={TOOLTIP_CONTENTS[tooltipIndex]}
+              isOpen
+            />
+          </div>
           <div className="w-[200px]">
             <Lottie src="/lotties/lumos-smiling.json" />
           </div>
