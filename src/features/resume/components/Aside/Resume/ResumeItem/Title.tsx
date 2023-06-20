@@ -63,7 +63,9 @@ const Title = ({ title = '자기소개서 예시', selected }: TitleProps) => {
             className="px-1 border-[1px] border-gray-400 text-sub max-w-[170px]"
           />
         ) : (
-          <span className="overflow-hidden font-semibold sub text-ellipsis whitespace-nowrap">{title}</span>
+          <span className="max-w-[170px] overflow-hidden font-semibold sub text-ellipsis whitespace-nowrap">
+            {title}
+          </span>
         )}
       </AccordionButton>
 
