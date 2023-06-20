@@ -55,7 +55,7 @@ const Page = () => {
       updatedAt: '2023-04-01T00:00:00.000Z',
       experienceStatus: 'INPROGRESS',
       situation: '개발자와 협업 역량을 쌓기 위해 IT 동아리에 들어감 개발자와 협업 역량을 쌓기 위해 IT 동아리에 들어감',
-      summary: ['경험요약1', '경험요약2'],
+      summaries: ['경험요약1', '경험요약2'],
       capabilities: [
         {
           isAi: false,
@@ -92,7 +92,7 @@ const Page = () => {
       updatedAt: '2023-04-02T00:00:00.000Z',
       experienceStatus: 'INPROGRESS',
       situation: '개발자와 협업 역량을 쌓기 위해 IT 동아리에 들어감',
-      summary: ['경험요약1', '경험요약2'],
+      summaries: ['경험요약1', '경험요약2'],
       capabilities: [
         {
           isAi: false,
@@ -124,7 +124,7 @@ const Page = () => {
       updatedAt: '2023-04-03T00:00:00.000Z',
       experienceStatus: 'INPROGRESS',
       situation: '개발자와 협업 역량을 쌓기 위해 IT 동아리에 들어감',
-      summary: ['경험요약1', '경험요약2'],
+      summaries: ['경험요약1', '경험요약2'],
       capabilities: [
         {
           isAi: false,
@@ -146,7 +146,7 @@ const Page = () => {
       updatedAt: '2023-04-04T00:00:00.000Z',
       experienceStatus: 'DONE',
       situation: '개발자와 협업 역량을 쌓기 위해 IT 동아리에 들어감',
-      summary: ['경험요약1', '경험요약2'],
+      summaries: ['경험요약1', '경험요약2'],
       capabilities: [
         {
           isAi: false,
@@ -173,7 +173,7 @@ const Page = () => {
       updatedAt: '2023-04-05T00:00:00.000Z',
       experienceStatus: 'DONE',
       situation: '개발자와 협업 역량을 쌓기 위해 IT 동아리에 들어감',
-      summary: ['경험요약1', '경험요약2'],
+      summaries: ['경험요약1', '경험요약2'],
       capabilities: [
         {
           isAi: false,
@@ -200,7 +200,7 @@ const Page = () => {
       updatedAt: '2023-04-06T00:00:00.000Z',
       experienceStatus: 'INPROGRESS',
       situation: '개발자와 협업 역량을 쌓기 위해 IT 동아리에 들어감',
-      summary: ['경험요약1', '경험요약2'],
+      summaries: ['경험요약1', '경험요약2'],
       capabilities: [
         {
           isAi: false,
@@ -232,7 +232,7 @@ const Page = () => {
       updatedAt: '2023-04-07T00:00:00.000Z',
       experienceStatus: 'INPROGRESS',
       situation: '개발자와 협업 역량을 쌓기 위해 IT 동아리에 들어감',
-      summary: ['경험요약1', '경험요약2'],
+      summaries: ['경험요약1', '경험요약2'],
       capabilities: [
         {
           isAi: false,
@@ -264,7 +264,7 @@ const Page = () => {
       updatedAt: '2023-04-08T00:00:00.000Z',
       experienceStatus: 'INPROGRESS',
       situation: '개발자와 협업 역량을 쌓기 위해 IT 동아리에 들어감 개발자와 협업 역량을 쌓기 위해 IT 동아리에 들어감',
-      summary: ['경험요약1', '경험요약2'],
+      summaries: ['경험요약1', '경험요약2'],
       capabilities: [
         {
           isAi: false,

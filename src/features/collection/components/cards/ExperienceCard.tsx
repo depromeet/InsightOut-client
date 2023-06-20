@@ -1,3 +1,5 @@
+'use client';
+
 import Image from 'next/image';
 import cardImage from '../../../../../public/images/card1.png';
 import Badge from '@/components/Badge/Badge';
@@ -10,13 +12,14 @@ import Modal from '@/components/Modal/Modal';
 import { useDisclosure } from '@chakra-ui/react';
 import ModalHeader from '@/components/Modal/ModalHeader';
 import ModalFooter from '@/components/Modal/ModalFooter';
+import ExperienceModalCard from './ExperienceModalCard';
 
 type Props = Experience;
 
 const ExperienceCard = ({
   id,
   experienceStatus,
-  summary,
+  summaries,
   startDate,
   endDate,
   title,
@@ -24,9 +27,21 @@ const ExperienceCard = ({
   capabilities,
 }: Props) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const {
+    isOpen: isOpenExperienceCardModal,
+    onOpen: onOpenExperienceCardModal,
+    onClose: onCloseExperienceCardModal,
+  } = useDisclosure();
+
+  const experiencePeriod = getExperiencePeriod(startDate, endDate);
   return (
     <>
-      <section className="w-[389px] p-[24px] border border-gray-300 rounded-[24px] hover:border-gray-400 hover:shadow-S4">
+      <section
+        className="w-[389px] p-[24px] border border-gray-300 rounded-[24px] hover:border-gray-400 hover:shadow-S4"
+        onClick={() => {
+          console.log('test');
+          onOpenExperienceCardModal();
+        }}>
         <div className="relative w-[341px] h-[345px] bg-black rounded-[16px]">
           {/* 카드 이미지 */}
           <div className="w-[341px] h-[345px] flex items-center justify-center">
@@ -52,15 +67,15 @@ const ExperienceCard = ({
           </ActionList>
           {/* 카드 키워드 */}
           <div className="flex flex-row gap-[12px] absolute bottom-[16px] left-[16px]">
-            {summary.map((item, index) => (
-              <Tag variant="gray800" size="M" key={`${id}-${index}-${item}`}>
-                {item}
+            {summaries.map((summary, index) => (
+              <Tag variant="gray800" size="M" key={`${id}-${index}-${summary}`}>
+                {summary}
               </Tag>
             ))}
           </div>
         </div>
         <div className="mt-[24px] flex flex-col">
-          <span className="b1 mb-[2px]">{getExperiencePeriod(startDate, endDate)}</span>
+          <span className="b1 mb-[2px]">{experiencePeriod}</span>
           <h5 className="h5 mb-[8px]">{title}</h5>
           <p className="b2 line-clamp-1">{situation}</p>
         </div>
@@ -110,6 +125,14 @@ const ExperienceCard = ({
           }}
         />
       </Modal>
+      <ExperienceModalCard
+        isOpen={isOpenExperienceCardModal}
+        onClose={onCloseExperienceCardModal}
+        period={experiencePeriod}
+        title={title}
+        summaries={summaries}
+        capabilities={capabilities}
+      />
     </>
   );
 };

@@ -17,6 +17,6 @@ export interface Experience {
   task?: string;
   action?: string;
   result?: string;
-  summary: string[];
+  summaries: string[];
   capabilities: Omit<Capacity, 'count'>[];
 }
