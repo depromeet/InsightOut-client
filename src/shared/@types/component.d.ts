@@ -36,7 +36,7 @@ type BadgeSize = 'S' | 'M' | 'L';
 
 // Tooltip
 
-type TooltipType = 'strong' | 'light';
+type TooltipType = 'strong' | 'light' | 'primary';
 type TooltipPosition =
   | 'center-top'
   | 'center-bottom'
