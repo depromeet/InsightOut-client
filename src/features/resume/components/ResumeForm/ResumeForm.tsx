@@ -9,14 +9,14 @@ import { TextLengthMessage } from '@/components/Input/TextLengthMessage';
 import Button from '@/components/Button/Button';
 import SavingCaption from './SavingCaption';
 
-import { useTitle, useAnswer, useResumeActions } from '../../store';
+import { useTitle, useAnswer, useQuestionActions } from '../../store';
 import { QuestionData } from '../../types/question';
 
 const ResumeForm = ({ id, title: initialTitle, answer: initialAnswer, updatedAt }: QuestionData) => {
   /** TODO: props로 전달받은 title, answer 값으로 초기화 */
   const title = useTitle();
   const answer = useAnswer();
-  const { setTitle, setAnswer } = useResumeActions();
+  const { setTitle, setAnswer } = useQuestionActions();
 
   const titleTextareaRef = useRef<HTMLTextAreaElement>(null);
 

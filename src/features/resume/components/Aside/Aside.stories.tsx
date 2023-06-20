@@ -1,18 +1,18 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import LeftNavigationBar from './LeftNavigationBar';
+import Aside from './Aside';
 
-const meta: Meta<typeof LeftNavigationBar> = {
-  title: 'Resume/LNB/LeftNavigationBar',
-  component: LeftNavigationBar,
+const meta: Meta<typeof Aside> = {
+  title: 'Resume/Aside/Aside',
+  component: Aside,
 };
 
 export default meta;
 
-type Story = StoryObj<typeof LeftNavigationBar>;
+type Story = StoryObj<typeof Aside>;
 
 export const Default: Story = {
-  render: (args) => <LeftNavigationBar {...args} />,
+  render: (args) => <Aside {...args} />,
   args: {
     resumeList: [
       {
