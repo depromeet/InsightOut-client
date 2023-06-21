@@ -4,3 +4,12 @@ export interface QuestionData {
   answer: string;
   updatedAt: string;
 }
+
+export interface SpellCheckData {
+  id: number;
+  error: string;
+  correct: string;
+  errorContext: string;
+}
+
+export type SpellCheckResultStatus = 'idle' | 'loading' | 'success' | 'error';
