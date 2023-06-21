@@ -1,3 +1,4 @@
+import IconCheckCircle from '@/components/Icon/IconCheckCircle';
 import { SpellCheckResultStatus } from '../../types/question';
 import SpellErrorResult from './SpellErrorResult';
 
@@ -11,8 +12,9 @@ const SpellCheckTitle = ({ status }: SpellCheckTitleProps) => {
   return (
     <div className="px-[24px] py-[20px] text-main">
       {status === 'success' ? (
-        <span className="b2">
-          맞춤법 검사 오류가 <span className="b1">0개</span> 발견되었습니다.
+        <span className="flex items-center b2">
+          <IconCheckCircle className="mx-[6px]" />
+          맞춤법 검사 오류가 <span className="b1">&nbsp;0개&nbsp;</span> 발견되었습니다.
         </span>
       ) : (
         <span className="b1">맞춤법 검사</span>

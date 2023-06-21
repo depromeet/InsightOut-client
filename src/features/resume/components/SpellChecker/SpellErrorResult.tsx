@@ -2,6 +2,7 @@ import { Accordion, AccordionItem, AccordionIcon, AccordionButton, AccordionPane
 
 import { textStyles } from '@/styles/theme/foundations/textStyles';
 import { colors } from '@/styles/theme/foundations/colors';
+import { AlertCircleLine, IconCheckLine, IconXLine } from '@/components/Icon';
 
 import { SpellCheckData } from '../../types/question';
 import { useSpellErrors, useAnswer, useQuestionActions } from '../../store';
@@ -39,7 +40,7 @@ const SpellErrorResult = () => {
             borderColor={colors.gray[100]}
             _hover={{ backgroundColor: 'none' }}>
             <AccordionIcon />
-            {/* FIXME: 아이콘 추가 */}
+            <AlertCircleLine className="mx-[6px] fill-error [&>path]:stroke-white" />
             맞춤법 검사 오류가<span className="b1">&nbsp;{spellErrors.length}개&nbsp;</span> 발견되었습니다.
           </AccordionButton>
         </h2>
@@ -52,9 +53,12 @@ const SpellErrorResult = () => {
                   <span className="text-success">&nbsp;{correct}</span>
                 </Flex>
                 <Flex gap={'20px'}>
-                  {/* FIXME: 아이콘 추가 */}
-                  <button onClick={() => handleDeleteErrorButtonClick(id)}>X</button>
-                  <button onClick={() => handleFixErrorButtonClick(id)}>O</button>
+                  <button onClick={() => handleDeleteErrorButtonClick(id)}>
+                    <IconXLine />
+                  </button>
+                  <button onClick={() => handleFixErrorButtonClick(id)}>
+                    <IconCheckLine />
+                  </button>
                 </Flex>
               </li>
             ))}
