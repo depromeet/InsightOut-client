@@ -11,6 +11,7 @@ const md = defineStyle({
 });
 const experienceModalCard = defineStyle({
   w: '1149px',
+  h: '936px',
 });
 
 const sizes = {
