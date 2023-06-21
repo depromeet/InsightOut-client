@@ -1,7 +1,7 @@
 // Base
 
 .common {
-  @apply flex justify-center items-center py-[12px] px-[16px] rounded-[8px] font-normal text-[16px] leading-[27px];
+  @apply flex justify-center items-center py-[12px] px-[16px] rounded-[8px] b1;
 }
 
 .root {
@@ -9,7 +9,7 @@
 }
 
 .root-relative {
-  @apply relative common;
+  @apply relative flex justify-center items-center py-[12px] px-[16px] b1 rounded-[16px];
 }
 
 // Type
