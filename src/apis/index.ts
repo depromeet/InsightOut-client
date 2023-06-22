@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import authApi from './auth';
 import { HTTP_BASE_URL, HTTP_STATUS_CODE } from '@/shared/constants/http';
 
@@ -8,8 +8,8 @@ const instance = axios.create({
 });
 
 instance.interceptors.response.use(
-  (response) => {
-    return response;
+  (response: AxiosResponse) => {
+    return response.data.data;
   },
   async (error) => {
     const { data, config: originalRequest } = error.response;
@@ -18,9 +18,7 @@ instance.interceptors.response.use(
      * @description Access Token이 만료될 경우 Refresh Token으로 재발급합니다.
      */
     if (data.statusCode === HTTP_STATUS_CODE.UNAUTHORIZED && data.message === 'Unauthorized') {
-      const response = await authApi.reIssue();
-      const accessToken = response.data.data.accessToken;
-      axios.defaults.headers['Authorization'] = `Bearer ${accessToken}`;
+      await authApi.reIssue();
       return axios(originalRequest);
     }
 
