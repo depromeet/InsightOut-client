@@ -1,16 +1,7 @@
 import isEmpty from 'lodash/isEmpty';
 import instance from '..';
 import { ExperienceParams, ExperienceResponse } from './types/experience';
-
-/**
- * @example
- * params = { last: true, capabilityId: 1, situation: true }
- * console.log(objToQueryString(params)) // 'last=true&capabilityId=1&situation=true'
- */
-const objToQueryString = (obj: Object) =>
-  Object.entries(obj)
-    .map((param) => param.join('='))
-    .join('&');
+import { objToQueryString } from '@/shared/utils/objToQueryString';
 
 const experienceApi = {
   get: async (params: ExperienceParams['get']) => {
