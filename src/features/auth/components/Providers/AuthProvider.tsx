@@ -21,9 +21,10 @@ export default function AuthProvider({ children }: StrictPropsWithChildren) {
      */
     if (isTokenRequired) {
       router.replace('/');
+      setIsRequesting(false);
       return;
     }
-  }, [isSignedIn, isTokenRequired, router]);
+  }, [isSignedIn, isTokenRequired, router, setIsRequesting]);
 
   useEffect(() => {
     if (isSignedIn) return;
