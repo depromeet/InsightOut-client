@@ -1,3 +1,5 @@
+'use client';
+
 import { initializeApp } from 'firebase/app';
 import { GoogleAuthProvider, getAuth, signInWithPopup } from 'firebase/auth';
 import authApi from '@/apis/auth';

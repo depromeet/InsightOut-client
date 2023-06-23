@@ -1,4 +1,4 @@
-import { ExperienceFormValues } from './analyze.types';
+import { ExperienceFormValues } from '../types';
 
 export const initialValue: ExperienceFormValues = {
   experienceId: null,
@@ -12,5 +12,4 @@ export const initialValue: ExperienceFormValues = {
   action: '',
   result: '',
   experienceStatus: 'INPROGRESS',
-  utilization: '',
 };
