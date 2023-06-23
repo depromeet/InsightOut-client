@@ -13,7 +13,7 @@
     "chromatic": "bash ./scripts/chromatic_publish.sh",
     "test": "jest",
     "test:all": "jest --watchAll",
-    "icon": "npx @svgr/cli --out-dir src/components/Icon --typescript --ignore-existing public/icons"
+    "icon": "npx @svgr/cli --out-dir src/components/Icon --typescript --ignore-existing public/icons --no-index --jsx-runtime=automatic"
   },
   "dependencies": {
     "@chakra-ui/react": "^2.6.1",
