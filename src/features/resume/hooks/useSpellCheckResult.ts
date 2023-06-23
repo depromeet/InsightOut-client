@@ -16,7 +16,7 @@ import { useQuestionActions } from '../store';
  * - error: 맞춤법 오류가 있는 경우
  */
 const useSpellCheckResult = (serverState: MutationStatus, spellErrors: SpellCheckData[]) => {
-  const [spellCheckResult, setSpellCheckResult] = useState<SpellCheckResult>();
+  const [spellCheckResult, setSpellCheckResult] = useState<SpellCheckResult>('idle');
   const { setIsEditMode, setSpellErrors } = useQuestionActions();
 
   useEffect(() => {
