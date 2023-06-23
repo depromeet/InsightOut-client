@@ -12,7 +12,7 @@ export default function AuthProvider({ children }: StrictPropsWithChildren) {
   const router = useRouter();
   const isSignedIn = useIsSignedIn();
   const isTokenRequired = useIsTokenRequired();
-  const { setIsSignedIn, setIsTokenRequired } = useAuthActions();
+  const { setIsSignedIn, setIsTokenRequired, setIsRequesting } = useAuthActions();
 
   useEffect(() => {
     if (isSignedIn) return;
@@ -34,6 +34,7 @@ export default function AuthProvider({ children }: StrictPropsWithChildren) {
          * Access Token이 존재하지 않을 경우 재발급
          */
         await authApi.reIssue();
+        setIsRequesting(false);
         setIsSignedIn(true);
       } catch (error) {
         if (isAxiosError(error)) {
@@ -41,7 +42,7 @@ export default function AuthProvider({ children }: StrictPropsWithChildren) {
           const statusCode = err.response?.status as number;
           const errorData = err.response?.data.data;
           const title = errorData?.title as string;
-
+          setIsRequesting(false);
           /**
            * Refresh Token이 만료되었거나 모든 토큰이 존재하지 않을 경우 홈으로 리다이렉트
            */
@@ -51,7 +52,7 @@ export default function AuthProvider({ children }: StrictPropsWithChildren) {
         }
       }
     })();
-  }, [isSignedIn, setIsSignedIn, setIsTokenRequired]);
+  }, [isSignedIn, setIsRequesting, setIsSignedIn, setIsTokenRequired]);
 
   return <>{children}</>;
 }

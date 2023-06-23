@@ -12,6 +12,7 @@ export interface AuthActions {
    * 토큰이 필요한지 여부를 설정하는 함수
    */
   setIsTokenRequired: (value: boolean) => void;
+  setIsRequesting: (value: boolean) => void;
 }
 
 /**
@@ -26,6 +27,7 @@ export interface AuthState {
    * 로그인 되어있는지 여부
    */
   isSignedIn: boolean;
+  isRequesting: boolean;
   /**
    * Action 함수
    */
