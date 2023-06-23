@@ -1,3 +1,4 @@
+import { authStore } from '@/features/auth/store';
 import axios, { AxiosResponse } from 'axios';
 import authApi from './auth';
 import { HTTP_BASE_URL } from '@/shared/constants/http';
@@ -14,25 +15,26 @@ instance.interceptors.response.use(
   },
   async (error) => {
     const { data, config: originalRequest } = error.response;
-    const [statusCode, title, message] = [data.statusCode, data.data.title, data.data.message];
+    const [statusCode, title] = [data.statusCode, data.data.title];
 
     /**
-     * @description Access Token이 만료될 경우 Refresh Token으로 재발급합니다.
+     * @description Access Token이 만료될 경우 Refresh Token으로 재발급하여 api 요청을 그대로 진행
      */
-    if (isAccessTokenExpired(statusCode, title, message)) {
+    if (isAccessTokenExpired(statusCode, title)) {
       await authApi.reIssue();
       return axios(originalRequest);
     }
 
     /**
-     * @description Refresh Token까지 만료될 경우 로그인 화면으로 이동합니다.
+     * @description Refresh Token까지 만료되거나 토큰이 존재하지 않을 경우 로그인 화면으로 리다이렉트
      */
-    if (isRefreshTokenExpired(statusCode, title, message) || isTokenNotExist(statusCode, title, message)) {
-      if (typeof window !== 'undefined') {
-        window.location.href = '/';
-      }
-      return Promise.reject(error);
+    if (isRefreshTokenExpired(statusCode, title) || isTokenNotExist(statusCode, title)) {
+      const { setIsTokenRequired, setIsSignedIn } = authStore.getState().actions;
+      setIsTokenRequired(true);
+      setIsSignedIn(false);
     }
+
+    return Promise.reject(error);
   }
 );
 
