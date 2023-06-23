@@ -1,6 +1,6 @@
 import { authStore } from '@/features/auth/store';
 import axios, { AxiosResponse } from 'axios';
-import authApi from './auth';
+import authApi from './auth/auth';
 import { HTTP_BASE_URL } from '@/shared/constants/http';
 import { isAccessTokenExpired, isRefreshTokenExpired, isTokenNotExist } from '@/shared/utils/http';
 

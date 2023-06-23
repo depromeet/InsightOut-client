@@ -2,7 +2,7 @@
 
 import { useEffect } from 'react';
 import { useAuthActions, useIsSignedIn, useIsTokenRequired } from '@/features/auth/store';
-import authApi from '@/apis/auth';
+import authApi from '@/apis/auth/auth';
 import { useRouter } from 'next/navigation';
 import { isAxiosError } from 'axios';
 import { InsightOutResponseError } from '@/shared/@types/data/api';
