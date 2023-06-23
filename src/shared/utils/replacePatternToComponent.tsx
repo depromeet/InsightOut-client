@@ -17,8 +17,7 @@ const replacePatternToComponent = (text: string, pattern: RegExp, Component: Ele
   if (splitText.length <= 1 || !matches) return text;
 
   return splitText.reduce(
-    (arr, element, index) =>
-      // @ts-expect-error NOTE:JSXElement가 요소에 포함
+    (arr: (string | JSX.Element)[], element, index) =>
       matches[index]
         ? [...arr, element, <Component key={`${matches[index]}`}>{matches[index]}</Component>]
         : [...arr, element],
