@@ -4,7 +4,6 @@ import localFont from 'next/font/local';
 import classNames from 'classnames';
 import TanstackQueryProvider from '@/components/Providers/TanstackQueryProvider';
 import ChakraUIProvider from '@/components/Providers/ChakraProvider';
-import AuthProvider from '@/features/auth/components/Providers/AuthProvider';
 
 export const metadata = {
   title: 'Create Next App',
@@ -19,9 +18,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
         suppressContentEditableWarning
         suppressHydrationWarning>
         <TanstackQueryProvider>
-          <ChakraUIProvider>
-            <AuthProvider>{children}</AuthProvider>
-          </ChakraUIProvider>
+          <ChakraUIProvider>{children}</ChakraUIProvider>
         </TanstackQueryProvider>
       </body>
     </html>
