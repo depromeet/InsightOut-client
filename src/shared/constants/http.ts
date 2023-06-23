@@ -10,3 +10,18 @@ export const HTTP_STATUS_CODE = {
   BAD_GATEWAY: 502,
   GATEWAY_TIMEOUT: 504,
 } as const;
+
+export const HTTP_RESPONSE_ERROR_DATA = {
+  ACCESS_TOKEN_EXPIRED: {
+    TITLE: 'AccessTokenExpired',
+    MESSAGE: 'AccessToken expired',
+  },
+  REFRESH_TOKEN_EXPIRED: {
+    TITLE: 'RefreshTokenExpired',
+    MESSAGE: 'RefreshToken expired',
+  },
+  TOKEN_NOT_EXIST: {
+    TITLE: 'NoAuthTokenException',
+    MESSAGE: 'No Auth Token Exception',
+  },
+} as const;
