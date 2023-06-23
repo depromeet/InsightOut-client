@@ -10,7 +10,7 @@ import { useQuestionActions } from '../store';
  * @param serverState tanstack query가 반환하는 status 값
  * @param spellErrors 서버로부터 응답 받은 맞춤법 오류 결과
  *
- * @returns 맞춤법 결과 상태 - loading | success | loading
+ * @returns 맞춤법 결과 상태 - loading | success | error
  * - loading: 서버에서 응답을 기다리고 있는 상태
  * - success: 맞춤법 오류가 없는 경우
  * - error: 맞춤법 오류가 있는 경우
