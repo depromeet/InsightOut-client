@@ -4,7 +4,7 @@ import Resume from './Resume';
 import ResumeContainer from './ResumeListContainer';
 
 const meta: Meta<typeof Resume> = {
-  title: 'Resume/LNB/Resume',
+  title: 'Resume/Aside/Resume',
   component: Resume,
 };
 
