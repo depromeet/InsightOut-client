@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { MutationStatus } from '@tanstack/react-query';
 
-import { SpellCheckData, SpellCheckResultStatus } from '../types/question';
+import { SpellCheckData, SpellCheckResult } from '../types/question';
 import { useQuestionActions } from '../store';
 
 /**
@@ -16,15 +16,15 @@ import { useQuestionActions } from '../store';
  * - error: 맞춤법 오류가 있는 경우
  */
 const useSpellCheckResult = (serverState: MutationStatus, spellErrors: SpellCheckData[]) => {
-  const [resultStatus, setResultStatus] = useState<SpellCheckResultStatus>(serverState);
+  const [spellCheckResult, setSpellCheckResult] = useState<SpellCheckResult>();
   const { setIsEditMode, setSpellErrors } = useQuestionActions();
 
   useEffect(() => {
-    if (serverState === 'loading') setResultStatus('loading');
+    if (serverState === 'idle' || serverState === 'loading') setSpellCheckResult(serverState);
     if (serverState === 'success') {
-      if (spellErrors.length === 0) setResultStatus('success');
+      if (spellErrors.length === 0) setSpellCheckResult('correct');
       else {
-        setResultStatus('error');
+        setSpellCheckResult('error');
         setIsEditMode(false);
         setSpellErrors(spellErrors);
       }
@@ -32,8 +32,8 @@ const useSpellCheckResult = (serverState: MutationStatus, spellErrors: SpellChec
   }, [serverState, spellErrors]);
 
   return {
-    resultStatus,
-    setResultStatus,
+    spellCheckResult,
+    setSpellCheckResult,
   };
 };
 

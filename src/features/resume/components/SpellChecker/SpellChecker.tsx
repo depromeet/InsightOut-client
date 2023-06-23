@@ -88,7 +88,7 @@ const SpellChecker = ({ status = demoStatus, result = demoData }: SpellCheckerPr
   const answer = useAnswer();
   const { setIsEditMode } = useQuestionActions();
 
-  const { resultStatus, setResultStatus } = useSpellCheckResult(status, result);
+  const { spellCheckResult, setSpellCheckResult } = useSpellCheckResult(status, result);
 
   const buttonContent = {
     idle: '검사하기',
@@ -101,22 +101,24 @@ const SpellChecker = ({ status = demoStatus, result = demoData }: SpellCheckerPr
   const handleSpellCheckButtonClick = () => {};
 
   const handleResetButtonClick = () => {
-    setResultStatus('idle');
+    setSpellCheckResult('idle');
     setIsEditMode(true);
   };
 
   return (
     <SpellCheckContainer>
-      <SpellCheckTitle status={resultStatus} />
+      <SpellCheckTitle status={spellCheckResult} />
       <Button
         type="button"
         variant="outlined"
         size="M"
         disabled={!!answer}
-        onClick={resultStatus === 'idle' ? handleSpellCheckButtonClick : handleResetButtonClick}
-        onlyIcon={resultStatus === 'loading' && <Spinner width="24px" height="24px" />}
+        onClick={spellCheckResult === 'idle' ? handleSpellCheckButtonClick : handleResetButtonClick}
+        onlyIcon={spellCheckResult === 'loading' && <Spinner width="24px" height="24px" />}
         leftIcon={
-          (resultStatus === 'success' || resultStatus === 'error') && <IconReset className="[&>path]:!fill-none" />
+          (spellCheckResult === 'correct' || spellCheckResult === 'error') && (
+            <IconReset className="[&>path]:!fill-none" />
+          )
         }
         className="absolute right-[24px] top-[15px] min-w-[71px]">
         {buttonContent[status]}

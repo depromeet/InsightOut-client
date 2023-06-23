@@ -12,4 +12,4 @@ export interface SpellCheckData {
   errorContext: string;
 }
 
-export type SpellCheckResultStatus = 'idle' | 'loading' | 'success' | 'error';
+export type SpellCheckResult = 'idle' | 'loading' | 'correct' | 'error';
