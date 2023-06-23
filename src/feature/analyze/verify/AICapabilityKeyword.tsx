@@ -1,6 +1,6 @@
 import React from 'react';
 import Tag from '@/components/Tag/Tag';
-import { AlertCircleLine } from '@/components/Icon';
+import AlertCircleLine from '@/components/Icon/AlertCircleLine';
 import RecommendKeyword from './RecommendKeyword';
 
 interface Props {

@@ -2,7 +2,9 @@ import { Accordion, AccordionItem, AccordionIcon, AccordionButton, AccordionPane
 
 import { textStyles } from '@/styles/theme/foundations/textStyles';
 import { colors } from '@/styles/theme/foundations/colors';
-import { AlertCircleLine, IconCheckLine, IconXLine } from '@/components/Icon';
+import AlertCircleLine from '@/components/Icon/AlertCircleLine';
+import IconCheckLine from '@/components/Icon/IconCheckLine';
+import IconXLine from '@/components/Icon/IconXLine';
 
 import { SpellCheckData } from '../../types/question';
 import { useSpellErrors, useAnswer, useQuestionActions } from '../../store';
