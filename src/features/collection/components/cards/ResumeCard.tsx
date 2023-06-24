@@ -6,6 +6,8 @@ import ModalHeader from '@/components/Modal/ModalHeader';
 import formatUpdatedAt from '@/shared/utils/formatUpdateAt';
 import { useDisclosure } from '@chakra-ui/react';
 import { useRef } from 'react';
+import ResumeAnswerModalCard from './ResumeAnswerModalCard';
+import { ANSWER_MAX_LENGTH } from '../../constants';
 
 type Props = {
   updatedAt: string;
@@ -14,15 +16,19 @@ type Props = {
 };
 
 const ResumeCard = ({ updatedAt, title, answer }: Props) => {
-  const MAX_LENGTH = 2000;
   const answerTextareaRef = useRef<HTMLTextAreaElement>(null);
 
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const {
+    isOpen: isOpenResumeAnswerModalCard,
+    onOpen: onOpenResumeAnswerModalCard,
+    onClose: onCloseResumeAnswerModalCard,
+  } = useDisclosure();
   // TODO: line-clamp 커스텀
 
   return (
     <>
-      <div className="border rounded-[24px] hover:shadow-S4 p-[24px]">
+      <div className="border rounded-[24px] hover:shadow-S4 p-[24px]" onClick={onOpenResumeAnswerModalCard}>
         <header className="relative mb-[16px]">
           {/* 액션버튼 */}
           <b className="b4 mb-[5px]">{formatUpdatedAt(updatedAt)}</b>
@@ -45,7 +51,7 @@ const ResumeCard = ({ updatedAt, title, answer }: Props) => {
         </div>
         <footer className="flex flex-row-reverse mt-[8px] ">
           <b className="b3 text-light">
-            <span className="text-secondary-500">{answer.length}자</span>/{MAX_LENGTH}자
+            <span className="text-secondary-500">{answer.length}자</span>/{ANSWER_MAX_LENGTH}자
           </b>
         </footer>
       </div>
@@ -63,6 +69,13 @@ const ResumeCard = ({ updatedAt, title, answer }: Props) => {
           }}
         />
       </Modal>
+      <ResumeAnswerModalCard
+        isOpen={isOpenResumeAnswerModalCard}
+        onClose={onCloseResumeAnswerModalCard}
+        title={title}
+        updatedAt={updatedAt}
+        answer={answer}
+      />
     </>
   );
 };
