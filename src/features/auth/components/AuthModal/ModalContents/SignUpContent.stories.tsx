@@ -13,7 +13,7 @@ type Story = StoryObj<typeof SignUpContents>;
 
 export const _SignUpContents: Story = {
   render: () => (
-    <Modal isOpen onClose={emptyFunction}>
+    <Modal size={'2xl'} isOpen onClose={emptyFunction}>
       <SignUpContents signIn={emptyFunction} />
     </Modal>
   ),
