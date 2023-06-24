@@ -7,7 +7,7 @@ const Page = () => {
   return (
     <>
       <div className="flex flex-col gap-4 p-10">
-        <TextAreaField placeholder="ex.개발자와 협업 역량을 쌓기 위해 it 동아리에 들어감" />
+        <TextAreaField autoSize placeholder="ex.개발자와 협업 역량을 쌓기 위해 it 동아리에 들어감" />
         <TextAreaField value="ex.개발자와 협업 역량을 쌓기 위해 it 동아리에 들어감" />
         <TextAreaField maxLength={100} placeholder="ex.개발자와 협업 역량을 쌓기 위해 it 동아리에 들어감" />
         <TextAreaField disabled placeholder="ex.개발자와 협업 역량을 쌓기 위해 it 동아리에 들어감" />
