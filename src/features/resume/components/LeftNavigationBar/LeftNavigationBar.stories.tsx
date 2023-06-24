@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-
-import Aside from './Aside';
+import Aside from '../Aside/Aside';
 
 const meta: Meta<typeof Aside> = {
   title: 'Resume/Aside/Aside',
