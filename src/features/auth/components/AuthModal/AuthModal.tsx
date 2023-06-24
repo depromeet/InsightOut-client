@@ -1,4 +1,6 @@
 import Modal from '@/components/Modal/Modal';
+import { useSearchParams } from 'next/navigation';
+import SignUpContents from './ModalContents/SignUpContents';
 
 type AuthModalProps = {
   isOpen: boolean;
@@ -7,9 +9,20 @@ type AuthModalProps = {
 };
 
 const AuthModal = ({ isOpen, handleClose, signIn }: AuthModalProps) => {
+  const searchParams = useSearchParams();
+
+  const renderContents = () => {
+    const steps = searchParams.get('steps');
+
+    switch (steps) {
+      case 'signUp':
+        return <SignUpContents signIn={signIn} />;
+    }
+  };
+
   return (
     <Modal size="2xl" isOpen={isOpen} onClose={handleClose}>
-      {/* 컨텐츠 */}
+      {renderContents()}
     </Modal>
   );
 };
