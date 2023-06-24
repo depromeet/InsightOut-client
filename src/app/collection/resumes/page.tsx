@@ -59,16 +59,16 @@ const Page = () => {
     },
   ];
 
-  const [selectedResumeId, setselectedResumeId] = useState(resumes[0].id);
+  const [selectedResumeId, setSelectedResumeId] = useState(resumes[0].id);
 
-  const handleResumeTitleClick = () => {};
+  const changeResumeId = (id: number) => setSelectedResumeId(id);
 
   return (
     <>
       {/* 자기소개서 제목 목록 */}
       <section className="flex flex-row gap-[8px] my-[24px]">
         {resumes.map(({ id, title }) => (
-          <li key={id} className="list-none" onClick={handleResumeTitleClick}>
+          <li key={id} className="list-none" onClick={() => changeResumeId(id)}>
             <Chip size="M" variant={selectedResumeId === id ? 'secondary-pressed' : 'secondary'}>
               {title}
             </Chip>
