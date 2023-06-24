@@ -1,12 +1,12 @@
 'use client';
 
 import React from 'react';
+import Link from 'next/link';
+import { Route } from 'next';
 import { LayoutProps } from './layout';
 import Button from '@/components/Button/Button';
 import { ROUTES } from '@/shared/constants/routes';
 import { usePathname, useRouter } from 'next/navigation';
-import Link from 'next/link';
-import { Route } from 'next';
 
 const Template = ({ children }: LayoutProps) => {
   const pathname = usePathname();
@@ -15,13 +15,11 @@ const Template = ({ children }: LayoutProps) => {
   const handleNextButton = () => {
     switch (pathname) {
       case ROUTES.EXPERIENCE:
-        return ROUTES.INFORMATION;
-      case ROUTES.INFORMATION:
         return ROUTES.KEYWORD;
       case ROUTES.KEYWORD:
+        return ROUTES.INFORMATION;
+      case ROUTES.INFORMATION:
         return ROUTES.VERIFY;
-      case ROUTES.VERIFY:
-        return ROUTES.COMPLETE;
       default:
         return ROUTES.EXPERIENCE;
     }
@@ -35,18 +33,24 @@ const Template = ({ children }: LayoutProps) => {
           {children}
           <div className="flex-center mt-[32px] gap-[12px]">
             {pathname === ROUTES.EXPERIENCE ? null : (
-              <Button variant="gray200" size="XL" onClick={back}>
+              <Button type="button" variant="gray200" size="XL" onClick={back}>
                 이전으로
               </Button>
             )}
-            <Link href={handleNextButton() as Route}>
-              <Button variant="gray900" size="XL">
-                {pathname === ROUTES.VERIFY ? '경험카드 만들기' : '다음으로'}
+            {pathname === ROUTES.VERIFY ? (
+              <Button type="submit" variant="gray900" size="XL">
+                경험카드 만들기
               </Button>
-            </Link>
+            ) : (
+              <Link href={handleNextButton() as Route}>
+                <Button type="button" variant="gray900" size="XL">
+                  다음으로
+                </Button>
+              </Link>
+            )}
           </div>
         </div>
-        <div className="experience mb-[16px] px-[14px] py-[32px] h-[500px] top-[32px] sticky">{/** aside */}</div>
+        <div className="experience mb-[16px] px-[14px] py-[32px] h-[500px] top-[88px] sticky">{/** aside */}</div>
       </div>
     </>
   );

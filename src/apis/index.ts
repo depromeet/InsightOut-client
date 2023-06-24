@@ -1,39 +1,40 @@
-import axios from 'axios';
-import authApi from './auth';
+import { authStore } from '@/features/auth/store';
+import axios, { AxiosResponse } from 'axios';
+import authApi from './auth/auth';
+import { HTTP_BASE_URL } from '@/shared/constants/http';
+import { isAccessTokenExpired, isRefreshTokenExpired, isTokenNotExist } from '@/shared/utils/http';
 
-/**
- * @description CORS 등의 이슈로 인해 로컬 서버 주소로 임시 대체합니다.
- */
 const instance = axios.create({
-  baseURL: 'http://dev.insightout.kr/api',
-  // baseURL: 'http://localhost:8080',
+  baseURL: HTTP_BASE_URL,
   withCredentials: true,
 });
 
 instance.interceptors.response.use(
-  (response) => {
-    return response;
+  (response: AxiosResponse) => {
+    return response.data.data;
   },
   async (error) => {
     const { data, config: originalRequest } = error.response;
+    const [statusCode, title] = [data.statusCode, data.data.title];
 
     /**
-     * @description Access Token이 만료될 경우 Refresh Token으로 재발급합니다.
+     * @description Access Token이 만료될 경우 Refresh Token으로 재발급하여 api 요청을 그대로 진행
      */
-    if (data.statusCode === 401 && data.message === 'Unauthorized') {
-      const response = await authApi.reIssue();
-      const accessToken = response.data.accessToken;
-      axios.defaults.headers['Authorization'] = `Bearer ${accessToken}`;
+    if (isAccessTokenExpired(statusCode, title)) {
+      await authApi.reIssue();
       return axios(originalRequest);
     }
 
     /**
-     * @description Refresh Token까지 만료될 경우 로그인 화면으로 이동합니다.
+     * @description Refresh Token까지 만료되거나 토큰이 존재하지 않을 경우 로그인 화면으로 리다이렉트
      */
-    if (data.statusCode === 401 && data.message === '적절하지 않은 요청입니다.') {
-      // window.location.href = '/signin';
-      return Promise.reject(error);
+    if (isRefreshTokenExpired(statusCode, title) || isTokenNotExist(statusCode, title)) {
+      const { setIsTokenRequired, setIsSignedIn } = authStore.getState().actions;
+      setIsTokenRequired(true);
+      setIsSignedIn(false);
     }
+
+    return Promise.reject(error);
   }
 );
 

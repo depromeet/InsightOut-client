@@ -154,23 +154,24 @@
 }
 
 // Icon Color
-.gray900 path {
+
+.gray900:not(.preserve-original-icon-color) path {
   @apply fill-white;
 }
 
-.primary path {
+.primary:not(.preserve-original-icon-color) path {
   @apply fill-white;
 }
 
-.gray200 path {
+.gray200:not(.preserve-original-icon-color) path {
   @apply fill-main;
 }
 
-.secondary path {
+.secondary:not(.preserve-original-icon-color) path {
   @apply fill-main;
 }
 
-.outlined path {
+.outlined:not(.preserve-original-icon-color) path {
   @apply fill-primary-500;
 }
 
