@@ -6,6 +6,8 @@ import authApi from '@/apis/auth/auth';
 import { useAuthActions, useIsSignedIn } from '../store';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+import { UserInfo } from '@/shared/store/types/user';
+import { useUserActions } from '@/shared/store/user';
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -24,6 +26,7 @@ const provider = new GoogleAuthProvider();
 const useGoogleLogin = () => {
   const isSignedIn = useIsSignedIn();
   const { setIsSignedIn, setIsTokenRequired } = useAuthActions();
+  const { setUserInfo } = useUserActions();
   const router = useRouter();
   const [googleIdToken, setGoogleIdToken] = useState<string>('');
 
@@ -31,8 +34,13 @@ const useGoogleLogin = () => {
     const firebaseResponse = await signInWithPopup(auth, provider);
     const idToken = await firebaseResponse.user.getIdToken();
     setGoogleIdToken(idToken);
-    await authApi.signIn(idToken);
-    setIsSignedIn(true);
+    const response = await authApi.signIn(idToken);
+    const userInfo: UserInfo = {
+      userId: response.userId,
+      nickname: response.nickname,
+      onboarding: response.onboarding,
+    };
+    setUserInfo(userInfo);
     router.push('/?steps=welcome');
 
     // setIsSignedIn(true);
