@@ -74,7 +74,7 @@ const ExperienceModalCard = (props: Props) => {
   return (
     <Modal size="experienceModalCard" isOpen={isOpen} onClose={onClose} isCentered>
       <ModalOverlay />
-      <ModalContent bg={'none'}>
+      <ModalContent bg={'none'} shadow={'none'}>
         <Flex p={0} className="[perspective:1000px]" flexDir={'column'} justify={'flex-start'} w={1149} h={936}>
           <MotionBox
             variants={cardFlippingVariants}
@@ -82,7 +82,9 @@ const ExperienceModalCard = (props: Props) => {
             bg={'white'}
             rounded={32}>
             <ModalHeader
-              className={`w-full ${!isBack ? 'bg-gray-50' : ''} rounded-t-[32px]`}
+              className={`w-full ${!isBack ? 'bg-gray-50' : ''} rounded-t-[32px] ${
+                isBack && '[transform:rotateY(180deg)]'
+              }`}
               p={[50, 42, 40, 30]}
               m={0}>
               <div className="flex flex-row justify-between mb-[12px]">
@@ -93,7 +95,10 @@ const ExperienceModalCard = (props: Props) => {
               </div>
               <h3 className="text-left h3">{title}</h3>
             </ModalHeader>
-            <ModalBody className="flex flex-row justify-between w-full" p={50} m={0}>
+            <ModalBody
+              className={`flex flex-row justify-between w-full ${isBack && '[transform:rotateY(180deg)]'}`}
+              p={50}
+              m={0}>
               {!isBack ? (
                 <>
                   <div className="w-[560px]">
