@@ -2,12 +2,15 @@
 
 import { Modal as ModalWrapper, ModalOverlay, ModalContent, ModalCloseButton } from '@chakra-ui/react';
 import { PropsWithChildren } from 'react';
+import type { Modal as ModalWrapperType } from '@chakra-ui/react';
 
-type ModalProps = PropsWithChildren<{
-  isOpen: boolean;
-  onClose: () => void;
-  size?: 'sm' | 'md';
-}>;
+type ModalProps = MergeComponentProps<
+  typeof ModalWrapperType,
+  PropsWithChildren<{
+    isOpen: boolean;
+    onClose: () => void;
+  }>
+>;
 
 const Modal = (props: ModalProps) => {
   const { isOpen, onClose, size, children } = props;
