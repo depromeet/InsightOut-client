@@ -13,7 +13,7 @@ type Props = {
 const ResumeAnswerModalCard = (props: Props) => {
   const { isOpen, onClose, updatedAt, title, answer } = props;
   return (
-    <Modal size="experienceModalCard" isOpen={isOpen} onClose={onClose} isCentered>
+    <Modal isOpen={isOpen} onClose={onClose} isCentered>
       <ModalOverlay />
       <ModalContent w={1085} h={738} p={50} textAlign={'left'}>
         <ModalHeader className="w-full rounded-t-[24px]" m={0}>
