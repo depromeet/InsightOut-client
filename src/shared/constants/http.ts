@@ -1,4 +1,4 @@
-export const HTTP_BASE_URL = 'https://dev.insightout.kr/api';
+export const HTTP_BASE_URL = 'http://localhost:3000/api';
 
 export const HTTP_STATUS_CODE = {
   BAD_REQUEST: 400,

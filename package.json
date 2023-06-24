@@ -12,7 +12,8 @@
     "build-storybook": "storybook build",
     "chromatic": "bash ./scripts/chromatic_publish.sh",
     "test": "jest",
-    "test:all": "jest --watchAll"
+    "test:all": "jest --watchAll",
+    "icon": "npx @svgr/cli --out-dir src/components/Icon --typescript --ignore-existing public/icons"
   },
   "dependencies": {
     "@chakra-ui/react": "^2.6.1",
@@ -32,6 +33,7 @@
     "eslint-plugin-unused-imports": "^2.0.0",
     "firebase": "^9.22.1",
     "framer-motion": "^10.12.8",
+    "lodash": "^4.17.21",
     "next": "13.4.1",
     "postcss": "^8.4.24",
     "react": "18.2.0",
