@@ -11,6 +11,7 @@ import IconGoogleLogo from '../Icon/IconGoogleLogo';
 import Spinner from '../Spinner/Spinner';
 import { useAuthActions, useIsOpenSignUpModal } from '@/features/auth/store';
 import AuthModal from '@/features/auth/components/AuthModal/AuthModal';
+import { useUserInfo } from '@/shared/store/user';
 
 type GlobalNavigationBarProps = ComponentPropsWithoutRef<'header'> & {
   /**
@@ -31,6 +32,7 @@ const GlobalNavigationBar = ({ className, isSignedIn, isRequesting, signIn, ...p
   const rootClassName = tw(styles.root, className);
   const pathName = usePathname();
   const isOpenSignUpModal = useIsOpenSignUpModal();
+  const userInfo = useUserInfo();
   const { setIsOpenSignUpModal } = useAuthActions();
   const router = useRouter();
 
@@ -93,7 +95,12 @@ const GlobalNavigationBar = ({ className, isSignedIn, isRequesting, signIn, ...p
           </Button>
         )}
       </header>
-      <AuthModal isOpen={isOpenSignUpModal} handleClose={handleClickCloseButton} signIn={signIn} />
+      <AuthModal
+        nickname={userInfo.nickname}
+        isOpen={isOpenSignUpModal}
+        handleClose={handleClickCloseButton}
+        signIn={signIn}
+      />
     </>
   );
 };

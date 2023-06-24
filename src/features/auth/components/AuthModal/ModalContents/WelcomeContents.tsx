@@ -3,14 +3,15 @@ import ModalFooter from '@/components/Modal/ModalFooter';
 import ModalHeader from '@/components/Modal/ModalHeader';
 
 type WelcomeContents = {
+  nickname: string;
   onClickButton: () => void;
 };
 
-const WelcomeContents = ({ onClickButton }: WelcomeContents) => {
+const WelcomeContents = ({ nickname, onClickButton }: WelcomeContents) => {
   return (
     <>
       <ModalHeader className="whitespace-pre-line">
-        <ModalHeader.Title title={`[랜덤닉네임]님!\n 인사이트 아웃에 오신걸 환영해요`} />
+        <ModalHeader.Title title={`${nickname}님!\n 인사이트 아웃에 오신걸 환영해요`} />
       </ModalHeader>
       <div className="w-[200px] h-[200px]">
         <Lottie src="/lotties/lumos-hi.json" />
