@@ -28,7 +28,7 @@ const Aside = () => {
           자기소개서 추가
         </Button>
       </header>
-      <ResumeListContainer>
+      <ResumeListContainer expandedResumeCount={resumeList?.length}>
         {resumeList?.map((resume) => (
           <Resume key={resume.id} {...resume} />
         ))}
