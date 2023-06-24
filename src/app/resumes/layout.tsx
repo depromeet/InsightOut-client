@@ -3,20 +3,13 @@ import { PropsWithChildren } from 'react';
 import Aside from '@/features/resume/components/Aside/Aside';
 import PrefetchHydration from '@/components/tanstackQuery/PrefetchHydration';
 import resumeApi from '@/apis/resume/resume';
-import { QUERY_KEY } from '@/shared/constants/queryKey';
+import { RESUME_KEY } from '@/shared/constants/querykeys';
 
 const Layout = ({ children }: PropsWithChildren) => {
   return (
     <div className="flex h-full bg-gray-50">
       {/* @ts-expect-error Server Component */}
-      <PrefetchHydration
-        queryKey={[QUERY_KEY.resumes]}
-        queryFn={async () => {
-          const {
-            data: { data },
-          } = await resumeApi.get();
-          return data;
-        }}>
+      <PrefetchHydration queryKey={[RESUME_KEY.lists()]} queryFn={() => resumeApi.get()}>
         <Aside />
       </PrefetchHydration>
       <div className="mx-[10px] mt-[19px]">{children}</div>
