@@ -4,6 +4,8 @@ import { initializeApp } from 'firebase/app';
 import { GoogleAuthProvider, getAuth, signInWithPopup } from 'firebase/auth';
 import authApi from '@/apis/auth/auth';
 import { useAuthActions, useIsSignedIn } from '../store';
+import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -22,13 +24,19 @@ const provider = new GoogleAuthProvider();
 const useGoogleLogin = () => {
   const isSignedIn = useIsSignedIn();
   const { setIsSignedIn, setIsTokenRequired } = useAuthActions();
+  const router = useRouter();
+  const [googleIdToken, setGoogleIdToken] = useState<string>('');
 
   const signIn = async () => {
-    const response = await signInWithPopup(auth, provider);
-    const idToken = await response.user.getIdToken();
+    const firebaseResponse = await signInWithPopup(auth, provider);
+    const idToken = await firebaseResponse.user.getIdToken();
+    setGoogleIdToken(idToken);
     await authApi.signIn(idToken);
     setIsSignedIn(true);
-    setIsTokenRequired(false);
+    router.push('/?steps=welcome');
+
+    // setIsSignedIn(true);
+    // setIsTokenRequired(false);
   };
 
   const signOut = () => auth.signOut();
