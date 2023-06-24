@@ -41,8 +41,8 @@ const ExperiencePage = () => {
       setValue('startMM', startMM);
       setValue('endYYYY', endYYYY);
       setValue('endMM', endMM);
-      setValue('experienceRole', analyze.experienceInfo.experienceRole);
-      setValue('motivation', analyze.experienceInfo.motivation);
+      setValue('experienceRole', analyze.experienceInfo?.experienceRole);
+      setValue('motivation', analyze.experienceInfo?.motivation);
     }
   }, [analyze]);
 
