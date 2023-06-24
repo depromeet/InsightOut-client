@@ -1,9 +1,9 @@
-import { useState } from 'react';
 import { AccordionButton, AccordionIcon } from '@chakra-ui/react';
+import { useState } from 'react';
 
 import ActionList from '@/components/ActionList/ActionList';
-import IconMoreVertical from '@/components/Icon/IconMoreVertical';
 import IconFolder from '@/components/Icon/IconFolder';
+import IconMoreVertical from '@/components/Icon/IconMoreVertical';
 
 type TitleProps = { title: string; selected?: boolean };
 

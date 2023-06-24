@@ -1,6 +1,7 @@
 import cn from 'classnames';
-import styles from './Badge.module.scss';
 import { forwardRef } from 'react';
+
+import styles from './Badge.module.scss';
 
 type BadgeProps = MergeComponentProps<
   'div',

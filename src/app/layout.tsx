@@ -1,9 +1,11 @@
 import './globals.css';
-import { PropsWithChildren } from 'react';
-import localFont from 'next/font/local';
+
 import classNames from 'classnames';
-import TanstackQueryProvider from '@/components/Providers/TanstackQueryProvider';
+import localFont from 'next/font/local';
+import { PropsWithChildren } from 'react';
+
 import ChakraUIProvider from '@/components/Providers/ChakraProvider';
+import TanstackQueryProvider from '@/components/Providers/TanstackQueryProvider';
 
 export const metadata = {
   title: 'Create Next App',

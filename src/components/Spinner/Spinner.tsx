@@ -1,5 +1,6 @@
-import { SPINNER_SIZE, SPINNER_STYLE } from '@/shared/constants/spinner';
 import { Spinner as ChakraSpinner } from '@chakra-ui/react';
+
+import { SPINNER_SIZE, SPINNER_STYLE } from '@/shared/constants/spinner';
 
 type SpinnerProps = MergeComponentProps<
   'div',

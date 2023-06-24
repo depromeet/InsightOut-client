@@ -1,5 +1,6 @@
-import { ComponentProps } from 'react';
 import cn from 'classnames';
+import { ComponentProps } from 'react';
+
 import styles from './Tag.module.scss';
 
 interface TagProps extends Omit<ComponentProps<'span'>, 'children'> {

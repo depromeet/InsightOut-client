@@ -1,16 +1,15 @@
 'use client';
 
-import { useRef, ChangeEvent } from 'react';
+import { ChangeEvent, useRef } from 'react';
 
+import Button from '@/components/Button/Button';
+import { TextLengthMessage } from '@/components/Input/TextLengthMessage';
 import { MAX_LENGTH } from '@/shared/constants/maxLength';
 import { resizeHeight } from '@/shared/utils/autoSizeTextarea';
 
-import { TextLengthMessage } from '@/components/Input/TextLengthMessage';
-import Button from '@/components/Button/Button';
-import SavingCaption from './SavingCaption';
-
-import { useTitle, useAnswer, useQuestionActions } from '../../store';
+import { useAnswer, useQuestionActions, useTitle } from '../../store';
 import { QuestionData } from '../../types/question';
+import SavingCaption from './SavingCaption';
 
 const ResumeForm = ({ id, title: initialTitle, answer: initialAnswer, updatedAt }: QuestionData) => {
   /** TODO: props로 전달받은 title, answer 값으로 초기화 */

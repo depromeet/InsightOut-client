@@ -1,5 +1,6 @@
-import { ReactElement, forwardRef } from 'react';
 import cn from 'classnames';
+import { forwardRef, ReactElement } from 'react';
+
 import styles from './Chip.module.scss';
 
 type ChipProps = MergeComponentProps<

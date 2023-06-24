@@ -1,7 +1,8 @@
-import React, { ReactElement } from 'react';
 import cn from 'classnames';
-import styles from './Tab.module.scss';
 import Link from 'next/link';
+import React, { ReactElement } from 'react';
+
+import styles from './Tab.module.scss';
 
 type TabProps = MergeComponentProps<
   'a',

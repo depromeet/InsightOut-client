@@ -1,7 +1,8 @@
 import { Box, Flex, Heading } from '@chakra-ui/react';
-import Chip from './Chip';
 import { Meta, StoryObj } from '@storybook/react';
+
 import Badge from '../Badge/Badge';
+import Chip from './Chip';
 
 const meta = {
   title: 'Components/Chip',

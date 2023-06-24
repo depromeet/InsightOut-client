@@ -1,7 +1,8 @@
 /* eslint-disable react/display-name */
 import { ModalFooter as ModalFooterWrapper } from '@chakra-ui/react';
-import Button from '../Button/Button';
 import { PropsWithChildren } from 'react';
+
+import Button from '../Button/Button';
 
 const ModalFooter = ({ children }: PropsWithChildren) => <ModalFooterWrapper>{children}</ModalFooterWrapper>;
 

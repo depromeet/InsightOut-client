@@ -1,6 +1,7 @@
-import { cache, type PropsWithChildren } from 'react';
 import { QueryClient } from '@tanstack/query-core';
-import { QueryKey, dehydrate, type QueryFunction } from '@tanstack/react-query';
+import { dehydrate, type QueryFunction, QueryKey } from '@tanstack/react-query';
+import { cache, type PropsWithChildren } from 'react';
+
 import HydrateOnClient from './HydrateOnClient';
 
 type Props = {

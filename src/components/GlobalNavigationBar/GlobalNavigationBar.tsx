@@ -1,14 +1,16 @@
+import { Flex } from '@chakra-ui/react';
+import cn from 'classnames';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { ComponentPropsWithoutRef } from 'react';
-import { Flex } from '@chakra-ui/react';
-import cn from 'classnames';
-import { tw } from '@/shared/utils/tailwindMerge';
+
 import { ROUTES } from '@/shared/constants/routes';
-import styles from './GlobalNavigationBar.module.scss';
+import { tw } from '@/shared/utils/tailwindMerge';
+
 import Button from '../Button/Button';
 import IconGoogleLogo from '../Icon/IconGoogleLogo';
 import Spinner from '../Spinner/Spinner';
+import styles from './GlobalNavigationBar.module.scss';
 
 type GlobalNavigationBarProps = ComponentPropsWithoutRef<'header'> & {
   /**
