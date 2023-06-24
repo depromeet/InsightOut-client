@@ -9,10 +9,15 @@ const sm = defineStyle({
 const md = defineStyle({
   w: '767px',
 });
+const resume = defineStyle({
+  w: '1085px',
+  h: '735px',
+});
 
 const sizes = {
   sm: definePartsStyle({ dialog: sm }),
   md: definePartsStyle({ dialog: md }),
+  resume: definePartsStyle({ dialog: resume }),
 };
 
 const baseStyle = definePartsStyle({

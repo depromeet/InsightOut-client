@@ -1,3 +1,5 @@
+'use client';
+
 import formatUpdatedAt from '@/shared/utils/formatUpdateAt';
 import { Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, ModalOverlay } from '@chakra-ui/react';
 import { ANSWER_MAX_LENGTH } from '../../constants';
@@ -13,9 +15,9 @@ type Props = {
 const ResumeAnswerModalCard = (props: Props) => {
   const { isOpen, onClose, updatedAt, title, answer } = props;
   return (
-    <Modal isOpen={isOpen} onClose={onClose} isCentered>
+    <Modal size={'resume'} isOpen={isOpen} onClose={onClose} isCentered>
       <ModalOverlay />
-      <ModalContent w={1085} h={738} p={50} textAlign={'left'}>
+      <ModalContent p={50} textAlign={'left'}>
         <ModalHeader className="w-full rounded-t-[24px]" m={0}>
           <b className="b4 mb-[20px]">{formatUpdatedAt(updatedAt)}</b>
           {/* 자소서 문항 질문을 입력하지 않은 경우 -> ‘문항 질문을 적어보세요'로 제목이 보임 */}
