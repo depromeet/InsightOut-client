@@ -10,8 +10,10 @@ interface InsightOutResponseData<T> {
 }
 
 interface InsightOutResponseErrorData {
-  title: string;
-  message: string;
+  data: {
+    title: string;
+    message: string;
+  };
 }
 
 export type InsightOutResponse<T> = InsightOutResponseData<T>;

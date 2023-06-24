@@ -15,7 +15,7 @@ export const Default: Story = {
   render: () => {
     return (
       <div className="flex flex-col gap-4">
-        <h3>Primay-50</h3>
+        <h3>Primary-50</h3>
         <div className="flex gap-6 ">
           <Tag variant="primary50" size="S">
             여기에키워드를써요
@@ -27,7 +27,7 @@ export const Default: Story = {
             여기에키워드를써요
           </Tag>
         </div>
-        <h3>Primay-500</h3>
+        <h3>Primary-500</h3>
         <div className="flex gap-6 ">
           <Tag variant="primary500" size="S">
             여기에키워드를써요
@@ -39,7 +39,7 @@ export const Default: Story = {
             여기에키워드를써요
           </Tag>
         </div>
-        <h3>Primay-outline</h3>
+        <h3>Primary-outline</h3>
         <div className="flex gap-6 ">
           <Tag variant="primary50-outline" size="S">
             여기에키워드를써요
