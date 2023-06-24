@@ -6,7 +6,7 @@ import { Flex, Modal, ModalBody, ModalContent, ModalHeader, ModalOverlay } from 
 import Image from 'next/image';
 import { Capacity } from '../../types';
 import cardImage from '../../../../../public/images/card1.png';
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import TextAreaField from '@/components/Input/TextAreaField/TextAreaField';
 import MotionBox from './MotionBox';
 
@@ -27,14 +27,6 @@ const ExperienceModalCard = (props: Props) => {
 
   const userCapabilitis = capabilities.filter(({ isAi }) => !isAi);
   const aiCapabilitis = capabilities.filter(({ isAi }) => isAi);
-
-  const starTextareaRef = useRef<HTMLTextAreaElement>(null);
-
-  // useEffect(() => {
-  //   resizeHeight(starTextareaRef);
-  //   console.log(starTextareaRef.current?.scrollHeight);
-  //   console.log(starTextareaRef.current);
-  // }, []);
 
   const aiRecommend =
     '디자이너로서 개발팀과 각각의 전문성을 최대한 활용하여 높은 퀄리티의 앱을 만들어내기 위해 커뮤니케이션 능력을 뽐내셨군요! 빠른 기간안에 앱 서비스를 런칭해야하는 상황에서 디자인 시스템 제작, 런칭일 정해서 린하게 개발하는 방법을 제의한 것은 프로젝트 관리 능력의 일환이었습니다.';
@@ -77,6 +69,7 @@ const ExperienceModalCard = (props: Props) => {
       <ModalContent bg={'none'} shadow={'none'}>
         <Flex p={0} className="[perspective:1000px]" flexDir={'column'} justify={'flex-start'} w={1149} h={936}>
           <MotionBox
+            h={'full'}
             variants={cardFlippingVariants}
             animate={!isBack ? 'flipInitial' : 'flipEnd'}
             bg={'white'}
@@ -96,7 +89,9 @@ const ExperienceModalCard = (props: Props) => {
               <h3 className="text-left h3">{title}</h3>
             </ModalHeader>
             <ModalBody
-              className={`flex flex-row justify-between w-full ${isBack && '[transform:rotateY(180deg)]'}`}
+              className={`flex flex-row justify-between w-full ${
+                isBack && '[transform:rotateY(180deg)]'
+              } overflow-auto h-[720px]`}
               p={50}
               m={0}>
               {!isBack ? (
@@ -198,15 +193,9 @@ const ExperienceModalCard = (props: Props) => {
                           올때메로나님의 IT동아리 협업
                         </Tag>
                       </div>
-                      {/* TODO: scrollHeight에 맞게 height 조절 */}
-                      <TextAreaField
-                        ref={starTextareaRef}
-                        className={`mb-[50px] `}
-                        readOnly
-                        value={
-                          '텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요'
-                        }
-                      />
+                      <p className={`mb-[50px] bg-gray-50 p-[16px] rounded-[16px]`}>
+                        텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요
+                      </p>
                     </div>
                   </div>
                 </div>
