@@ -7,17 +7,18 @@ import WelcomeContents from './ModalContents/WelcomeContents';
 import CategoriesContents from './ModalContents/CategoriesContents';
 import { useUserInfo } from '@/shared/store/user';
 import { useState } from 'react';
+import useGoogleLogin from '../../hooks/useGoogleLogin';
 
 type AuthModalProps = {
   isOpen: boolean;
   handleClose: () => void;
-  signIn: () => void;
 };
 
-const AuthModal = ({ isOpen, handleClose, signIn }: AuthModalProps) => {
+const AuthModal = ({ isOpen, handleClose }: AuthModalProps) => {
   const searchParams = useSearchParams();
   const router = useRouter();
   const { nickname } = useUserInfo();
+  const { signIn } = useGoogleLogin();
 
   const [selectedCategory, setSelectedCategory] = useState<string>('');
 
