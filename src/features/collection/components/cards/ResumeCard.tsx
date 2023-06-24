@@ -5,7 +5,7 @@ import ModalFooter from '@/components/Modal/ModalFooter';
 import ModalHeader from '@/components/Modal/ModalHeader';
 import formatUpdatedAt from '@/shared/utils/formatUpdateAt';
 import { useDisclosure } from '@chakra-ui/react';
-import { useRef } from 'react';
+import React, { useRef } from 'react';
 import ResumeAnswerModalCard from './ResumeAnswerModalCard';
 import { ANSWER_MAX_LENGTH } from '../../constants';
 
@@ -35,7 +35,9 @@ const ResumeCard = ({ updatedAt, title, answer }: Props) => {
           {/* 자소서 문항 질문을 입력하지 않은 경우 -> ‘문항 질문을 적어보세요'로 제목이 보임 */}
           <h6 className="h6">{title}</h6>
           <ActionList>
-            <ActionList.Button className="absolute top-0 right-0">
+            <ActionList.Button
+              className="absolute top-0 right-0"
+              onClick={(e: React.MouseEvent<HTMLButtonElement>) => e.stopPropagation()}>
               <IconMoreVertical />
             </ActionList.Button>
             <ActionList.ItemWrapper>
