@@ -1,4 +1,8 @@
+import { WRITE_STATUS } from '../constants';
+
 type ExperienceStatus = 'INPROGRESS' | 'DONE';
+
+export type WriteStatusType = (typeof WRITE_STATUS)[number];
 
 export interface ExperienceFormValues {
   /**
@@ -51,6 +55,10 @@ export interface ExperienceFormValues {
    * 경험 카드 작성 상태
    */
   experienceStatus: ExperienceStatus;
+  /**
+   * 각 스텝의 작성 상태 (제출하기 전에 해당 property 삭제하고 제출하기)
+   */
+  writeStatus?: WriteStatusType[];
 }
 
 export type Keyword = Record<string, boolean>;
