@@ -1,5 +1,6 @@
-import { Accordion } from '@chakra-ui/react';
 import { PropsWithChildren } from 'react';
+
+import { Accordion } from '@chakra-ui/react';
 
 import { boxShadow } from '@/styles/theme/foundations/boxShadow';
 

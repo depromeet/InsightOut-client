@@ -1,8 +1,9 @@
 'use client';
 
-import isEmpty from 'lodash/isEmpty';
 import React from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
+
+import isEmpty from 'lodash/isEmpty';
 
 import TextAreaField from '@/components/Input/TextAreaField/TextAreaField';
 import TextField from '@/components/Input/TextField/TextField';

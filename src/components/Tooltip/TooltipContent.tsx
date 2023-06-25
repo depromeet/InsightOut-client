@@ -1,5 +1,6 @@
-import { Portal } from '@chakra-ui/react';
 import React, { forwardRef } from 'react';
+
+import { Portal } from '@chakra-ui/react';
 
 import TooltipArrow from '@/components/Tooltip/TooltipArrow';
 import { tw } from '@/shared/utils/tailwindMerge';

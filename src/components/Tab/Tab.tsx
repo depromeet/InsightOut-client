@@ -1,6 +1,7 @@
+import React, { ReactElement } from 'react';
+
 import cn from 'classnames';
 import Link from 'next/link';
-import React, { ReactElement } from 'react';
 
 import styles from './Tab.module.scss';
 

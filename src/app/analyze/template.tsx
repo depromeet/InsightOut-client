@@ -1,9 +1,10 @@
 'use client';
 
+import React from 'react';
+
 import { Route } from 'next';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
-import React from 'react';
 
 import Button from '@/components/Button/Button';
 import { ROUTES } from '@/shared/constants/routes';

@@ -1,5 +1,6 @@
-import cn from 'classnames';
 import { ComponentProps } from 'react';
+
+import cn from 'classnames';
 
 import styles from './Tag.module.scss';
 

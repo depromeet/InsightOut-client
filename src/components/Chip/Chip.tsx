@@ -1,5 +1,6 @@
-import cn from 'classnames';
 import { forwardRef, ReactElement } from 'react';
+
+import cn from 'classnames';
 
 import styles from './Chip.module.scss';
 

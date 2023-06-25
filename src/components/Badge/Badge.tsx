@@ -1,5 +1,6 @@
-import cn from 'classnames';
 import { forwardRef } from 'react';
+
+import cn from 'classnames';
 
 import styles from './Badge.module.scss';
 

@@ -1,8 +1,9 @@
+import { ComponentPropsWithoutRef } from 'react';
+
 import { Flex } from '@chakra-ui/react';
 import cn from 'classnames';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { ComponentPropsWithoutRef } from 'react';
 
 import { ROUTES } from '@/shared/constants/routes';
 import { tw } from '@/shared/utils/tailwindMerge';
