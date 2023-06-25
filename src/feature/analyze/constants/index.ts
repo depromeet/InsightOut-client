@@ -13,6 +13,7 @@ export const initialValue: ExperienceFormValues = {
   action: '',
   result: '',
   experienceStatus: 'INPROGRESS',
+  writeStatus: ['미작성', '미작성', '미작성', '미작성'],
 };
 
 export const STEP = {
@@ -44,3 +45,5 @@ export const STEPS = [
     route: ROUTES.VERIFY,
   },
 ];
+
+export const WRITE_STATUS = ['미작성', '작성중', '작성완료'] as const;
