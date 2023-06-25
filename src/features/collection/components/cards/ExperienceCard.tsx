@@ -56,7 +56,9 @@ const ExperienceCard = ({
           )}
           {/* 액션버튼 */}
           <ActionList>
-            <ActionList.Button className="absolute top-[16px] right-[16px]">
+            <ActionList.Button
+              className="absolute top-[16px] right-[16px]"
+              onClick={(e: React.MouseEvent<HTMLButtonElement>) => e.stopPropagation()}>
               <IconMoreVertical />
             </ActionList.Button>
             <ActionList.ItemWrapper>

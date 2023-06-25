@@ -9,10 +9,15 @@ const sm = defineStyle({
 const md = defineStyle({
   w: '767px',
 });
+const experienceModalCard = defineStyle({
+  w: '1149px',
+  h: '936',
+});
 
 const sizes = {
   sm: definePartsStyle({ dialog: sm }),
   md: definePartsStyle({ dialog: md }),
+  experienceModalCard: definePartsStyle({ dialog: experienceModalCard }),
 };
 
 const baseStyle = definePartsStyle({
