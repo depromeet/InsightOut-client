@@ -1,5 +1,6 @@
-import { tw } from '@/shared/utils/tailwindMerge';
 import { ComponentProps } from 'react';
+
+import { tw } from '@/shared/utils/tailwindMerge';
 
 const IconDocument = ({ className, ...props }: ComponentProps<'svg'>) => (
   <svg

@@ -1,12 +1,11 @@
 import type { Theme as ChakraTheme, ThemeConfig } from '@chakra-ui/react';
 import { extendTheme } from '@chakra-ui/react';
 
-// Global styles (overrides)
-import styles from './styles';
-
+import { modalTheme } from './components/modalTheme';
 // Foundations
 import { foundations } from './foundations';
-import { modalTheme } from './components/modalTheme';
+// Global styles (overrides)
+import styles from './styles';
 
 const config: ThemeConfig = {
   initialColorMode: 'light',

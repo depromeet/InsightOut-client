@@ -1,4 +1,5 @@
 import type { Keyword } from '@/feature/analyze/types';
+
 import instance from '..';
 import { KeywordParams } from './types/keyword';
 

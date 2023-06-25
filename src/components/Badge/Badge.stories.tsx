@@ -1,6 +1,7 @@
 import { Flex, Heading } from '@chakra-ui/react';
-import Badge from './Badge';
 import { Meta, StoryObj } from '@storybook/react';
+
+import Badge from './Badge';
 
 const meta = {
   title: 'Components/Badge',
