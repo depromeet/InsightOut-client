@@ -28,6 +28,14 @@ const nextConfig = {
 
     return config;
   },
+  async rewrites() {
+    return [
+      {
+        source: '/api/:path*',
+        destination: 'https://dev.insightout.kr/api/:path*',
+      },
+    ];
+  },
 };
 
 module.exports = nextConfig;

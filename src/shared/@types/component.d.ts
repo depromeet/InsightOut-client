@@ -68,3 +68,7 @@ type TagVariant =
   | 'gray100'
   | 'gray800';
 type TagSize = 'S' | 'M' | 'L';
+
+// Spinner
+type SpinnerStyle = 'primary500' | 'secondary500';
+type SpinnerSize = 'S' | 'M' | 'L';

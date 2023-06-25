@@ -1,7 +1,8 @@
 import { Flex, Heading } from '@chakra-ui/react';
-import Button from './Button';
 import { Meta, StoryObj } from '@storybook/react';
+
 import IconHeart from '../Icon/IconHeart';
+import Button from './Button';
 
 const meta = {
   title: 'Components/Button',

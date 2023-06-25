@@ -1,7 +1,7 @@
+import { Accordion, AccordionItem } from '@chakra-ui/react';
 import type { Meta, StoryObj } from '@storybook/react';
 
 import Title from './Title';
-import { Accordion, AccordionItem } from '@chakra-ui/react';
 
 const meta: Meta<typeof Title> = {
   title: 'Resume/Aside/ResumeItem/Title',

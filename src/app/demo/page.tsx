@@ -1,5 +1,5 @@
-import PrefetchHydration from '@/components/tanstackQuery/PrefetchHydration';
 import List from '@/components/demo/List';
+import PrefetchHydration from '@/components/tanstackQuery/PrefetchHydration';
 
 const Page = () => {
   return (

@@ -3,10 +3,9 @@
 import Button from '@/components/Button/Button';
 import IconPencil from '@/components/Icon/IconPencil';
 
+import { ResumeData } from '../../types/resume';
 import Resume from './Resume/Resume';
 import ResumeListContainer from './Resume/ResumeListContainer';
-
-import { ResumeData } from '../../types/resume';
 
 type AsideProps = { resumeList: ResumeData[] };
 

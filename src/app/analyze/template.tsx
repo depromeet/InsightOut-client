@@ -1,12 +1,15 @@
 'use client';
 
 import React from 'react';
-import Link from 'next/link';
+
 import { Route } from 'next';
-import { LayoutProps } from './layout';
+import Link from 'next/link';
+import { usePathname, useRouter } from 'next/navigation';
+
 import Button from '@/components/Button/Button';
 import { ROUTES } from '@/shared/constants/routes';
-import { usePathname, useRouter } from 'next/navigation';
+
+import { LayoutProps } from './layout';
 
 const Template = ({ children }: LayoutProps) => {
   const pathname = usePathname();
@@ -50,7 +53,7 @@ const Template = ({ children }: LayoutProps) => {
             )}
           </div>
         </div>
-        <div className="experience mb-[16px] px-[14px] py-[32px] h-[500px] top-[32px] sticky">{/** aside */}</div>
+        <div className="experience mb-[16px] px-[14px] py-[32px] h-[500px] top-[88px] sticky">{/** aside */}</div>
       </div>
     </>
   );
