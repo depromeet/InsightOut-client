@@ -1,0 +1,15 @@
+.root {
+  @apply flex justify-between px-[16px] py-[10.5px] rounded-[8px] border-[1px] w-[100%] cursor-pointer;
+}
+
+.미작성 {
+  @apply bg-gray-50 border-gray-200 [&>span]:text-light;
+}
+
+.작성중 {
+  @apply bg-primary-600 border-primary-600 [&>span]:text-white shadow-list;
+}
+
+.작성완료 {
+  @apply bg-primary-50 border-primary-100 [&>span]:text-primary-500;
+}

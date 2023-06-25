@@ -1,10 +1,13 @@
 'use client';
 
 import React from 'react';
+
+import { usePathname } from 'next/navigation';
+
+import { STEP, STEPS } from '@/feature/analyze/constants';
+
 import Tag from '../Tag/Tag';
 import ProgressBar from './ProgressBar';
-import { usePathname } from 'next/navigation';
-import { STEP, STEPS } from '@/feature/analyze/constants';
 
 const Progress = () => {
   const pathname = usePathname();
@@ -20,8 +23,6 @@ const Progress = () => {
         </Tag>
       </div>
       <ProgressBar progress={progress} />
-      <div className="bg-gray-50 w-[100%] h-[2px] rounded-[8px] my-[24px]" />
-      <span className="subhead2 mb-[24px]">작성 페이지</span>
     </div>
   );
 };

@@ -14,6 +14,7 @@ import Progress from '@/components/Progress/Progress';
 import Stepper from '@/components/Stepper/Stepper';
 import TooltipRelativeContent from '@/components/Tooltip/TooltipRelativeContent';
 import { initialValue, STEPS } from '@/feature/analyze/constants';
+import StepMenu from '@/feature/analyze/layout/StepMenu';
 import { ExperienceFormValues } from '@/feature/analyze/types';
 import { useIsMounted } from '@/hooks/useIsMounted';
 import { ROUTES } from '@/shared/constants/routes';
@@ -101,6 +102,7 @@ const Layout = ({ children }: LayoutProps) => {
                 <Lottie src="/lotties/lumos-smile.json" />
               </div>
               <Progress />
+              <StepMenu />
             </div>
           </div>
         </div>
