@@ -95,8 +95,8 @@ const Layout = ({ children }: LayoutProps) => {
                   isOpen
                 />
               </div>
-              <div className="w-[200px] h-[200px] mb-[24px]">
-                <Lottie key="asd" src="/lotties/lumos-smiling.json" />
+              <div className="w-[250px] h-[250px] mb-[24px]">
+                <Lottie src="/lotties/lumos-smile.json" />
               </div>
               <Progress />
             </div>
