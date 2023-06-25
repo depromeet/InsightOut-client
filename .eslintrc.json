@@ -9,7 +9,12 @@
       "warn",
       { "vars": "all", "varsIgnorePattern": "^_", "args": "after-used", "argsIgnorePattern": "^_" }
     ],
-    "simple-import-sort/imports": "warn",
+    "simple-import-sort/imports": [
+      "warn",
+      {
+        "groups": [["^react"], ["^@?\\w"], ["@/(.*)"], ["^[./]"]]
+      }
+    ],
     "simple-import-sort/exports": "warn"
   }
 }
