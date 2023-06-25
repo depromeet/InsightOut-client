@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { AlertCircleLine } from '@/components/Icon';
+import AlertCircleLine from '@/components/Icon/AlertCircleLine';
 import Tag from '@/components/Tag/Tag';
 
 import RecommendKeyword from './RecommendKeyword';
