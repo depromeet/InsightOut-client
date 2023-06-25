@@ -15,6 +15,7 @@ import { ExperienceFormValues } from '@/feature/analyze/types';
 import TooltipRelativeContent from '@/components/Tooltip/TooltipRelativeContent';
 import Lottie from '@/components/Lottie/Lottie';
 import Progress from '@/components/Progress/Progress';
+import StepMenu from '@/feature/analyze/layout/StepMenu';
 
 export interface LayoutProps {
   children: React.ReactNode;
@@ -99,6 +100,7 @@ const Layout = ({ children }: LayoutProps) => {
                 <Lottie src="/lotties/lumos-smile.json" />
               </div>
               <Progress />
+              <StepMenu />
             </div>
           </div>
         </div>

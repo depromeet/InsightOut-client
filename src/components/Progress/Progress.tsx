@@ -20,8 +20,6 @@ const Progress = () => {
         </Tag>
       </div>
       <ProgressBar progress={progress} />
-      <div className="bg-gray-50 w-[100%] h-[2px] rounded-[8px] my-[24px]" />
-      <span className="subhead2 mb-[24px]">작성 페이지</span>
     </div>
   );
 };
