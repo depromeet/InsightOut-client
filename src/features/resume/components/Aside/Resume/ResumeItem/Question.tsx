@@ -27,7 +27,9 @@ const ResumeQuestion = ({ id, title, active }: ResumeQuestionProps) => {
       )}>
       <Link href={`${ROUTES.RESUMES}/${id}`} className={`flex w-full b3`}>
         <IconDocument className="mr-[6px]" />
-        <span className="max-w-[217px] text-ellipsis overflow-hidden whitespace-nowrap">{title}</span>
+        <span className="max-w-[217px] text-ellipsis overflow-hidden whitespace-nowrap">
+          {title ?? '문항 질문을 적어보세요.'}
+        </span>
       </Link>
 
       <ActionList>
