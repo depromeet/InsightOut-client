@@ -1,13 +1,12 @@
-import { useParams } from 'next/navigation';
 import { AccordionItem, AccordionPanel } from '@chakra-ui/react';
+import { useParams } from 'next/navigation';
 
 import { colors } from '@/styles/theme/foundations/colors';
 
-import Title from './ResumeItem/Title';
+import { ResumeData } from '../../../types/resume';
 import Question from './ResumeItem/Question';
 import QuestionAddButton from './ResumeItem/QuestionAddButton';
-
-import { ResumeData } from '../../../types/resume';
+import Title from './ResumeItem/Title';
 
 const Resume = ({ id, title, questions }: ResumeData) => {
   const { questionId } = useParams();

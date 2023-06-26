@@ -1,9 +1,12 @@
 import React, { forwardRef } from 'react';
+
 import { Portal } from '@chakra-ui/react';
+
 import TooltipArrow from '@/components/Tooltip/TooltipArrow';
-import wrapTooltipChildren from '@/shared/utils/tooltip/wrapTooltipChildren';
-import styles from './TooltipContent.module.scss';
 import { tw } from '@/shared/utils/tailwindMerge';
+import wrapTooltipChildren from '@/shared/utils/tooltip/wrapTooltipChildren';
+
+import styles from './TooltipContent.module.scss';
 
 type TooltipProps = MergeComponentProps<
   'div',

@@ -1,11 +1,11 @@
 import { useState } from 'react';
+
 import { AccordionButton, AccordionIcon } from '@chakra-ui/react';
 
 import ActionList from '@/components/ActionList/ActionList';
-import IconMoreVertical from '@/components/Icon/IconMoreVertical';
 import IconFolder from '@/components/Icon/IconFolder';
-
-import { useUpdateResumeTitle, useDeleteResume } from '@/hooks/reactQuery/resume/mutation';
+import IconMoreVertical from '@/components/Icon/IconMoreVertical';
+import { useDeleteResume,useUpdateResumeTitle } from '@/hooks/reactQuery/resume/mutation';
 
 type TitleProps = { resumeId: number; title: string; selected?: boolean };
 

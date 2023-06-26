@@ -1,10 +1,10 @@
+import { ModalBody, useDisclosure } from '@chakra-ui/react';
 import type { Meta } from '@storybook/react';
 
-import Modal from './Modal';
 import Button from '../Button/Button';
-import { ModalBody, useDisclosure } from '@chakra-ui/react';
-import ModalHeader from './ModalHeader';
+import Modal from './Modal';
 import ModalFooter from './ModalFooter';
+import ModalHeader from './ModalHeader';
 
 const meta: Meta<typeof Modal> = {
   title: 'Components/Modal',

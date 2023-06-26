@@ -1,10 +1,12 @@
 'use client';
 
 import { useEffect } from 'react';
-import { useAuthActions, useIsSignedIn, useIsTokenRequired } from '@/features/auth/store';
-import authApi from '@/apis/auth/auth';
-import { useRouter } from 'next/navigation';
+
 import { isAxiosError } from 'axios';
+import { useRouter } from 'next/navigation';
+
+import authApi from '@/apis/auth/auth';
+import { useAuthActions, useIsSignedIn, useIsTokenRequired } from '@/features/auth/store';
 import { InsightOutResponseError } from '@/shared/@types/data/api';
 import { isRefreshTokenExpired, isTokenNotExist } from '@/shared/utils/http';
 

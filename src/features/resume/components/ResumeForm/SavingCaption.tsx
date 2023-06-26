@@ -1,6 +1,7 @@
 import { ButtonSpinner } from '@chakra-ui/react';
 
 import { colors } from '@/styles/theme/foundations/colors';
+
 import { SAVING_STATUS } from '../../constants/savingStatus';
 
 type SavingCaptionProps = { updatedAt: string; currentSavingStatus: keyof typeof SAVING_STATUS };

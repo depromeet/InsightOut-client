@@ -1,12 +1,15 @@
 'use client';
 
 import React from 'react';
-import Link from 'next/link';
+
 import { Route } from 'next';
-import { LayoutProps } from './layout';
+import Link from 'next/link';
+import { usePathname, useRouter } from 'next/navigation';
+
 import Button from '@/components/Button/Button';
 import { ROUTES } from '@/shared/constants/routes';
-import { usePathname, useRouter } from 'next/navigation';
+
+import { LayoutProps } from './layout';
 
 const Template = ({ children }: LayoutProps) => {
   const pathname = usePathname();

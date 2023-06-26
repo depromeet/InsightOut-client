@@ -1,8 +1,10 @@
 'use client';
 
 import { initializeApp } from 'firebase/app';
-import { GoogleAuthProvider, getAuth, signInWithPopup } from 'firebase/auth';
+import { getAuth, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+
 import authApi from '@/apis/auth/auth';
+
 import { useAuthActions, useIsSignedIn } from '../store';
 
 const firebaseConfig = {

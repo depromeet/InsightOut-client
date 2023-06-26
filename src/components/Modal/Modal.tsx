@@ -1,7 +1,8 @@
 'use client';
 
-import { Modal as ModalWrapper, ModalOverlay, ModalContent, ModalCloseButton } from '@chakra-ui/react';
 import { PropsWithChildren } from 'react';
+
+import { Modal as ModalWrapper, ModalCloseButton, ModalContent, ModalOverlay } from '@chakra-ui/react';
 
 type ModalProps = PropsWithChildren<{
   isOpen: boolean;

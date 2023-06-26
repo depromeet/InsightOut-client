@@ -1,5 +1,6 @@
-import instance from '..';
 import { AUTH_API } from '@/features/auth/shared/constants/api';
+
+import instance from '..';
 import { AccessToken, SignInData } from './types/auth';
 
 const authApi = {

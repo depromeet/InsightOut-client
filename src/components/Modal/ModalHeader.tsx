@@ -1,6 +1,7 @@
 /* eslint-disable react/display-name */
-import { ModalHeader as ModalHeaderWrapper } from '@chakra-ui/react';
 import { PropsWithChildren } from 'react';
+
+import { ModalHeader as ModalHeaderWrapper } from '@chakra-ui/react';
 
 const ModalHeader = ({ children }: PropsWithChildren) => <ModalHeaderWrapper>{children}</ModalHeaderWrapper>;
 
