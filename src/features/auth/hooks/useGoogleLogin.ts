@@ -7,6 +7,7 @@ import { useIsSignedIn } from '../store';
 import { useRouter } from 'next/navigation';
 import { UserInfo } from '@/shared/store/types/user';
 import { useUserActions } from '@/shared/store/user';
+import { useState } from 'react';
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -27,17 +28,25 @@ const useGoogleLogin = () => {
   const { setUserInfo } = useUserActions();
   const router = useRouter();
 
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
   const signIn = async () => {
-    const firebaseResponse = await signInWithPopup(auth, provider);
-    const idToken = await firebaseResponse.user.getIdToken();
-    const response = await authApi.signIn(idToken);
-    const userInfo: UserInfo = {
-      userId: response.userId,
-      nickname: response.nickname,
-      onboarding: response.onboarding,
-    };
-    setUserInfo(userInfo);
-    router.push('/?steps=welcome');
+    setIsLoading(true);
+    try {
+      const firebaseResponse = await signInWithPopup(auth, provider);
+      const idToken = await firebaseResponse.user.getIdToken();
+      const response = await authApi.signIn(idToken);
+      const userInfo: UserInfo = {
+        userId: response.userId,
+        nickname: response.nickname,
+        onboarding: response.onboarding,
+      };
+      setIsLoading(false);
+      setUserInfo(userInfo);
+      router.push('/?steps=welcome');
+    } catch (error) {
+      setIsLoading(false);
+    }
   };
 
   const signOut = () => auth.signOut();
@@ -46,6 +55,7 @@ const useGoogleLogin = () => {
     signIn,
     signOut,
     isSignedIn,
+    isLoading,
   };
 };
 

@@ -10,6 +10,7 @@ import { useState } from 'react';
 import useGoogleLogin from '../../hooks/useGoogleLogin';
 import StartNowContents from './ModalContents/StartNowContents';
 import { useAuthActions } from '../../store';
+import Spinner from '@/components/Spinner/Spinner';
 
 type AuthModalProps = {
   isOpen: boolean;
@@ -22,7 +23,7 @@ const AuthModal = ({ isOpen, onClose, onAbortSignUp }: AuthModalProps) => {
   const router = useRouter();
   const { nickname } = useUserInfo();
   const { setIsSignedIn, setIsTokenRequired } = useAuthActions();
-  const { signIn } = useGoogleLogin();
+  const { signIn, isLoading } = useGoogleLogin();
 
   const [selectedCategory, setSelectedCategory] = useState<string>('');
 
@@ -77,7 +78,7 @@ const AuthModal = ({ isOpen, onClose, onAbortSignUp }: AuthModalProps) => {
 
   return (
     <Modal size={modalSize()} isOpen={isOpen} onClose={handleCloseModal}>
-      {renderContents()}
+      {isLoading ? <Spinner size="L" style="primary500" /> : renderContents()}
     </Modal>
   );
 };
