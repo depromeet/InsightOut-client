@@ -13,8 +13,8 @@ import Modal from '@/components/Modal/Modal';
 import { Divider, useDisclosure } from '@chakra-ui/react';
 import ModalHeader from '@/components/Modal/ModalHeader';
 import ModalFooter from '@/components/Modal/ModalFooter';
-import ExperienceModalCard from '../ExperienceCard/ExperienceCard';
 import { Fragment } from 'react';
+import ExperienceModal from '../ExperienceCard/ExperienceModal';
 
 type Props = Experience;
 
@@ -76,7 +76,7 @@ const ExperienceListCard = ({
           }}
         />
       </Modal>
-      <ExperienceModalCard
+      <ExperienceModal
         isOpen={isOpenExperienceCardModal}
         onClose={onCloseExperienceCardModal}
         period={experiencePeriod}
