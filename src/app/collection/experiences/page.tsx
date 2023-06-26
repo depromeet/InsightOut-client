@@ -8,7 +8,9 @@ import { useState } from 'react';
 import addPlusMarkOver99 from '@/shared/utils/addPlusMarkOver99';
 import { Capacity, Experience } from '@/features/collection/types';
 import ExperienceCard from '@/features/collection/components/cards/ExperienceCard';
-import dayjs from 'dayjs';
+import getAllCapacityBadgeItem from '@/features/collection/utils/getAllCapacityBadgeItem';
+import getFilteredExperiences from '@/features/collection/utils/getFilteredExperiences';
+import getSortedExperiences from '@/features/collection/utils/getSortedExperiences';
 
 const Page = () => {
   const EXPERIENCE_FILTER_BY_TIME = ['경험시간순', '작성시간순'];
@@ -290,40 +292,19 @@ const Page = () => {
     },
   ];
 
-  const getAllCapacityBadgeItem = (target: Capacity[]): Capacity => {
-    return {
-      id: 0,
-      keyword: '전체',
-      count: target.reduce((acc, { count }) => acc + count, 0),
-    };
-  };
+  const allCapacityBadgeItem = getAllCapacityBadgeItem(capabilities);
 
-  const shownCapabilities: Capacity[] = [getAllCapacityBadgeItem(capabilities), ...capabilities];
+  const shownCapabilities: Capacity[] = [allCapacityBadgeItem, ...capabilities];
 
   const [isSortedByUpdatedAt, setIsSortedByUpdatedAt] = useState(false);
-  const [selectedCapacityId, setSelectedCapacityId] = useState(shownCapabilities[0].id);
+  const [selectedCapacityId, setSelectedCapacityId] = useState(allCapacityBadgeItem.id);
 
   const handleTimeSortClick = () => {
     setIsSortedByUpdatedAt((isSortedByUpdatedAt) => !isSortedByUpdatedAt);
   };
 
-  const getFilterExperiencesBySelecedId = (experiences: Experience[], selectedCapacityId: number) => {
-    return selectedCapacityId === 0
-      ? experiences
-      : experiences.filter((experience) =>
-          experience.capabilities.find((capacity) => capacity.id === selectedCapacityId)
-        );
-  };
-
-  const getSortedExperienceByExperienceTimeFilter = (experiences: Experience[], isSortedByUpdatedAt: boolean) =>
-    experiences.sort((a, b) => {
-      const sortedA = isSortedByUpdatedAt ? dayjs(a.updatedAt).valueOf() : dayjs(a.startDate).valueOf();
-      const sortedB = isSortedByUpdatedAt ? dayjs(b.updatedAt).valueOf() : dayjs(b.startDate).valueOf();
-      return sortedB - sortedA;
-    });
-
-  const _experiences = getFilterExperiencesBySelecedId(experiences, selectedCapacityId);
-  const __experiences = getSortedExperienceByExperienceTimeFilter(_experiences, isSortedByUpdatedAt);
+  const _experiences = getFilteredExperiences(experiences, selectedCapacityId);
+  const __experiences = getSortedExperiences(_experiences, isSortedByUpdatedAt);
 
   return (
     <>
