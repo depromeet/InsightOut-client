@@ -8,6 +8,8 @@ import CategoriesContents from './ModalContents/CategoriesContents';
 import { useUserInfo } from '@/shared/store/user';
 import { useState } from 'react';
 import useGoogleLogin from '../../hooks/useGoogleLogin';
+import StartNowContents from './ModalContents/StartNowContents';
+import emptyFunction from '@/shared/utils/emptyFunction';
 
 type AuthModalProps = {
   isOpen: boolean;
@@ -31,6 +33,7 @@ const AuthModal = ({ isOpen, handleClose }: AuthModalProps) => {
       case 'welcome':
         return 'xl';
       case 'categories':
+      case 'startnow':
         return '5xl';
     }
   };
@@ -48,10 +51,13 @@ const AuthModal = ({ isOpen, handleClose }: AuthModalProps) => {
           <CategoriesContents
             nickname={nickname}
             selectedCategory={selectedCategory}
-            onClickGoBack={() => router.back()}
+            onClickLeftButton={() => router.back()}
             onClickCategory={setSelectedCategory}
+            onClickRightButton={() => router.push('/?steps=startnow')}
           />
         );
+      case 'startnow':
+        return <StartNowContents onClickLeftButton={() => router.back()} onClickRightButton={emptyFunction} />;
     }
   };
 
