@@ -11,6 +11,7 @@ import IconGoogleLogo from '../Icon/IconGoogleLogo';
 import Spinner from '../Spinner/Spinner';
 import { useAuthActions, useIsOpenSignUpModal } from '@/features/auth/store';
 import AuthModal from '@/features/auth/components/AuthModal/AuthModal';
+import authApi from '@/apis/auth/auth';
 
 type GlobalNavigationBarProps = ComponentPropsWithoutRef<'header'> & {
   /**
@@ -38,6 +39,10 @@ const GlobalNavigationBar = ({ className, isSignedIn, isRequesting, ...props }: 
   const handleClickCloseButton = () => {
     setIsOpenSignUpModal(false);
     router.replace('/');
+  };
+
+  const handleAbortSignUp = async () => {
+    await authApi.withdraw();
   };
 
   return (
@@ -89,7 +94,7 @@ const GlobalNavigationBar = ({ className, isSignedIn, isRequesting, ...props }: 
           </Button>
         )}
       </header>
-      <AuthModal isOpen={isOpenSignUpModal} handleClose={handleClickCloseButton} />
+      <AuthModal isOpen={isOpenSignUpModal} onClose={handleClickCloseButton} onAbortSignUp={handleAbortSignUp} />
     </>
   );
 };

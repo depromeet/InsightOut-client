@@ -13,16 +13,23 @@ import emptyFunction from '@/shared/utils/emptyFunction';
 
 type AuthModalProps = {
   isOpen: boolean;
-  handleClose: () => void;
+  onClose: () => void;
+  onAbortSignUp: () => void;
 };
 
-const AuthModal = ({ isOpen, handleClose }: AuthModalProps) => {
+const AuthModal = ({ isOpen, onClose, onAbortSignUp }: AuthModalProps) => {
   const searchParams = useSearchParams();
   const router = useRouter();
   const { nickname } = useUserInfo();
   const { signIn } = useGoogleLogin();
 
   const [selectedCategory, setSelectedCategory] = useState<string>('');
+
+  const handleCloseModal = () => {
+    const isLastStep = !!searchParams.get('startnow');
+    if (!isLastStep) onAbortSignUp();
+    onClose();
+  };
 
   const modalSize = () => {
     const steps = searchParams.get('steps');
@@ -62,7 +69,7 @@ const AuthModal = ({ isOpen, handleClose }: AuthModalProps) => {
   };
 
   return (
-    <Modal size={modalSize()} isOpen={isOpen} onClose={handleClose}>
+    <Modal size={modalSize()} isOpen={isOpen} onClose={handleCloseModal}>
       {renderContents()}
     </Modal>
   );
