@@ -9,7 +9,7 @@ import { useUserInfo } from '@/shared/store/user';
 import { useState } from 'react';
 import useGoogleLogin from '../../hooks/useGoogleLogin';
 import StartNowContents from './ModalContents/StartNowContents';
-import emptyFunction from '@/shared/utils/emptyFunction';
+import { useAuthActions } from '../../store';
 
 type AuthModalProps = {
   isOpen: boolean;
@@ -21,6 +21,7 @@ const AuthModal = ({ isOpen, onClose, onAbortSignUp }: AuthModalProps) => {
   const searchParams = useSearchParams();
   const router = useRouter();
   const { nickname } = useUserInfo();
+  const { setIsSignedIn, setIsTokenRequired } = useAuthActions();
   const { signIn } = useGoogleLogin();
 
   const [selectedCategory, setSelectedCategory] = useState<string>('');
@@ -28,6 +29,12 @@ const AuthModal = ({ isOpen, onClose, onAbortSignUp }: AuthModalProps) => {
   const handleCloseModal = () => {
     const isLastStep = !!searchParams.get('startnow');
     if (!isLastStep) onAbortSignUp();
+    onClose();
+  };
+
+  const handleSignUpSuccess = () => {
+    setIsSignedIn(true);
+    setIsTokenRequired(false);
     onClose();
   };
 
@@ -64,7 +71,7 @@ const AuthModal = ({ isOpen, onClose, onAbortSignUp }: AuthModalProps) => {
           />
         );
       case 'startnow':
-        return <StartNowContents onClickLeftButton={() => router.back()} onClickRightButton={emptyFunction} />;
+        return <StartNowContents onClickLeftButton={() => router.back()} onClickRightButton={handleSignUpSuccess} />;
     }
   };
 
