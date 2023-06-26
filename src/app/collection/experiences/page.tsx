@@ -11,9 +11,9 @@ import ExperienceCard from '@/features/collection/components/cards/ExperienceCar
 import getAllCapacityBadgeItem from '@/features/collection/utils/getAllCapacityBadgeItem';
 import getFilteredExperiences from '@/features/collection/utils/getFilteredExperiences';
 import getSortedExperiences from '@/features/collection/utils/getSortedExperiences';
+import { EXPERIENCE_SORT_BY } from '@/features/collection/constants';
 
 const Page = () => {
-  const EXPERIENCE_FILTER_BY_TIME = ['경험시간순', '작성시간순'];
   const capabilities: Capacity[] = [
     {
       id: 1234,
@@ -296,15 +296,15 @@ const Page = () => {
 
   const shownCapabilities: Capacity[] = [allCapacityBadgeItem, ...capabilities];
 
-  const [isSortedByUpdatedAt, setIsSortedByUpdatedAt] = useState(false);
+  const [sortBy, setSortBy] = useState<keyof typeof EXPERIENCE_SORT_BY>('EXPERIENCE_TIME');
   const [selectedCapacityId, setSelectedCapacityId] = useState(allCapacityBadgeItem.id);
 
   const handleTimeSortClick = () => {
-    setIsSortedByUpdatedAt((isSortedByUpdatedAt) => !isSortedByUpdatedAt);
+    setSortBy(() => (sortBy === 'EXPERIENCE_TIME' ? 'UPDATED_AT' : 'EXPERIENCE_TIME'));
   };
 
   const _experiences = getFilteredExperiences(experiences, selectedCapacityId);
-  const __experiences = getSortedExperiences(_experiences, isSortedByUpdatedAt);
+  const __experiences = getSortedExperiences(_experiences, sortBy);
 
   return (
     <>
@@ -329,7 +329,7 @@ const Page = () => {
         <div>
           {/* TODO: TextButton Svg 색상 처리 필요 */}
           <TextButton size="L" leftIcon={<IconClock className="fill-none" />} onClick={handleTimeSortClick}>
-            {EXPERIENCE_FILTER_BY_TIME[+isSortedByUpdatedAt]}
+            {EXPERIENCE_SORT_BY[sortBy]}
           </TextButton>
         </div>
       </section>
