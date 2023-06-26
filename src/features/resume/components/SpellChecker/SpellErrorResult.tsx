@@ -1,13 +1,13 @@
-import { Accordion, AccordionItem, AccordionIcon, AccordionButton, AccordionPanel, Flex } from '@chakra-ui/react';
+import { Accordion, AccordionButton, AccordionIcon, AccordionItem, AccordionPanel, Flex } from '@chakra-ui/react';
 
-import { textStyles } from '@/styles/theme/foundations/textStyles';
-import { colors } from '@/styles/theme/foundations/colors';
 import AlertCircleLine from '@/components/Icon/AlertCircleLine';
 import IconCheckLine from '@/components/Icon/IconCheckLine';
 import IconXLine from '@/components/Icon/IconXLine';
+import { colors } from '@/styles/theme/foundations/colors';
+import { textStyles } from '@/styles/theme/foundations/textStyles';
 
+import { useAnswer, useQuestionActions, useSpellErrors } from '../../store';
 import { SpellCheckData } from '../../types/question';
-import { useSpellErrors, useAnswer, useQuestionActions } from '../../store';
 
 const SpellErrorResult = () => {
   const answer = useAnswer();
