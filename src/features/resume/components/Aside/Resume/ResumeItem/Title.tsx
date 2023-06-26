@@ -1,11 +1,13 @@
 import { useState } from 'react';
 
-import { AccordionButton, AccordionIcon } from '@chakra-ui/react';
+import { AccordionButton, AccordionIcon, useDisclosure } from '@chakra-ui/react';
 
 import ActionList from '@/components/ActionList/ActionList';
 import IconFolder from '@/components/Icon/IconFolder';
 import IconMoreVertical from '@/components/Icon/IconMoreVertical';
-import { useDeleteResume,useUpdateResumeTitle } from '@/hooks/reactQuery/resume/mutation';
+import { useDeleteResume, useUpdateResumeTitle } from '@/hooks/reactQuery/resume/mutation';
+
+import DeleteModal from '../../DeleteModal';
 
 type TitleProps = { resumeId: number; title: string; selected?: boolean };
 
@@ -22,6 +24,8 @@ type TitleProps = { resumeId: number; title: string; selected?: boolean };
  */
 const Title = ({ resumeId, title = '자기소개서 예시', selected }: TitleProps) => {
   const [isEditMode, setIsEditMode] = useState(false);
+
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   const { mutate: updateResumeTitle } = useUpdateResumeTitle(resumeId);
   const { mutate: deleteResume } = useDeleteResume();
@@ -83,9 +87,15 @@ const Title = ({ resumeId, title = '자기소개서 예시', selected }: TitlePr
         </ActionList.Button>
         <ActionList.ItemWrapper>
           <ActionList.Item onClick={handleEditButtonClick}>수정하기</ActionList.Item>
-          <ActionList.Item onClick={handleDeleteButtonClick}>삭제하기</ActionList.Item>
+          <ActionList.Item onClick={onOpen}>삭제하기</ActionList.Item>
         </ActionList.ItemWrapper>
       </ActionList>
+      <DeleteModal
+        isOpen={isOpen}
+        onClose={onClose}
+        handleLeftClick={onClose}
+        handleRightClick={handleDeleteButtonClick}
+      />
     </div>
   );
 };

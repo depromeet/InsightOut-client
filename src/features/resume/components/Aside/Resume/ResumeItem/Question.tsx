@@ -1,3 +1,4 @@
+import { useDisclosure } from '@chakra-ui/react';
 import Link from 'next/link';
 
 import ActionList from '@/components/ActionList/ActionList';
@@ -7,12 +8,15 @@ import { ROUTES } from '@/shared/constants/routes';
 import { tw } from '@/shared/utils/tailwindMerge';
 
 import { QuestionData } from '../../../../types/question';
+import DeleteModal from '../../DeleteModal';
 
 type ResumeQuestionProps = QuestionData & {
   active?: boolean;
 };
 
 const ResumeQuestion = ({ id, title, active }: ResumeQuestionProps) => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
   const handleDeleteButtonClick = () => {
     /** ConfirmModal */
     /** isConfirmed: Delete API */
@@ -37,9 +41,15 @@ const ResumeQuestion = ({ id, title, active }: ResumeQuestionProps) => {
           <IconMoreVertical />
         </ActionList.Button>
         <ActionList.ItemWrapper>
-          <ActionList.Item onClick={handleDeleteButtonClick}>삭제하기</ActionList.Item>
+          <ActionList.Item onClick={onOpen}>삭제하기</ActionList.Item>
         </ActionList.ItemWrapper>
       </ActionList>
+      <DeleteModal
+        isOpen={isOpen}
+        onClose={onClose}
+        handleLeftClick={onClose}
+        handleRightClick={handleDeleteButtonClick}
+      />
     </div>
   );
 };
