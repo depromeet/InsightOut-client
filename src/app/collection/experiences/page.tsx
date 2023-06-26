@@ -8,10 +8,10 @@ import { useState } from 'react';
 import addPlusMarkOver99 from '@/shared/utils/addPlusMarkOver99';
 import { Capacity, Experience } from '@/features/collection/types';
 import ExperienceCard from '@/features/collection/components/cards/ExperienceCard';
-import getAllCapacityBadgeItem from '@/features/collection/utils/getAllCapacityBadgeItem';
 import getFilteredExperiences from '@/features/collection/utils/getFilteredExperiences';
 import getSortedExperiences from '@/features/collection/utils/getSortedExperiences';
 import { EXPERIENCE_SORT_BY } from '@/features/collection/constants';
+import getAllCapacity from '@/features/collection/utils/getAllCapacityBadgeItem';
 
 const Page = () => {
   const capabilities: Capacity[] = [
@@ -292,18 +292,20 @@ const Page = () => {
     },
   ];
 
-  const allCapacityBadgeItem = getAllCapacityBadgeItem(capabilities);
+  const allCapacity = getAllCapacity(capabilities);
 
-  const shownCapabilities: Capacity[] = [allCapacityBadgeItem, ...capabilities];
+  const shownCapabilities: Capacity[] = [allCapacity, ...capabilities];
 
   const [sortBy, setSortBy] = useState<keyof typeof EXPERIENCE_SORT_BY>('EXPERIENCE_TIME');
-  const [selectedCapacityId, setSelectedCapacityId] = useState(allCapacityBadgeItem.id);
+  const [selectedCapacityId, setSelectedCapacityId] = useState(allCapacity.id);
 
   const handleTimeSortClick = () => {
     setSortBy(() => (sortBy === 'EXPERIENCE_TIME' ? 'UPDATED_AT' : 'EXPERIENCE_TIME'));
   };
 
-  const _experiences = getFilteredExperiences(experiences, selectedCapacityId);
+  const _experiences =
+    selectedCapacityId === allCapacity.id ? experiences : getFilteredExperiences(experiences, selectedCapacityId);
+
   const __experiences = getSortedExperiences(_experiences, sortBy);
 
   return (

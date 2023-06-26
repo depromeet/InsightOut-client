@@ -1,6 +1,6 @@
 import { Capacity } from '../types';
 
-const getAllCapacityBadgeItem = (target: Capacity[]): Capacity => {
+const getAllCapacity = (target: Capacity[]): Capacity => {
   return {
     id: 0,
     keyword: '전체',
@@ -8,4 +8,4 @@ const getAllCapacityBadgeItem = (target: Capacity[]): Capacity => {
   };
 };
 
-export default getAllCapacityBadgeItem;
+export default getAllCapacity;
