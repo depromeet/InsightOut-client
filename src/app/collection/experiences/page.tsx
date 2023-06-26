@@ -1,17 +1,15 @@
 'use client';
 
-import Badge from '@/components/Badge/Badge';
 import TextButton from '@/components/Button/TextButton';
-import Chip from '@/components/Chip/Chip';
 import IconClock from '@/components/Icon/IconClock';
 import { useState } from 'react';
-import addPlusMarkOver99 from '@/shared/utils/addPlusMarkOver99';
 import { Capacity, Experience } from '@/features/collection/types';
 import ExperienceCard from '@/features/collection/components/cards/ExperienceCard';
 import getFilteredExperiences from '@/features/collection/utils/getFilteredExperiences';
 import getSortedExperiences from '@/features/collection/utils/getSortedExperiences';
 import { EXPERIENCE_SORT_BY } from '@/features/collection/constants';
 import getAllCapacity from '@/features/collection/utils/getAllCapacityBadgeItem';
+import ChipListNav from '@/features/collection/components/nav/ChipListNav';
 
 const Page = () => {
   const capabilities: Capacity[] = [
@@ -310,31 +308,18 @@ const Page = () => {
 
   return (
     <>
-      <section className="flex flex-row justify-between items-center my-[24px]">
-        <nav className="flex flex-row gap-[8px]">
-          {shownCapabilities.map(({ id, keyword, count }) => (
-            <li key={id} className="list-none">
-              <Chip
-                size="M"
-                variant={selectedCapacityId === id ? 'secondary-pressed' : 'secondary'}
-                badge={
-                  <Badge variant="gray100-outline" size="S">
-                    {addPlusMarkOver99(count)}
-                  </Badge>
-                }
-                onClick={() => setSelectedCapacityId(id)}>
-                {keyword}
-              </Chip>
-            </li>
-          ))}
-        </nav>
-        <div>
-          {/* TODO: TextButton Svg 색상 처리 필요 */}
-          <TextButton size="L" leftIcon={<IconClock className="fill-none" />} onClick={handleTimeSortClick}>
-            {EXPERIENCE_SORT_BY[sortBy]}
-          </TextButton>
-        </div>
-      </section>
+      <ChipListNav
+        items={shownCapabilities}
+        selectedItem={selectedCapacityId}
+        changeItem={setSelectedCapacityId}
+        Right={
+          <div>
+            <TextButton size="L" leftIcon={<IconClock className="fill-none" />} onClick={handleTimeSortClick}>
+              {EXPERIENCE_SORT_BY[sortBy]}
+            </TextButton>
+          </div>
+        }
+      />
       <section className="mt-[24px]">
         <ul className="grid grid-cols-3 gap-[16px]">
           {__experiences.map((experience: Experience) => (
