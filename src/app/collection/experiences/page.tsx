@@ -4,7 +4,7 @@ import TextButton from '@/components/Button/TextButton';
 import IconClock from '@/components/Icon/IconClock';
 import { useState } from 'react';
 import { Capacity, Experience } from '@/features/collection/types';
-import ExperienceCard from '@/features/collection/components/cards/ExperienceCard';
+import ExperienceCard from '@/features/collection/components/cards/ExperienceCard/ExperienceCard';
 import getFilteredExperiences from '@/features/collection/utils/getFilteredExperiences';
 import getSortedExperiences from '@/features/collection/utils/getSortedExperiences';
 import { EXPERIENCE_SORT_BY } from '@/features/collection/constants';
