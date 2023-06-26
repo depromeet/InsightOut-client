@@ -4,7 +4,7 @@ import TextButton from '@/components/Button/TextButton';
 import IconClock from '@/components/Icon/IconClock';
 import { useState } from 'react';
 import { Capacity, Experience } from '@/features/collection/types';
-import ExperienceCard from '@/features/collection/components/cards/ExperienceCard/ExperienceCard';
+import ExperienceListCard from '@/features/collection/components/cards/ExperienceListCard/ExperienceListCard';
 import getFilteredExperiences from '@/features/collection/utils/getFilteredExperiences';
 import getSortedExperiences from '@/features/collection/utils/getSortedExperiences';
 import { EXPERIENCE_SORT_BY } from '@/features/collection/constants';
@@ -324,7 +324,7 @@ const Page = () => {
         <ul className="grid grid-cols-3 gap-[16px]">
           {__experiences.map((experience: Experience) => (
             <li key={experience.id}>
-              <ExperienceCard {...experience} />
+              <ExperienceListCard {...experience} />
             </li>
           ))}
         </ul>
