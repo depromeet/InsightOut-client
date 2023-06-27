@@ -31,9 +31,8 @@ const ResumeCard = ({ updatedAt, title, answer }: Props) => {
       <div className="border rounded-[24px] hover:shadow-S4 p-[24px]" onClick={onOpenResumeAnswerModalCard}>
         <header className="relative mb-[16px]">
           {/* 액션버튼 */}
-          <b className="b4 mb-[5px]">{formatUpdatedAt(updatedAt)}</b>
-          {/* 자소서 문항 질문을 입력하지 않은 경우 -> ‘문항 질문을 적어보세요'로 제목이 보임 */}
-          <h6 className="h6">{title}</h6>
+          <b className="b4 mb-[5px]">{formatUpdatedAt(updatedAt) + ' 마지막 수정'}</b>
+          <h6 className="h6">{title || '문항 질문을 적어보세요'}</h6>
           <ActionList>
             <ActionList.Button
               className="absolute top-0 right-0"
