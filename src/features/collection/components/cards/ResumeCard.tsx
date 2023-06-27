@@ -19,7 +19,7 @@ type Props = {
 };
 
 const ResumeCard = ({ updatedAt, title, answer }: Props) => {
-  const answerTextareaRef = useRef<HTMLTextAreaElement>(null);
+  const answerPRef = useRef<HTMLParagraphElement>(null);
 
   const {
     isOpen: isOpenActionListModal,
@@ -52,9 +52,9 @@ const ResumeCard = ({ updatedAt, title, answer }: Props) => {
           </ActionList>
         </header>
         <div>
-          <textarea className="w-full bg-transparent resize-none line-clamp-5 b2" rows={5} ref={answerTextareaRef}>
+          <p className="w-full bg-transparent resize-none line-clamp-5 b2" ref={answerPRef}>
             {answer}
-          </textarea>
+          </p>
         </div>
         <footer className="flex flex-row-reverse mt-[8px] ">
           <TextLengthMessage currentLength={answer.length} maxLength={MAX_LENGTH.QUESTION} />
