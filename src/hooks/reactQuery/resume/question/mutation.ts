@@ -27,6 +27,7 @@ export const useUpdateQuestion = (
   return useMutation((payload) => questionApi.patch({ questionId, payload }), {
     ...options,
     onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: [RESUME_KEY.lists()] });
       queryClient.invalidateQueries({ queryKey: [QUESTION_KEY.detail([questionId])] });
     },
   });
