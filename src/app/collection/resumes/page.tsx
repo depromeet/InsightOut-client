@@ -1,7 +1,7 @@
 'use client';
 
-import Chip from '@/components/Chip/Chip';
 import ResumeCard from '@/features/collection/components/cards/ResumeCard';
+import ChipListNav from '@/features/collection/components/nav/ChipListNav';
 import { useState } from 'react';
 
 const Page = () => {
@@ -61,20 +61,10 @@ const Page = () => {
 
   const [selectedResumeId, setSelectedResumeId] = useState(resumes[0].id);
 
-  const changeResumeId = (id: number) => setSelectedResumeId(id);
-
   return (
     <>
       {/* 자기소개서 제목 목록 */}
-      <section className="flex flex-row gap-[8px] my-[24px]">
-        {resumes.map(({ id, title }) => (
-          <li key={id} className="list-none" onClick={() => changeResumeId(id)}>
-            <Chip size="M" variant={selectedResumeId === id ? 'secondary-pressed' : 'secondary'}>
-              {title}
-            </Chip>
-          </li>
-        ))}
-      </section>
+      <ChipListNav items={resumes} selectedItem={selectedResumeId} changeItem={setSelectedResumeId} />
       {/* 자기소개서 상세 */}
       <section>
         <ul className="flex flex-col gap-[40px]">
