@@ -1,3 +1,5 @@
+'use client';
+
 import ActionList from '@/components/ActionList/ActionList';
 import IconMoreVertical from '@/components/Icon/IconMoreVertical';
 import Modal from '@/components/Modal/Modal';
@@ -7,7 +9,8 @@ import formatUpdatedAt from '@/shared/utils/formatUpdateAt';
 import { useDisclosure } from '@chakra-ui/react';
 import React, { useRef } from 'react';
 import ResumeAnswerModalCard from './ResumeAnswerModalCard';
-import { ANSWER_MAX_LENGTH } from '../../constants';
+import { MAX_LENGTH } from '@/shared/constants/maxLength';
+import { TextLengthMessage } from '@/components/Input/TextLengthMessage';
 
 type Props = {
   updatedAt: string;
@@ -18,13 +21,16 @@ type Props = {
 const ResumeCard = ({ updatedAt, title, answer }: Props) => {
   const answerTextareaRef = useRef<HTMLTextAreaElement>(null);
 
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const {
+    isOpen: isOpenActionListModal,
+    onOpen: onOpenActionListModal,
+    onClose: onCloseActionListModal,
+  } = useDisclosure();
   const {
     isOpen: isOpenResumeAnswerModalCard,
     onOpen: onOpenResumeAnswerModalCard,
     onClose: onCloseResumeAnswerModalCard,
   } = useDisclosure();
-  // TODO: line-clamp 커스텀
 
   return (
     <>
@@ -41,7 +47,7 @@ const ResumeCard = ({ updatedAt, title, answer }: Props) => {
             </ActionList.Button>
             <ActionList.ItemWrapper>
               <ActionList.Item>수정하기</ActionList.Item>
-              <ActionList.Item onClick={onOpen}>삭제하기</ActionList.Item>
+              <ActionList.Item onClick={onOpenActionListModal}>삭제하기</ActionList.Item>
             </ActionList.ItemWrapper>
           </ActionList>
         </header>
@@ -51,19 +57,17 @@ const ResumeCard = ({ updatedAt, title, answer }: Props) => {
           </textarea>
         </div>
         <footer className="flex flex-row-reverse mt-[8px] ">
-          <b className="b3 text-light">
-            <span className="text-secondary-500">{answer.length}자</span>/{ANSWER_MAX_LENGTH}자
-          </b>
+          <TextLengthMessage currentLength={answer.length} maxLength={MAX_LENGTH.QUESTION} />
         </footer>
       </div>
-      <Modal size="md" isOpen={isOpen} onClose={onClose}>
+      <Modal size="md" isOpen={isOpenActionListModal} onClose={onCloseActionListModal}>
         <ModalHeader.Title
           title="해당 자기소개서를 삭제하실건가요?"
           subTitle="삭제한 자기소개서는 다시 복구할 수 없어요"
         />
         <ModalFooter.TwoButton
           leftTextContent="취소하기"
-          handleLeftClick={onClose}
+          handleLeftClick={onCloseActionListModal}
           rightTextContent="삭제하기"
           handleRightClick={() => {
             console.log('삭제하기');
