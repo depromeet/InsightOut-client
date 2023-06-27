@@ -1,11 +1,9 @@
+import { UserInfo } from '@/shared/store/types/user';
+
 /**
  * 유저 정보 조회 결과
  */
-export interface UserInfo {
-  nickname: string;
-  email: string;
-  imageUrl: string;
-}
+export type GetUserInfo = Pick<UserInfo, 'nickname' | 'email' | 'imageUrl'>;
 
 /**
  * 유저 정보 업데이트 시 전달할 데이터

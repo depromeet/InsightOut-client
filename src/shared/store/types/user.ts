@@ -1,6 +1,6 @@
 /* eslint-disable unused-imports/no-unused-vars */
 
-export interface UserOnboardingInfo {
+export interface OnboardingInfo {
   experience: boolean;
   experienceStepper: boolean;
   resume: boolean;
@@ -10,7 +10,17 @@ export interface UserOnboardingInfo {
 export interface UserInfo {
   userId: number;
   nickname: string;
-  onboarding: UserOnboardingInfo;
+  onboarding: OnboardingInfo;
+  email: string;
+  imageUrl: string;
+}
+
+export interface UserInfoParams {
+  userId?: number;
+  nickname?: string;
+  onboarding?: OnboardingInfo;
+  email?: string;
+  imageUrl?: string;
 }
 
 /**
@@ -20,7 +30,7 @@ export interface UserActions {
   /**
    * 유저 정보를 저장하는 함수
    */
-  setUserInfo: (userInfo: UserInfo) => void;
+  setUserInfo: (userInfo: UserInfoParams) => void;
 }
 
 /**
