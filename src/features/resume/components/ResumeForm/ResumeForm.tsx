@@ -25,8 +25,8 @@ const ResumeForm = () => {
     { questionId },
     {
       onSuccess({ title, answer }) {
-        setTitle(title);
-        setAnswer(answer ?? ''); // NOTE: answer이 없을 때 서버에서 null을 보내줘서 빈 문자열로 바꿨습니다
+        setTitle(title ?? ''); // NOTE: answer이 없을 때 서버에서 null을 보내줘서 빈 문자열로 바꿨습니다
+        setAnswer(answer ?? '');
       },
     }
   );
