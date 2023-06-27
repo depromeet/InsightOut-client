@@ -2,21 +2,21 @@
 
 import { useState } from 'react';
 import Chip from '@/components/Chip/Chip';
-import AiRecommendResumeListCard from '@/features/collection/cards/AiRecommendResumeListCard';
+import AiRecommendResumeListCard from '@/features/collection/cards/AiRecommendResumeCard';
 
 const Page = () => {
   const aiRecommendKeyword = [
     {
       id: 1234,
-      keyword: '디프만 13기',
+      keyword: '창의력',
     },
     {
       id: 1235,
-      keyword: '코코아',
+      keyword: '추진력',
     },
     {
       id: 1236,
-      keyword: '네버',
+      keyword: '커뮤니케이션',
     },
   ];
 
@@ -51,7 +51,7 @@ const Page = () => {
     },
   ];
 
-  const [selectedAiRecommendId, setSelectedAiRecommendId] = useState(aiRecommends[0].id);
+  const [selectedAiRecommendId, setSelectedAiRecommendId] = useState(aiRecommendKeyword[0].id);
 
   return (
     <div>

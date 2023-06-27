@@ -4,6 +4,8 @@ import { useDisclosure } from '@chakra-ui/react';
 import ActionList from '@/components/ActionList/ActionList';
 import IconMoreVertical from '@/components/Icon/IconMoreVertical';
 import formatUpdatedAt from '@/shared/utils/formatUpdateAt';
+import Tag from '@/components/Tag/Tag';
+import Button from '@/components/Button/Button';
 
 type Props = {
   updatedAt: string;
@@ -31,6 +33,7 @@ const AiRecommendResumeCard = ({ title, answer, updatedAt }: Props) => {
           updatedAt={updatedAt}
           onOpenActionListModal={onOpenActionListModal}
         />
+        <AiRecommendResumeCard.Footer />
       </div>
     </>
   );
@@ -58,5 +61,21 @@ AiRecommendResumeCard.Header = ({ title, updatedAt, onOpenActionListModal }: AiR
     </ActionList>
   </header>
 );
+
+AiRecommendResumeCard.Footer = () => {
+  return (
+    <div>
+      <h4 className="subhead4 mb-[4px]">AI 추천 키워드</h4>
+      <div className="flex flex-row justify-between">
+        <Tag size="M" variant="secondary50-outline">
+          창의력
+        </Tag>
+        <Button size="M" variant="gray200">
+          경험카드 확인하기
+        </Button>
+      </div>
+    </div>
+  );
+};
 
 export default AiRecommendResumeCard;
