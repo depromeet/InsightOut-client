@@ -10,7 +10,7 @@ export const useGetQuestion = (
   options?: UseQueryOptions<QuestionResponse['get'], AxiosError>
 ) => {
   return useQuery<QuestionResponse['get'], AxiosError>(
-    [QUESTION_KEY.detail([{ ...params }])],
+    QUESTION_KEY.detail([{ ...params }]),
     () => questionApi.get({ ...params }),
     { ...options }
   );
