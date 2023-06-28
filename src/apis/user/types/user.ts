@@ -1,4 +1,6 @@
+import { JSXElementConstructor, ReactElement } from 'react';
 import { UserInfo } from '@/shared/store/types/user';
+import { Field } from '@/shared/constants/user';
 
 /**
  * 유저 정보 조회 결과
@@ -10,7 +12,7 @@ export type GetUserInfo = Pick<UserInfo, 'nickname' | 'email' | 'imageUrl'>;
  */
 export interface UpdateUserInfo {
   nickname: string;
-  field: string;
+  field: string | null;
 }
 
 /**
@@ -19,3 +21,12 @@ export interface UpdateUserInfo {
 export interface FeedbackContent {
   contents: string;
 }
+
+/**
+ * 유저 직무 데이터
+ */
+export type JobCategories = readonly {
+  title: string;
+  icon: ReactElement<SVGAElement, string | JSXElementConstructor<any>>;
+  field: Field;
+}[];

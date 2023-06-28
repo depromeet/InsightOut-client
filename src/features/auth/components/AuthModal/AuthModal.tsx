@@ -11,6 +11,8 @@ import useGoogleLogin from '../../hooks/useGoogleLogin';
 import StartNowContents from './ModalContents/StartNowContents';
 import { useAuthActions } from '../../store';
 import Spinner from '@/components/Spinner/Spinner';
+import userApi from '@/apis/user/user';
+import { Field } from '@/shared/constants/user';
 
 type AuthModalProps = {
   isOpen: boolean;
@@ -25,7 +27,7 @@ const AuthModal = ({ isOpen, onClose, onAbortSignUp }: AuthModalProps) => {
   const { setIsSignedIn, setIsTokenRequired } = useAuthActions();
   const { signIn, isLoading } = useGoogleLogin();
 
-  const [selectedCategory, setSelectedCategory] = useState<string>('');
+  const [selectedCategory, setSelectedCategory] = useState<{ title: string; field: Field }>({ title: '', field: null });
 
   const handleCloseModal = () => {
     const isLastStep = !!searchParams.get('startnow');
@@ -37,6 +39,11 @@ const AuthModal = ({ isOpen, onClose, onAbortSignUp }: AuthModalProps) => {
     setIsSignedIn(true);
     setIsTokenRequired(false);
     onClose();
+  };
+
+  const handleChooseJob = async () => {
+    await userApi.patch({ nickname, field: selectedCategory.field });
+    router.push('/?steps=startnow');
   };
 
   const modalSize = () => {
@@ -68,7 +75,7 @@ const AuthModal = ({ isOpen, onClose, onAbortSignUp }: AuthModalProps) => {
             selectedCategory={selectedCategory}
             onClickLeftButton={() => router.back()}
             onClickCategory={setSelectedCategory}
-            onClickRightButton={() => router.push('/?steps=startnow')}
+            onClickRightButton={handleChooseJob}
           />
         );
       case 'startnow':
