@@ -9,10 +9,12 @@ import { TextLengthMessage } from '@/components/Input/TextLengthMessage';
 import { useAnswer, useQuestionActions, useTitle } from '@/features/resume/store';
 import { useUpdateQuestion } from '@/hooks/reactQuery/resume/question/mutation';
 import { useGetQuestion } from '@/hooks/reactQuery/resume/question/query';
+import useDebounce from '@/hooks/useDebounce';
 import { MAX_LENGTH } from '@/shared/constants/maxLength';
 import { resizeHeight } from '@/shared/utils/autoSizeTextarea';
 import formatYYMMDDhhmm from '@/shared/utils/date/formatYYMMDDhhmm';
 
+import { AUTO_SAVE_TIME } from '../../constants/autoSaveTime';
 import SavingCaption from './SavingCaption';
 
 const ResumeForm = () => {
@@ -39,9 +41,11 @@ const ResumeForm = () => {
     setTitle(e.target.value);
   };
 
+  const debouncedUpdateQuestion = useDebounce(() => updateQuestion({ title, answer }), AUTO_SAVE_TIME);
+
   const handleAnswerChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setAnswer(e.target.value);
-    /**TODO: debounce patch */
+    debouncedUpdateQuestion();
   };
 
   const handleResumeSubmit = (e: FormEvent<HTMLFormElement>) => {
