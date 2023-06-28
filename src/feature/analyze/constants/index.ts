@@ -9,12 +9,15 @@ export const initialValue: ExperienceFormValues = {
   motivation: '',
   startDate: '',
   endDate: '',
+  keyword: [],
   situation: '',
   task: '',
   action: '',
   result: '',
   experienceStatus: 'INPROGRESS',
   writeStatus: ['미작성', '미작성', '미작성', '미작성'],
+  capabilities: [],
+  resume: '',
 };
 
 export const STEP = {
