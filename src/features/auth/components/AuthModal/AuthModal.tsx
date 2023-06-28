@@ -42,6 +42,9 @@ const AuthModal = ({ isOpen, onClose, onAbortSignUp }: AuthModalProps) => {
   };
 
   const handleChooseJob = async () => {
+    /**
+     * @TODO patch api/onboarding 에 field 추가 작업 완료되면 전송 로직 추가
+     */
     await userApi.patch({ nickname, field: selectedCategory.field });
     router.push('/?steps=startnow');
   };

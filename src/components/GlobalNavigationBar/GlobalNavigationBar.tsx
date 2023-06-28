@@ -11,7 +11,8 @@ import IconGoogleLogo from '../Icon/IconGoogleLogo';
 import Spinner from '../Spinner/Spinner';
 import { useAuthActions, useIsOpenSignUpModal } from '@/features/auth/store';
 import AuthModal from '@/features/auth/components/AuthModal/AuthModal';
-import authApi from '@/apis/auth/auth';
+import userApi from '@/apis/user/user';
+import { useUserNickname } from '@/shared/store/user';
 
 type GlobalNavigationBarProps = ComponentPropsWithoutRef<'header'> & {
   /**
@@ -28,6 +29,7 @@ const GlobalNavigationBar = ({ className, isSignedIn, isRequesting, ...props }: 
   const rootClassName = tw(styles.root, className);
   const pathName = usePathname();
   const isOpenSignUpModal = useIsOpenSignUpModal();
+  const nickname = useUserNickname();
   const { setIsOpenSignUpModal } = useAuthActions();
   const router = useRouter();
 
@@ -42,7 +44,7 @@ const GlobalNavigationBar = ({ className, isSignedIn, isRequesting, ...props }: 
   };
 
   const handleAbortSignUp = async () => {
-    await authApi.withdraw();
+    await userApi.patch({ nickname, field: null });
   };
 
   return (
