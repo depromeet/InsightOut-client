@@ -12,7 +12,9 @@ import Spinner from '../Spinner/Spinner';
 import { useAuthActions, useIsOpenSignUpModal } from '@/features/auth/store';
 import AuthModal from '@/features/auth/components/AuthModal/AuthModal';
 import userApi from '@/apis/user/user';
-import { useUserNickname } from '@/shared/store/user';
+import { useUserImageUrl, useUserNickname } from '@/shared/store/user';
+import SvgIconGnbMyPage from '../Icon/IconGnbMyPage';
+import Image from 'next/image';
 
 type GlobalNavigationBarProps = ComponentPropsWithoutRef<'header'> & {
   /**
@@ -30,6 +32,7 @@ const GlobalNavigationBar = ({ className, isSignedIn, isRequesting, ...props }: 
   const pathName = usePathname();
   const isOpenSignUpModal = useIsOpenSignUpModal();
   const nickname = useUserNickname();
+  const profileImgUrl = useUserImageUrl();
   const { setIsOpenSignUpModal } = useAuthActions();
   const router = useRouter();
 
@@ -79,9 +82,15 @@ const GlobalNavigationBar = ({ className, isSignedIn, isRequesting, ...props }: 
         ) : isSignedIn ? (
           <Link
             className={cn(styles.link, styles.myPage, { [styles.focus]: pathName === '/demo' })}
-            href={{ pathname: '/demo' }}>
+            href={{ pathname: '#' }}>
             <Flex justifyContent={'space-between'} alignItems={'center'} gap={'10px'}>
-              <div className={styles['user-profile']} />
+              {profileImgUrl.length > 0 ? (
+                <div className={styles['user-profile']}>
+                  <Image src={profileImgUrl} width={20} height={20} alt="use-profile" />
+                </div>
+              ) : (
+                <SvgIconGnbMyPage width={32} height={32} />
+              )}
               마이 페이지
             </Flex>
           </Link>
