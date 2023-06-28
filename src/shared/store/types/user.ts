@@ -1,5 +1,8 @@
 /* eslint-disable unused-imports/no-unused-vars */
 
+/**
+ * 유저 온보딩 수행 여부
+ */
 export interface OnboardingInfo {
   experience: boolean;
   experienceStepper: boolean;
@@ -7,6 +10,9 @@ export interface OnboardingInfo {
   collection: boolean;
 }
 
+/**
+ * 유저 정보
+ */
 export interface UserInfo {
   userId: number;
   nickname: string;
@@ -15,18 +21,15 @@ export interface UserInfo {
   imageUrl: string;
 }
 
-export interface UserInfoParams {
-  userId?: number;
-  nickname?: string;
-  onboarding?: OnboardingInfo;
-  email?: string;
-  imageUrl?: string;
-}
+/**
+ * 유저 정보 업데이트 Params
+ */
+export type UserInfoParams = Partial<UserInfo>;
 
 /**
  * 유저 관련 zustand actions
  */
-export interface UserActions {
+interface UserActions {
   /**
    * 유저 정보를 저장하는 함수
    */
