@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import Link from 'next/link';
 import { Route } from 'next';
 import Button from '@/components/Button/Button';
@@ -17,6 +17,7 @@ import Lottie from '@/components/Lottie/Lottie';
 import Progress from '@/components/Progress/Progress';
 import StepMenu from '@/feature/analyze/layout/StepMenu';
 import { useFetchAnalyze } from '@/hooks/reactQuery/analyze/query';
+import { usePrevious } from '@chakra-ui/react';
 
 export interface LayoutProps {
   children: React.ReactNode;
@@ -24,6 +25,10 @@ export interface LayoutProps {
 const Layout = ({ children }: LayoutProps) => {
   const { back } = useRouter();
   const pathname = usePathname();
+  const prevPathname = usePrevious(pathname);
+
+  const currentStepIndex = (STEPS.find((v) => v.route === pathname)?.id ?? 1) - 1;
+  const prevStepIndex = (STEPS.find((v) => v.route === prevPathname)?.id ?? 1) - 1;
 
   const methods = useForm({
     mode: 'all',
@@ -53,8 +58,6 @@ const Layout = ({ children }: LayoutProps) => {
     }
   );
 
-  const tooltipIndex = (STEPS.find((v) => v.route === pathname)?.id ?? 1) - 1;
-
   const TOOLTIP_CONTENTS = [
     <>“OOO님 좋은 시작이에요”</>,
     <>“뭐든지 시작이 반이에요”</>,
@@ -62,10 +65,67 @@ const Layout = ({ children }: LayoutProps) => {
     <>“AI 직무역량 키워드 추천을 통해 나의 직무역량을 다각도로 넓혀보세요”</>,
   ];
 
+  const setWriteStatus = useCallback(
+    (target: WriteStatusType[], status: WriteStatusType) => {
+      target[prevStepIndex] = status;
+      methods.setValue('writeStatus', target);
+    },
+    [methods, prevStepIndex]
+  );
+
   useEffect(() => {
-    // TODO: switch문으로 현재 페이지에 해당하는 값들이 모두 있으면 작성 완료, 모두 만족하진 않고 있긴하면 작성중, 없으면 미작성,
-    // ['미작성', '작성중', '미작성', '작성완료']
-  }, [pathname]);
+    const writeStatus = methods.getValues('writeStatus') as WriteStatusType[];
+    const copyWriteStatus = [...writeStatus];
+
+    switch (prevPathname) {
+      case ROUTES.EXPERIENCE:
+        const [title, startYYYY, startMM, endYYYY, endMM, experienceRole, motivation] = methods.getValues([
+          'title',
+          'startYYYY',
+          'startMM',
+          'endYYYY',
+          'endMM',
+          'experienceRole',
+          'motivation',
+        ]);
+        if (!!title && !!startYYYY && !!startMM && !!endYYYY && !!endMM && !!experienceRole && !!motivation) {
+          setWriteStatus(copyWriteStatus, '작성완료');
+        } else if (!!title || !!startYYYY || !!startMM || !!endYYYY || !!endMM || !!experienceRole || !!motivation) {
+          setWriteStatus(copyWriteStatus, '작성중');
+        } else {
+          setWriteStatus(copyWriteStatus, '미작성');
+        }
+        break;
+      case ROUTES.KEYWORD:
+        const keyword = methods.getValues('keyword');
+        if (keyword.some(([, isSelected]) => isSelected === true)) {
+          setWriteStatus(copyWriteStatus, '작성완료');
+        } else {
+          setWriteStatus(copyWriteStatus, '미작성');
+        }
+        break;
+      case ROUTES.INFORMATION:
+        const [situation, task, action, result] = methods.getValues(['situation', 'task', 'action', 'result']);
+        if (!!situation && !!task && !!action && !!result) {
+          setWriteStatus(copyWriteStatus, '작성완료');
+        } else if (!!situation || !!task || !!action || !!result) {
+          setWriteStatus(copyWriteStatus, '작성중');
+        } else {
+          setWriteStatus(copyWriteStatus, '미작성');
+        }
+        break;
+      default:
+        const [capabilities, resume] = methods.getValues(['capabilities', 'resume']);
+        if (!!capabilities.length && !!resume) {
+          setWriteStatus(copyWriteStatus, '작성완료');
+        } else if (!!capabilities.length || !!resume) {
+          setWriteStatus(copyWriteStatus, '작성중');
+        } else {
+          setWriteStatus(copyWriteStatus, '미작성');
+        }
+        break;
+    }
+  }, [methods, pathname, prevPathname, currentStepIndex, setWriteStatus]);
 
   const handleNextButton = () => {
     switch (pathname) {
@@ -117,12 +177,12 @@ const Layout = ({ children }: LayoutProps) => {
             </div>
 
             {/* Aside */}
-            <div className="experience flex flex-col items-center mb-[16px] px-[14px] py-[32px] h-[100%] top-[88px] sticky">
+            <div className="experience flex flex-col items-center min-w-[384px] mb-[16px] px-[14px] py-[32px] h-[100%] top-[88px] sticky">
               <div className="mb-[8px]">
                 <TooltipRelativeContent
                   type="primary"
                   position="center-top"
-                  content={TOOLTIP_CONTENTS[tooltipIndex]}
+                  content={TOOLTIP_CONTENTS[currentStepIndex]}
                   isOpen
                 />
               </div>
