@@ -56,7 +56,7 @@ const ResumeForm = ({ id, title: initialTitle, answer: initialAnswer, updatedAt 
         onChange={handleAnswerChange}
         maxLength={MAX_LENGTH.QUESTION}
         placeholder="질문에 대한 답변을 적어보세요."
-        className="w-[660px] h-[660px] resize-none b1 text-main placeholder:text-light"
+        className="w-[612px] h-[660px] resize-none b1 text-main placeholder:text-light"
       />
     </form>
   );
