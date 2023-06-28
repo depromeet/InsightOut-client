@@ -48,6 +48,10 @@ const ResumeForm = () => {
     debouncedUpdateQuestion();
   };
 
+  const handleAnswerBlur = () => {
+    updateQuestion({ title, answer });
+  };
+
   const handleResumeSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -76,6 +80,7 @@ const ResumeForm = () => {
       <textarea
         value={answer}
         onChange={handleAnswerChange}
+        onBlur={handleAnswerBlur}
         maxLength={MAX_LENGTH.QUESTION}
         placeholder="질문에 대한 답변을 적어보세요."
         className="w-[660px] h-[660px] resize-none b1 text-main placeholder:text-light"
