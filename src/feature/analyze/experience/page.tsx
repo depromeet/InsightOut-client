@@ -3,20 +3,15 @@
 import React from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 
-import isEmpty from 'lodash/isEmpty';
-
 import TextAreaField from '@/components/Input/TextAreaField/TextAreaField';
 import TextField from '@/components/Input/TextField/TextField';
 import QuestionCard from '@/components/QuestionCard/QuestionCard';
 import PickerFieldContainer from '@/feature/analyze/experience/PickerFieldContainer';
 import { ExperienceFormValues } from '@/feature/analyze/types';
-import { useFetchAnalyze } from '@/hooks/reactQuery/analyze/query';
-import { useUpdateEffect } from '@/hooks/useUpdateEffect';
 import { callbackRefWithResizeHeight } from '@/shared/utils/callbackRefWithResizeHeight';
 
 const ExperiencePage = () => {
-  const { control, setFocus, setValue } = useFormContext<ExperienceFormValues>();
-  const { data: analyze } = useFetchAnalyze({ last: true });
+  const { control, setFocus } = useFormContext<ExperienceFormValues>();
 
   const handlePeriodChange =
     (
@@ -33,20 +28,6 @@ const ExperiencePage = () => {
       }
       onChange(e);
     };
-
-  useUpdateEffect(() => {
-    if (!isEmpty(analyze)) {
-      const [endYYYY, endMM] = analyze.endDate.split('-');
-      const [startYYYY, startMM] = analyze.startDate.split('-');
-      setValue('title', analyze.title);
-      setValue('startYYYY', startYYYY);
-      setValue('startMM', startMM);
-      setValue('endYYYY', endYYYY);
-      setValue('endMM', endMM);
-      setValue('experienceRole', analyze.experienceInfo?.experienceRole);
-      setValue('motivation', analyze.experienceInfo?.motivation);
-    }
-  }, [analyze]);
 
   return (
     <>

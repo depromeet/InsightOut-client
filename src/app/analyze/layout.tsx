@@ -1,7 +1,7 @@
 'use client';
 
-import React from 'react';
-import { FormProvider, useForm } from 'react-hook-form';
+import React, { useEffect } from 'react';
+import { FormProvider, useForm, useWatch } from 'react-hook-form';
 
 import { DevTool } from '@hookform/devtools';
 import { Route } from 'next';
@@ -15,7 +15,8 @@ import Stepper from '@/components/Stepper/Stepper';
 import TooltipRelativeContent from '@/components/Tooltip/TooltipRelativeContent';
 import { initialValue, STEPS } from '@/feature/analyze/constants';
 import StepMenu from '@/feature/analyze/layout/StepMenu';
-import { ExperienceFormValues } from '@/feature/analyze/types';
+import { ExperienceFormValues, WriteStatusType } from '@/feature/analyze/types';
+import { useFetchAnalyze } from '@/hooks/reactQuery/analyze/query';
 import { useIsMounted } from '@/hooks/useIsMounted';
 import { ROUTES } from '@/shared/constants/routes';
 
@@ -24,12 +25,36 @@ export interface LayoutProps {
 }
 const Layout = ({ children }: LayoutProps) => {
   const { back } = useRouter();
+  const pathname = usePathname();
+
   const methods = useForm({
     mode: 'all',
     defaultValues: initialValue,
   });
 
-  const pathname = usePathname();
+  const writeStatus = useWatch({
+    name: 'writeStatus',
+    control: methods.control,
+  });
+
+  const { data } = useFetchAnalyze(
+    {},
+    {
+      onSuccess: (data) => {
+        const { setValue } = methods;
+        const [endYYYY, endMM] = data.endDate.split('-');
+        const [startYYYY, startMM] = data.startDate.split('-');
+        setValue('title', data.title);
+        setValue('startYYYY', startYYYY);
+        setValue('startMM', startMM);
+        setValue('endYYYY', endYYYY);
+        setValue('endMM', endMM);
+        setValue('experienceRole', data.experienceInfo?.experienceRole);
+        setValue('motivation', data.experienceInfo?.motivation);
+      },
+    }
+  );
+
   const tooltipIndex = (STEPS.find((v) => v.route === pathname)?.id ?? 1) - 1;
 
   const TOOLTIP_CONTENTS = [
@@ -38,6 +63,11 @@ const Layout = ({ children }: LayoutProps) => {
     <>“내용을 풍부하게 작성할수록 다양한 AI 직무 역량 키워드를 받을 수 있어요 최선을 다해 작성해주세요 :)”</>,
     <>“AI 직무역량 키워드 추천을 통해 나의 직무역량을 다각도로 넓혀보세요”</>,
   ];
+
+  useEffect(() => {
+    // TODO: switch문으로 현재 페이지에 해당하는 값들이 모두 있으면 작성 완료, 모두 만족하진 않고 있긴하면 작성중, 없으면 미작성,
+    // ['미작성', '작성중', '미작성', '작성완료']
+  }, [pathname]);
 
   const handleNextButton = () => {
     switch (pathname) {
@@ -102,7 +132,7 @@ const Layout = ({ children }: LayoutProps) => {
                 <Lottie src="/lotties/lumos-smile.json" />
               </div>
               <Progress />
-              <StepMenu />
+              <StepMenu status={writeStatus as WriteStatusType[]} />
             </div>
           </div>
         </div>

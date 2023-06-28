@@ -3,11 +3,14 @@ import React from 'react';
 import Link from 'next/link';
 
 import { STEPS } from '../constants';
+import { WriteStatusType } from '../types';
 import StepMenuItem from './StepMenuItem';
 
-// FIXME: props로 status 받기
-const StepMenu = () => {
-  const status = ['미작성', '미작성', '작성중', '작성완료'] as const;
+interface StepMenuProps {
+  status: WriteStatusType[];
+}
+
+const StepMenu = ({ status }: StepMenuProps) => {
   return (
     <>
       <div className="bg-gray-50 w-[100%] h-[2px] rounded-[8px] my-[24px]" />
