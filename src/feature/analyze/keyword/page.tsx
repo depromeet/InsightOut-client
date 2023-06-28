@@ -1,6 +1,7 @@
 'use client';
 
-import React, { KeyboardEvent, useState } from 'react';
+import React, { KeyboardEvent, useEffect } from 'react';
+import { useFormContext, useWatch } from 'react-hook-form';
 
 import Button from '@/components/Button/Button';
 import TextAreaField from '@/components/Input/TextAreaField/TextAreaField';
@@ -10,7 +11,7 @@ import KeywordContainer from '@/feature/analyze/keyword/KeywordContainer';
 import useInput from '@/hooks/useInput';
 import { exceptEnter } from '@/shared/utils/exceptEnter';
 
-type KeywordEntries = [string, boolean][];
+import { ExperienceFormValues, KeywordEntriesType } from '../types';
 
 // FIXME: mock data
 const data = {
@@ -38,37 +39,48 @@ const data = {
   수리감각: false,
   정보수집능력: false,
 };
+// TODO: 키워드 useQuery로 불러오고 onSuccess 콜백에서 setValue('keyword', Object.entries(data))로 대체하기
 const entriesData = Object.entries(data);
 
-const deDuplicatedKeywordList = (arr: KeywordEntries) => Object.entries(Object.fromEntries(arr));
+const deDuplicatedKeywordList = (arr: KeywordEntriesType) => Object.entries(Object.fromEntries(arr));
 
 // TODO: 경험 분해 키워드 가져오기 API (/experience/capability/{experienceId}) 요청으로 키워드 불러오기
 // TODO: 경험 분해 키워드 임시 저장 API (/experience/capability) 로 요청 보내기, 요청body: Object.fromEntries(keywordList.filter(([, isSelected]) => keyword[1] === true))
-// MINOR_TODO: input checkbox로 리팩토링? (Tag 컴포넌트 수정)
 
 const KeywordPage = () => {
   const [text, onChangeText, setText] = useInput('');
-  const [keywordList, setKeywordList] = useState(entriesData);
+  const { setValue, control } = useFormContext<ExperienceFormValues>();
+  const keywordList = useWatch({
+    name: 'keyword',
+    control,
+  });
+
+  // FIXME: api 연결하면 제거하기
+  useEffect(() => {
+    setValue('keyword', entriesData);
+  }, []);
+
+  const getNextKeywordAction = (newKeyword: string) => {
+    const selectedKeywordList = keywordList.filter(([, isSelected]) => isSelected === true);
+    const selectedKeywordIndex = keywordList.findIndex(([prevKeyword]) => prevKeyword === newKeyword);
+    const toggleKeyword = selectedKeywordList.includes(keywordList[selectedKeywordIndex]);
+    const newKeywordList = keywordList.map(([prevKeyword, prevSelected]) =>
+      prevKeyword === newKeyword ? [prevKeyword, !prevSelected] : [prevKeyword, prevSelected]
+    ) as KeywordEntriesType;
+
+    if (selectedKeywordList.length === 4 && toggleKeyword) return newKeywordList;
+    if (selectedKeywordList.length >= 4) return keywordList;
+    return newKeywordList;
+  };
 
   const handleClickKeyword = (newKeyword: string) => () => {
-    setKeywordList((prev) => {
-      const selectedKeywordList = prev.filter(([, isSelected]) => isSelected === true);
-      const selectedKeywordIndex = keywordList.findIndex(([prevKeyword]) => prevKeyword === newKeyword);
-      const toggleKeyword = selectedKeywordList.includes(keywordList[selectedKeywordIndex]);
-      const newKeywordList = prev.map(([prevKeyword, prevSelected]) =>
-        prevKeyword === newKeyword ? [prevKeyword, !prevSelected] : [prevKeyword, prevSelected]
-      ) as KeywordEntries;
-
-      if (selectedKeywordList.length === 4 && toggleKeyword) return newKeywordList;
-      if (selectedKeywordList.length >= 4) return prev;
-      return newKeywordList;
-    });
+    setValue('keyword', getNextKeywordAction(newKeyword));
   };
 
   const addKeywordAndInitializeTextField = () => {
     if (!text.trim()) return;
     // TODO: 중복된 키워드면 토스트 띄워주기
-    setKeywordList((prev) => deDuplicatedKeywordList([...prev, [text, false]]));
+    setValue('keyword', deDuplicatedKeywordList([...keywordList, [text, false]]));
     setText('');
   };
 
