@@ -35,18 +35,35 @@ const AuthModal = ({ isOpen, onClose, onAbortSignUp }: AuthModalProps) => {
     onClose();
   };
 
+  /**
+   * 회원가입 성공 시 핸들러
+   */
   const handleSignUpSuccess = () => {
     setIsSignedIn(true);
     setIsTokenRequired(false);
     onClose();
   };
 
+  /**
+   * 직무 선택 핸들러
+   */
   const handleChooseJob = async () => {
     /**
      * @TODO patch api/onboarding 에 field 추가 작업 완료되면 전송 로직 추가
      */
     await userApi.patch({ nickname, field: selectedCategory.field });
     router.push('/?steps=startnow');
+  };
+
+  /**
+   * 만나서 반가워요 버튼 클릭 핸들러
+   */
+  const handleClickGreeting = () => {
+    /**
+     * @TODO 기존에 회원가입을 했던 유저라면 바로 모달 Close
+     */
+    // onClose();
+    router.push('/?steps=categories');
   };
 
   const modalSize = () => {
@@ -70,7 +87,7 @@ const AuthModal = ({ isOpen, onClose, onAbortSignUp }: AuthModalProps) => {
       case 'signUp':
         return <SignUpContents signIn={signIn} />;
       case 'welcome':
-        return <WelcomeContents nickname={nickname} onClickButton={() => router.push('/?steps=categories')} />;
+        return <WelcomeContents nickname={nickname} onClickButton={handleClickGreeting} />;
       case 'categories':
         return (
           <CategoriesContents
