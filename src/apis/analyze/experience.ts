@@ -1,7 +1,9 @@
 import isEmpty from 'lodash/isEmpty';
+
+import { objToQueryString } from '@/shared/utils/objToQueryString';
+
 import instance from '..';
 import { ExperienceParams, ExperienceResponse } from './types/experience';
-import { objToQueryString } from '@/shared/utils/objToQueryString';
 
 const experienceApi = {
   get: async (params: ExperienceParams['get']) => {

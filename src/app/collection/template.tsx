@@ -1,8 +1,9 @@
 'use client';
 
+import { usePathname } from 'next/navigation';
+
 import Badge from '@/components/Badge/Badge';
 import Tab from '@/components/Tab/Tab';
-import { usePathname } from 'next/navigation';
 import { COLLECTION_TABS } from '@/shared/constants/tabs';
 
 const Template = ({ children }: { children: React.ReactNode }) => {

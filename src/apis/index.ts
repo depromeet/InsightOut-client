@@ -1,6 +1,10 @@
 import axios, { AxiosResponse } from 'axios';
-import authApi from './auth';
-import { HTTP_BASE_URL, HTTP_STATUS_CODE } from '@/shared/constants/http';
+
+import { authStore } from '@/features/auth/store';
+import { HTTP_BASE_URL } from '@/shared/constants/http';
+import { isAccessTokenExpired, isRefreshTokenExpired, isTokenNotExist } from '@/shared/utils/http';
+
+import authApi from './auth/auth';
 
 const instance = axios.create({
   baseURL: HTTP_BASE_URL,
@@ -13,24 +17,26 @@ instance.interceptors.response.use(
   },
   async (error) => {
     const { data, config: originalRequest } = error.response;
+    const [statusCode, title] = [data.statusCode, data.data.title];
 
     /**
-     * @description Access Token이 만료될 경우 Refresh Token으로 재발급합니다.
+     * @description Access Token이 만료될 경우 Refresh Token으로 재발급하여 api 요청을 그대로 진행
      */
-    if (data.statusCode === HTTP_STATUS_CODE.UNAUTHORIZED && data.message === 'Unauthorized') {
-      const response = await authApi.reIssue();
-      const accessToken = response.accessToken;
-      instance.defaults.headers['Authorization'] = `Bearer ${accessToken}`;
+    if (isAccessTokenExpired(statusCode, title)) {
+      await authApi.reIssue();
       return axios(originalRequest);
     }
 
     /**
-     * @description Refresh Token까지 만료될 경우 로그인 화면으로 이동합니다.
+     * @description Refresh Token까지 만료되거나 토큰이 존재하지 않을 경우 로그인 화면으로 리다이렉트
      */
-    if (data.statusCode === HTTP_STATUS_CODE.UNAUTHORIZED && data.message === '적절하지 않은 요청입니다.') {
-      // window.location.href = '/signin';
-      return Promise.reject(error);
+    if (isRefreshTokenExpired(statusCode, title) || isTokenNotExist(statusCode, title)) {
+      const { setIsTokenRequired, setIsSignedIn } = authStore.getState().actions;
+      setIsTokenRequired(true);
+      setIsSignedIn(false);
     }
+
+    return Promise.reject(error);
   }
 );
 

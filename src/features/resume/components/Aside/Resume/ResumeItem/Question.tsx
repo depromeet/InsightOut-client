@@ -1,20 +1,21 @@
 import Link from 'next/link';
 
-import { tw } from '@/shared/utils/tailwindMerge';
-import { ROUTES } from '@/shared/constants/routes';
-
 import ActionList from '@/components/ActionList/ActionList';
-import IconMoreVertical from '@/components/Icon/IconMoreVertical';
 import IconDocument from '@/components/Icon/IconDocument';
-
-import { QuestionData } from '../../../../types/question';
+import IconMoreVertical from '@/components/Icon/IconMoreVertical';
+import { QuestionData } from '@/features/resume/types/question';
+import { useDeleteQuestion } from '@/hooks/reactQuery/resume/question/mutation';
+import { ROUTES } from '@/shared/constants/routes';
+import { tw } from '@/shared/utils/tailwindMerge';
 
 type ResumeQuestionProps = QuestionData & {
   active?: boolean;
 };
 
 const ResumeQuestion = ({ id, title, active }: ResumeQuestionProps) => {
+  const { mutate: deleteResumeQuestion } = useDeleteQuestion();
   const handleDeleteButtonClick = () => {
+    deleteResumeQuestion(id);
     /** ConfirmModal */
     /** isConfirmed: Delete API */
   };
@@ -28,7 +29,9 @@ const ResumeQuestion = ({ id, title, active }: ResumeQuestionProps) => {
       )}>
       <Link href={`${ROUTES.RESUMES}/${id}`} className={`flex w-full b3`}>
         <IconDocument className="mr-[6px]" />
-        <span className="max-w-[217px] text-ellipsis overflow-hidden whitespace-nowrap">{title}</span>
+        <span className="max-w-[217px] text-ellipsis overflow-hidden whitespace-nowrap">
+          {title ?? '문항 질문을 적어보세요.'}
+        </span>
       </Link>
 
       <ActionList>

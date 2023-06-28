@@ -1,11 +1,12 @@
 'use client';
 
 import React from 'react';
-import QuestionCard from '@/components/QuestionCard/QuestionCard';
+
 import TextAreaField from '@/components/Input/TextAreaField/TextAreaField';
-import SelectedKeywordContainer from '@/feature/analyze/verify/SelectedKeywordContainer';
+import QuestionCard from '@/components/QuestionCard/QuestionCard';
 import Tag from '@/components/Tag/Tag';
 import AICapabilityKeyword from '@/feature/analyze/verify/AICapabilityKeyword';
+import SelectedKeywordContainer from '@/feature/analyze/verify/SelectedKeywordContainer';
 
 const keywordList = ['도전정신', '추진력', '혁신사고력'];
 

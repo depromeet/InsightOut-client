@@ -1,13 +1,17 @@
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
 import { ComponentPropsWithoutRef } from 'react';
+
 import { Flex } from '@chakra-ui/react';
 import cn from 'classnames';
-import { tw } from '@/shared/utils/tailwindMerge';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+
 import { ROUTES } from '@/shared/constants/routes';
-import styles from './GlobalNavigationBar.module.scss';
+import { tw } from '@/shared/utils/tailwindMerge';
+
 import Button from '../Button/Button';
 import IconGoogleLogo from '../Icon/IconGoogleLogo';
+import Spinner from '../Spinner/Spinner';
+import styles from './GlobalNavigationBar.module.scss';
 
 type GlobalNavigationBarProps = ComponentPropsWithoutRef<'header'> & {
   /**
@@ -15,12 +19,16 @@ type GlobalNavigationBarProps = ComponentPropsWithoutRef<'header'> & {
    */
   isSignedIn: boolean;
   /**
+   * Auth 관련 요청이 진행 중인지 여부 (스피너 출력을 위해 필요)
+   */
+  isRequesting: boolean;
+  /**
    * 구글 로그인 함수
    */
   signIn: () => void;
 };
 
-const GlobalNavigationBar = ({ className, isSignedIn, signIn, ...props }: GlobalNavigationBarProps) => {
+const GlobalNavigationBar = ({ className, isSignedIn, isRequesting, signIn, ...props }: GlobalNavigationBarProps) => {
   const rootClassName = tw(styles.root, className);
   const pathName = usePathname();
 
@@ -48,7 +56,11 @@ const GlobalNavigationBar = ({ className, isSignedIn, signIn, ...props }: Global
           </Link>
         </Flex>
       </Flex>
-      {isSignedIn ? (
+      {isRequesting ? (
+        <Flex width={140} justifyContent={'center'}>
+          <Spinner size="L" style="primary500" />
+        </Flex>
+      ) : isSignedIn ? (
         <Link
           className={cn(styles.link, styles.myPage, { [styles.focus]: pathName === '/demo' })}
           href={{ pathname: '/demo' }}>
