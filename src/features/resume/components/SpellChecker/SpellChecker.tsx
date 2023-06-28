@@ -1,14 +1,15 @@
 import { PropsWithChildren } from 'react';
-import { MutationStatus } from '@tanstack/react-query';
+
 import { Spinner } from '@chakra-ui/react';
+import { MutationStatus } from '@tanstack/react-query';
 
 import Button from '@/components/Button/Button';
 import IconReset from '@/components/Icon/IconReset';
 
-import SpellCheckTitle from './SpellCheckTitle';
-import { SpellCheckData } from '../../types/question';
-import { useAnswer, useQuestionActions } from '../../store';
 import useSpellCheckResult from '../../hooks/useSpellCheckResult';
+import { useAnswer, useQuestionActions } from '../../store';
+import { SpellCheckData } from '../../types/question';
+import SpellCheckTitle from './SpellCheckTitle';
 
 // FIXME: api 연결 시 분리 예정 (14줄 ~ 28줄)
 type SpellCheckResponse = {

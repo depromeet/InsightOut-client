@@ -3,16 +3,18 @@
 import Button from '@/components/Button/Button';
 import IconPencil from '@/components/Icon/IconPencil';
 
-import { ResumeData } from '../../types/resume';
 import Resume from './Resume/Resume';
 import ResumeListContainer from './Resume/ResumeListContainer';
 
-type AsideProps = { resumeList: ResumeData[] };
+import { useGetResumes } from '@/hooks/reactQuery/resume/query';
+import { useCreateResume } from '@/hooks/reactQuery/resume/mutation';
 
-const Aside = ({ resumeList }: AsideProps) => {
+const Aside = () => {
+  const { mutate: createResume } = useCreateResume();
+  const { data: resumeList } = useGetResumes();
+
   const handleAddFolderButtonClick = () => {
-    /** TODO:POST 요청
-     */
+    createResume();
   };
 
   return (
@@ -22,13 +24,13 @@ const Aside = ({ resumeList }: AsideProps) => {
           <IconPencil />
           <span>내 자기소개서</span>
         </h1>
-        <Button variant="secondary" size="M" onClick={handleAddFolderButtonClick}>
+        <Button variant="primary" size="M" onClick={handleAddFolderButtonClick}>
           자기소개서 추가
         </Button>
       </header>
-      <ResumeListContainer>
-        {resumeList.map((resume) => (
-          <Resume key={resume.id} resume={resume} />
+      <ResumeListContainer expandedResumeCount={resumeList?.length}>
+        {resumeList?.map((resume) => (
+          <Resume key={resume.id} {...resume} />
         ))}
       </ResumeListContainer>
     </aside>

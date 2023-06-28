@@ -5,8 +5,9 @@ import { AccordionButton, AccordionIcon } from '@chakra-ui/react';
 import ActionList from '@/components/ActionList/ActionList';
 import IconFolder from '@/components/Icon/IconFolder';
 import IconMoreVertical from '@/components/Icon/IconMoreVertical';
+import { useDeleteResume, useUpdateResumeTitle } from '@/hooks/reactQuery/resume/mutation';
 
-type TitleProps = { title: string; selected?: boolean };
+type TitleProps = { resumeId: number; title: string; selected?: boolean };
 
 /**
  * @description 자기소개서 제목을 보여주고 수정할 수 있고 자기소개서 리스트 항목을 트리거하는 컴포넌트입니다.
@@ -19,24 +20,30 @@ type TitleProps = { title: string; selected?: boolean };
  * - 수정을 하면 input 요소로 변경됩니다.
  * - input 요소에서 blur 이벤트가 발생하면 자기소개서 제목이 수정됩니다.
  */
-const Title = ({ title = '자기소개서 예시', selected }: TitleProps) => {
+const Title = ({ resumeId, title = '자기소개서 예시', selected }: TitleProps) => {
   const [isEditMode, setIsEditMode] = useState(false);
+
+  const { mutate: updateResumeTitle } = useUpdateResumeTitle(resumeId);
+  const { mutate: deleteResume } = useDeleteResume();
 
   const handleEditButtonClick = () => {
     setIsEditMode(true);
   };
 
-  /** FIXME: EditInput과 관련한 이벤트 추상화 */
-  const handleEditInputBlur = () => {
-    /** PATCH 요청 */
+  const handleEditInputBlur = (e: React.FocusEvent<HTMLInputElement>) => {
     setIsEditMode(false);
+    updateResumeTitle(e.target.value);
   };
 
   const handleEditInputEnterKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
-      /** PATCH 요청 */
       setIsEditMode(false);
+      updateResumeTitle(e.currentTarget.value);
     }
+  };
+
+  const handleDeleteButtonClick = () => {
+    deleteResume({ resumeId });
   };
 
   /**
@@ -76,7 +83,7 @@ const Title = ({ title = '자기소개서 예시', selected }: TitleProps) => {
         </ActionList.Button>
         <ActionList.ItemWrapper>
           <ActionList.Item onClick={handleEditButtonClick}>수정하기</ActionList.Item>
-          <ActionList.Item>삭제하기</ActionList.Item>
+          <ActionList.Item onClick={handleDeleteButtonClick}>삭제하기</ActionList.Item>
         </ActionList.ItemWrapper>
       </ActionList>
     </div>

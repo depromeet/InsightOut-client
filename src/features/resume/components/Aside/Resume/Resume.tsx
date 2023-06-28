@@ -1,4 +1,5 @@
 import { AccordionItem, AccordionPanel } from '@chakra-ui/react';
+import { useParams } from 'next/navigation';
 
 import { colors } from '@/styles/theme/foundations/colors';
 
@@ -7,19 +8,21 @@ import Question from './ResumeItem/Question';
 import QuestionAddButton from './ResumeItem/QuestionAddButton';
 import Title from './ResumeItem/Title';
 
-const Resume = ({ resume: { title, questions } }: { resume: ResumeData }) => {
+const Resume = ({ id, title, questions }: ResumeData) => {
+  const { questionId } = useParams();
+
   const handleAddQuestionButtonClick = () => {
     /** POST 요청 */
   };
 
   return (
     <AccordionItem borderEndWidth={0} borderWidth={0} borderRadius="10px" backgroundColor={colors.white}>
-      <Title title={title} />
+      <Title resumeId={id} title={title} />
       <AccordionPanel display="flex" flexDirection="column" paddingX="0px" paddingY="8px">
         <ul>
           {questions.map((question) => (
             <li key={question.id}>
-              <Question active {...question} />
+              <Question active={+questionId === question.id} {...question} />
             </li>
           ))}
         </ul>

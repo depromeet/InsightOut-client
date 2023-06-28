@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
+
 import { MutationStatus } from '@tanstack/react-query';
 
-import { SpellCheckData, SpellCheckResult } from '../types/question';
 import { useQuestionActions } from '../store';
+import { SpellCheckData, SpellCheckResult } from '../types/question';
 
 /**
  * 서버 응답 상태와 맞춤법 검사 결과에 따라 맞춤법 결과 UI 상태를 반환하는 hook
