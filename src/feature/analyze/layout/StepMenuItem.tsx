@@ -17,7 +17,7 @@ const StepMenuItem = ({ title, status, className }: StepMenuItemProps) => {
       case '미작성':
         return 'gray100-outline';
       case '작성중':
-        return 'primary500';
+        return 'primary200-outline';
       case '작성완료':
         return 'primary50-outline';
       default:
