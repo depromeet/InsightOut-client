@@ -188,19 +188,21 @@ const ExperienceCardList = () => {
     },
   ];
   return (
-    <ul className="flex flex-col w-[370px] max-h-[843px] overflow-hidden gap-[16px] px-[29px] py-[16px] bg-gradient-to-b from-[#E9E8FF] to-[#F2F9FF]">
-      {demoResponse.map(({ id, startDate, endDate, title, summaryKeywords }) => (
-        <li key={id}>
-          <ExperienceCard
-            // FIXME: 선택한 경험 카드의 id
-            selected={id === 1}
-            date={formatDate(startDate, endDate)}
-            title={title}
-            summaryKeywords={summaryKeywords}
-          />
-        </li>
-      ))}
-    </ul>
+    <div className="relative after:content-[''] after:absolute after:bottom-0 after:w-[100%] after:h-[62px] after:bg-gradient-to-t after:from-[#F1F7FE] after:to-[rgba(243, 249, 255, 0.00)]">
+      <ul className="flex flex-col w-[370px] max-h-[843px] overflow-y-scroll gap-[16px] px-[29px] py-[16px] bg-gradient-to-b from-[#E9E8FF] to-[#F2F9FF]">
+        {demoResponse.map(({ id, startDate, endDate, title, summaryKeywords }) => (
+          <li key={id}>
+            <ExperienceCard
+              // FIXME: 선택한 경험 카드의 id
+              selected={id === 1}
+              date={formatDate(startDate, endDate)}
+              title={title}
+              summaryKeywords={summaryKeywords}
+            />
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 };
 
