@@ -18,7 +18,7 @@ const SpellCheckContainer = ({ children }: PropsWithChildren) => (
 
 const SpellChecker = () => {
   const answer = useAnswer();
-  const { setIsEditMode } = useQuestionActions();
+  const { setIsSpellCheckMode } = useQuestionActions();
 
   const { mutate: spellCheck, data: result, status } = useSpellCheck();
   const { spellCheckResult, setSpellCheckResult } = useSpellCheckResult(status, result ?? []);
@@ -36,7 +36,7 @@ const SpellChecker = () => {
 
   const handleResetButtonClick = () => {
     setSpellCheckResult('idle');
-    setIsEditMode(true);
+    setIsSpellCheckMode(false);
   };
 
   return (
