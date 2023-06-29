@@ -6,10 +6,12 @@ import ProgressBar from './ProgressBar';
 import { usePathname } from 'next/navigation';
 import { STEP, STEPS } from '@/feature/analyze/constants';
 
+const PROGRESS_STEP_FACTOR = 100 / STEPS.length;
+
 const Progress = () => {
   const pathname = usePathname();
   const currentStepId = STEPS.find((step) => step.route === pathname)?.id ?? STEP.experience;
-  const progress = 25 * currentStepId;
+  const progress = PROGRESS_STEP_FACTOR * currentStepId;
 
   return (
     <div className="w-[100%] rounded-[24px]">
