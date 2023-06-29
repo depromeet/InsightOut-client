@@ -12,7 +12,7 @@ interface StepMenuItemProps extends Pick<HTMLAttributes<HTMLLIElement>, 'classNa
 const StepMenuItem = ({ title, status, className }: StepMenuItemProps) => {
   const classNames = cn(styles.root, styles[status], className);
 
-  const handleVariant = () => {
+  const getVariant = () => {
     switch (status) {
       case '미작성':
         return 'gray100-outline';
@@ -27,7 +27,7 @@ const StepMenuItem = ({ title, status, className }: StepMenuItemProps) => {
   return (
     <li className={classNames}>
       <span className="b1">{title}</span>
-      <Badge size="S" variant={handleVariant()}>
+      <Badge size="S" variant={getVariant()}>
         {status}
       </Badge>
     </li>

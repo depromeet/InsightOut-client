@@ -37,7 +37,7 @@ const data = {
   수리감각: false,
   정보수집능력: false,
 };
-// TODO: 키워드 useQuery로 불러오고 onSuccess 콜백에서 setValue('keyword', Object.entries(data))로 대체하기
+// TODO: 키워드 useQuery로 불러오고 onSuccess 콜백에서 setValue('keywords', Object.entries(data))로 대체하기
 const entriesData = Object.entries(data);
 
 const deDuplicatedKeywordList = (arr: KeywordEntriesType) => Object.entries(Object.fromEntries(arr));
@@ -49,16 +49,16 @@ const KeywordPage = () => {
   const [text, onChangeText, setText] = useInput('');
   const { setValue, control } = useFormContext<ExperienceFormValues>();
   const keywordList = useWatch({
-    name: 'keyword',
+    name: 'keywords',
     control,
   });
 
   // FIXME: api 연결하면 제거하기
   useEffect(() => {
-    setValue('keyword', entriesData);
+    setValue('keywords', entriesData);
   }, []);
 
-  const getNextKeywordAction = (newKeyword: string) => {
+  const getKeywordList = (newKeyword: string) => {
     const selectedKeywordList = keywordList.filter(([, isSelected]) => isSelected === true);
     const selectedKeywordIndex = keywordList.findIndex(([prevKeyword]) => prevKeyword === newKeyword);
     const toggleKeyword = selectedKeywordList.includes(keywordList[selectedKeywordIndex]);
@@ -72,13 +72,13 @@ const KeywordPage = () => {
   };
 
   const handleClickKeyword = (newKeyword: string) => () => {
-    setValue('keyword', getNextKeywordAction(newKeyword));
+    setValue('keywords', getKeywordList(newKeyword));
   };
 
   const addKeywordAndInitializeTextField = () => {
     if (!text.trim()) return;
     // TODO: 중복된 키워드면 토스트 띄워주기
-    setValue('keyword', deDuplicatedKeywordList([...keywordList, [text, false]]));
+    setValue('keywords', deDuplicatedKeywordList([...keywordList, [text, false]]));
     setText('');
   };
 

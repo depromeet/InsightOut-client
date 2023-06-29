@@ -8,7 +8,7 @@ export const initialValue: ExperienceFormValues = {
   motivation: '',
   startDate: '',
   endDate: '',
-  keyword: [],
+  keywords: [],
   situation: '',
   task: '',
   action: '',

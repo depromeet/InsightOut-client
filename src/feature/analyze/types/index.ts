@@ -42,7 +42,7 @@ export interface ExperienceFormValues {
   /**
    * 키워드 리스트, 제출할 땐 Object.fromEntries()로 풀어서 객체형식으로 보내기
    */
-  keyword: KeywordEntriesType;
+  keywords: KeywordEntriesType;
   /**
    * 경험 내용(STAR) 중 S (/analyze/information)
    */

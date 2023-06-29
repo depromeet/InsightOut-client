@@ -15,7 +15,7 @@ const Lottie = ({ src, loop = true, autoplay = true, ...restProps }: LottieProps
   const player = useRef<AnimationItem | null>(null);
 
   useEffect(() => {
-    if (container.current == null) {
+    if (container.current === null) {
       return;
     }
 
