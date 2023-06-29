@@ -12,17 +12,10 @@ export default meta;
 type Story = StoryObj<typeof SpellChecker>;
 
 export const Default: Story = {
-  render: (args) => <SpellChecker {...args} />,
+  render: () => <SpellChecker />,
   args: {},
 };
 
 export const Example: Story = {
-  render: () => (
-    <>
-      <SpellChecker status="idle" />
-      <SpellChecker status="loading" />
-      <SpellChecker status="success" result={[]} />
-      <SpellChecker status="success" />
-    </>
-  ),
+  render: () => <SpellChecker />,
 };
