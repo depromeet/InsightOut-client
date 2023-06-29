@@ -3,7 +3,7 @@ import { PropsWithChildren } from 'react';
 import resumeApi from '@/apis/resume/resume';
 import PrefetchHydration from '@/components/tanstackQuery/PrefetchHydration';
 import Aside from '@/features/resume/components/Aside/Aside';
-import ExperienceCardList from '@/features/resume/components/ExperienceCardList/ExperienceCardList';
+import MyExperienceCard from '@/features/resume/components/MyExperienceCard/MyExperienceCard';
 import { RESUME_KEY } from '@/shared/constants/querykeys';
 
 const Layout = ({ children }: PropsWithChildren) => {
@@ -15,7 +15,7 @@ const Layout = ({ children }: PropsWithChildren) => {
       </PrefetchHydration>
       <div className="flex mt-[19px] gap-[20px] px-[10px] max-[1536px]:flex-col max-[1536px]:pl-[101px] ">
         {children}
-        <ExperienceCardList />
+        <MyExperienceCard />
       </div>
     </div>
   );

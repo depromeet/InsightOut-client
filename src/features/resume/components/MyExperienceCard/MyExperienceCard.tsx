@@ -1,7 +1,4 @@
-import { Divider, Flex } from '@chakra-ui/react';
-
 import IconCards from '@/components/Icon/IconCards';
-import { colors } from '@/styles/theme/foundations/colors';
 
 import ExperienceCardDetail from './ExperienceCardDetail';
 import ExperienceCardList from './ExperienceCardList';
@@ -17,11 +14,11 @@ const MyExperienceCard = () => {
         <p className="c1 text-sub">직무역량별 경험카드로 기억을 되새긴 후 자기소개서를 작성해봐요.</p>
         {/* <FilterChipList /> */}
       </header>
-      <Divider borderColor={colors.gray[200]} />
-      <Flex>
+      <hr aria-orientation="horizontal" className="border-gray-200"></hr>
+      <div className="flex">
         <ExperienceCardList />
         <ExperienceCardDetail />
-      </Flex>
+      </div>
     </section>
   );
 };
