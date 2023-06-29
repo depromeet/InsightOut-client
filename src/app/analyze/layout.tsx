@@ -61,8 +61,8 @@ const Layout = ({ children }: LayoutProps) => {
   );
 
   const TOOLTIP_CONTENTS = [
-    <>“OOO님 좋은 시작이에요”</>,
-    <>“뭐든지 시작이 반이에요”</>,
+    `“${data}님 좋은 시작이에요”`,
+    '“뭐든지 시작이 반이에요”',
     <>“내용을 풍부하게 작성할수록 다양한 AI 직무 역량 키워드를 받을 수 있어요 최선을 다해 작성해주세요 :)”</>,
     <>“AI 직무역량 키워드 추천을 통해 나의 직무역량을 다각도로 넓혀보세요”</>,
   ];
@@ -81,7 +81,7 @@ const Layout = ({ children }: LayoutProps) => {
 
     switch (prevPathname) {
       case ROUTES.EXPERIENCE:
-        const [title, startYYYY, startMM, endYYYY, endMM, experienceRole, motivation] = methods.getValues([
+        const experiencePageValues = methods.getValues([
           'title',
           'startYYYY',
           'startMM',
@@ -90,27 +90,27 @@ const Layout = ({ children }: LayoutProps) => {
           'experienceRole',
           'motivation',
         ]);
-        if (!!title && !!startYYYY && !!startMM && !!endYYYY && !!endMM && !!experienceRole && !!motivation) {
+        if (experiencePageValues.every((v) => !!v)) {
           setWriteStatus(copyWriteStatus, '작성완료');
-        } else if (!!title || !!startYYYY || !!startMM || !!endYYYY || !!endMM || !!experienceRole || !!motivation) {
+        } else if (experiencePageValues.some((v) => !!v)) {
           setWriteStatus(copyWriteStatus, '작성중');
         } else {
           setWriteStatus(copyWriteStatus, '미작성');
         }
         break;
       case ROUTES.KEYWORD:
-        const keyword = methods.getValues('keyword');
-        if (keyword.some(([, isSelected]) => isSelected === true)) {
+        const keywords = methods.getValues('keywords');
+        if (keywords.some(([, isSelected]) => isSelected === true)) {
           setWriteStatus(copyWriteStatus, '작성완료');
         } else {
           setWriteStatus(copyWriteStatus, '미작성');
         }
         break;
       case ROUTES.INFORMATION:
-        const [situation, task, action, result] = methods.getValues(['situation', 'task', 'action', 'result']);
-        if (!!situation && !!task && !!action && !!result) {
+        const informationPageValues = methods.getValues(['situation', 'task', 'action', 'result']);
+        if (informationPageValues.every((v) => !!v)) {
           setWriteStatus(copyWriteStatus, '작성완료');
-        } else if (!!situation || !!task || !!action || !!result) {
+        } else if (informationPageValues.some((v) => !!v)) {
           setWriteStatus(copyWriteStatus, '작성중');
         } else {
           setWriteStatus(copyWriteStatus, '미작성');

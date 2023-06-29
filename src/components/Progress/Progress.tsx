@@ -1,10 +1,10 @@
 'use client';
 
 import React from 'react';
+import { useFormContext } from 'react-hook-form';
 
-import { usePathname } from 'next/navigation';
-
-import { STEP, STEPS } from '@/feature/analyze/constants';
+import { STEPS } from '@/feature/analyze/constants';
+import { ExperienceFormValues, WriteStatusType } from '@/feature/analyze/types';
 
 import Tag from '../Tag/Tag';
 import ProgressBar from './ProgressBar';
@@ -12,9 +12,9 @@ import ProgressBar from './ProgressBar';
 const PROGRESS_STEP_FACTOR = 100 / STEPS.length;
 
 const Progress = () => {
-  const pathname = usePathname();
-  const currentStepId = STEPS.find((step) => step.route === pathname)?.id ?? STEP.experience;
-  const progress = PROGRESS_STEP_FACTOR * currentStepId;
+  const { getValues } = useFormContext<ExperienceFormValues>();
+  const writeStatus = getValues('writeStatus') as WriteStatusType[];
+  const progress = PROGRESS_STEP_FACTOR * writeStatus.filter((status) => status === '작성완료').length;
 
   return (
     <div className="w-[100%] rounded-[24px]">
