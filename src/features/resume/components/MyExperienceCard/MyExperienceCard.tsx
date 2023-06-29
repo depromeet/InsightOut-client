@@ -6,7 +6,7 @@ import { colors } from '@/styles/theme/foundations/colors';
 import ExperienceCardDetail from './ExperienceCardDetail';
 import ExperienceCardList from './ExperienceCardList';
 
-const ExperienceCardContainer = () => {
+const MyExperienceCard = () => {
   return (
     <section className="resume-section min-h-[976px] shadow-toast">
       <header className="flex items-center gap-[6px] pt-[28px] pl-[35px] pr-[37px]">
@@ -26,4 +26,4 @@ const ExperienceCardContainer = () => {
   );
 };
 
-export default ExperienceCardContainer;
+export default MyExperienceCard;
