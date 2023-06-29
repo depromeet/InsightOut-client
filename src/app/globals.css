@@ -7,9 +7,6 @@
   .layout {
     @apply max-w-[1200px] mx-auto;
   }
-  .layout-mt-40 {
-    @apply mt-10 layout;
-  }
 
   /* header */
   .h1 {
@@ -63,6 +60,12 @@
   .subhead3 {
     font-weight: 500;
     font-size: 20px;
+    line-height: 28px;
+    letter-spacing: -0.6px;
+  }
+  .subhead4 {
+    font-weight: 700;
+    font-size: 16px;
     line-height: 28px;
     letter-spacing: -0.6px;
   }
