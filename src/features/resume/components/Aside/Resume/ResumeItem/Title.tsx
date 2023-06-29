@@ -6,7 +6,6 @@ import ActionList from '@/components/ActionList/ActionList';
 import IconFolder from '@/components/Icon/IconFolder';
 import IconMoreVertical from '@/components/Icon/IconMoreVertical';
 import { useDeleteResume, useUpdateResumeTitle } from '@/hooks/reactQuery/resume/mutation';
-import { useDeleteResume, useUpdateResumeTitle } from '@/hooks/reactQuery/resume/mutation';
 
 import DeleteModal from '../../DeleteModal';
 
@@ -29,7 +28,7 @@ const Title = ({ resumeId, title = '자기소개서 예시', selected }: TitlePr
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const { mutate: updateResumeTitle } = useUpdateResumeTitle(resumeId);
-  const { mutate: deleteResume } = useDeleteResume();
+  const { mutate: deleteResume } = useDeleteResume(resumeId);
 
   const handleEditButtonClick = () => {
     setIsEditMode(true);
