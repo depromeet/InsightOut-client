@@ -7,14 +7,17 @@ import { TextLengthMessage } from '@/components/Input/TextLengthMessage';
 import { MAX_LENGTH } from '@/shared/constants/maxLength';
 import { resizeHeight } from '@/shared/utils/autoSizeTextarea';
 
-import { useAnswer, useQuestionActions, useTitle } from '../../store';
+import { useAnswer, useIsEditMode, useQuestionActions, useTitle } from '../../store';
 import { QuestionData } from '../../types/question';
+import SpellChecker from '../SpellChecker/SpellChecker';
+import SpellErrorPreview from '../SpellChecker/SpellErrorPreview';
 import SavingCaption from './SavingCaption';
 
 const ResumeForm = ({ id, title: initialTitle, answer: initialAnswer, updatedAt }: QuestionData) => {
   /** TODO: props로 전달받은 title, answer 값으로 초기화 */
   const title = useTitle();
   const answer = useAnswer();
+  const isEditMode = useIsEditMode();
   const { setTitle, setAnswer } = useQuestionActions();
 
   const titleTextareaRef = useRef<HTMLTextAreaElement>(null);
@@ -51,13 +54,18 @@ const ResumeForm = ({ id, title: initialTitle, answer: initialAnswer, updatedAt 
         placeholder="문항 질문을 적어보세요."
         className="w-full min-h-[96px] py-[6px] resize-none subhead2 placeholder:text-light"
       />
-      <textarea
-        value={answer}
-        onChange={handleAnswerChange}
-        maxLength={MAX_LENGTH.QUESTION}
-        placeholder="질문에 대한 답변을 적어보세요."
-        className="w-[660px] h-[660px] resize-none b1 text-main placeholder:text-light"
-      />
+      {isEditMode ? (
+        <textarea
+          value={answer}
+          onChange={handleAnswerChange}
+          maxLength={MAX_LENGTH.QUESTION}
+          placeholder="질문에 대한 답변을 적어보세요."
+          className="w-[660px] h-[660px] resize-none b1 text-main placeholder:text-light"
+        />
+      ) : (
+        <SpellErrorPreview />
+      )}
+      <SpellChecker />
     </form>
   );
 };
