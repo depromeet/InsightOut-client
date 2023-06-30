@@ -46,7 +46,7 @@ const SpellChecker = () => {
         type="button"
         variant="outlined"
         size="M"
-        disabled={!!answer}
+        disabled={!answer}
         onClick={spellCheckResult === 'idle' ? handleSpellCheckButtonClick : handleResetButtonClick}
         onlyIcon={spellCheckResult === 'loading' && <Spinner width="24px" height="24px" />}
         leftIcon={
