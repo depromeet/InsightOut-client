@@ -1,18 +1,18 @@
+import questionApi from '@/apis/resume/question';
+import PrefetchHydration from '@/components/tanstackQuery/PrefetchHydration';
 import ResumeForm from '@/features/resume/components/ResumeForm/ResumeForm';
+import { QUESTION_KEY } from '@/shared/constants/querykeys';
 
-const Page = () => {
-  /** FIXME: GET /resumes/questions/${questionId} */
-  const mockData = {
-    id: 1234,
-    title: '디프만 13기 지원동기',
-    answer: '디프만을 통한 빠른 성장',
-    updatedAt: '2023-06-05T05:58:44.402Z',
-  };
-
+const Page = ({ params: { questionId } }: { params: { questionId: string } }) => {
   return (
-    <section className="resume-section py-[30px] px-11">
-      <ResumeForm {...mockData} />
-    </section>
+    <div className="flex flex-col min-w-[748px] border-[1px] border-purple-100 shadow-toast rounded-3xl bg-white py-[30px] px-11">
+      {/* @ts-expect-error Server Component */}
+      <PrefetchHydration
+        queryKey={[QUESTION_KEY.detail([{ questionId }])]}
+        queryFn={() => questionApi.get({ questionId })}>
+        <ResumeForm />
+      </PrefetchHydration>
+    </div>
   );
 };
 

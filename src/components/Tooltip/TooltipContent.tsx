@@ -11,7 +11,7 @@ import styles from './TooltipContent.module.scss';
 type TooltipProps = MergeComponentProps<
   'div',
   {
-    /** @description 툴팁 타입 (strong, light) */
+    /** @description 툴팁 타입 (strong, light, primary) */
     type: TooltipType;
     /** @description 툴팁 포지션 (center-top, center-bottom, right-top, right-bottom, left-top, left-bottom, side-left-center, side-right-center) */
     position: TooltipPosition;
@@ -27,7 +27,7 @@ type TooltipProps = MergeComponentProps<
  */
 const TooltipContent = forwardRef<HTMLDivElement, TooltipProps>(
   ({ type = 'strong', position = 'center-top', content, className, isOpen, ...props }, ref) => {
-    const rootClassName = tw(styles.root, styles[type], styles[position], className);
+    const rootClassName = tw(styles.root, styles[type], styles[position], 'b1', className);
     const wrappedContent = wrapTooltipChildren(content);
 
     return (
