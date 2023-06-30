@@ -4,6 +4,7 @@ import React, { useCallback, useEffect } from 'react';
 import { FormProvider, useForm, useWatch } from 'react-hook-form';
 
 import { usePrevious } from '@chakra-ui/react';
+// import { useFetchAnalyze } from '@/hooks/reactQuery/analyze/query';
 import { DevTool } from '@hookform/devtools';
 import { Route } from 'next';
 import Link from 'next/link';
@@ -17,7 +18,6 @@ import TooltipRelativeContent from '@/components/Tooltip/TooltipRelativeContent'
 import { initialValue, STEPS } from '@/feature/analyze/constants';
 import StepMenu from '@/feature/analyze/layout/StepMenu';
 import { ExperienceFormValues, WriteStatusType } from '@/feature/analyze/types';
-import { useFetchAnalyze } from '@/hooks/reactQuery/analyze/query';
 import { useIsMounted } from '@/hooks/useIsMounted';
 import { ROUTES } from '@/shared/constants/routes';
 
@@ -42,23 +42,23 @@ const Layout = ({ children }: LayoutProps) => {
     control: methods.control,
   });
 
-  const { data } = useFetchAnalyze(
-    {},
-    {
-      onSuccess: (data) => {
-        const { setValue } = methods;
-        const [endYYYY, endMM] = data.endDate.split('-');
-        const [startYYYY, startMM] = data.startDate.split('-');
-        setValue('title', data.title);
-        setValue('startYYYY', startYYYY);
-        setValue('startMM', startMM);
-        setValue('endYYYY', endYYYY);
-        setValue('endMM', endMM);
-        setValue('experienceRole', data.experienceInfo?.experienceRole);
-        setValue('motivation', data.experienceInfo?.motivation);
-      },
-    }
-  );
+  // const { data } = useFetchAnalyze(
+  //   {},
+  //   {
+  //     onSuccess: (data) => {
+  //       const { setValue } = methods;
+  //       const [endYYYY, endMM] = data.endDate.split('-');
+  //       const [startYYYY, startMM] = data.startDate.split('-');
+  //       setValue('title', data.title);
+  //       setValue('startYYYY', startYYYY);
+  //       setValue('startMM', startMM);
+  //       setValue('endYYYY', endYYYY);
+  //       setValue('endMM', endMM);
+  //       setValue('experienceRole', data.experienceInfo?.experienceRole);
+  //       setValue('motivation', data.experienceInfo?.motivation);
+  //     },
+  //   }
+  // );
 
   const TOOLTIP_CONTENTS = [
     `“000님 좋은 시작이에요”`,

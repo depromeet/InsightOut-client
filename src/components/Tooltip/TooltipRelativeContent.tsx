@@ -37,7 +37,7 @@ const TooltipRelativeContent = ({
   return (
     <React.Fragment>
       {isOpen && (
-        <div className={classNames(rootClassName, 'text-center')} {...props}>
+        <div className={classNames(rootClassName, 'text-center', 'b1')} {...props}>
           {content}
           <TooltipArrow className={styles.arrow} type={type} position={position} />
         </div>
