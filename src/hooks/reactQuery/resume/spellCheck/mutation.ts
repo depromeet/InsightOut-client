@@ -1,4 +1,4 @@
-import { useMutation,UseMutationOptions } from '@tanstack/react-query';
+import { useMutation, UseMutationOptions } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
 
 import spellCheckApi from '@/apis/resume/spellCheck';
@@ -12,7 +12,7 @@ export const useSpellCheck = (
 ) => {
   return useMutation(
     async (answer) => {
-      const { data } = await spellCheckApi.post({ payload: { sentence: answer } });
+      const data = await spellCheckApi.post({ payload: { sentence: answer } });
       return formatSpellCheckResponse(data);
     },
     {

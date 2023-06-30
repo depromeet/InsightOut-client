@@ -1,11 +1,12 @@
 import instance from '@/apis';
 
-import { SpellCheckParams } from './types/spellCheck';
+import { SpellCheckParams, SpellCheckResponse } from './types/spellCheck';
 
 const API_URL = '/resumes/questions/spell-check';
 
 const spellCheckApi = {
-  post: async ({ payload }: SpellCheckParams['post']) => await instance.post(API_URL, payload),
+  post: async ({ payload }: SpellCheckParams['post']): Promise<SpellCheckResponse> =>
+    await instance.post(API_URL, payload),
 };
 
 export default spellCheckApi;
