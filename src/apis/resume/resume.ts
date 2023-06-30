@@ -1,4 +1,5 @@
 import instance from '@/apis';
+
 import { ResumeParams, ResumeResponse } from './types/resume';
 
 const API_URL = '/resumes';

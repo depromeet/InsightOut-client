@@ -3,17 +3,19 @@ import Link from 'next/link';
 import ActionList from '@/components/ActionList/ActionList';
 import IconDocument from '@/components/Icon/IconDocument';
 import IconMoreVertical from '@/components/Icon/IconMoreVertical';
+import { QuestionData } from '@/features/resume/types/question';
+import { useDeleteQuestion } from '@/hooks/reactQuery/resume/question/mutation';
 import { ROUTES } from '@/shared/constants/routes';
 import { tw } from '@/shared/utils/tailwindMerge';
-
-import { QuestionData } from '../../../../types/question';
 
 type ResumeQuestionProps = QuestionData & {
   active?: boolean;
 };
 
 const ResumeQuestion = ({ id, title, active }: ResumeQuestionProps) => {
+  const { mutate: deleteResumeQuestion } = useDeleteQuestion();
   const handleDeleteButtonClick = () => {
+    deleteResumeQuestion(id);
     /** ConfirmModal */
     /** isConfirmed: Delete API */
   };
