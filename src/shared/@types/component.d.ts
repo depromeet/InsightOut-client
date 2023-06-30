@@ -28,6 +28,7 @@ type ChipSize = 'S' | 'M';
 type BadgeVariant =
   | 'primary500'
   | 'primary50-outline'
+  | 'primary200-outline'
   | 'secondary400'
   | 'secondary50-outline'
   | 'gray100-outline'
