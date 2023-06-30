@@ -1,6 +1,6 @@
 import highlightError from '@/shared/utils/replacePatternToComponent';
 
-import { useAnswer,useSpellErrors } from '../../store';
+import { useAnswer, useSpellErrors } from '../../store';
 import ErrorWord from './ErrorWord';
 
 const SpellErrorPreview = () => {

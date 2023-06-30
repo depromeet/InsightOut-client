@@ -1,8 +1,8 @@
 import { PropsWithChildren } from 'react';
 
-import Aside from '@/features/resume/components/Aside/Aside';
-import PrefetchHydration from '@/components/tanstackQuery/PrefetchHydration';
 import resumeApi from '@/apis/resume/resume';
+import PrefetchHydration from '@/components/tanstackQuery/PrefetchHydration';
+import Aside from '@/features/resume/components/Aside/Aside';
 import { RESUME_KEY } from '@/shared/constants/querykeys';
 
 const Layout = ({ children }: PropsWithChildren) => {

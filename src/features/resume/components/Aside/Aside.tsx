@@ -2,12 +2,11 @@
 
 import Button from '@/components/Button/Button';
 import IconPencil from '@/components/Icon/IconPencil';
+import { useCreateResume } from '@/hooks/reactQuery/resume/mutation';
+import { useGetResumes } from '@/hooks/reactQuery/resume/query';
 
 import Resume from './Resume/Resume';
 import ResumeListContainer from './Resume/ResumeListContainer';
-
-import { useGetResumes } from '@/hooks/reactQuery/resume/query';
-import { useCreateResume } from '@/hooks/reactQuery/resume/mutation';
 
 const Aside = () => {
   const { mutate: createResume } = useCreateResume();

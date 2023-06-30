@@ -6,7 +6,7 @@ import IconXLine from '@/components/Icon/IconXLine';
 import { colors } from '@/styles/theme/foundations/colors';
 import { textStyles } from '@/styles/theme/foundations/textStyles';
 
-import { useAnswer, useQuestionActions,useSpellErrors } from '../../store';
+import { useAnswer, useQuestionActions, useSpellErrors } from '../../store';
 import { SpellCheckData } from '../../types/question';
 
 const SpellErrorResult = () => {
