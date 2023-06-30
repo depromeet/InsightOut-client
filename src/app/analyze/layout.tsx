@@ -16,7 +16,7 @@ import TooltipRelativeContent from '@/components/Tooltip/TooltipRelativeContent'
 import Lottie from '@/components/Lottie/Lottie';
 import Progress from '@/components/Progress/Progress';
 import StepMenu from '@/feature/analyze/layout/StepMenu';
-import { useFetchAnalyze } from '@/hooks/reactQuery/analyze/query';
+// import { useFetchAnalyze } from '@/hooks/reactQuery/analyze/query';
 import { usePrevious } from '@chakra-ui/react';
 
 export interface LayoutProps {
@@ -40,23 +40,23 @@ const Layout = ({ children }: LayoutProps) => {
     control: methods.control,
   });
 
-  const { data } = useFetchAnalyze(
-    {},
-    {
-      onSuccess: (data) => {
-        const { setValue } = methods;
-        const [endYYYY, endMM] = data.endDate.split('-');
-        const [startYYYY, startMM] = data.startDate.split('-');
-        setValue('title', data.title);
-        setValue('startYYYY', startYYYY);
-        setValue('startMM', startMM);
-        setValue('endYYYY', endYYYY);
-        setValue('endMM', endMM);
-        setValue('experienceRole', data.experienceInfo?.experienceRole);
-        setValue('motivation', data.experienceInfo?.motivation);
-      },
-    }
-  );
+  // const { data } = useFetchAnalyze(
+  //   {},
+  //   {
+  //     onSuccess: (data) => {
+  //       const { setValue } = methods;
+  //       const [endYYYY, endMM] = data.endDate.split('-');
+  //       const [startYYYY, startMM] = data.startDate.split('-');
+  //       setValue('title', data.title);
+  //       setValue('startYYYY', startYYYY);
+  //       setValue('startMM', startMM);
+  //       setValue('endYYYY', endYYYY);
+  //       setValue('endMM', endMM);
+  //       setValue('experienceRole', data.experienceInfo?.experienceRole);
+  //       setValue('motivation', data.experienceInfo?.motivation);
+  //     },
+  //   }
+  // );
 
   const TOOLTIP_CONTENTS = [
     `“000님 좋은 시작이에요”`,

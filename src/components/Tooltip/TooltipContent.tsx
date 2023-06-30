@@ -24,7 +24,7 @@ type TooltipProps = MergeComponentProps<
  */
 const TooltipContent = forwardRef<HTMLDivElement, TooltipProps>(
   ({ type = 'strong', position = 'center-top', content, className, isOpen, ...props }, ref) => {
-    const rootClassName = tw(styles.root, styles[type], styles[position], className);
+    const rootClassName = tw(styles.root, styles[type], styles[position], 'b1', className);
     const wrappedContent = wrapTooltipChildren(content);
 
     return (
