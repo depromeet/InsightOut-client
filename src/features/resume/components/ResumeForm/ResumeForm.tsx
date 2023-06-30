@@ -6,7 +6,6 @@ import { useParams } from 'next/navigation';
 
 import Button from '@/components/Button/Button';
 import { TextLengthMessage } from '@/components/Input/TextLengthMessage';
-import { useAnswer, useQuestionActions, useTitle } from '@/features/resume/store';
 import { useUpdateQuestion } from '@/hooks/reactQuery/resume/question/mutation';
 import { useGetQuestion } from '@/hooks/reactQuery/resume/question/query';
 import { MAX_LENGTH } from '@/shared/constants/maxLength';
