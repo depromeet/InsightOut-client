@@ -1,6 +1,7 @@
 import { AccordionItem, AccordionPanel } from '@chakra-ui/react';
 import { useParams } from 'next/navigation';
 
+import { useCreateQuestion } from '@/hooks/reactQuery/resume/question/mutation';
 import { colors } from '@/styles/theme/foundations/colors';
 
 import { ResumeData } from '../../../types/resume';
@@ -10,9 +11,10 @@ import Title from './ResumeItem/Title';
 
 const Resume = ({ id, title, questions }: ResumeData) => {
   const { questionId } = useParams();
+  const { mutate: createQuestion } = useCreateQuestion();
 
   const handleAddQuestionButtonClick = () => {
-    /** POST 요청 */
+    createQuestion(id);
   };
 
   return (
