@@ -1,5 +1,7 @@
 'use client';
 
+import { useState } from 'react';
+
 import { initializeApp } from 'firebase/app';
 import { getAuth, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { useRouter } from 'next/navigation';
@@ -29,17 +31,25 @@ const useGoogleLogin = () => {
   const { setUserInfo } = useUserActions();
   const router = useRouter();
 
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
   const signIn = async () => {
-    const firebaseResponse = await signInWithPopup(auth, provider);
-    const idToken = await firebaseResponse.user.getIdToken();
-    const response = await authApi.signIn(idToken);
-    const userInfo: UserInfo = {
-      userId: response.userId,
-      nickname: response.nickname,
-      onboarding: response.onboarding,
-    };
-    setUserInfo(userInfo);
-    router.push('/?steps=welcome');
+    setIsLoading(true);
+    try {
+      const firebaseResponse = await signInWithPopup(auth, provider);
+      const idToken = await firebaseResponse.user.getIdToken();
+      const response = await authApi.signIn(idToken);
+      const userInfo: UserInfo = {
+        userId: response.userId,
+        nickname: response.nickname,
+        onboarding: response.onboarding,
+      };
+      setIsLoading(false);
+      setUserInfo(userInfo);
+      router.push('/?steps=welcome');
+    } catch (error) {
+      setIsLoading(false);
+    }
   };
 
   const signOut = () => auth.signOut();
@@ -48,6 +58,7 @@ const useGoogleLogin = () => {
     signIn,
     signOut,
     isSignedIn,
+    isLoading,
   };
 };
 

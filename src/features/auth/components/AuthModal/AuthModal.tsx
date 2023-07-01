@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 
 import Modal from '@/components/Modal/Modal';
+import Spinner from '@/components/Spinner/Spinner';
 import CategoriesContents from '@/features/auth/components/AuthModal/ModalContents/CategoriesContents';
 import SignUpContents from '@/features/auth/components/AuthModal/ModalContents/SignUpContents';
 import StartNowContents from '@/features/auth/components/AuthModal/ModalContents/StartNowContents';
@@ -25,7 +26,7 @@ const AuthModal = ({ isOpen, onClose, onAbortSignUp }: AuthModalProps) => {
   const router = useRouter();
   const { nickname } = useUserInfo();
   const { setIsSignedIn, setIsTokenRequired } = useAuthActions();
-  const { signIn } = useGoogleLogin();
+  const { signIn, isLoading } = useGoogleLogin();
 
   const [selectedCategory, setSelectedCategory] = useState<string>('');
 
@@ -79,7 +80,7 @@ const AuthModal = ({ isOpen, onClose, onAbortSignUp }: AuthModalProps) => {
   };
   return (
     <Modal size={modalSize()} isOpen={isOpen} onClose={handleCloseModal}>
-      {renderContents()}
+      {isLoading ? <Spinner size="L" style="primary500" /> : renderContents()}
     </Modal>
   );
 };
