@@ -15,6 +15,11 @@ const authApi = {
    * @description cookie에 담겨있는 refreshToken을 활용하여 accessToken 재발급
    */
   reIssue: () => instance.post<unknown, AccessToken>(AUTH_API.REISSUE),
+  /**
+   *
+   * @description refreshToken을 전달하여 회원 탈퇴
+   */
+  withdraw: () => instance.delete(AUTH_API.WITHDRAW),
 };
 
 export default authApi;

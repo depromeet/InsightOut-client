@@ -5,6 +5,7 @@ import cn from 'classnames';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 
+import authApi from '@/apis/auth/auth';
 import AuthModal from '@/features/auth/components/AuthModal/AuthModal';
 import { useAuthActions, useIsOpenSignUpModal } from '@/features/auth/store';
 import { ROUTES } from '@/shared/constants/routes';
@@ -41,6 +42,10 @@ const GlobalNavigationBar = ({ className, isSignedIn, isRequesting, ...props }: 
   const handleClickCloseButton = () => {
     setIsOpenSignUpModal(false);
     router.replace('/');
+  };
+
+  const handleAbortSignUp = async () => {
+    await authApi.withdraw();
   };
 
   return (
@@ -92,7 +97,7 @@ const GlobalNavigationBar = ({ className, isSignedIn, isRequesting, ...props }: 
           </Button>
         )}
       </header>
-      <AuthModal isOpen={isOpenSignUpModal} handleClose={handleClickCloseButton} />
+      <AuthModal isOpen={isOpenSignUpModal} onClose={handleClickCloseButton} onAbortSignUp={handleAbortSignUp} />
     </>
   );
 };
