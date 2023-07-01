@@ -1,7 +1,13 @@
 import isEmpty from 'lodash/isEmpty';
 
 import instance from '@/apis';
-import { ExperienceCapabilityResponse, ExperienceParams, ExperienceResponse } from '@/apis/experience/types/experience';
+import {
+  ExperienceCapabilityParams,
+  ExperienceCapabilityResponse,
+  ExperienceCountResponse,
+  ExperienceParams,
+  ExperienceResponse,
+} from '@/apis/experience/types/experience';
 import { objToQueryString } from '@/shared/utils/objToQueryString';
 
 const EXPERIENCE_API_URL = '/experience';
@@ -16,5 +22,14 @@ export const EXPERIENCE_API = {
 };
 
 export const EXPERIENCE_CAPABILITY_API = {
-  get: async () => await instance.get<null, ExperienceCapabilityResponse>(EXPERIENCE_API_URL + '/capalibity'),
+  get: async (parmas: ExperienceCapabilityParams['get']) => {
+    const { experienceId } = parmas;
+    return await instance.get<ExperienceCapabilityParams, ExperienceCapabilityResponse>(
+      EXPERIENCE_API_URL + '/capalibity' + experienceId
+    );
+  },
+};
+
+export const EXPERIENCE_COUNT_API = {
+  get: async () => await instance.get<null, ExperienceCountResponse>(EXPERIENCE_API_URL + '/count'),
 };

@@ -34,11 +34,19 @@ export type ExperienceResponse = {
 };
 
 export type ExperienceCapabilityParams = {
-  get: {};
+  get: {
+    experienceId?: number;
+  };
 };
 
 export type ExperienceCapabilityResponse = {
   get: {
     capability: Capability;
+  };
+};
+
+export type ExperienceCountResponse = {
+  get: {
+    experience: number;
   };
 };
