@@ -3,14 +3,18 @@ import { PropsWithChildren } from 'react';
 
 import { ModalHeader as ModalHeaderWrapper } from '@chakra-ui/react';
 
-const ModalHeader = ({ children }: PropsWithChildren) => <ModalHeaderWrapper>{children}</ModalHeaderWrapper>;
+type ModalHeaderProps = { className?: string } & PropsWithChildren;
 
-type TiTleProps = {
+const ModalHeader = ({ className, children }: ModalHeaderProps) => (
+  <ModalHeaderWrapper className={className}>{children}</ModalHeaderWrapper>
+);
+
+type TitleProps = {
   title: string;
   subTitle?: string;
 };
 
-ModalHeader.Title = ({ title, subTitle }: TiTleProps) => {
+ModalHeader.Title = ({ title, subTitle }: TitleProps) => {
   return (
     <ModalHeader>
       <h5 className="h5 tex">{title}</h5>
