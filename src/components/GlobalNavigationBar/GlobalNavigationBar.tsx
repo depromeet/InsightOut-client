@@ -2,6 +2,7 @@ import { ComponentPropsWithoutRef } from 'react';
 
 import { Flex } from '@chakra-ui/react';
 import cn from 'classnames';
+import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 
@@ -9,10 +10,11 @@ import userApi from '@/apis/user/user';
 import AuthModal from '@/features/auth/components/AuthModal/AuthModal';
 import { useAuthActions, useIsOpenSignUpModal } from '@/features/auth/store';
 import { ROUTES } from '@/shared/constants/routes';
-import { useUserNickname } from '@/shared/store/user';
+import { useUserImageUrl, useUserNickname } from '@/shared/store/user';
 import { tw } from '@/shared/utils/tailwindMerge';
 
 import Button from '../Button/Button';
+import SvgIconGnbMyPage from '../Icon/IconGnbMyPage';
 import IconGoogleLogo from '../Icon/IconGoogleLogo';
 import Spinner from '../Spinner/Spinner';
 import styles from './GlobalNavigationBar.module.scss';
@@ -33,6 +35,7 @@ const GlobalNavigationBar = ({ className, isSignedIn, isRequesting, ...props }: 
   const pathName = usePathname();
   const isOpenSignUpModal = useIsOpenSignUpModal();
   const nickname = useUserNickname();
+  const profileImgUrl = useUserImageUrl();
   const { setIsOpenSignUpModal } = useAuthActions();
   const router = useRouter();
 
@@ -82,9 +85,15 @@ const GlobalNavigationBar = ({ className, isSignedIn, isRequesting, ...props }: 
         ) : isSignedIn ? (
           <Link
             className={cn(styles.link, styles.myPage, { [styles.focus]: pathName === '/demo' })}
-            href={{ pathname: '/demo' }}>
+            href={{ pathname: '#' }}>
             <Flex justifyContent={'space-between'} alignItems={'center'} gap={'10px'}>
-              <div className={styles['user-profile']} />
+              {profileImgUrl.length > 0 ? (
+                <div className={styles['user-profile']}>
+                  <Image src={profileImgUrl} width={20} height={20} alt="use-profile" />
+                </div>
+              ) : (
+                <SvgIconGnbMyPage width={32} height={32} />
+              )}
               마이 페이지
             </Flex>
           </Link>
