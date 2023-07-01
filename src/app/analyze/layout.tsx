@@ -18,8 +18,10 @@ import TooltipRelativeContent from '@/components/Tooltip/TooltipRelativeContent'
 import { initialValue, STEPS } from '@/feature/analyze/constants';
 import StepMenu from '@/feature/analyze/layout/StepMenu';
 import { ExperienceFormValues, WriteStatusType } from '@/feature/analyze/types';
+import SavingCaption from '@/features/resume/components/ResumeForm/SavingCaption';
 import { useIsMounted } from '@/hooks/useIsMounted';
 import { ROUTES } from '@/shared/constants/routes';
+import formatYYMMDDhhmm from '@/shared/utils/date/formatYYMMDDhhmm';
 
 export interface LayoutProps {
   children: React.ReactNode;
@@ -66,6 +68,8 @@ const Layout = ({ children }: LayoutProps) => {
     '“내용을 풍부하게 작성할수록 다양한 AI 직무 역량 키워드를 받을 수 있어요 최선을 다해 작성해주세요 :)”',
     '“AI 직무역량 키워드 추천을 통해 나의 직무역량을 다각도로 넓혀보세요”',
   ];
+
+  const save = () => {};
 
   const setWriteStatus = useCallback(
     (target: WriteStatusType[], status: WriteStatusType) => {
@@ -193,6 +197,18 @@ const Layout = ({ children }: LayoutProps) => {
               </div>
               <Progress />
               <StepMenu status={writeStatus as WriteStatusType[]} />
+              <div className="absolute top-[calc(100%+16px)] left-[0px] right-[0px]">
+                <Button type="button" className="w-full mb-[6px]" variant="gray200" size="XL" onClick={save}>
+                  저장하기
+                </Button>
+                {/* FIXME: 임시저장 api 연결할때 수정하기 */}
+                {/* <SavingCaption updatedAt={formatYYMMDDhhmm(data?.updatedAt)} currentSavingStatus={status} direction="ltr" /> */}
+                <SavingCaption
+                  updatedAt={formatYYMMDDhhmm('2023-06-25T23:35:04.381Z')}
+                  currentSavingStatus="loading"
+                  direction="ltr"
+                />
+              </div>
             </div>
           </div>
         </div>
