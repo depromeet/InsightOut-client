@@ -16,7 +16,7 @@ import { useGetExperienceCapabilities } from '@/hooks/reactQuery/experience/qeur
 const Page = () => {
   const { data: capabilities } = useGetExperienceCapabilities();
 
-  const _capabilites = capabilities?.capabilities || [];
+  const _capabilites = capabilities || [];
 
   // TODO: 경험카드 스키마 전달 받고 적용
   const experiences: Experience[] = [
