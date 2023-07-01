@@ -4,6 +4,10 @@
  * 유저 온보딩 수행 여부
  */
 export interface OnboardingInfo {
+  /**
+   * 직무 선택 여부
+   */
+  field: boolean;
   experience: boolean;
   experienceStepper: boolean;
   resume: boolean;
