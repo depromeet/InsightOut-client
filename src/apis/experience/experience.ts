@@ -24,7 +24,7 @@ export const EXPERIENCE_API = {
 export const EXPERIENCE_CAPABILITY_API = {
   get: async (parmas: ExperienceCapabilityParams['get']) => {
     const { experienceId } = parmas;
-    return await instance.get<ExperienceCapabilityParams, ExperienceCapabilityResponse>(
+    return await instance.get<ExperienceCapabilityParams['get'], ExperienceCapabilityResponse['get']>(
       `${EXPERIENCE_API_URL}/capalibity/${experienceId}`
     );
   },

@@ -11,40 +11,12 @@ import { Capability, Experience } from '@/features/collection/types';
 import getAllCapability from '@/features/collection/utils/getAllCapabilityBadgeItem';
 import getFilteredExperiences from '@/features/collection/utils/getFilteredExperiences';
 import getSortedExperiences from '@/features/collection/utils/getSortedExperiences';
+import { useGetExperienceCapabilities } from '@/hooks/reactQuery/experience/qeury';
 
 const Page = () => {
-  const capabilities: Capability[] = [
-    {
-      id: 1234,
-      keyword: '문제해결력',
-      count: 4,
-    },
-    {
-      id: 1235,
-      keyword: '협동력',
-      count: 100,
-    },
-    {
-      id: 1236,
-      keyword: '커뮤니케이션',
-      count: 5,
-    },
-    {
-      id: 1237,
-      keyword: '도전정신',
-      count: 7,
-    },
-    {
-      id: 1238,
-      keyword: '고객지향성',
-      count: 13,
-    },
-    {
-      id: 1239,
-      keyword: '기획력',
-      count: 13,
-    },
-  ];
+  const { data: capabilities } = useGetExperienceCapabilities();
+
+  const _capabilites = capabilities?.capabilities || [];
 
   // TODO: 경험카드 스키마 전달 받고 적용
   const experiences: Experience[] = [
@@ -291,9 +263,9 @@ const Page = () => {
     },
   ];
 
-  const allCapability = getAllCapability(capabilities);
+  const allCapability = getAllCapability(_capabilites);
 
-  const shownCapabilities: Capability[] = [allCapability, ...capabilities];
+  const shownCapabilities: Capability[] = [allCapability, ..._capabilites];
 
   const [sortBy, setSortBy] = useState<keyof typeof EXPERIENCE_SORT_BY>('EXPERIENCE_TIME');
   const [selectedCapabilityId, setSelectedCapabilityId] = useState(allCapability.id);
