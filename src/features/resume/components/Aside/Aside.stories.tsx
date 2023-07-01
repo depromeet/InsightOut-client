@@ -12,7 +12,7 @@ export default meta;
 type Story = StoryObj<typeof Aside>;
 
 export const Default: Story = {
-  render: (args) => <Aside {...args} />,
+  render: () => <Aside />,
   args: {
     resumeList: [
       {

@@ -1,11 +1,12 @@
 'use client';
 
 import { Box } from '@chakra-ui/react';
-import { colors } from '@/styles/theme/foundations/colors';
-import { boxShadow } from '@/styles/theme/foundations/boxShadow';
-import { textStyles } from '@/styles/theme/foundations/textStyles';
+
 import instance from '@/apis';
 import Button from '@/components/Button/Button';
+import { boxShadow } from '@/styles/theme/foundations/boxShadow';
+import { colors } from '@/styles/theme/foundations/colors';
+import { textStyles } from '@/styles/theme/foundations/textStyles';
 
 export default function Home() {
   const handleAnotherApi = async () => {

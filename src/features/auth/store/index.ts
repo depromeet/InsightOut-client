@@ -1,5 +1,6 @@
 /* eslint-disable unused-imports/no-unused-vars */
 import { create } from 'zustand';
+
 import { AuthState } from '../types/store';
 
 export const authStore = create<AuthState>((set) => ({

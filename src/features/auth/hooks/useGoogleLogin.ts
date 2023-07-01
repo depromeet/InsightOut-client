@@ -1,13 +1,16 @@
 'use client';
 
-import { initializeApp } from 'firebase/app';
-import { GoogleAuthProvider, getAuth, signInWithPopup } from 'firebase/auth';
-import authApi from '@/apis/auth/auth';
-import { useIsSignedIn } from '../store';
-import { useRouter } from 'next/navigation';
-import { useUserActions } from '@/shared/store/user';
 import { useState } from 'react';
+
+import { initializeApp } from 'firebase/app';
+import { getAuth, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+import { useRouter } from 'next/navigation';
+
+import authApi from '@/apis/auth/auth';
 import userApi from '@/apis/user/user';
+import { useUserActions } from '@/shared/store/user';
+
+import { useIsSignedIn } from '../store';
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,

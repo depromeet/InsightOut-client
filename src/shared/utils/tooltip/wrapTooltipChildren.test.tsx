@@ -1,5 +1,7 @@
 import React from 'react';
+
 import { render } from '@testing-library/react';
+
 import wrapTooltipChildren from '../tooltip/wrapTooltipChildren';
 
 describe('wrapTooltipChildren', () => {

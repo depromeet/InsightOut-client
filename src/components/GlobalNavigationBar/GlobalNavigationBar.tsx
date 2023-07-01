@@ -1,21 +1,24 @@
-import Link from 'next/link';
-import { usePathname, useRouter } from 'next/navigation';
 import { ComponentPropsWithoutRef } from 'react';
+
 import { Flex } from '@chakra-ui/react';
 import cn from 'classnames';
-import { tw } from '@/shared/utils/tailwindMerge';
+import { Route } from 'next';
+import Image from 'next/image';
+import Link from 'next/link';
+import { usePathname, useRouter } from 'next/navigation';
+
+import userApi from '@/apis/user/user';
+import AuthModal from '@/features/auth/components/AuthModal/AuthModal';
+import { useAuthActions, useIsOpenSignUpModal } from '@/features/auth/store';
 import { ROUTES } from '@/shared/constants/routes';
-import styles from './GlobalNavigationBar.module.scss';
+import { useUserImageUrl, useUserNickname } from '@/shared/store/user';
+import { tw } from '@/shared/utils/tailwindMerge';
+
 import Button from '../Button/Button';
+import SvgIconGnbMyPage from '../Icon/IconGnbMyPage';
 import IconGoogleLogo from '../Icon/IconGoogleLogo';
 import Spinner from '../Spinner/Spinner';
-import { useAuthActions, useIsOpenSignUpModal } from '@/features/auth/store';
-import AuthModal from '@/features/auth/components/AuthModal/AuthModal';
-import userApi from '@/apis/user/user';
-import { useUserImageUrl, useUserNickname } from '@/shared/store/user';
-import SvgIconGnbMyPage from '../Icon/IconGnbMyPage';
-import Image from 'next/image';
-import { Route } from 'next';
+import styles from './GlobalNavigationBar.module.scss';
 
 type GlobalNavigationBarProps = ComponentPropsWithoutRef<'header'> & {
   /**

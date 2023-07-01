@@ -1,5 +1,6 @@
-import getPlacement from './getPlacement';
 import { OFFSET } from '@/shared/constants/tooltip';
+
+import getPlacement from './getPlacement';
 
 describe('getPlacement', () => {
   const rect = {

@@ -1,22 +1,36 @@
 'use client';
 
-import { useRef, ChangeEvent } from 'react';
+import { ChangeEvent, FormEvent, useRef } from 'react';
 
+import { useParams } from 'next/navigation';
+
+import Button from '@/components/Button/Button';
+import { TextLengthMessage } from '@/components/Input/TextLengthMessage';
+import { useAnswer, useQuestionActions, useTitle } from '@/features/resume/store';
+import { useUpdateQuestion } from '@/hooks/reactQuery/resume/question/mutation';
+import { useGetQuestion } from '@/hooks/reactQuery/resume/question/query';
 import { MAX_LENGTH } from '@/shared/constants/maxLength';
 import { resizeHeight } from '@/shared/utils/autoSizeTextarea';
+import formatYYMMDDhhmm from '@/shared/utils/date/formatYYMMDDhhmm';
 
-import { TextLengthMessage } from '@/components/Input/TextLengthMessage';
-import Button from '@/components/Button/Button';
 import SavingCaption from './SavingCaption';
 
-import { useTitle, useAnswer, useQuestionActions } from '../../store';
-import { QuestionData } from '../../types/question';
-
-const ResumeForm = ({ id, title: initialTitle, answer: initialAnswer, updatedAt }: QuestionData) => {
-  /** TODO: props로 전달받은 title, answer 값으로 초기화 */
+const ResumeForm = () => {
   const title = useTitle();
   const answer = useAnswer();
   const { setTitle, setAnswer } = useQuestionActions();
+  const { questionId } = useParams();
+
+  const { data: question } = useGetQuestion(
+    { questionId },
+    {
+      onSuccess({ title, answer }) {
+        setTitle(title ?? ''); // NOTE: answer이 없을 때 서버에서 null을 보내줘서 빈 문자열로 바꿨습니다
+        setAnswer(answer ?? '');
+      },
+    }
+  );
+  const { mutate: updateQuestion, status } = useUpdateQuestion(+questionId);
 
   const titleTextareaRef = useRef<HTMLTextAreaElement>(null);
 
@@ -30,13 +44,16 @@ const ResumeForm = ({ id, title: initialTitle, answer: initialAnswer, updatedAt 
     /**TODO: debounce patch */
   };
 
-  const handleResumeSubmit = () => {};
+  const handleResumeSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    updateQuestion({ title, answer });
+  };
 
   return (
     <form onSubmit={handleResumeSubmit}>
       <header className="flex items-center justify-between mb-[14px]">
-        {/* TODO: savingStatus 서버 상태에 따라 변경 */}
-        <SavingCaption updatedAt={updatedAt} currentSavingStatus="loading" />
+        <SavingCaption updatedAt={formatYYMMDDhhmm(question?.updatedAt)} currentSavingStatus={status} />
         <div className="flex items-center gap-4">
           <TextLengthMessage currentLength={answer.length} maxLength={MAX_LENGTH.QUESTION} />
           <Button variant="gray900" size="M" disabled={answer.length === 0}>
