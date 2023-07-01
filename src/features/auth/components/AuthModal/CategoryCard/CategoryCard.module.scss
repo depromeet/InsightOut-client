@@ -1,0 +1,27 @@
+.root {
+  @apply flex items-center w-[224px] p-[12px] gap-[4px] rounded-[8px] bg-gray-200 cursor-pointer text-light;
+
+  .icon-wrapper {
+    @apply flex-center p-[4px];
+  }
+
+  // Hover
+  &:hover {
+    @apply bg-primary-100 text-sub;
+  }
+
+  // Focused
+  &:focus,
+  &:active {
+    @apply bg-gray-900 text-white;
+  }
+
+  // Selected
+  &.selected {
+    @apply bg-gray-900 text-white;
+  }
+
+  .title {
+    @apply text-[20px] font-medium leading-[28px];
+  }
+}
