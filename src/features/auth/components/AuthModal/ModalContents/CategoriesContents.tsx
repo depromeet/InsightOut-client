@@ -26,15 +26,15 @@ import SvgIconSales from '@/components/Icon/jobCategories/IconSales';
 import SvgIconTrade from '@/components/Icon/jobCategories/IconTrade';
 import ModalFooter from '@/components/Modal/ModalFooter';
 import ModalHeader from '@/components/Modal/ModalHeader';
-import emptyFunction from '@/shared/utils/emptyFunction';
 
 import CategoryCard from '../CategoryCard/CategoryCard';
 
 type CategoriesContentsProps = {
   nickname: string;
   selectedCategory: string;
-  onClickGoBack: () => void;
+  onClickLeftButton: () => void;
   onClickCategory: Dispatch<SetStateAction<string>>;
+  onClickRightButton: () => void;
 };
 
 const JOB_CATEGORIES = [
@@ -65,8 +65,9 @@ const JOB_CATEGORIES = [
 const CategoriesContents = ({
   nickname,
   selectedCategory,
-  onClickGoBack,
+  onClickLeftButton,
   onClickCategory,
+  onClickRightButton,
 }: CategoriesContentsProps) => {
   return (
     <>
@@ -91,9 +92,9 @@ const CategoriesContents = ({
       <ModalFooter>
         <ModalFooter.TwoButton
           leftTextContent="이전으로"
-          handleLeftClick={onClickGoBack}
+          handleLeftClick={onClickLeftButton}
           rightTextContent="선택완료"
-          handleRightClick={emptyFunction}
+          handleRightClick={onClickRightButton}
         />
       </ModalFooter>
     </>

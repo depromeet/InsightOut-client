@@ -14,7 +14,7 @@ export default meta;
 type Story = StoryObj<typeof CategoriesContents>;
 
 export const _CategoriesContents: Story = {
-  args: { nickname: '디프만 4조' },
+  args: { nickname: '디프만 4조', onClickLeftButton: emptyFunction, onClickRightButton: emptyFunction },
   render: (args) => (
     <Modal size={'5xl'} isOpen onClose={emptyFunction}>
       <CategoriesContents {...args} />

@@ -6,10 +6,12 @@ import { useRouter, useSearchParams } from 'next/navigation';
 
 import Modal from '@/components/Modal/Modal';
 import { useUserInfo } from '@/shared/store/user';
+import emptyFunction from '@/shared/utils/emptyFunction';
 
 import useGoogleLogin from '../../hooks/useGoogleLogin';
 import CategoriesContents from './ModalContents/CategoriesContents';
 import SignUpContents from './ModalContents/SignUpContents';
+import StartNowContents from './ModalContents/StartNowContents';
 import WelcomeContents from './ModalContents/WelcomeContents';
 
 type AuthModalProps = {
@@ -34,6 +36,7 @@ const AuthModal = ({ isOpen, handleClose }: AuthModalProps) => {
       case 'welcome':
         return 'xl';
       case 'categories':
+      case 'startnow':
         return '5xl';
     }
   };
@@ -51,10 +54,13 @@ const AuthModal = ({ isOpen, handleClose }: AuthModalProps) => {
           <CategoriesContents
             nickname={nickname}
             selectedCategory={selectedCategory}
-            onClickGoBack={() => router.back()}
+            onClickLeftButton={() => router.back()}
             onClickCategory={setSelectedCategory}
+            onClickRightButton={() => router.push('/?steps=startnow')}
           />
         );
+      case 'startnow':
+        return <StartNowContents onClickLeftButton={() => router.back()} onClickRightButton={emptyFunction} />;
     }
   };
   return (
