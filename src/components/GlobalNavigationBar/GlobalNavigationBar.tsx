@@ -8,6 +8,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import AuthModal from '@/features/auth/components/AuthModal/AuthModal';
 import { useAuthActions, useIsOpenSignUpModal } from '@/features/auth/store';
 import { ROUTES } from '@/shared/constants/routes';
+import { useUserInfo } from '@/shared/store/user';
 import { tw } from '@/shared/utils/tailwindMerge';
 
 import Button from '../Button/Button';
@@ -34,6 +35,7 @@ const GlobalNavigationBar = ({ className, isSignedIn, isRequesting, signIn, ...p
   const rootClassName = tw(styles.root, className);
   const pathName = usePathname();
   const isOpenSignUpModal = useIsOpenSignUpModal();
+  const userInfo = useUserInfo();
   const { setIsOpenSignUpModal } = useAuthActions();
   const router = useRouter();
 
@@ -96,7 +98,12 @@ const GlobalNavigationBar = ({ className, isSignedIn, isRequesting, signIn, ...p
           </Button>
         )}
       </header>
-      <AuthModal isOpen={isOpenSignUpModal} handleClose={handleClickCloseButton} signIn={signIn} />
+      <AuthModal
+        nickname={userInfo.nickname}
+        isOpen={isOpenSignUpModal}
+        handleClose={handleClickCloseButton}
+        signIn={signIn}
+      />
     </>
   );
 };
