@@ -5,14 +5,14 @@ import { useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 
 import Modal from '@/components/Modal/Modal';
+import CategoriesContents from '@/features/auth/components/AuthModal/ModalContents/CategoriesContents';
+import SignUpContents from '@/features/auth/components/AuthModal/ModalContents/SignUpContents';
+import StartNowContents from '@/features/auth/components/AuthModal/ModalContents/StartNowContents';
+import WelcomeContents from '@/features/auth/components/AuthModal/ModalContents/WelcomeContents';
 import { useUserInfo } from '@/shared/store/user';
-import emptyFunction from '@/shared/utils/emptyFunction';
 
 import useGoogleLogin from '../../hooks/useGoogleLogin';
-import CategoriesContents from './ModalContents/CategoriesContents';
-import SignUpContents from './ModalContents/SignUpContents';
-import StartNowContents from './ModalContents/StartNowContents';
-import WelcomeContents from './ModalContents/WelcomeContents';
+import { useAuthActions } from '../../store';
 
 type AuthModalProps = {
   isOpen: boolean;
@@ -24,6 +24,7 @@ const AuthModal = ({ isOpen, onClose, onAbortSignUp }: AuthModalProps) => {
   const searchParams = useSearchParams();
   const router = useRouter();
   const { nickname } = useUserInfo();
+  const { setIsSignedIn, setIsTokenRequired } = useAuthActions();
   const { signIn } = useGoogleLogin();
 
   const [selectedCategory, setSelectedCategory] = useState<string>('');
@@ -31,6 +32,12 @@ const AuthModal = ({ isOpen, onClose, onAbortSignUp }: AuthModalProps) => {
   const handleCloseModal = () => {
     const isLastStep = !!searchParams.get('startnow');
     if (!isLastStep) onAbortSignUp();
+    onClose();
+  };
+
+  const handleSignUpSuccess = () => {
+    setIsSignedIn(true);
+    setIsTokenRequired(false);
     onClose();
   };
 
@@ -67,7 +74,7 @@ const AuthModal = ({ isOpen, onClose, onAbortSignUp }: AuthModalProps) => {
           />
         );
       case 'startnow':
-        return <StartNowContents onClickLeftButton={() => router.back()} onClickRightButton={emptyFunction} />;
+        return <StartNowContents onClickLeftButton={() => router.back()} onClickRightButton={handleSignUpSuccess} />;
     }
   };
   return (
