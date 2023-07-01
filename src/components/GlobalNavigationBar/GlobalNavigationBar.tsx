@@ -3,8 +3,10 @@ import { ComponentPropsWithoutRef } from 'react';
 import { Flex } from '@chakra-ui/react';
 import cn from 'classnames';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 
+import AuthModal from '@/features/auth/components/AuthModal/AuthModal';
+import { useAuthActions, useIsOpenSignUpModal } from '@/features/auth/store';
 import { ROUTES } from '@/shared/constants/routes';
 import { tw } from '@/shared/utils/tailwindMerge';
 
@@ -31,50 +33,71 @@ type GlobalNavigationBarProps = ComponentPropsWithoutRef<'header'> & {
 const GlobalNavigationBar = ({ className, isSignedIn, isRequesting, signIn, ...props }: GlobalNavigationBarProps) => {
   const rootClassName = tw(styles.root, className);
   const pathName = usePathname();
+  const isOpenSignUpModal = useIsOpenSignUpModal();
+  const { setIsOpenSignUpModal } = useAuthActions();
+  const router = useRouter();
+
+  const handleClickLoginButton = () => {
+    setIsOpenSignUpModal(true);
+    router.push('/?steps=signUp');
+  };
+
+  const handleClickCloseButton = () => {
+    setIsOpenSignUpModal(false);
+    router.replace('/');
+  };
 
   return (
-    <header {...props} className={rootClassName}>
-      <Flex alignItems={'center'} gap={'115px'}>
-        <Link
-          className={cn(styles.link, { [styles.focus]: pathName === ROUTES.HOME })}
-          href={{ pathname: ROUTES.HOME }}>
-          로고
-        </Link>
-        <Flex alignItems={'center'} gap={'24px'}>
+    <>
+      <header {...props} className={rootClassName}>
+        <Flex alignItems={'center'} gap={'115px'}>
           <Link
-            className={cn(styles.link, { [styles.focus]: pathName === ROUTES.EXPERIENCE })}
-            href={{ pathname: ROUTES.EXPERIENCE }}>
-            경험분해
+            className={cn(styles.link, { [styles.focus]: pathName === ROUTES.HOME })}
+            href={{ pathname: ROUTES.HOME }}>
+            로고
           </Link>
-          <Link className={cn(styles.link, { [styles.focus]: pathName === '/demo' })} href={{ pathname: '/demo' }}>
-            자기소개서 작성하기
-          </Link>
-          <Link
-            className={cn(styles.link, { [styles.focus]: pathName === '/collection/experiences' })}
-            href={{ pathname: '/collection/experiences' }}>
-            모아보기
-          </Link>
-        </Flex>
-      </Flex>
-      {isRequesting ? (
-        <Flex width={140} justifyContent={'center'}>
-          <Spinner size="L" style="primary500" />
-        </Flex>
-      ) : isSignedIn ? (
-        <Link
-          className={cn(styles.link, styles.myPage, { [styles.focus]: pathName === '/demo' })}
-          href={{ pathname: '/demo' }}>
-          <Flex justifyContent={'space-between'} alignItems={'center'} gap={'10px'}>
-            <div className={styles['user-profile']} />
-            마이 페이지
+          <Flex alignItems={'center'} gap={'24px'}>
+            <Link
+              className={cn(styles.link, { [styles.focus]: pathName === ROUTES.EXPERIENCE })}
+              href={{ pathname: ROUTES.EXPERIENCE }}>
+              경험분해
+            </Link>
+            <Link className={cn(styles.link, { [styles.focus]: pathName === '/demo' })} href={{ pathname: '/demo' }}>
+              자기소개서 작성하기
+            </Link>
+            <Link
+              className={cn(styles.link, { [styles.focus]: pathName === '/collection/experiences' })}
+              href={{ pathname: '/collection/experiences' }}>
+              모아보기
+            </Link>
           </Flex>
-        </Link>
-      ) : (
-        <Button variant="outlined" size="L" leftIcon={<IconGoogleLogo />} preserveOriginalIconColor onClick={signIn}>
-          구글 로그인
-        </Button>
-      )}
-    </header>
+        </Flex>
+        {isRequesting ? (
+          <Flex width={140} justifyContent={'center'}>
+            <Spinner size="L" style="primary500" />
+          </Flex>
+        ) : isSignedIn ? (
+          <Link
+            className={cn(styles.link, styles.myPage, { [styles.focus]: pathName === '/demo' })}
+            href={{ pathname: '/demo' }}>
+            <Flex justifyContent={'space-between'} alignItems={'center'} gap={'10px'}>
+              <div className={styles['user-profile']} />
+              마이 페이지
+            </Flex>
+          </Link>
+        ) : (
+          <Button
+            variant="outlined"
+            size="L"
+            leftIcon={<IconGoogleLogo />}
+            preserveOriginalIconColor
+            onClick={handleClickLoginButton}>
+            구글 로그인
+          </Button>
+        )}
+      </header>
+      <AuthModal isOpen={isOpenSignUpModal} handleClose={handleClickCloseButton} signIn={signIn} />
+    </>
   );
 };
 
