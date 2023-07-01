@@ -34,7 +34,7 @@ const GlobalNavigationBar = ({ className, isSignedIn, isRequesting, ...props }: 
   const isOpenSignUpModal = useIsOpenSignUpModal();
   const nickname = useUserNickname();
   const profileImgUrl = useUserImageUrl();
-  const { setIsOpenSignUpModal } = useAuthActions();
+  const { setIsOpenSignUpModal, setIsSignedIn } = useAuthActions();
   const router = useRouter();
 
   const handleClickLoginButton = () => {
@@ -49,6 +49,7 @@ const GlobalNavigationBar = ({ className, isSignedIn, isRequesting, ...props }: 
 
   const handleAbortSignUp = async () => {
     await userApi.patch({ nickname, field: null });
+    setIsSignedIn(true);
   };
 
   return (
