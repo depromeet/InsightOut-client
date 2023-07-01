@@ -2,7 +2,7 @@
   @apply flex items-center w-[224px] p-[12px] gap-[4px] rounded-[8px] bg-gray-200 cursor-pointer text-light;
 
   .icon-wrapper {
-    @apply flex-center p-[4px];
+    @apply flex justify-center items-center p-[4px];
   }
 
   // Hover

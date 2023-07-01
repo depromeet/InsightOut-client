@@ -24,13 +24,9 @@ type GlobalNavigationBarProps = ComponentPropsWithoutRef<'header'> & {
    * Auth 관련 요청이 진행 중인지 여부 (스피너 출력을 위해 필요)
    */
   isRequesting: boolean;
-  /**
-   * 구글 로그인 함수
-   */
-  signIn: () => void;
 };
 
-const GlobalNavigationBar = ({ className, isSignedIn, isRequesting, signIn, ...props }: GlobalNavigationBarProps) => {
+const GlobalNavigationBar = ({ className, isSignedIn, isRequesting, ...props }: GlobalNavigationBarProps) => {
   const rootClassName = tw(styles.root, className);
   const pathName = usePathname();
   const isOpenSignUpModal = useIsOpenSignUpModal();
@@ -96,7 +92,7 @@ const GlobalNavigationBar = ({ className, isSignedIn, isRequesting, signIn, ...p
           </Button>
         )}
       </header>
-      <AuthModal isOpen={isOpenSignUpModal} handleClose={handleClickCloseButton} signIn={signIn} />
+      <AuthModal isOpen={isOpenSignUpModal} handleClose={handleClickCloseButton} />
     </>
   );
 };

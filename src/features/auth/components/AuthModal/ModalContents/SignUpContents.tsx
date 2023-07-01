@@ -1,4 +1,5 @@
 import { Flex, ModalBody } from '@chakra-ui/react';
+import { Route } from 'next';
 import Link from 'next/link';
 
 import Button from '@/components/Button/Button';
@@ -30,11 +31,11 @@ const SignUpContents = ({ signIn }: SignUpContentsProps) => {
         <Flex flexDir={'column'}>
           <span className="text-light text-[10px] font-medium leading-[14px]">
             로그인 시&nbsp;
-            <Link href={'#'} className="underline text-primary-500">
+            <Link href={'#' as Route} className="underline text-primary-500">
               개인정보보호 정책
             </Link>
             &nbsp;및&nbsp;
-            <Link href={'#'} className="underline text-primary-500">
+            <Link href={'#' as Route} className="underline text-primary-500">
               서비스 약관
             </Link>
             에 동의하는 것으로 간주하며,

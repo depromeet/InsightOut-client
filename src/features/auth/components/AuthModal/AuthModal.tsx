@@ -7,6 +7,7 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import Modal from '@/components/Modal/Modal';
 import { useUserInfo } from '@/shared/store/user';
 
+import useGoogleLogin from '../../hooks/useGoogleLogin';
 import CategoriesContents from './ModalContents/CategoriesContents';
 import SignUpContents from './ModalContents/SignUpContents';
 import WelcomeContents from './ModalContents/WelcomeContents';
@@ -14,13 +15,13 @@ import WelcomeContents from './ModalContents/WelcomeContents';
 type AuthModalProps = {
   isOpen: boolean;
   handleClose: () => void;
-  signIn: () => void;
 };
 
-const AuthModal = ({ isOpen, handleClose, signIn }: AuthModalProps) => {
+const AuthModal = ({ isOpen, handleClose }: AuthModalProps) => {
   const searchParams = useSearchParams();
   const router = useRouter();
   const { nickname } = useUserInfo();
+  const { signIn } = useGoogleLogin();
 
   const [selectedCategory, setSelectedCategory] = useState<string>('');
 
