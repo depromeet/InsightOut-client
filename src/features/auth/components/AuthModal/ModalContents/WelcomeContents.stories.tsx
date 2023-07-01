@@ -6,7 +6,7 @@ import emptyFunction from '@/shared/utils/emptyFunction';
 import WelcomeContents from './WelcomeContents';
 
 const meta = {
-  title: 'Auth/AuthModal',
+  title: 'Auth/AuthModal/ModalContents',
   component: WelcomeContents,
 } satisfies Meta<typeof WelcomeContents>;
 
@@ -16,7 +16,7 @@ type Story = StoryObj<typeof WelcomeContents>;
 export const _WelcomeContents: Story = {
   args: { nickname: '디프만 4조' },
   render: (args) => (
-    <Modal size={'2xl'} isOpen onClose={emptyFunction}>
+    <Modal size={'xl'} isOpen onClose={emptyFunction}>
       <WelcomeContents {...args} onClickButton={emptyFunction} />
     </Modal>
   ),
