@@ -22,16 +22,18 @@ const ExperienceCardDetail = () => {
   const star = { situation, task, action, result };
 
   return (
-    <article className="flex flex-col w-[330px] gap-[16px] py-[22px] px-[24px]">
-      <h3 className="subhead2">{title}</h3>
-      {(Object.entries(star) as Entries<typeof star>).map(([key, value]) => (
-        <div key={key} className="flex flex-col gap-[8px]">
-          <Badge variant="gray100-outline" size="S">
-            {BADGE_CONTENT[key]}
-          </Badge>
-          <p className="b4">{value}</p>
-        </div>
-      ))}
+    <article className="w-[330px] py-[22px] px-[24px]">
+      <h3 className="subhead2 mb-[16px]">{title}</h3>
+      <ul>
+        {(Object.entries(star) as Entries<typeof star>).map(([key, value]) => (
+          <li key={key} className="mb-[16px]">
+            <Badge variant="gray100-outline" size="S" className="!inline-block !mb-[8px]">
+              {BADGE_CONTENT[key]}
+            </Badge>
+            <p className="b4">{value}</p>
+          </li>
+        ))}
+      </ul>
     </article>
   );
 };
