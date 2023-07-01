@@ -7,6 +7,7 @@ export const userStore = create<UserState>((set) => ({
     userId: 0,
     nickname: '',
     onboarding: {
+      field: false,
       experience: false,
       experienceStepper: false,
       resume: false,
