@@ -30,8 +30,8 @@ const Home = () => {
       <section className="relative h-[1014px]">
         <Image src={'/images/home/img-home-1.png'} fill alt="Home-1" className="object-contain w-full h-full" />
       </section>
-      <section className="flex justify-center items-center pt-[170px] py-[286px] gap-[102px]">
-        <div className="flex flex-col gap-[44px]">
+      <section className="relative flex justify-center items-center pt-[170px] py-[286px] gap-[102px] z-[1]">
+        <div className="flex flex-col gap-[44px] z-[2]">
           <div className="flex flex-col w-[588px] gap-[30px]">
             <Badge variant="primary50-outline" size="L">
               경험분해 4 STEPS
@@ -61,6 +61,14 @@ const Home = () => {
           </div>
         </div>
         <Image src={'/images/home/img-home-2.png'} width={486} height={486} alt="Home-2" />
+        <Image
+          src={'/images/home/img-home-ellipsis-left.png'}
+          className="absolute top-[413px] left-[-350px] w-[788px] h-[788px] z-[-1]"
+          width={788}
+          height={788}
+          alt="Home-ellipsis-left"
+          loading="eager"
+        />
       </section>
     </main>
   );
