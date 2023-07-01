@@ -44,5 +44,5 @@ export type ExperienceCapabilityResponse = {
 };
 
 export type ExperienceCountResponse = {
-  experience: number;
+  get: { experience: number };
 };

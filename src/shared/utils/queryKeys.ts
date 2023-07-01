@@ -6,6 +6,7 @@ export const createQueryKeys = <T extends string>(keyword: T) => {
     list: (args: unknown[]) => [...keys.lists(), ...args] as const,
     details: () => [...keys.all, 'detail'] as const,
     detail: (args: unknown[]) => [...keys.details(), ...args] as const,
+    count: () => [...keys.all, 'count'] as const,
   };
   return keys;
 };

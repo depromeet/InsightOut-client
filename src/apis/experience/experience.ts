@@ -25,11 +25,11 @@ export const EXPERIENCE_CAPABILITY_API = {
   get: async (parmas: ExperienceCapabilityParams['get']) => {
     const { experienceId } = parmas;
     return await instance.get<ExperienceCapabilityParams, ExperienceCapabilityResponse>(
-      EXPERIENCE_API_URL + '/capalibity' + experienceId
+      `${EXPERIENCE_API_URL}/capalibity/${experienceId}`
     );
   },
 };
 
 export const EXPERIENCE_COUNT_API = {
-  get: async () => await instance.get<null, ExperienceCountResponse>(EXPERIENCE_API_URL + '/count'),
+  get: async () => await instance.get<null, ExperienceCountResponse['get']>(EXPERIENCE_API_URL + '/count'),
 };
