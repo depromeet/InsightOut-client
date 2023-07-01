@@ -14,7 +14,7 @@ const authApi = {
    *
    * @description cookie에 담겨있는 refreshToken을 활용하여 accessToken 재발급
    */
-  reIssue: () => instance.post<any, AccessToken>(AUTH_API.REISSUE),
+  reIssue: () => instance.post<unknown, AccessToken>(AUTH_API.REISSUE),
 };
 
 export default authApi;
