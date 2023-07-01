@@ -12,7 +12,7 @@ export interface ExperienceFormValues {
   /**
    * 경험 분해 키워드 가져올 때 필요한 id
    */
-  experienceId: number | null;
+  experienceId: number;
   /**
    * 경험 제목 (/analyze/experience)
    */
@@ -75,4 +75,8 @@ export interface ExperienceFormValues {
    * Chat GPT 자기소개서 생성 프롬프트 api response
    */
   resume: string;
+  /**
+   * FIXME: 필요한 필드인지 확인하기
+   */
+  // utilization: string;
 }
