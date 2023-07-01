@@ -2,6 +2,7 @@ import { ComponentPropsWithoutRef } from 'react';
 
 import { Flex } from '@chakra-ui/react';
 import cn from 'classnames';
+import { Route } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
@@ -85,7 +86,7 @@ const GlobalNavigationBar = ({ className, isSignedIn, isRequesting, ...props }: 
         ) : isSignedIn ? (
           <Link
             className={cn(styles.link, styles.myPage, { [styles.focus]: pathName === '/demo' })}
-            href={{ pathname: '#' }}>
+            href={'#' as Route}>
             <Flex justifyContent={'space-between'} alignItems={'center'} gap={'10px'}>
               {profileImgUrl.length > 0 ? (
                 <div className={styles['user-profile']}>
