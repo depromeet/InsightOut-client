@@ -1,4 +1,4 @@
-import { AUTH_API } from '@/features/auth/shared/constants/api';
+import { AUTH_API } from '@/features/auth/constants/api';
 
 import instance from '..';
 import { AccessToken, SignInData } from './types/auth';
