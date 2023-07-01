@@ -4,8 +4,8 @@ import React, { useCallback, useEffect } from 'react';
 import { FormProvider, useForm, useWatch } from 'react-hook-form';
 
 import { usePrevious } from '@chakra-ui/react';
-// import { useFetchAnalyze } from '@/hooks/reactQuery/analyze/query';
 import { DevTool } from '@hookform/devtools';
+import isNumber from 'lodash/isNumber';
 import { Route } from 'next';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
@@ -19,6 +19,9 @@ import { initialValue, STEPS } from '@/feature/analyze/constants';
 import StepMenu from '@/feature/analyze/layout/StepMenu';
 import { ExperienceFormValues, WriteStatusType } from '@/feature/analyze/types';
 import SavingCaption from '@/features/resume/components/ResumeForm/SavingCaption';
+import { useCreateExperience, useUpdateExperience } from '@/hooks/reactQuery/analyze/mutation';
+import { useGetExperience } from '@/hooks/reactQuery/analyze/query';
+import { useUpdateKeyword } from '@/hooks/reactQuery/keyword/mutation';
 import { useIsMounted } from '@/hooks/useIsMounted';
 import { ROUTES } from '@/shared/constants/routes';
 import formatYYMMDDhhmm from '@/shared/utils/date/formatYYMMDDhhmm';
@@ -39,28 +42,50 @@ const Layout = ({ children }: LayoutProps) => {
     defaultValues: initialValue,
   });
 
-  const writeStatus = useWatch({
-    name: 'writeStatus',
+  const [writeStatus, experienceId] = useWatch({
+    name: ['writeStatus', 'experienceId'],
     control: methods.control,
   });
 
-  // const { data } = useFetchAnalyze(
-  //   {},
-  //   {
-  //     onSuccess: (data) => {
-  //       const { setValue } = methods;
-  //       const [endYYYY, endMM] = data.endDate.split('-');
-  //       const [startYYYY, startMM] = data.startDate.split('-');
-  //       setValue('title', data.title);
-  //       setValue('startYYYY', startYYYY);
-  //       setValue('startMM', startMM);
-  //       setValue('endYYYY', endYYYY);
-  //       setValue('endMM', endMM);
-  //       setValue('experienceRole', data.experienceInfo?.experienceRole);
-  //       setValue('motivation', data.experienceInfo?.motivation);
-  //     },
-  //   }
-  // );
+  const { mutateAsync: createExperience } = useCreateExperience();
+  const { mutate: saveKeyword } = useUpdateKeyword({ experienceId });
+
+  useEffect(() => {
+    (async () => {
+      const { experienceId } = await createExperience();
+      methods.setValue('experienceId', experienceId);
+    })();
+  }, [createExperience, methods]);
+
+  const { data } = useGetExperience(
+    { experienceId },
+    {
+      enabled: isNumber(experienceId),
+      onSuccess: (data) => {
+        const { setValue, getValues } = methods;
+        const [situation, task, action, result] = getValues(['situation', 'task', 'action', 'result']);
+        const [endYYYY, endMM] = data?.endDate?.split?.('-') ?? '';
+        const [startYYYY, startMM] = data?.startDate?.split?.('-') ?? '';
+
+        setValue('title', data.title);
+        setValue('startYYYY', startYYYY);
+        setValue('startMM', startMM);
+        setValue('endYYYY', endYYYY);
+        setValue('endMM', endMM);
+        setValue('experienceRole', data.ExperienceInfo?.experienceRole);
+        setValue('motivation', data.ExperienceInfo?.motivation);
+
+        setValue('situation', situation);
+        setValue('task', task);
+        setValue('action', action);
+        setValue('result', result);
+      },
+    }
+  );
+
+  const { mutate: updateExperience, status: updateExperienceStatus } = useUpdateExperience(experienceId);
+
+  console.log(data);
 
   const TOOLTIP_CONTENTS = [
     `“000님 좋은 시작이에요”`,
@@ -68,8 +93,54 @@ const Layout = ({ children }: LayoutProps) => {
     '“내용을 풍부하게 작성할수록 다양한 AI 직무 역량 키워드를 받을 수 있어요 최선을 다해 작성해주세요 :)”',
     '“AI 직무역량 키워드 추천을 통해 나의 직무역량을 다각도로 넓혀보세요”',
   ];
+  const stepByStepSave = () => {
+    switch (pathname) {
+      case ROUTES.EXPERIENCE:
+      case ROUTES.INFORMATION:
+        saveExperience();
+        break;
+      case ROUTES.KEYWORD:
+        const keywordList = methods.getValues('keywords');
+        saveKeyword({
+          keywords: Object.fromEntries(keywordList.filter(([, isSelected]) => isSelected === true)),
+        });
+        break;
+      default:
+        break;
+    }
+  };
+  const handlePrevButton = () => {
+    stepByStepSave();
+    back();
+  };
 
-  const save = () => {};
+  const saveExperience = () => {
+    const [title, startYYYY, startMM, endYYYY, endMM, experienceRole, motivation, situation, task, action, result] =
+      methods.getValues([
+        'title',
+        'startYYYY',
+        'startMM',
+        'endYYYY',
+        'endMM',
+        'experienceRole',
+        'motivation',
+        'situation',
+        'task',
+        'action',
+        'result',
+      ]);
+    updateExperience({
+      title,
+      ...(startYYYY && startMM && { startDate: `${startYYYY}-${startMM}` }),
+      ...(endYYYY && endMM && { endDate: `${endYYYY}-${endMM}` }),
+      experienceRole,
+      motivation,
+      situation,
+      task,
+      action,
+      result,
+    });
+  };
 
   const setWriteStatus = useCallback(
     (target: WriteStatusType[], status: WriteStatusType) => {
@@ -164,7 +235,7 @@ const Layout = ({ children }: LayoutProps) => {
               {children}
               <div className="flex-center mt-[32px] gap-[12px]">
                 {pathname === ROUTES.EXPERIENCE ? null : (
-                  <Button type="button" variant="gray200" size="XL" onClick={back}>
+                  <Button type="button" variant="gray200" size="XL" onClick={handlePrevButton}>
                     이전으로
                   </Button>
                 )}
@@ -174,7 +245,7 @@ const Layout = ({ children }: LayoutProps) => {
                   </Button>
                 ) : (
                   <Link href={handleNextButton() as Route}>
-                    <Button type="button" variant="gray900" size="XL">
+                    <Button type="button" variant="gray900" size="XL" onClick={stepByStepSave}>
                       다음으로
                     </Button>
                   </Link>
@@ -198,14 +269,20 @@ const Layout = ({ children }: LayoutProps) => {
               <Progress />
               <StepMenu status={writeStatus as WriteStatusType[]} />
               <div className="absolute top-[calc(100%+16px)] left-[0px] right-[0px]">
-                <Button type="button" className="w-full mb-[6px]" variant="gray200" size="XL" onClick={save}>
+                <Button
+                  type="button"
+                  className="w-full mb-[6px]"
+                  variant="gray200"
+                  size="XL"
+                  onClick={stepByStepSave}
+                  disabled={['loading', 'error'].includes(updateExperienceStatus)}>
                   저장하기
                 </Button>
-                {/* FIXME: 임시저장 api 연결할때 수정하기 */}
-                {/* <SavingCaption updatedAt={formatYYMMDDhhmm(data?.updatedAt)} currentSavingStatus={status} direction="ltr" /> */}
+                {/* FIXME: updatedAt 넘기기 */}
+                {/* updatedAt={formatYYMMDDhhmm(data.updatedAt)} */}
                 <SavingCaption
                   updatedAt={formatYYMMDDhhmm('2023-06-25T23:35:04.381Z')}
-                  currentSavingStatus="loading"
+                  currentSavingStatus={updateExperienceStatus}
                   direction="ltr"
                 />
               </div>
