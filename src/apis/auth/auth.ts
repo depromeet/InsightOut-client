@@ -20,6 +20,10 @@ const authApi = {
    * @description refreshToken을 전달하여 회원 탈퇴
    */
   withdraw: () => instance.delete(AUTH_API.WITHDRAW),
+  /**
+   * @description 로그아웃
+   */
+  signOut: () => instance.post(AUTH_API.SIGN_OUT),
 };
 
 export default authApi;
