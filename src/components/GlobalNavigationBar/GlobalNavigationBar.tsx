@@ -5,10 +5,11 @@ import cn from 'classnames';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 
-import authApi from '@/apis/auth/auth';
+import userApi from '@/apis/user/user';
 import AuthModal from '@/features/auth/components/AuthModal/AuthModal';
 import { useAuthActions, useIsOpenSignUpModal } from '@/features/auth/store';
 import { ROUTES } from '@/shared/constants/routes';
+import { useUserNickname } from '@/shared/store/user';
 import { tw } from '@/shared/utils/tailwindMerge';
 
 import Button from '../Button/Button';
@@ -31,6 +32,7 @@ const GlobalNavigationBar = ({ className, isSignedIn, isRequesting, ...props }: 
   const rootClassName = tw(styles.root, className);
   const pathName = usePathname();
   const isOpenSignUpModal = useIsOpenSignUpModal();
+  const nickname = useUserNickname();
   const { setIsOpenSignUpModal } = useAuthActions();
   const router = useRouter();
 
@@ -45,7 +47,7 @@ const GlobalNavigationBar = ({ className, isSignedIn, isRequesting, ...props }: 
   };
 
   const handleAbortSignUp = async () => {
-    await authApi.withdraw();
+    await userApi.patch({ nickname, field: null });
   };
 
   return (
