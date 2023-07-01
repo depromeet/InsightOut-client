@@ -40,13 +40,9 @@ export type ExperienceCapabilityParams = {
 };
 
 export type ExperienceCapabilityResponse = {
-  get: {
-    capability: Capability;
-  };
+  capability: Capability;
 };
 
 export type ExperienceCountResponse = {
-  get: {
-    experience: number;
-  };
+  experience: number;
 };
