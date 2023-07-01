@@ -16,19 +16,19 @@ const SpellCheckContainer = ({ children }: PropsWithChildren) => (
   </div>
 );
 
+const BUTTON_CONTENT = {
+  idle: '검사하기',
+  loading: '',
+  success: '초기화',
+  error: '초기화',
+} as const;
+
 const SpellChecker = () => {
   const answer = useAnswer();
   const { setIsSpellCheckMode } = useQuestionActions();
 
   const { mutate: spellCheck, data: result, status } = useSpellCheck();
   const { spellCheckResult, setSpellCheckResult } = useSpellCheckResult(status, result ?? []);
-
-  const BUTTON_CONTENT = {
-    idle: '검사하기',
-    loading: '',
-    success: '초기화',
-    error: '초기화',
-  } as const;
 
   const handleSpellCheckButtonClick = () => {
     spellCheck(answer);
