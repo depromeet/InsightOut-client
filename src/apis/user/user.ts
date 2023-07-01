@@ -11,7 +11,8 @@ const userApi = {
   /**
    * 유저 정보 업데이트
    */
-  patch: () => instance.patch<UpdateUserInfo>(USER_API.UPDATE_USER_INFO),
+  patch: ({ nickname, field }: UpdateUserInfo) =>
+    instance.patch<UpdateUserInfo, never>(USER_API.UPDATE_USER_INFO, { nickname, field }),
   /**
    * 피드백 제출
    */
