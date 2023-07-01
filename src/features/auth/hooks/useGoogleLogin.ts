@@ -7,7 +7,7 @@ import { getAuth, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { useRouter } from 'next/navigation';
 
 import authApi from '@/apis/auth/auth';
-import { UserInfo } from '@/shared/store/types/user';
+import userApi from '@/apis/user/user';
 import { useUserActions } from '@/shared/store/user';
 
 import { useIsSignedIn } from '../store';
@@ -38,14 +38,11 @@ const useGoogleLogin = () => {
     try {
       const firebaseResponse = await signInWithPopup(auth, provider);
       const idToken = await firebaseResponse.user.getIdToken();
-      const response = await authApi.signIn(idToken);
-      const userInfo: UserInfo = {
-        userId: response.userId,
-        nickname: response.nickname,
-        onboarding: response.onboarding,
-      };
-      setIsLoading(false);
+      const { userId, nickname, onboarding } = await authApi.signIn(idToken);
+      const { imageUrl, email } = await userApi.get();
+      const userInfo = { userId, nickname, onboarding, email, imageUrl };
       setUserInfo(userInfo);
+      setIsLoading(false);
       router.push('/?steps=welcome');
     } catch (error) {
       setIsLoading(false);

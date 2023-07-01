@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 
-import { UserInfo, UserState } from './types/user';
+import { UserInfoParams, UserState } from './types/user';
 
 export const userStore = create<UserState>((set) => ({
   userInfo: {
@@ -12,14 +12,30 @@ export const userStore = create<UserState>((set) => ({
       resume: false,
       collection: false,
     },
+    email: '',
+    imageUrl: '',
   },
   actions: {
-    setUserInfo: (userInfo: UserInfo) => set(() => ({ userInfo })),
+    setUserInfo: (params: UserInfoParams) =>
+      set((state) => ({
+        userInfo: {
+          userId: params.userId ?? state.userInfo.userId,
+          nickname: params.nickname ?? state.userInfo.nickname,
+          onboarding: params.onboarding ?? state.userInfo.onboarding,
+          email: params.email ?? state.userInfo.email,
+          imageUrl: params.imageUrl ?? state.userInfo.imageUrl,
+        },
+      })),
   },
 }));
 
 // State
 export const useUserInfo = () => userStore((state) => state.userInfo);
+export const useUserId = () => userStore((state) => state.userInfo.userId);
+export const useUserNickname = () => userStore((state) => state.userInfo.nickname);
+export const useUserOnboarding = () => userStore((state) => state.userInfo.onboarding);
+export const useUserEmail = () => userStore((state) => state.userInfo.email);
+export const useUserImageUrl = () => userStore((state) => state.userInfo.imageUrl);
 
 // Actions
 export const useUserActions = () => userStore((state) => state.actions);
