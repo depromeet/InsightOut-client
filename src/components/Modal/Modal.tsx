@@ -1,7 +1,9 @@
 'use client';
 
 import { PropsWithChildren } from 'react';
+
 import type { Modal as ModalWrapperType } from '@chakra-ui/react';
+import { Modal as ModalWrapper, ModalCloseButton, ModalContent, ModalOverlay } from '@chakra-ui/react';
 
 type ModalProps = MergeComponentProps<
   typeof ModalWrapperType,

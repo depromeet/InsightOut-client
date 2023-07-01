@@ -1,7 +1,5 @@
 import { Meta, StoryObj } from '@storybook/react';
 
-import emptyFunction from '@/shared/utils/emptyFunction';
-
 import GlobalNavigationBar from './GlobalNavigationBar';
 
 const meta = {

@@ -1,4 +1,5 @@
 import { create } from 'zustand';
+
 import { UserInfoParams, UserState } from './types/user';
 
 export const userStore = create<UserState>((set) => ({
@@ -6,6 +7,7 @@ export const userStore = create<UserState>((set) => ({
     userId: 0,
     nickname: '',
     onboarding: {
+      field: false,
       experience: false,
       experienceStepper: false,
       resume: false,
