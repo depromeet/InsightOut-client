@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Modal, ModalContent, ModalOverlay } from '@chakra-ui/react';
 
-import { Capacity } from '@/features/collection/types';
+import { Capability } from '@/features/collection/types';
 
 import ExperienceCard from './ExperienceCard';
 
@@ -12,7 +12,7 @@ type Props = {
   period: string;
   title: string;
   summaries: string[];
-  capabilities: Omit<Capacity, 'count'>[];
+  capabilities: Omit<Capability, 'count'>[];
 };
 
 const ExperienceModal = ({ isOpen, onClose, title, period, summaries, capabilities }: Props) => {

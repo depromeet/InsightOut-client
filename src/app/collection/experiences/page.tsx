@@ -7,13 +7,13 @@ import IconClock from '@/components/Icon/IconClock';
 import ExperienceListCard from '@/features/collection/components/cards/ExperienceListCard/ExperienceListCard';
 import ChipListNav from '@/features/collection/components/nav/ChipListNav';
 import { EXPERIENCE_SORT_BY } from '@/features/collection/constants';
-import { Capacity, Experience } from '@/features/collection/types';
-import getAllCapacity from '@/features/collection/utils/getAllCapacityBadgeItem';
+import { Capability, Experience } from '@/features/collection/types';
+import getAllCapability from '@/features/collection/utils/getAllCapabilityBadgeItem';
 import getFilteredExperiences from '@/features/collection/utils/getFilteredExperiences';
 import getSortedExperiences from '@/features/collection/utils/getSortedExperiences';
 
 const Page = () => {
-  const capabilities: Capacity[] = [
+  const capabilities: Capability[] = [
     {
       id: 1234,
       keyword: '문제해결력',
@@ -291,19 +291,19 @@ const Page = () => {
     },
   ];
 
-  const allCapacity = getAllCapacity(capabilities);
+  const allCapability = getAllCapability(capabilities);
 
-  const shownCapabilities: Capacity[] = [allCapacity, ...capabilities];
+  const shownCapabilities: Capability[] = [allCapability, ...capabilities];
 
   const [sortBy, setSortBy] = useState<keyof typeof EXPERIENCE_SORT_BY>('EXPERIENCE_TIME');
-  const [selectedCapacityId, setSelectedCapacityId] = useState(allCapacity.id);
+  const [selectedCapabilityId, setSelectedCapabilityId] = useState(allCapability.id);
 
   const handleTimeSortClick = () => {
     setSortBy(() => (sortBy === 'EXPERIENCE_TIME' ? 'UPDATED_AT' : 'EXPERIENCE_TIME'));
   };
 
   const _experiences =
-    selectedCapacityId === allCapacity.id ? experiences : getFilteredExperiences(experiences, selectedCapacityId);
+    selectedCapabilityId === allCapability.id ? experiences : getFilteredExperiences(experiences, selectedCapabilityId);
 
   const __experiences = getSortedExperiences(_experiences, sortBy);
 
@@ -311,8 +311,8 @@ const Page = () => {
     <>
       <ChipListNav
         items={shownCapabilities}
-        selectedItem={selectedCapacityId}
-        changeItem={setSelectedCapacityId}
+        selectedItem={selectedCapabilityId}
+        changeItem={setSelectedCapabilityId}
         Right={
           <div>
             <TextButton size="L" leftIcon={<IconClock className="fill-none" />} onClick={handleTimeSortClick}>

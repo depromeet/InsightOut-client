@@ -10,14 +10,14 @@ import TextAreaField from '@/components/Input/TextAreaField/TextAreaField';
 import Tag from '@/components/Tag/Tag';
 
 import cardImage from '../../../../../../public/images/card1.png';
-import { Capacity } from '../../../types';
+import { Capability } from '../../../types';
 import MotionBox from '../MotionBox';
 
 type Props = {
   period: string;
   title: string;
   summaries: string[];
-  capabilities: Omit<Capacity, 'count'>[];
+  capabilities: Omit<Capability, 'count'>[];
 };
 
 const aiRecommendQuestions = [
@@ -108,7 +108,7 @@ ExperienceCard.Header = ({ title, period, isBack, handleFlipClick }: ExperienceC
 
 type ExperienceCardBodyFrontProps = {
   summaries: string[];
-  capabilities: Omit<Capacity, 'count'>[];
+  capabilities: Omit<Capability, 'count'>[];
   aiRecommend: string;
 };
 
@@ -155,7 +155,7 @@ ExperienceCard.Image = ({ summaries }: ExperienceCardImageProps) => (
 
 type ExperienceKeywordProps = {
   title: string;
-  capabilities: Omit<Capacity, 'count'>[];
+  capabilities: Omit<Capability, 'count'>[];
   aiRecommend?: string;
 };
 
@@ -194,7 +194,7 @@ ExperienceCard.AIQuestions = ({ aiRecommendQuestions }: ExperienceCardAIQuestion
 );
 
 type ExperienceCardBodyBackProps = {
-  capabilities: Omit<Capacity, 'count'>[];
+  capabilities: Omit<Capability, 'count'>[];
 };
 
 ExperienceCard.BodyBack = ({ capabilities }: ExperienceCardBodyBackProps) => {
@@ -223,7 +223,7 @@ ExperienceCard.BodyBack = ({ capabilities }: ExperienceCardBodyBackProps) => {
           </div>
           <ul className="flex flex-row gap-[8px]">
             {userCapabilities.map(({ keyword }, index) => (
-              <li key={`back-capacity-${keyword}-${index}`}>
+              <li key={`back-capability-${keyword}-${index}`}>
                 <Tag variant="primary500" size="M">
                   {keyword}
                 </Tag>

@@ -1,5 +1,5 @@
 import { ExperienceFormValues } from '@/feature/analyze/types';
-import { Capacity } from '@/features/collection/types';
+import { Capability } from '@/features/collection/types';
 
 export type ExperienceParams = {
   get: {
@@ -39,6 +39,6 @@ export type ExperienceCapabilityParams = {
 
 export type ExperienceCapabilityResponse = {
   get: {
-    capability: Capacity;
+    capability: Capability;
   };
 };

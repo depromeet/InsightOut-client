@@ -15,7 +15,7 @@ import ModalHeader from '@/components/Modal/ModalHeader';
 import Tag from '@/components/Tag/Tag';
 
 import cardImage from '../../../../../../public/images/card1.png';
-import { Capacity, Experience } from '../../../types';
+import { Capability, Experience } from '../../../types';
 import getExperiencePeriod from '../../../utils/getExperiencePeriod';
 import ExperienceModal from '../ExperienceCard/ExperienceModal';
 
@@ -152,7 +152,7 @@ ExperienceListCard.Summary = ({ experiencePeriod, title, situation }: Experience
 type ExperienceListCardKeyWordProps = {
   id: number;
   title: string;
-  capabilities: Omit<Capacity, 'count'>[];
+  capabilities: Omit<Capability, 'count'>[];
   isAi?: boolean;
 };
 
@@ -160,8 +160,8 @@ ExperienceListCard.Keyword = ({ id, title, capabilities, isAi = false }: Experie
   <div className={`${isAi ? 'h-[66px]' : 'h-[104px] gap-y-[2px]'}`}>
     <span className="mb-4 subhead4">{title}</span>
     <div className={`flex flex-row flex-wrap gap-x-[4px] mb-[10px] ${isAi || 'gap-y-[2px]'}`}>
-      {capabilities.map(({ id: capacityId, keyword }, index) => (
-        <Fragment key={`${id}-${title}-${capacityId}-${keyword}`}>
+      {capabilities.map(({ id: capabilityId, keyword }, index) => (
+        <Fragment key={`${id}-${title}-${capabilityId}-${keyword}`}>
           <Tag variant={isAi ? 'secondary50-outline' : 'primary50-outline'} size="M">
             {keyword}
           </Tag>
