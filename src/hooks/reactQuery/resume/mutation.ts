@@ -1,5 +1,5 @@
 import { useMutation, UseMutationOptions, useQueryClient } from '@tanstack/react-query';
-import { AxiosError,AxiosResponse } from 'axios';
+import { AxiosError, AxiosResponse } from 'axios';
 
 import resumeApi from '@/apis/resume/resume';
 import { ResumeParams } from '@/apis/resume/types/resume';

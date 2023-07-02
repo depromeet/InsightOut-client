@@ -3,14 +3,14 @@ import { SpellCheckData } from './question';
 export interface QuestionState {
   title: string;
   answer: string;
-  isEditMode: boolean;
+  isSpellCheckMode: boolean;
   spellErrors: SpellCheckData[];
 }
 
 export interface QuestionActions {
   setTitle: (title: QuestionState['title']) => void;
   setAnswer: (answer: QuestionState['answer']) => void;
-  setIsEditMode: (isEditMode: QuestionState['isEditMode']) => void;
+  setIsSpellCheckMode: (isSpellCheckMode: QuestionState['isSpellCheckMode']) => void;
   setSpellErrors: (spellErrors: QuestionState['spellErrors']) => void;
 }
 
