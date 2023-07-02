@@ -6,7 +6,7 @@ import {
   ExperienceCapabilityResponse,
   ExperienceCountResponse,
   ExperienceParams,
-  ExperienceResponse,
+  ExperiencesResponse,
 } from '@/apis/experience/types/experience';
 import { objToQueryString } from '@/shared/utils/objToQueryString';
 
@@ -15,10 +15,8 @@ const EXPERIENCE_API_URL = '/experience';
 export const EXPERIENCE_API = {
   get: async (params: ExperienceParams['get']) => {
     const queryString = isEmpty(params) ? '' : `?${objToQueryString(params)}`;
-    return await instance.get<ExperienceResponse, ExperienceResponse>(EXPERIENCE_API_URL + queryString);
+    return await instance.get<ExperiencesResponse, ExperiencesResponse>(EXPERIENCE_API_URL + queryString);
   },
-  post: async ({ ...params }: ExperienceParams['post']) =>
-    await instance.post<ExperienceResponse, ExperienceResponse>(EXPERIENCE_API_URL, params),
 };
 
 export const EXPERIENCE_CAPABILITY_API = {
