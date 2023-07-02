@@ -4,30 +4,13 @@ import { useState } from 'react';
 
 import ResumeCard from '@/features/collection/components/cards/ResumeCard';
 import ChipListNav from '@/features/collection/components/nav/ChipListNav';
+import { useGetResumesTitle } from '@/hooks/reactQuery/resume/query';
 
 const Page = () => {
-  // TODO: 추후 이동
+  const { data: resumes } = useGetResumesTitle();
 
-  const resumes = [
-    {
-      id: 1234,
-      title: '디프만 13기',
-      createdAt: '2023-06-16T14:42:03.704Z',
-      updatedAt: '2023-06-16T14:42:03.704Z',
-    },
-    {
-      id: 1235,
-      title: '코코아',
-      createdAt: '2023-06-16T14:42:03.704Z',
-      updatedAt: '2023-06-16T14:42:03.704Z',
-    },
-    {
-      id: 1236,
-      title: '네버',
-      createdAt: '2023-06-16T14:42:03.704Z',
-      updatedAt: '2023-06-16T14:42:03.704Z',
-    },
-  ];
+  // TODO:notFound 처리
+  const [selectedResumeKeyword, setSelectedResumeKeyword] = useState(resumes ? resumes[0].title : '');
 
   const questions = [
     {
@@ -60,12 +43,10 @@ const Page = () => {
     },
   ];
 
-  const [selectedResumeId, setSelectedResumeId] = useState(resumes[0].id);
-
   return (
     <>
       {/* 자기소개서 제목 목록 */}
-      <ChipListNav items={resumes} selectedItem={selectedResumeId} changeItem={setSelectedResumeId} />
+      <ChipListNav items={resumes || []} selectedItem={selectedResumeKeyword} changeItem={setSelectedResumeKeyword} />
       {/* 자기소개서 상세 */}
       <section>
         <ul className="flex flex-col gap-[40px]">

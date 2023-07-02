@@ -6,8 +6,8 @@ import addPlusMarkOver99 from '@/shared/utils/addPlusMarkOver99';
 
 type Props<T> = {
   items: T[];
-  selectedItem: number;
-  changeItem?: Dispatch<SetStateAction<number>>;
+  selectedItem: string;
+  changeItem?: Dispatch<SetStateAction<string>>;
   Right?: ReactNode;
 };
 
@@ -21,29 +21,27 @@ type Item = {
 const ChipListNav = <T extends Item>({ items, selectedItem, changeItem, Right }: Props<T>) => {
   return (
     <section className="flex flex-row justify-between items-center my-[24px]">
-      <nav>
-        <ul className="flex flex-row gap-[8px]">
-          {items.map(({ id, count, keyword, title }: T) => {
-            const content = keyword || title || '';
-            return (
-              <li key={id} className="list-none">
-                <Chip
-                  size="M"
-                  variant={selectedItem === id ? 'secondary-pressed' : 'secondary'}
-                  badge={
-                    count ? (
-                      <Badge variant="gray100-outline" size="S">
-                        {addPlusMarkOver99(count)}
-                      </Badge>
-                    ) : undefined
-                  }
-                  onClick={changeItem ? () => changeItem(id) : undefined}>
-                  {content}
-                </Chip>
-              </li>
-            );
-          })}
-        </ul>
+      <nav className="flex flex-row gap-[8px]">
+        {items.map(({ id, count, keyword, title }: T) => {
+          const chipContents = keyword || title || '';
+          return (
+            <li key={id} className="list-none">
+              <Chip
+                size="M"
+                variant={selectedItem === chipContents ? 'secondary-pressed' : 'secondary'}
+                badge={
+                  count ? (
+                    <Badge variant="gray100-outline" size="S">
+                      {addPlusMarkOver99(count)}
+                    </Badge>
+                  ) : undefined
+                }
+                onClick={changeItem ? () => changeItem(chipContents) : undefined}>
+                {chipContents}
+              </Chip>
+            </li>
+          );
+        })}
       </nav>
       {Right}
     </section>
