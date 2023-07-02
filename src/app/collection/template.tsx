@@ -5,6 +5,7 @@ import { usePathname } from 'next/navigation';
 import Badge from '@/components/Badge/Badge';
 import Tab from '@/components/Tab/Tab';
 import { COLLECTION_TABS } from '@/shared/constants/tabs';
+import addPlusMarkOver99 from '@/shared/utils/addPlusMarkOver99';
 
 const Template = ({ children }: { children: React.ReactNode }) => {
   const currentPath = usePathname();
@@ -19,7 +20,7 @@ const Template = ({ children }: { children: React.ReactNode }) => {
             size="lg"
             badge={
               <Badge variant="gray900" size="L">
-                {count}
+                {addPlusMarkOver99(count)}
               </Badge>
             }
             variant={currentPath === `/collection/${pathname}` ? 'pressed' : 'default'}>
