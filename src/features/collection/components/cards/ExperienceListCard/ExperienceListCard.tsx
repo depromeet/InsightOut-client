@@ -13,6 +13,7 @@ import Modal from '@/components/Modal/Modal';
 import ModalFooter from '@/components/Modal/ModalFooter';
 import ModalHeader from '@/components/Modal/ModalHeader';
 import Tag from '@/components/Tag/Tag';
+import { MESSAGE } from '@/features/collection/constants';
 
 import cardImage from '../../../../../../public/images/card1.png';
 import { Experience, ExperienceStatus } from '../../../types';
@@ -43,7 +44,7 @@ const ExperienceListCard = ({
     onClose: onCloseExperienceCardModal,
   } = useDisclosure();
 
-  const experiencePeriod = getExperiencePeriod(startDate ?? '', endDate ?? '');
+  const experiencePeriod = startDate && endDate ? getExperiencePeriod(startDate, endDate) : MESSAGE.HAS_NOT_PERIOD;
 
   return (
     <>
@@ -60,7 +61,7 @@ const ExperienceListCard = ({
         />
         <ExperienceListCard.Summary
           experiencePeriod={experiencePeriod}
-          title={title || ''}
+          title={title || MESSAGE.HAS_NOT_TITLE}
           situation={situation || ''}
         />
         <Divider my={'16px'} />
@@ -71,8 +72,8 @@ const ExperienceListCard = ({
       </section>
       <Modal size="md" isOpen={isOpenActionListModal} onClose={onCloseActionListModal}>
         <ModalHeader.Title
-          title={'[경험제목]\n카드를 삭제하실건가요?'}
-          subTitle="삭제한 카드는 다시 복구할 수 없어요"
+          title={MESSAGE.DELETE_EXPERIENCE_CARD_TITLE}
+          subTitle={MESSAGE.DELETE_EXPERIENCE_CARD_SUBTITLE}
         />
         <ModalFooter.TwoButton
           leftTextContent="취소하기"
