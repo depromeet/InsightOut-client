@@ -16,6 +16,10 @@ export interface AuthActions {
    * 토큰 관련 요청이 진행 중인지 여부를 설정하는 함수
    */
   setIsRequesting: (value: boolean) => void;
+  /**
+   * 회원가입 모달 트리거 함수
+   */
+  setIsOpenSignUpModal: (value: boolean) => void;
 }
 
 /**
@@ -34,6 +38,10 @@ export interface AuthState {
    * 토큰 관련 요청이 진행 중인지 여부 (스피너 출력)
    */
   isRequesting: boolean;
+  /**
+   * 회원가입 모달 트리거 값
+   */
+  isOpenSignUpModal: boolean;
   /**
    * Action 함수
    */
