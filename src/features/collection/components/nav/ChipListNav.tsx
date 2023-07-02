@@ -25,7 +25,7 @@ const ChipListNav = <T extends Item>({ items, selectedItem, changeItem, Right }:
           <li key={id} className="list-none">
             <Chip
               size="M"
-              variant={selectedItem === id ? 'secondary-pressed' : 'secondary'}
+              variant={selectedItem === keyword ? 'secondary-pressed' : 'secondary'}
               badge={
                 count ? (
                   <Badge variant="gray100-outline" size="S">
@@ -33,7 +33,7 @@ const ChipListNav = <T extends Item>({ items, selectedItem, changeItem, Right }:
                   </Badge>
                 ) : undefined
               }
-              onClick={changeItem ? () => changeItem(id) : undefined}>
+              onClick={changeItem ? () => changeItem(keyword) : undefined}>
               {keyword}
             </Chip>
           </li>

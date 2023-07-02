@@ -20,6 +20,7 @@ const Page = () => {
 
   const { data: experiences } = useGetExperiences();
 
+  // TODO: notFound 처리
   // if (!experiences) notFound();
 
   const allCapability = getAllCapability(_capabilites);
@@ -33,7 +34,7 @@ const Page = () => {
     setSortBy(() => (sortBy === 'EXPERIENCE_TIME' ? 'UPDATED_AT' : 'EXPERIENCE_TIME'));
   };
 
-  // TODO: refactor
+  // TODO: 백엔드와 경험 시간 값을 논의 refactor
   let __experiences = experiences?.data || [];
   if (experiences?.data) {
     const _experiences =
