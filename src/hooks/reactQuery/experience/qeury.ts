@@ -7,15 +7,15 @@ import {
   ExperienceCapabilityResponse,
   ExperienceCountResponse,
   ExperienceParams,
-  ExperienceResponse,
+  ExperiencesResponse,
 } from '@/apis/experience/types/experience';
 import { EXPERIENCE_CAPABILITY_KEY, EXPERIENCE_KEY } from '@/shared/constants/querykeys';
 
 export const useGetExperiences = (
   params?: ExperienceParams['get'],
-  options?: UseQueryOptions<ExperienceResponse, AxiosError>
+  options?: UseQueryOptions<ExperiencesResponse, AxiosError>
 ) =>
-  useQuery<ExperienceResponse, AxiosError>(
+  useQuery<ExperiencesResponse, AxiosError>(
     EXPERIENCE_KEY.list([{ ...params }]),
     () => EXPERIENCE_API.get({ ...params }),
     {

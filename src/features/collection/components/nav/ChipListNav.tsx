@@ -6,8 +6,8 @@ import addPlusMarkOver99 from '@/shared/utils/addPlusMarkOver99';
 
 type Props<T> = {
   items: T[];
-  selectedItem: number;
-  changeItem?: Dispatch<SetStateAction<number>>;
+  selectedItem: string;
+  changeItem?: Dispatch<SetStateAction<string>>;
   Right?: ReactNode;
 };
 

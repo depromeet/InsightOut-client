@@ -1,7 +1,7 @@
 import { Experience } from '../types';
 
-const getFilteredExperiences = (experiences: Experience[], selectedCapabilityId: number) =>
+const getFilteredExperiences = (experiences: Experience[], selectedCapability: string) =>
   experiences.filter((experience) =>
-    experience.capabilities.find((capability) => capability.id === selectedCapabilityId)
+    experience.experienceCapabilityKeywords?.find((capability) => capability === selectedCapability)
   );
 export default getFilteredExperiences;

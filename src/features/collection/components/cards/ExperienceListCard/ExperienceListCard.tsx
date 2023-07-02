@@ -15,7 +15,7 @@ import ModalHeader from '@/components/Modal/ModalHeader';
 import Tag from '@/components/Tag/Tag';
 
 import cardImage from '../../../../../../public/images/card1.png';
-import { Capability, Experience } from '../../../types';
+import { Experience, ExperienceStatus } from '../../../types';
 import getExperiencePeriod from '../../../utils/getExperiencePeriod';
 import ExperienceModal from '../ExperienceCard/ExperienceModal';
 
@@ -23,13 +23,14 @@ type Props = Experience;
 
 const ExperienceListCard = ({
   id,
-  experienceStatus,
-  summaries,
-  startDate,
-  endDate,
   title,
   situation,
-  capabilities,
+  experienceStatus,
+  summaryKeywords,
+  startDate,
+  endDate,
+  experienceCapabilityKeywords,
+  aiRecommendKeywords,
 }: Props) => {
   const {
     isOpen: isOpenActionListModal,
@@ -42,9 +43,8 @@ const ExperienceListCard = ({
     onClose: onCloseExperienceCardModal,
   } = useDisclosure();
 
-  const experiencePeriod = getExperiencePeriod(startDate, endDate);
-  const userCapabilitis = capabilities.filter(({ isAi }) => !isAi);
-  const aiCapabilitis = capabilities.filter(({ isAi }) => isAi);
+  const experiencePeriod = getExperiencePeriod(startDate ?? '', endDate ?? '');
+
   return (
     <>
       <section
@@ -55,14 +55,18 @@ const ExperienceListCard = ({
         <ExperienceListCard.Top
           id={id}
           experienceStatus={experienceStatus}
-          summaries={summaries}
+          summaryKeywords={summaryKeywords}
           onOpenActionListModal={onOpenActionListModal}
         />
-        <ExperienceListCard.Summary experiencePeriod={experiencePeriod} title={title} situation={situation} />
+        <ExperienceListCard.Summary
+          experiencePeriod={experiencePeriod}
+          title={title || ''}
+          situation={situation || ''}
+        />
         <Divider my={'16px'} />
         <div>
-          <ExperienceListCard.Keyword id={id} title="직무영략 키워드" capabilities={userCapabilitis} />
-          <ExperienceListCard.Keyword id={id} title="AI추천 키워드" capabilities={aiCapabilitis} isAi={true} />
+          <ExperienceListCard.Keyword id={id} title="직무영략 키워드" capabilities={experienceCapabilityKeywords} />
+          <ExperienceListCard.Keyword id={id} title="AI추천 키워드" capabilities={aiRecommendKeywords} isAi={true} />
         </div>
       </section>
       <Modal size="md" isOpen={isOpenActionListModal} onClose={onCloseActionListModal}>
@@ -83,9 +87,10 @@ const ExperienceListCard = ({
         isOpen={isOpenExperienceCardModal}
         onClose={onCloseExperienceCardModal}
         period={experiencePeriod}
-        title={title}
-        summaries={summaries}
-        capabilities={capabilities}
+        title={title || ''}
+        summaryKeywords={summaryKeywords}
+        experienceCapabilityKeywords={experienceCapabilityKeywords}
+        aiRecommendKeywords={aiRecommendKeywords}
       />
     </>
   );
@@ -93,12 +98,17 @@ const ExperienceListCard = ({
 
 type ExperienceListCardTopProps = {
   id: number;
-  experienceStatus: 'INPROGRESS' | 'DONE';
+  experienceStatus: ExperienceStatus;
   onOpenActionListModal: () => void;
-  summaries: string[];
+  summaryKeywords?: string[];
 };
 
-ExperienceListCard.Top = ({ id, experienceStatus, onOpenActionListModal, summaries }: ExperienceListCardTopProps) => (
+ExperienceListCard.Top = ({
+  id,
+  experienceStatus,
+  onOpenActionListModal,
+  summaryKeywords,
+}: ExperienceListCardTopProps) => (
   <div className="relative w-[341px] h-[345px] bg-black rounded-[16px]">
     {/* 카드 이미지 */}
     <div className="w-[341px] h-[345px] flex items-center justify-center">
@@ -126,11 +136,13 @@ ExperienceListCard.Top = ({ id, experienceStatus, onOpenActionListModal, summari
     </ActionList>
     {/* 카드 키워드 */}
     <div className="flex flex-row gap-[12px] absolute bottom-[16px] left-[16px]">
-      {summaries.map((summary, index) => (
-        <Tag variant="gray800" size="M" key={`${id}-${index}-${summary}`}>
-          {summary}
-        </Tag>
-      ))}
+      {summaryKeywords
+        ? summaryKeywords.map((summary, index) => (
+            <Tag variant="gray800" size="M" key={`${id}-${index}-${summary}`}>
+              {summary}
+            </Tag>
+          ))
+        : ''}
     </div>
   </div>
 );
@@ -152,7 +164,7 @@ ExperienceListCard.Summary = ({ experiencePeriod, title, situation }: Experience
 type ExperienceListCardKeyWordProps = {
   id: number;
   title: string;
-  capabilities: Omit<Capability, 'count'>[];
+  capabilities?: string[];
   isAi?: boolean;
 };
 
@@ -160,15 +172,17 @@ ExperienceListCard.Keyword = ({ id, title, capabilities, isAi = false }: Experie
   <div className={`${isAi ? 'h-[66px]' : 'h-[104px] gap-y-[2px]'}`}>
     <span className="mb-4 subhead4">{title}</span>
     <div className={`flex flex-row flex-wrap gap-x-[4px] mb-[10px] ${isAi || 'gap-y-[2px]'}`}>
-      {capabilities.map(({ id: capabilityId, keyword }, index) => (
-        <Fragment key={`${id}-${title}-${capabilityId}-${keyword}`}>
-          <Tag variant={isAi ? 'secondary50-outline' : 'primary50-outline'} size="M">
-            {keyword}
-          </Tag>
-          {/* Question: CSS로 요소의 개수만큼 개행 처리를 할 수 있는 방법이 있을까요? */}
-          {index % 2 ? <span className="basis-full" /> : ''}
-        </Fragment>
-      ))}
+      {capabilities
+        ? capabilities.map((capability, index) => (
+            <Fragment key={`${id}-${title}-${capability}`}>
+              <Tag variant={isAi ? 'secondary50-outline' : 'primary50-outline'} size="M">
+                {capability}
+              </Tag>
+              {/* Question: CSS로 요소의 개수만큼 개행 처리를 할 수 있는 방법이 있을까요? */}
+              {index % 2 ? <span className="basis-full" /> : ''}
+            </Fragment>
+          ))
+        : ''}
     </div>
   </div>
 );

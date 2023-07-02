@@ -16,8 +16,9 @@ import MotionBox from '../MotionBox';
 type Props = {
   period: string;
   title: string;
-  summaries: string[];
-  capabilities: Omit<Capability, 'count'>[];
+  summaryKeywords?: string[];
+  experienceCapabilityKeywords?: string[];
+  aiRecommendKeywords?: string[];
 };
 
 const aiRecommendQuestions = [
@@ -41,7 +42,7 @@ const aiRecommend =
   '디자이너로서 개발팀과 각각의 전문성을 최대한 활용하여 높은 퀄리티의 앱을 만들어내기 위해 커뮤니케이션 능력을 뽐내셨군요! 빠른 기간안에 앱 서비스를 런칭해야하는 상황에서 디자인 시스템 제작, 런칭일 정해서 린하게 개발하는 방법을 제의한 것은 프로젝트 관리 능력의 일환이었습니다.';
 
 const ExperienceCard = (props: Props) => {
-  const { period, title, summaries, capabilities } = props;
+  const { period, title, summaryKeywords, experienceCapabilityKeywords, aiRecommendKeywords } = props;
 
   const [isBack, setIsBack] = useState(false);
 
@@ -74,9 +75,14 @@ const ExperienceCard = (props: Props) => {
             isBack && '[transform:rotateY(180deg)]'
           }`}>
           {!isBack ? (
-            <ExperienceCard.BodyFront summaries={summaries} aiRecommend={aiRecommend} capabilities={capabilities} />
+            <ExperienceCard.BodyFront
+              summaries={summaryKeywords}
+              aiRecommend={aiRecommend}
+              experienceCapabilityKeywords={experienceCapabilityKeywords}
+              aiRecommendKeywords={aiRecommendKeywords}
+            />
           ) : (
-            <ExperienceCard.BodyBack capabilities={capabilities} />
+            <ExperienceCard.BodyBack capabilities={[]} />
           )}
         </div>
       </MotionBox>
@@ -107,22 +113,31 @@ ExperienceCard.Header = ({ title, period, isBack, handleFlipClick }: ExperienceC
 );
 
 type ExperienceCardBodyFrontProps = {
-  summaries: string[];
-  capabilities: Omit<Capability, 'count'>[];
-  aiRecommend: string;
+  summaries?: string[];
+  experienceCapabilityKeywords?: string[];
+  aiRecommendKeywords?: string[];
+  aiRecommend?: string;
 };
 
-ExperienceCard.BodyFront = ({ summaries, capabilities, aiRecommend }: ExperienceCardBodyFrontProps) => {
-  const userCapabilities = capabilities.filter(({ isAi }) => !isAi);
-  const aiCapabilities = capabilities.filter(({ isAi }) => isAi);
+ExperienceCard.BodyFront = ({
+  summaries,
+  experienceCapabilityKeywords,
+  aiRecommendKeywords,
+  aiRecommend,
+}: ExperienceCardBodyFrontProps) => {
   return (
     <>
       <div className="w-[560px]">
         <ExperienceCard.Image summaries={summaries} />
       </div>
       <div className="w-[589px] flex flex-col text-left px-[40px]">
-        <ExperienceCard.Keyword title="내가 선택한 역량 키워드" capabilities={userCapabilities} />
-        <ExperienceCard.Keyword title="AI 역량 분석" capabilities={aiCapabilities} aiRecommend={aiRecommend} />
+        <ExperienceCard.Keyword title="내가 선택한 역량 키워드" capabilities={experienceCapabilityKeywords} />
+        <ExperienceCard.Keyword
+          title="AI 역량 분석"
+          capabilities={aiRecommendKeywords}
+          isAi={true}
+          aiRecommend={aiRecommend}
+        />
         <ExperienceCard.AIQuestions aiRecommendQuestions={aiRecommendQuestions} />
       </div>
     </>
@@ -130,7 +145,7 @@ ExperienceCard.BodyFront = ({ summaries, capabilities, aiRecommend }: Experience
 };
 
 type ExperienceCardImageProps = {
-  summaries: string[];
+  summaries?: string[];
 };
 
 ExperienceCard.Image = ({ summaries }: ExperienceCardImageProps) => (
@@ -140,13 +155,15 @@ ExperienceCard.Image = ({ summaries }: ExperienceCardImageProps) => (
       <div className="absolute flex flex-col bottom-[24px] left-[24px]">
         <span className="text-left text-white b4 mb-[6px]">경험요약</span>
         <ul className="flex flex-row gap-[8px]">
-          {summaries.map((summary, index) => (
-            <li key={`ExperienceCardModal-${index}-${summary}`}>
-              <Tag variant="gray800" size="L">
-                {summary}
-              </Tag>
-            </li>
-          ))}
+          {summaries
+            ? summaries.map((summary, index) => (
+                <li key={`ExperienceCardModal-${index}-${summary}`}>
+                  <Tag variant="gray800" size="L">
+                    {summary}
+                  </Tag>
+                </li>
+              ))
+            : ''}
         </ul>
       </div>
     </div>
@@ -155,22 +172,25 @@ ExperienceCard.Image = ({ summaries }: ExperienceCardImageProps) => (
 
 type ExperienceKeywordProps = {
   title: string;
-  capabilities: Omit<Capability, 'count'>[];
+  capabilities?: string[];
+  isAi?: boolean;
   aiRecommend?: string;
 };
 
-ExperienceCard.Keyword = ({ title, capabilities, aiRecommend }: ExperienceKeywordProps) => (
+ExperienceCard.Keyword = ({ title, capabilities, aiRecommend, isAi = false }: ExperienceKeywordProps) => (
   <div className="mb-[22px]">
     <h6 className="h6 mb-[16px]">{title}</h6>
-    <ul className={`flex flex-row flex-wrap gap-x-[8px] gap-y-[4px] ${aiRecommend && 'mb-[16px]'}`}>
-      {capabilities.map(({ keyword, id }, index) => (
-        <li key={`${id}-${index}-${keyword}`}>
-          <Tag variant={`${aiRecommend ? 'secondary50-outline' : 'primary50-outline'}`} size="L">
-            {keyword}
-          </Tag>
-          {aiRecommend ? index % 2 ? <span className="basis-full" /> : '' : ''}
-        </li>
-      ))}
+    <ul className={`flex flex-row flex-wrap gap-x-[8px] gap-y-[4px] ${isAi && 'mb-[16px]'}`}>
+      {capabilities
+        ? capabilities.map((capability, index) => (
+            <li key={`${'EXPERIENCE_CARD'}-${index}-${capability}`}>
+              <Tag variant={`${isAi ? 'secondary50-outline' : 'primary50-outline'}`} size="L">
+                {capability}
+              </Tag>
+              {isAi ? index % 2 ? <span className="basis-full" /> : '' : ''}
+            </li>
+          ))
+        : ''}
     </ul>
     {aiRecommend ? <p className="w-full h-fit">{aiRecommend}</p> : ''}
   </div>

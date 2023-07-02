@@ -1,5 +1,5 @@
 import { ExperienceFormValues } from '@/feature/analyze/types';
-import { Capability } from '@/features/collection/types';
+import { Capability, Experience } from '@/features/collection/types';
 
 export type ExperienceParams = {
   get: {
@@ -14,22 +14,15 @@ export type ExperienceParams = {
   post: Partial<ExperienceFormValues>;
 };
 
-export type ExperienceResponse = {
-  id: number;
-  title: string;
-  startDate: string;
-  endDate: string;
-  experienceStatus: string;
-  situation: string;
-  task: string;
-  action: string;
-  result: string;
-  experienceInfo: {
-    experienceInfoId: number;
-    experienceId: number;
-    motivation: string;
-    experienceRole: string;
-    analysis: string;
+export type ExperiencesResponse = {
+  data: Experience[];
+  meta: {
+    hasNextPage: boolean;
+    hasPreviousPage: boolean;
+    itemCount: number;
+    page: number;
+    pageCount: number;
+    take: number;
   };
 };
 

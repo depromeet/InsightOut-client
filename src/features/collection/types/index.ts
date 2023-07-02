@@ -8,15 +8,18 @@ export type Capability = {
 
 export interface Experience {
   id: number;
-  title: string;
-  startDate: string;
-  endDate: string;
-  updatedAt: string;
-  experienceStatus: 'INPROGRESS' | 'DONE'; // boolean으로 수정하는건 어떨까?
-  situation?: string;
-  task?: string;
-  action?: string;
-  result?: string;
-  summaries: string[];
-  capabilities: Omit<Capability, 'count'>[];
+  title?: string | null;
+  situation?: string | null;
+  task?: string | null;
+  action?: string | null;
+  result?: string | null;
+  startDate: string | null;
+  endDate: string | null;
+  updatedAt?: string | null;
+  experienceStatus: ExperienceStatus;
+  summaryKeywords?: string[];
+  experienceCapabilityKeywords?: string[];
+  aiRecommendKeywords?: string[];
 }
+
+export type ExperienceStatus = 'INPROGRESS' | 'DONE';
