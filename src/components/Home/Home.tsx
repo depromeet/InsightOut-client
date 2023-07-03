@@ -5,16 +5,12 @@ import Image from 'next/image';
 import Badge from '../Badge/Badge';
 import Button from '../Button/Button';
 import SvgIconChevronRight from '../Icon/IconChevronRight';
-import SvgIconHomeExperience1 from '../Icon/IconHomeExperience1';
-import SvgIconHomeExperience2 from '../Icon/IconHomeExperience2';
-import SvgIconHomeExperience3 from '../Icon/IconHomeExperience3';
-import SvgIconHomeExperience4 from '../Icon/IconHomeExperience4';
 import AnalyzeCard from './AnalyzeCard';
 
 const Home = () => {
   return (
-    <main className="bg-white">
-      <section className="flex flex-col justify-center items-center pt-[230px] pb-[63px]">
+    <main>
+      <section className="flex flex-col justify-center items-center pt-[230px] pb-[63px] bg-white">
         <h1 className="text-center text-[60px] font-bold leading-[80px] whitespace-pre-line mb-[26px]">
           {'자기소개서가 막막한 순간,\n그 시작을 함께하는\n인사이트 아웃'}
         </h1>
@@ -27,10 +23,10 @@ const Home = () => {
           경험 분해 시작하기
         </Button>
       </section>
-      <section className="relative h-[1014px]">
+      <section className="relative h-[1014px] bg-white">
         <Image src={'/images/home/img-home-1.png'} fill alt="Home-1" className="object-contain w-full h-full" />
       </section>
-      <section className="flex justify-center items-center pt-[170px] py-[286px] gap-[102px]">
+      <section className="relative flex justify-center items-center pt-[170px] py-[286px] gap-[102px] bg-white z-[-1]">
         <div className="flex flex-col gap-[44px]">
           <div className="flex flex-col w-[588px] gap-[30px]">
             <Badge variant="primary50-outline" size="L">
@@ -51,16 +47,71 @@ const Home = () => {
             </div>
           </div>
           <div className="flex items-center w-[612px] py-[24px] border-y-[1px] border-solid border-gray-200 gap-[14px]">
-            <AnalyzeCard icon={<SvgIconHomeExperience1 />} index={1} title="직무 선택" />
+            <AnalyzeCard
+              image={
+                <Image
+                  src={'/images/home/img-home-experience-1.png'}
+                  className="w-[80px] h-[80px]"
+                  width={80}
+                  height={80}
+                  alt="home-experience-1"
+                />
+              }
+              index={1}
+              title="직무 선택"
+            />
             <SvgIconChevronRight />
-            <AnalyzeCard icon={<SvgIconHomeExperience2 />} index={2} title="경험 작성" />
+            <AnalyzeCard
+              image={
+                <Image
+                  src={'/images/home/img-home-experience-2.png'}
+                  className="w-[80px] h-[80px]"
+                  width={80}
+                  height={80}
+                  alt="home-experience-2"
+                />
+              }
+              index={2}
+              title="경험 작성"
+            />
             <SvgIconChevronRight />
-            <AnalyzeCard icon={<SvgIconHomeExperience3 />} index={3} title="직무 역량 추진" />
+            <AnalyzeCard
+              image={
+                <Image
+                  src={'/images/home/img-home-experience-3.png'}
+                  className="w-[80px] h-[80px]"
+                  width={80}
+                  height={80}
+                  alt="home-experience-3"
+                />
+              }
+              index={3}
+              title="직무 역량 추진"
+            />
             <SvgIconChevronRight />
-            <AnalyzeCard icon={<SvgIconHomeExperience4 />} index={4} title="경험카드 생성" />
+            <AnalyzeCard
+              image={
+                <Image
+                  src={'/images/home/img-home-experience-4.png'}
+                  className="w-[80px] h-[80px]"
+                  width={80}
+                  height={80}
+                  alt="home-experience-4"
+                />
+              }
+              index={4}
+              title="경험카드 생성"
+            />
           </div>
         </div>
-        <Image src={'/images/home/img-home-2.png'} width={486} height={486} alt="Home-2" />
+        <Image src={'/images/img-home-2.png'} width={486} height={486} alt="Home-2" />
+        <Image
+          src={'/images/img-home-ellipsis-1.png'}
+          width={352}
+          height={788}
+          alt="home-ellipsis-1"
+          className="absolute top-[413px] left-0 z-[-2]"
+        />
       </section>
     </main>
   );
