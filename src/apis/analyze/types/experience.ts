@@ -20,8 +20,27 @@ export type ExperienceResponse = {
     experienceInfoId: number;
     motivation: string;
     experienceRole: string;
-    // TODO: 어떤 필드인지 체크하기
-    // utilization: string;
     analysis: string;
   };
+  summaryKeywords: string[];
+  updatedAt: string;
+  AiResume: [
+    {
+      content: string;
+      AiResumeCapability: [
+        {
+          Capability: {
+            keyword: string;
+            keywordType: string;
+          };
+        },
+        {
+          Capability: {
+            keyword: string;
+            keywordType: string;
+          };
+        }
+      ];
+    }
+  ];
 };

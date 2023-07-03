@@ -19,6 +19,7 @@ import { initialValue, STEPS } from '@/feature/analyze/constants';
 import StepMenu from '@/feature/analyze/layout/StepMenu';
 import { ExperienceFormValues, WriteStatusType } from '@/feature/analyze/types';
 import SavingCaption from '@/features/resume/components/ResumeForm/SavingCaption';
+import { useSubmitExperience } from '@/hooks/reactQuery/ai/mutation';
 import { useCreateExperience, useUpdateExperience } from '@/hooks/reactQuery/analyze/mutation';
 import { useGetExperience } from '@/hooks/reactQuery/analyze/query';
 import { useUpdateKeyword } from '@/hooks/reactQuery/keyword/mutation';
@@ -30,7 +31,7 @@ export interface LayoutProps {
   children: React.ReactNode;
 }
 const Layout = ({ children }: LayoutProps) => {
-  const { back } = useRouter();
+  const { back, push } = useRouter();
   const pathname = usePathname();
   const prevPathname = usePrevious(pathname);
 
@@ -63,7 +64,13 @@ const Layout = ({ children }: LayoutProps) => {
       enabled: isNumber(experienceId),
       onSuccess: (data) => {
         const { setValue, getValues } = methods;
-        const [situation, task, action, result] = getValues(['situation', 'task', 'action', 'result']);
+        const [situation, task, action, result, resume] = getValues([
+          'situation',
+          'task',
+          'action',
+          'result',
+          'resume',
+        ]);
         const [endYYYY, endMM] = data?.endDate?.split?.('-') ?? '';
         const [startYYYY, startMM] = data?.startDate?.split?.('-') ?? '';
 
@@ -79,11 +86,14 @@ const Layout = ({ children }: LayoutProps) => {
         setValue('task', task);
         setValue('action', action);
         setValue('result', result);
+
+        setValue('resume', resume);
       },
     }
   );
 
   const { mutate: updateExperience, status: updateExperienceStatus } = useUpdateExperience(experienceId);
+  const { mutateAsync: submitExperience } = useSubmitExperience();
 
   console.log(data);
 
@@ -219,8 +229,18 @@ const Layout = ({ children }: LayoutProps) => {
 
   const isMounted = useIsMounted();
 
-  const submit = (data: ExperienceFormValues) => {
-    console.log({ data });
+  const submit = async (data: ExperienceFormValues) => {
+    const { experienceId, situation, task, action, result } = data;
+    const response = await submitExperience({
+      experienceId,
+      situation,
+      task,
+      action,
+      result,
+    });
+
+    // FIXME: 성공하면 보내는 곳은 준하님이 이어서 작업해주시면 됩니다.
+    if ('ExperienceInfo' in response) push('/');
   };
 
   return (
@@ -278,10 +298,8 @@ const Layout = ({ children }: LayoutProps) => {
                   disabled={['loading', 'error'].includes(updateExperienceStatus)}>
                   저장하기
                 </Button>
-                {/* FIXME: updatedAt 넘기기 */}
-                {/* updatedAt={formatYYMMDDhhmm(data.updatedAt)} */}
                 <SavingCaption
-                  updatedAt={formatYYMMDDhhmm('2023-06-25T23:35:04.381Z')}
+                  updatedAt={formatYYMMDDhhmm(data?.updatedAt)}
                   currentSavingStatus={updateExperienceStatus}
                   direction="ltr"
                 />

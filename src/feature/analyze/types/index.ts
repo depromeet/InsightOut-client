@@ -6,7 +6,7 @@ export type WriteStatusType = (typeof WRITE_STATUS)[number];
 export type Keyword = Record<string, boolean>;
 export type KeywordEntriesType = [string, boolean][];
 
-type CapabilitiesType = { id: number; keyword: string };
+export type CapabilitiesType = { id: number; keyword: string };
 
 export interface ExperienceFormValues {
   /**
@@ -75,8 +75,4 @@ export interface ExperienceFormValues {
    * Chat GPT 자기소개서 생성 프롬프트 api response
    */
   resume: string;
-  /**
-   * FIXME: 필요한 필드인지 확인하기
-   */
-  // utilization: string;
 }

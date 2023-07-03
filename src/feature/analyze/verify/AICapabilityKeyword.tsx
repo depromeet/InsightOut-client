@@ -3,10 +3,11 @@ import React from 'react';
 import AlertCircleLine from '@/components/Icon/AlertCircleLine';
 import Tag from '@/components/Tag/Tag';
 
+import { CapabilitiesType } from '../types';
 import RecommendKeyword from './RecommendKeyword';
 
 interface Props {
-  recommendKeywordList: string[];
+  recommendKeywordList: CapabilitiesType[];
 }
 
 const AICapabilityKeyword = ({ recommendKeywordList }: Props) => {
@@ -23,7 +24,7 @@ const AICapabilityKeyword = ({ recommendKeywordList }: Props) => {
         작성과 면접 때 <RecommendKeyword keywordList={recommendKeywordList} />를 어필해보는건 어때요?
       </p>
       <div className="flex gap-[12px] mb-[18px]">
-        {recommendKeywordList.map((keyword) => (
+        {recommendKeywordList.map(({ keyword }) => (
           <Tag key={keyword} variant="secondary500" size="L">
             {keyword}
           </Tag>
