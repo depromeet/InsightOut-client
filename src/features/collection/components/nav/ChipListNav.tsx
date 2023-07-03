@@ -6,8 +6,8 @@ import addPlusMarkOver99 from '@/shared/utils/addPlusMarkOver99';
 
 type Props<T> = {
   items: T[];
-  selectedItem: string;
-  changeItem?: Dispatch<SetStateAction<string>>;
+  selectedItem: string | undefined;
+  changeItem?: Dispatch<SetStateAction<T | undefined>>;
   Right?: ReactNode;
 };
 
@@ -22,7 +22,8 @@ const ChipListNav = <T extends Item>({ items, selectedItem, changeItem, Right }:
   return (
     <section className="flex flex-row justify-between items-center my-[24px]">
       <nav className="flex flex-row gap-[8px]">
-        {items.map(({ id, count, keyword, title }: T) => {
+        {items.map((item: T) => {
+          const { id, count, keyword, title } = item;
           const chipContents = keyword || title || '';
           return (
             <li key={id} className="list-none">
@@ -36,7 +37,7 @@ const ChipListNav = <T extends Item>({ items, selectedItem, changeItem, Right }:
                     </Badge>
                   ) : undefined
                 }
-                onClick={changeItem ? () => changeItem(chipContents) : undefined}>
+                onClick={changeItem ? () => changeItem(item) : undefined}>
                 {chipContents}
               </Chip>
             </li>

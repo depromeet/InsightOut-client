@@ -1,16 +1,22 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import ResumeCard from '@/features/collection/components/cards/ResumeCard';
 import ChipListNav from '@/features/collection/components/nav/ChipListNav';
+import { ResumeTitle } from '@/features/collection/types';
 import { useGetResumesTitle } from '@/hooks/reactQuery/resume/query';
 
 const Page = () => {
   const { data: resumes } = useGetResumesTitle();
 
-  // TODO:notFound 처리
-  const [selectedResumeKeyword, setSelectedResumeKeyword] = useState(resumes ? resumes[0].title : '');
+  const initialResumes = resumes && resumes[0];
+
+  const [selectedResume, setSelectedResume] = useState<ResumeTitle | undefined>(initialResumes);
+
+  useEffect(() => {
+    setSelectedResume(initialResumes);
+  }, [initialResumes]);
 
   const questions = [
     {
@@ -46,7 +52,7 @@ const Page = () => {
   return (
     <>
       {/* 자기소개서 제목 목록 */}
-      <ChipListNav items={resumes || []} selectedItem={selectedResumeKeyword} changeItem={setSelectedResumeKeyword} />
+      <ChipListNav items={resumes || []} selectedItem={selectedResume?.title} changeItem={setSelectedResume} />
       {/* 자기소개서 상세 */}
       <section>
         <ul className="flex flex-col gap-[40px]">
