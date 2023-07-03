@@ -3,21 +3,27 @@
 import Button from '@/components/Button/Button';
 import IconPencil from '@/components/Icon/IconPencil';
 import Tooltip from '@/components/Tooltip/Tooltip';
+import { useUpdateOnboarding } from '@/hooks/reactQuery/onboarding/mutation';
 import { useCreateResume } from '@/hooks/reactQuery/resume/mutation';
 import { useGetResumes } from '@/hooks/reactQuery/resume/query';
-import { useUserOnboarding } from '@/shared/store/user';
+import { useUserActions, useUserOnboarding } from '@/shared/store/user';
 
 import Resume from './Resume/Resume';
 import ResumeListContainer from './Resume/ResumeListContainer';
 
 const Aside = () => {
-  const { resume: isResumeOnboardingComplete } = useUserOnboarding();
+  const { resume: isResumeOnboardingComplete, ...restOnboardings } = useUserOnboarding();
+  const { setUserInfo } = useUserActions();
 
   const { mutate: createResume } = useCreateResume();
   const { data: resumeList } = useGetResumes();
+  const { mutate: updateResumeOnboarding } = useUpdateOnboarding({
+    onSuccess: () => setUserInfo({ onboarding: { ...restOnboardings, resume: true } }),
+  });
 
   const handleAddFolderButtonClick = () => {
     createResume();
+    if (!isResumeOnboardingComplete) updateResumeOnboarding({ resume: true });
   };
 
   return (
