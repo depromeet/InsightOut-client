@@ -10,18 +10,17 @@ import { TextLengthMessage } from '@/components/Input/TextLengthMessage';
 import Modal from '@/components/Modal/Modal';
 import ModalFooter from '@/components/Modal/ModalFooter';
 import ModalHeader from '@/components/Modal/ModalHeader';
+import { QuestionData } from '@/features/resume/types/question';
 import { MAX_LENGTH } from '@/shared/constants/maxLength';
 import formatUpdatedAt from '@/shared/utils/formatUpdateAt';
 
 import ResumeAnswerModalCard from './ResumeAnswerModalCard';
 
 type Props = {
-  updatedAt: string;
-  title: string;
-  answer: string;
+  question: QuestionData;
 };
 
-const ResumeCard = ({ updatedAt, title, answer }: Props) => {
+const ResumeCard = ({ question: { answer, title, updatedAt } }: Props) => {
   const answerPRef = useRef<HTMLParagraphElement>(null);
 
   const {
