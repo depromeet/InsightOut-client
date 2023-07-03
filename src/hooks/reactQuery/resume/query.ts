@@ -5,12 +5,15 @@ import resumeCountApi from '@/apis/resume/count';
 import resumeApi from '@/apis/resume/resume';
 import resumeTitleApi from '@/apis/resume/title';
 import { CountResponse } from '@/apis/resume/types/count';
-import { ResumeResponse } from '@/apis/resume/types/resume';
+import { ResumeParams, ResumeResponse } from '@/apis/resume/types/resume';
 import { TitleResponse } from '@/apis/resume/types/title';
 import { RESUME_KEY } from '@/shared/constants/querykeys';
 
-export const useGetResumes = (options?: UseQueryOptions<ResumeResponse['get'], AxiosError>) => {
-  return useQuery<ResumeResponse['get'], AxiosError>(RESUME_KEY.lists(), () => resumeApi.get(), { ...options });
+export const useGetResumes = (
+  params: ResumeParams['get'],
+  options?: UseQueryOptions<ResumeResponse['get'], AxiosError>
+) => {
+  return useQuery<ResumeResponse['get'], AxiosError>(RESUME_KEY.lists(), () => resumeApi.get(params), { ...options });
 };
 
 export const useGetResumesCount = (options?: UseQueryOptions<CountResponse['get'], AxiosError>) => {
