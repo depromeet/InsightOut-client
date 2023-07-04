@@ -11,6 +11,8 @@ import FeedbackForm from './FeedbackForm';
 import Looper from './Looper';
 import StartButton from './StartButton';
 
+const ANALYZE_CARD = ['직무 선택', '경험 작성', '직무 역량 추진', '경험카드 생성'];
+
 const Home = () => {
   return (
     <>
@@ -53,61 +55,12 @@ const Home = () => {
                 </div>
               </div>
               <div className="flex items-center w-[612px] py-[24px] border-y-[1px] border-solid border-gray-200 gap-[14px]">
-                <AnalyzeCard
-                  image={
-                    <Image
-                      src={'/images/home/img-home-experience-1.png'}
-                      className="w-[80px] h-[80px]"
-                      width={80}
-                      height={80}
-                      alt="home-experience-1"
-                    />
-                  }
-                  index={1}
-                  title="직무 선택"
-                />
-                <SvgIconChevronRight />
-                <AnalyzeCard
-                  image={
-                    <Image
-                      src={'/images/home/img-home-experience-2.png'}
-                      className="w-[80px] h-[80px]"
-                      width={80}
-                      height={80}
-                      alt="home-experience-2"
-                    />
-                  }
-                  index={2}
-                  title="경험 작성"
-                />
-                <SvgIconChevronRight />
-                <AnalyzeCard
-                  image={
-                    <Image
-                      src={'/images/home/img-home-experience-3.png'}
-                      className="w-[80px] h-[80px]"
-                      width={80}
-                      height={80}
-                      alt="home-experience-3"
-                    />
-                  }
-                  index={3}
-                  title="직무 역량 추진"
-                />
-                <SvgIconChevronRight />
-                <AnalyzeCard
-                  image={
-                    <Image
-                      src={'/images/home/img-home-experience-4.png'}
-                      className="w-[80px] h-[80px]"
-                      width={80}
-                      height={80}
-                      alt="home-experience-4"
-                    />
-                  }
-                  index={4}
-                  title="경험카드 생성"
-                />
+                {ANALYZE_CARD.map((title, index) => (
+                  <>
+                    <AnalyzeCard key={title} index={index + 1} title="직무 선택" />
+                    {index < 3 && <SvgIconChevronRight />}
+                  </>
+                ))}
               </div>
             </div>
             <Image src={'/images/home/img-home-2.png'} width={486} height={486} alt="Home-2" />
