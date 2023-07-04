@@ -5,19 +5,19 @@ import { QuestionStore } from '../types/store';
 export const useQuestionStore = create<QuestionStore>((set) => ({
   title: '',
   answer: '',
-  isEditMode: true,
+  isSpellCheckMode: false,
   spellErrors: [],
   actions: {
     setTitle: (title) => set(() => ({ title })),
     setAnswer: (answer) => set(() => ({ answer })),
-    setIsEditMode: (isEditMode) => set(() => ({ isEditMode })),
+    setIsSpellCheckMode: (isSpellCheckMode) => set(() => ({ isSpellCheckMode })),
     setSpellErrors: (spellErrors) => set(() => ({ spellErrors })),
   },
 }));
 
 export const useTitle = () => useQuestionStore((state) => state.title);
 export const useAnswer = () => useQuestionStore((state) => state.answer);
-export const useIsEditMode = () => useQuestionStore((state) => state.isEditMode);
+export const useIsSpellCheckMode = () => useQuestionStore((state) => state.isSpellCheckMode);
 export const useSpellErrors = () => useQuestionStore((state) => state.spellErrors);
 
 export const useQuestionActions = () => useQuestionStore((state) => state.actions);

@@ -8,6 +8,10 @@
   @apply fill-white;
 }
 
+.primary path {
+  @apply fill-primary-50;
+}
+
 // Position
 
 .center-top {

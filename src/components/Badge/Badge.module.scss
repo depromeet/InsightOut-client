@@ -11,6 +11,10 @@
 }
 
 .primary50-outline {
+  @apply text-primary-500 bg-primary-100 border-[1px] border-solid border-primary-200 m-[-1px];
+}
+
+.primary200-outline {
   @apply text-primary-500 bg-primary-50 border-[1px] border-solid border-primary-200 m-[-1px];
 }
 
@@ -33,7 +37,7 @@
 // Sizes
 
 .S {
-  @apply py-[2px] px-[6px] text-[12px] font-medium leading-[16px];
+  @apply py-[2px] px-[6px] text-[12px] font-medium leading-[16px] h-[20px];
 }
 
 .M {
