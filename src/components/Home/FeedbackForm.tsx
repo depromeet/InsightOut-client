@@ -41,7 +41,7 @@ const FeedbackForm = () => {
       }}>
       <TextField
         ref={inputRef}
-        className="w-[552px] p-[16px] rounded-[16px] border border-solid border-gray-300 bg-transparent text-gray-300 placeholder:text-gray-300"
+        className="w-[552px] p-[16px] bg-transparent focus:text-white"
         type="text"
         placeholder="서비스를 사용하면서 느낀 생각, 느낌을 자유롭게 적어주세요!"
       />
