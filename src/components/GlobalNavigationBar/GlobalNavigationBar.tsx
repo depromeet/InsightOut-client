@@ -2,6 +2,7 @@ import { ComponentPropsWithoutRef } from 'react';
 
 import { Flex } from '@chakra-ui/react';
 import cn from 'classnames';
+import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
@@ -35,10 +36,14 @@ const GlobalNavigationBar = ({ className, isSignedIn, isRequesting, signIn, ...p
   return (
     <header {...props} className={rootClassName}>
       <Flex alignItems={'center'} gap={'115px'}>
-        <Link
-          className={cn(styles.link, { [styles.focus]: pathName === ROUTES.HOME })}
-          href={{ pathname: ROUTES.HOME }}>
-          로고
+        <Link className={styles.link} href={{ pathname: ROUTES.HOME }}>
+          <Image
+            src={'/images/home/img-home-logo.png'}
+            className="w-[142px] h-[31px]"
+            width={142}
+            height={31}
+            alt="home-logo"
+          />
         </Link>
         <Flex alignItems={'center'} gap={'24px'}>
           <Link
