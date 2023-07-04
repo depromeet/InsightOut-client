@@ -1,14 +1,21 @@
 'use client';
 
+import { Route } from 'next';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
+
+import { ROUTES } from '@/shared/constants/routes';
 
 import Badge from '../Badge/Badge';
 import Button from '../Button/Button';
 import SvgIconChevronRight from '../Icon/IconChevronRight';
+import SvgIconPairQuotation from '../Icon/IconPairQuotation';
 import AnalyzeCard from './AnalyzeCard';
 import Looper from './Looper';
 
 const Home = () => {
+  const router = useRouter();
+
   return (
     <main>
       <section className="flex flex-col justify-center items-center pt-[230px] pb-[63px] bg-white">
@@ -20,7 +27,7 @@ const Home = () => {
             '인사이트 아웃을 통해 질문으로 나의 프로젝트를 정리하며 경험을 파헤치고\n나만의 경험 역량 카드로 만들어 자기소개서를 작성해보세요.'
           }
         </p>
-        <Button variant="primary" size="XL">
+        <Button variant="primary" size="XL" onClick={() => router.push(ROUTES.EXPERIENCE)}>
           경험 분해 시작하기
         </Button>
       </section>
@@ -169,6 +176,56 @@ const Home = () => {
         </div>
         <div className="relative max-w-[1200px] w-full h-[462px]">
           <Image src={'/images/home/img-home-3.png'} fill alt="Home-3" />
+        </div>
+      </section>
+      <section className="flex flex-col w-full h-[1024px] bg-no-repeat bg-center bg-cover bg-home-5">
+        <div className="flex flex-col justify-center items-center h-full gap-[30px] text-white">
+          <Badge size="L" variant="primary50-outline">
+            사용자 후기
+          </Badge>
+          <h1 className="text-center whitespace-pre-line h1">{'인사이트 아웃을 경험해본\n사용자들의 이야기 🎉'}</h1>
+          <p className="text-center b1">
+            자기소개서 작성이 막막한 그 순간, 인사이트아웃에서 만든 경험카드가 큰 힘이 되어주었어요.
+          </p>
+          {/* @TODO 경험카드 만들기 페이지 라우터 연결 */}
+          <Button size="XL" variant="primary" onClick={() => router.push('#' as Route)}>
+            경험카드 만들기
+          </Button>
+        </div>
+        <div className="flex items-center justify-center gap-[24px]">
+          <div className="flex flex-col w-[384px] h-[374px] py-[48px] px-[38px] rounded-[30px] bg-[#282469] opacity-[0.8]">
+            <SvgIconPairQuotation className="mb-[8px]" />
+            <p className="text-primary-50 text-[28px] font-bold leading-[38px] mb-[10px]">
+              경험 정리의 시작점이 되어줬어요.
+            </p>
+            <p className="text-primary-50 text-[20px] font-bold leading-[28px] mb-[8px]">
+              내 경험을 키워드로 정리해보고 싶었는데 인사이트아웃이 그 시작점을 찾아줬어요. 이걸로 방향성을 잡고
+              자기소개서를 작성했어요.
+            </p>
+            <p className="text-primary-300 text-[20px] font-bold leading-[28px]">ios 개발 취준생, 박OO</p>
+          </div>
+          <div className="flex flex-col w-[384px] h-[374px] py-[48px] px-[38px] rounded-[30px] bg-[#282469] opacity-[0.8]">
+            <SvgIconPairQuotation className="mb-[8px]" />
+            <p className="text-primary-50 text-[28px] font-bold leading-[38px] mb-[10px]">
+              경험을 새롭게 표현할 수 있었어요.
+            </p>
+            <p className="text-primary-50 text-[20px] font-bold leading-[28px] mb-[8px]">
+              계속 써왔던 표현에서 벗어나 새로운 말로 바꿔서 경험을 적을 수 있는 점이 좋아요. 같은 경험이지만 역량을
+              다르게 표현할 수 있었어요.
+            </p>
+            <p className="text-primary-300 text-[20px] font-bold leading-[28px]">UXUI 디자인 취준생, 박OO</p>
+          </div>
+          <div className="flex flex-col w-[384px] h-[374px] py-[48px] px-[38px] rounded-[30px] bg-[#282469] opacity-[0.8]">
+            <SvgIconPairQuotation className="mb-[8px]" />
+            <p className="text-primary-50 text-[28px] font-bold leading-[38px] mb-[10px]">
+              몰랐던 직무 어필포인트를 발견했어요.
+            </p>
+            <p className="text-primary-50 text-[20px] font-bold leading-[28px] mb-[8px]">
+              역량 키워드를 분석해주는 것만으로도 자소서 작성에 참고가 많이 됐어요. 특히 AI 키워드 추천 덕분에 몰랐던
+              직무 어필 포인트를 발견했어요.
+            </p>
+            <p className="text-primary-300 text-[20px] font-bold leading-[28px]">UXUI 디자인 취준생, 전OO</p>
+          </div>
         </div>
       </section>
     </main>

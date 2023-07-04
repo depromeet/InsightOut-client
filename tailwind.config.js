@@ -14,6 +14,11 @@ module.exports = {
     colors,
     boxShadow,
     dropShadow,
+    extend: {
+      backgroundImage: {
+        'home-5': 'url("/images/home/img-home-4.png")',
+      },
+    },
   },
   plugins: [],
 };
