@@ -43,7 +43,8 @@ const Aside = () => {
             position="left-bottom"
             content="‘자기소개서 추가' 버튼을 눌러 작성을 시작해보세요!"
             alwaysOpen
-            className="b1">
+            className="b1"
+            offset={14}>
             <Button variant="primary" size="M" onClick={handleAddFolderButtonClick}>
               자기소개서 추가
             </Button>
