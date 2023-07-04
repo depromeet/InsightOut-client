@@ -40,7 +40,6 @@ const VerifyPage = () => {
   const { mutateAsync: createRecommendKeyword } = useCreateRecommendKeyword();
 
   const { mutateAsync: createRecommendResume, isLoading: isRecommendResumeLoading } = useCreateRecommendResume();
-
   useEffect(() => {
     (async () => {
       if (!!situation && !!task && !!action && !!result && isNumber(experienceId)) {
@@ -54,7 +53,7 @@ const VerifyPage = () => {
         setValue('capabilities', capabilities);
         const { resume } = await createRecommendResume({
           experienceId,
-          capabilityIds: capabilities.map(({ id }) => id),
+          capabilityIds: capabilities.map(({ id }) => id).slice(0, 2),
           situation,
           task,
           action,
@@ -63,7 +62,7 @@ const VerifyPage = () => {
         setValue('resume', resume);
       }
     })();
-  }, [action, experienceId, result, situation, task, createRecommendKeyword, setValue, createRecommendResume, resume]);
+  }, [action, experienceId, result, situation, task, setValue, createRecommendKeyword, createRecommendResume]);
 
   return (
     <>
@@ -108,7 +107,7 @@ const VerifyPage = () => {
             rows={10}
             placeholder="ex.개발 기간이 짧아서 빠른 기간 내 런칭을 완료해야 했음"
             chipTitle="AI 추천 자기소개서 예시"
-            maxLength={700}
+            maxLength={1000}
             value={resume}
           />
         )}
