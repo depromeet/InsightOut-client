@@ -1,3 +1,5 @@
+'use client';
+
 import { ReactNode, useCallback, useEffect, useRef, useState } from 'react';
 
 import { tw } from '@/shared/utils/tailwindMerge';
