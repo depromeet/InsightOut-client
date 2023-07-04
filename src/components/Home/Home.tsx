@@ -27,7 +27,7 @@ const Home = () => {
       <section className="relative h-[1014px] bg-white">
         <Image src={'/images/home/img-home-1.png'} fill alt="Home-1" className="object-contain w-full h-full" />
       </section>
-      <section className="relative flex flex-col justify-center items-center pt-[170px] py-[286px] bg-white z-[-1]">
+      <section className="relative flex flex-col justify-center items-center pt-[170px] pb-[283px] bg-white z-[-1]">
         <div className="flex justify-center items-center mb-[286px] gap-[102px]">
           <div className="flex flex-col gap-[44px]">
             <div className="flex flex-col w-[588px] gap-[30px]">
@@ -147,6 +147,29 @@ const Home = () => {
           alt="Home-ellipsis-left"
           loading="eager"
         />
+      </section>
+      <section className="flex flex-col items-center justify-center pb-[296px] bg-white">
+        <div className="flex justify-center items-end h-[185px] mb-[103px] gap-[24px]">
+          <div className="flex flex-col w-[588px] pb-[12px] gap-[30px]">
+            <Badge variant="primary50-outline" size="L">
+              자기소개서 작성까지 한번에
+            </Badge>
+            <h2 className="whitespace-pre-line h2">{'쓰는게 막막할때,\n경험카드를 참고해요'}</h2>
+          </div>
+          <div className="flex flex-col justify-end w-[588px] gap-[16px] b1 text-light">
+            <p>
+              설문조사 결과 과반수 이상의 구직자는 자기소개서 작성할 때 어떻게 시작할지 몰라서 어려움을 겪는다는 문제를
+              발견했습니다.
+            </p>
+            <p>
+              인사이트아웃에서 내 경험들을 역량별로 분류해서 불러올 수 있어요! 역량 키워드 태그를 통해서 문항과 잘
+              어울리는 경험카드들을 확인해보세요.
+            </p>
+          </div>
+        </div>
+        <div className="relative max-w-[1200px] w-full h-[462px]">
+          <Image src={'/images/home/img-home-3.png'} fill alt="Home-3" />
+        </div>
       </section>
     </main>
   );
