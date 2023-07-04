@@ -103,7 +103,7 @@ const Home = () => {
             loading="eager"
           />
         </section>
-        <section className="flex flex-col items-center justify-center pb-[296px] bg-white">
+        <section className="relative flex flex-col items-center justify-center pb-[296px] bg-white z-[-1]">
           <div className="flex justify-center items-end h-[185px] mb-[103px] gap-[24px]">
             <div className="flex flex-col w-[588px] pb-[12px] gap-[30px]">
               <Badge variant="primary50-outline" size="L">
@@ -125,6 +125,14 @@ const Home = () => {
           <div className="relative max-w-[1200px] w-full h-[462px]">
             <Image src={'/images/home/img-home-3.png'} fill alt="Home-3" />
           </div>
+          <Image
+            src={'/images/home/img-home-ellipsis-right.png'}
+            className="absolute top-[413px] right-[-350px] w-[788px] h-[788px] z-[-1]"
+            width={788}
+            height={788}
+            alt="Home-ellipsis-left"
+            loading="eager"
+          />
         </section>
         <section
           className="flex flex-col w-full h-[1024px] pb-[144px] bg-no-repeat bg-center bg-cover"
