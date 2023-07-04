@@ -16,7 +16,7 @@ const ANALYZE_CARD = ['직무 선택', '경험 작성', '직무 역량 추진', 
 const Home = () => {
   return (
     <>
-      <main>
+      <main className="overflow-hidden">
         <section className="flex flex-col justify-center items-center pt-[230px] pb-[63px] bg-white">
           <h1 className="text-center text-[60px] font-bold leading-[80px] whitespace-pre-line mb-[26px]">
             {'자기소개서가 막막한 순간,\n그 시작을 함께하는\n인사이트 아웃'}
