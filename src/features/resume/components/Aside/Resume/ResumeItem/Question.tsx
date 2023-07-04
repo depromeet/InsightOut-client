@@ -4,10 +4,11 @@ import Link from 'next/link';
 import ActionList from '@/components/ActionList/ActionList';
 import IconDocument from '@/components/Icon/IconDocument';
 import IconMoreVertical from '@/components/Icon/IconMoreVertical';
+import { QuestionData } from '@/features/resume/types/question';
+import { useDeleteQuestion } from '@/hooks/reactQuery/resume/question/mutation';
 import { ROUTES } from '@/shared/constants/routes';
 import { tw } from '@/shared/utils/tailwindMerge';
 
-import { QuestionData } from '../../../../types/question';
 import DeleteModal from '../../DeleteModal';
 
 type ResumeQuestionProps = QuestionData & {
@@ -17,9 +18,10 @@ type ResumeQuestionProps = QuestionData & {
 const ResumeQuestion = ({ id, title, active }: ResumeQuestionProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
+  const { mutate: deleteResumeQuestion } = useDeleteQuestion();
+
   const handleDeleteButtonClick = () => {
-    /** ConfirmModal */
-    /** isConfirmed: Delete API */
+    deleteResumeQuestion(id);
   };
 
   return (

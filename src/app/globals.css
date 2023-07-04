@@ -66,6 +66,12 @@
     line-height: 28px;
     letter-spacing: -0.6px;
   }
+  .subhead4 {
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 28px;
+    letter-spacing: -0.6px;
+  }
 
   /* body */
   .b1 {
@@ -136,5 +142,9 @@
   }
   .flex-center {
     @apply flex items-center justify-center;
+  }
+  /* resume에서 사용하는 section 컴포넌트: ResumeForm, ExperienceCardList */
+  .resume-section {
+    @apply flex flex-col w-[700px] border-[1px] rounded-3xl border-primary-100 shadow-toast bg-white;
   }
 }

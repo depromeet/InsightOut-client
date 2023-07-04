@@ -1,7 +1,15 @@
 // Base
 
+.common {
+  @apply flex justify-center items-center py-[12px] px-[16px] rounded-[8px];
+}
+
 .root {
-  @apply absolute flex justify-center items-center py-[12px] px-[16px] rounded-[8px] font-normal text-[16px] leading-[27px] drop-shadow-tooltip;
+  @apply absolute drop-shadow-tooltip common;
+}
+
+.root-relative {
+  @apply relative flex justify-center items-center py-[12px] px-[16px] rounded-[16px];
 }
 
 // Type
@@ -12,4 +20,8 @@
 
 .light {
   @apply bg-white text-dark;
+}
+
+.primary {
+  @apply bg-primary-50 text-primary-700 drop-shadow-[none] max-w-[268px] break-keep;
 }

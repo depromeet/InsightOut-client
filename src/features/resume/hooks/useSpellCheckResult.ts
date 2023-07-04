@@ -18,7 +18,7 @@ import { SpellCheckData, SpellCheckResult } from '../types/question';
  */
 const useSpellCheckResult = (serverState: MutationStatus, spellErrors: SpellCheckData[]) => {
   const [spellCheckResult, setSpellCheckResult] = useState<SpellCheckResult>('idle');
-  const { setIsEditMode, setSpellErrors } = useQuestionActions();
+  const { setIsSpellCheckMode, setSpellErrors } = useQuestionActions();
 
   useEffect(() => {
     if (serverState === 'idle' || serverState === 'loading') setSpellCheckResult(serverState);
@@ -26,7 +26,7 @@ const useSpellCheckResult = (serverState: MutationStatus, spellErrors: SpellChec
       if (spellErrors.length === 0) setSpellCheckResult('correct');
       else {
         setSpellCheckResult('error');
-        setIsEditMode(false);
+        setIsSpellCheckMode(true);
         setSpellErrors(spellErrors);
       }
     }
