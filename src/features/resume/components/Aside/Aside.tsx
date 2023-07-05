@@ -3,14 +3,14 @@
 import Button from '@/components/Button/Button';
 import IconPencil from '@/components/Icon/IconPencil';
 import { useCreateResume } from '@/hooks/reactQuery/resume/mutation';
-import { useGetResumes } from '@/hooks/reactQuery/resume/query';
 
+import useResumeListWithUpdatedTitle from '../../hooks/useResumeListWithUpdatedTitle';
 import Resume from './Resume/Resume';
 import ResumeListContainer from './Resume/ResumeListContainer';
 
 const Aside = () => {
+  const { resumeList } = useResumeListWithUpdatedTitle();
   const { mutate: createResume } = useCreateResume();
-  const { data: resumeList } = useGetResumes();
 
   const handleAddFolderButtonClick = () => {
     createResume();

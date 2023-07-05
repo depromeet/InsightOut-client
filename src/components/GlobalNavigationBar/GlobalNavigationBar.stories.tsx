@@ -1,7 +1,5 @@
 import { Meta, StoryObj } from '@storybook/react';
 
-import emptyFunction from '@/shared/utils/emptyFunction';
-
 import GlobalNavigationBar from './GlobalNavigationBar';
 
 const meta = {
@@ -13,5 +11,5 @@ export default meta;
 type Story = StoryObj<typeof GlobalNavigationBar>;
 
 export const _GlobalNavigationBar: Story = {
-  render: () => <GlobalNavigationBar isSignedIn={false} signIn={emptyFunction} isRequesting={false} />,
+  render: () => <GlobalNavigationBar isSignedIn={false} isRequesting={false} />,
 };
