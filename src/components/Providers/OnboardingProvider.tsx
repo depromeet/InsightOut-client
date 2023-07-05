@@ -19,14 +19,14 @@ import { useUserActions } from '@/shared/store/user';
  *    - 2. 서버로부터 응답 받은 온보딩 값을 userStore에 저장합니다.
  */
 export default function OnboardingProvider({ children }: StrictPropsWithChildren) {
-  const pathname = usePathname();
+  const currentPath = usePathname();
   const isSignedIn = useIsSignedIn();
   const { setUserInfo } = useUserActions();
 
   const onboardingPages = [ROUTES.EXPERIENCE, ROUTES.RESUMES];
 
   useEffect(() => {
-    if (!isSignedIn || !onboardingPages.some((onboardingPage) => pathname.startsWith(onboardingPage))) return;
+    if (!isSignedIn || !onboardingPages.some((onboardingPage) => currentPath.startsWith(onboardingPage))) return;
 
     (async () => {
       try {
@@ -37,7 +37,7 @@ export default function OnboardingProvider({ children }: StrictPropsWithChildren
         console.error(error);
       }
     })();
-  });
+  }, [isSignedIn, currentPath]);
 
   return <>{children}</>;
 }
