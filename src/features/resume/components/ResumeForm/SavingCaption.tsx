@@ -5,11 +5,15 @@ import { colors } from '@/styles/theme/foundations/colors';
 
 import { SAVING_STATUS } from '../../constants/savingStatus';
 
-type SavingCaptionProps = { updatedAt: string; currentSavingStatus: keyof typeof SAVING_STATUS };
+type SavingCaptionProps = {
+  updatedAt: string;
+  currentSavingStatus: keyof typeof SAVING_STATUS;
+  direction?: 'rtl' | 'ltr';
+};
 
-const SavingCaption = ({ updatedAt, currentSavingStatus }: SavingCaptionProps) => {
+const SavingCaption = ({ updatedAt, currentSavingStatus, direction = 'rtl' }: SavingCaptionProps) => {
   return (
-    <div className="flex items-center text-gray-500 b4">
+    <div className={`flex items-center ${direction === 'rtl' ? 'justify-start' : 'justify-end'} text-gray-500 b4`}>
       <span>{updatedAt}</span>
       {currentSavingStatus !== 'idle' && <IconVerticalDivider className="mx-[3px]" />}
       <span>{SAVING_STATUS[currentSavingStatus]}</span>

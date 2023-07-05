@@ -3,7 +3,7 @@ import { ROUTES } from '@/shared/constants/routes';
 import { ExperienceFormValues } from '../types';
 
 export const initialValue: ExperienceFormValues = {
-  experienceId: null,
+  experienceId: NaN,
   title: '',
   experienceRole: '',
   motivation: '',
