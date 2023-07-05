@@ -10,6 +10,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import userApi from '@/apis/user/user';
 import AuthModal from '@/features/auth/components/AuthModal/AuthModal';
 import { useAuthActions, useIsOpenSignUpModal } from '@/features/auth/store';
+import getResumeRoute from '@/features/resume/utils/getResumeRoute';
 import { ROUTES } from '@/shared/constants/routes';
 import { useUserImageUrl, useUserNickname } from '@/shared/store/user';
 import { tw } from '@/shared/utils/tailwindMerge';
@@ -39,6 +40,7 @@ const GlobalNavigationBar = ({ className, isSignedIn, isRequesting, ...props }: 
   const profileImgUrl = useUserImageUrl();
   const { setIsOpenSignUpModal, setIsSignedIn } = useAuthActions();
   const router = useRouter();
+  const resumeRoute = getResumeRoute();
 
   const handleClickLoginButton = () => {
     setIsOpenSignUpModal(true);
@@ -70,7 +72,9 @@ const GlobalNavigationBar = ({ className, isSignedIn, isRequesting, ...props }: 
               href={{ pathname: ROUTES.EXPERIENCE }}>
               경험분해
             </Link>
-            <Link className={cn(styles.link, { [styles.focus]: pathName === '/demo' })} href={{ pathname: '/demo' }}>
+            <Link
+              className={cn(styles.link, { [styles.focus]: pathName.startsWith(ROUTES.RESUMES) })}
+              href={{ pathname: resumeRoute }}>
               자기소개서 작성하기
             </Link>
             <Link
