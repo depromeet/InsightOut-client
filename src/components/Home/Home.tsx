@@ -38,9 +38,9 @@ const Home = () => {
                 <Badge variant="primary50-outline" size="L">
                   경험분해 4 STEPS
                 </Badge>
-                <h1 className="text-main text-[44px] font-bold whitespace-pre-line">
+                <h2 className="text-main text-[44px] font-bold whitespace-pre-line">
                   {'질의응답으로\n 경험을 분해해요'}
-                </h1>
+                </h2>
                 <div className="flex flex-col gap-[16px]">
                   <p className="text-light text-[16px] font-medium whitespace-pre-line">
                     {
@@ -58,7 +58,7 @@ const Home = () => {
                 {ANALYZE_CARD.map((title, index) => (
                   <>
                     <AnalyzeCard key={title} index={index + 1} title="직무 선택" />
-                    {index < 3 && <SvgIconChevronRight />}
+                    {index + 1 < ANALYZE_CARD.length && <SvgIconChevronRight />}
                   </>
                 ))}
               </div>
@@ -69,9 +69,9 @@ const Home = () => {
             <Badge variant="primary50-outline" size="L">
               AI 역량키워드 추천
             </Badge>
-            <p className="text-center whitespace-pre-line h2">
+            <h2 className="text-center whitespace-pre-line h2">
               {'인공지능이 내 경험과 어울리는\n직무 키워드를 뽑아줘요'}
-            </p>
+            </h2>
             <div className="text-center text-light b1">
               <p>겪었던 경험들을 편하게 이야기해주세요.</p>
               <p>똑똑한 인공지능이 경험을 분석하고 어울리는 직무 역량 키워드를 추천해줄게요.</p>
@@ -141,14 +141,14 @@ const Home = () => {
             <Badge size="L" variant="primary50-outline">
               사용자 후기
             </Badge>
-            <h1 className="text-center whitespace-pre-line h1">{'인사이트 아웃을 경험해본\n사용자들의 이야기 🎉'}</h1>
+            <h2 className="text-center whitespace-pre-line h1">{'인사이트 아웃을 경험해본\n사용자들의 이야기 🎉'}</h2>
             <p className="text-center b1">
               자기소개서 작성이 막막한 그 순간, 인사이트아웃에서 만든 경험카드가 큰 힘이 되어주었어요.
             </p>
             <StartButton route={ROUTES.EXPERIENCE}>경험카드 만들기</StartButton>
           </div>
           <div className="flex items-center justify-center gap-[24px]">
-            <div className="flex flex-col w-[384px] h-[374px] py-[48px] px-[38px] rounded-[30px] bg-[#282469] opacity-[0.8]">
+            <div className="flex flex-col w-[384px] h-[374px] py-[48px] px-[38px] rounded-[30px] bg-[#282469] opacity-[0.8] shrink-0">
               <SvgIconPairQuotation className="mb-[8px]" />
               <p className="text-primary-50 text-[28px] font-bold leading-[38px] mb-[10px]">
                 경험 정리의 시작점이 되어줬어요.
@@ -159,7 +159,7 @@ const Home = () => {
               </p>
               <p className="text-primary-300 text-[20px] font-bold leading-[28px]">ios 개발 취준생, 박OO</p>
             </div>
-            <div className="flex flex-col w-[384px] h-[374px] py-[48px] px-[38px] rounded-[30px] bg-[#282469] opacity-[0.8]">
+            <div className="flex flex-col w-[384px] h-[374px] py-[48px] px-[38px] rounded-[30px] bg-[#282469] opacity-[0.8] shrink-0">
               <SvgIconPairQuotation className="mb-[8px]" />
               <p className="text-primary-50 text-[28px] font-bold leading-[38px] mb-[10px]">
                 경험을 새롭게 표현할 수 있었어요.
@@ -170,7 +170,7 @@ const Home = () => {
               </p>
               <p className="text-primary-300 text-[20px] font-bold leading-[28px]">UXUI 디자인 취준생, 박OO</p>
             </div>
-            <div className="flex flex-col w-[384px] h-[374px] py-[48px] px-[38px] rounded-[30px] bg-[#282469] opacity-[0.8]">
+            <div className="flex flex-col w-[384px] h-[374px] py-[48px] px-[38px] rounded-[30px] bg-[#282469] opacity-[0.8] shrink-0">
               <SvgIconPairQuotation className="mb-[8px]" />
               <p className="text-primary-50 text-[28px] font-bold leading-[38px] mb-[10px]">
                 몰랐던 직무 어필포인트를 발견했어요.
