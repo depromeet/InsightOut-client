@@ -3,11 +3,9 @@
 import React, { useCallback, useEffect } from 'react';
 import { FormProvider, useForm, useWatch } from 'react-hook-form';
 
-import { usePrevious } from '@chakra-ui/react';
+import { useDisclosure, usePrevious } from '@chakra-ui/react';
 import { DevTool } from '@hookform/devtools';
 import isNumber from 'lodash/isNumber';
-import { Route } from 'next';
-import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 
 import Button from '@/components/Button/Button';
@@ -17,6 +15,8 @@ import Stepper from '@/components/Stepper/Stepper';
 import TooltipRelativeContent from '@/components/Tooltip/TooltipRelativeContent';
 import { initialValue, STEPS } from '@/feature/analyze/constants';
 import StepMenu from '@/feature/analyze/layout/StepMenu';
+import AI진입조건모달 from '@/feature/analyze/modal/BaseDialog';
+import PrevNextButton from '@/feature/analyze/PrevNextButton.tsx/PrevNextButton';
 import { ExperienceFormValues, WriteStatusType } from '@/feature/analyze/types';
 import SavingCaption from '@/features/resume/components/ResumeForm/SavingCaption';
 import { useSubmitExperience } from '@/hooks/reactQuery/ai/mutation';
@@ -31,9 +31,12 @@ export interface LayoutProps {
   children: React.ReactNode;
 }
 const Layout = ({ children }: LayoutProps) => {
-  const { back, push } = useRouter();
+  const { push } = useRouter();
   const pathname = usePathname();
   const prevPathname = usePrevious(pathname);
+  const isMounted = useIsMounted();
+
+  const { isOpen: isAI진입조건모달Open, onOpen: AI진입조건모달Open, onClose: AI진입조건모달Close } = useDisclosure();
 
   const currentStepIndex = (STEPS.find((v) => v.route === pathname)?.id ?? 1) - 1;
   const prevStepIndex = (STEPS.find((v) => v.route === prevPathname)?.id ?? 1) - 1;
@@ -91,11 +94,10 @@ const Layout = ({ children }: LayoutProps) => {
       },
     }
   );
+  console.log(data);
 
   const { mutate: updateExperience, status: updateExperienceStatus } = useUpdateExperience(experienceId);
   const { mutateAsync: submitExperience } = useSubmitExperience();
-
-  console.log(data);
 
   const TOOLTIP_CONTENTS = [
     `“000님 좋은 시작이에요”`,
@@ -118,10 +120,6 @@ const Layout = ({ children }: LayoutProps) => {
       default:
         break;
     }
-  };
-  const handlePrevButton = () => {
-    stepByStepSave();
-    back();
   };
 
   const saveExperience = () => {
@@ -214,23 +212,13 @@ const Layout = ({ children }: LayoutProps) => {
     }
   }, [methods, pathname, prevPathname, currentStepIndex, setWriteStatus]);
 
-  const handleNextButton = () => {
-    switch (pathname) {
-      case ROUTES.EXPERIENCE:
-        return ROUTES.KEYWORD;
-      case ROUTES.KEYWORD:
-        return ROUTES.INFORMATION;
-      case ROUTES.INFORMATION:
-        return ROUTES.VERIFY;
-      default:
-        return ROUTES.EXPERIENCE;
-    }
-  };
-
-  const isMounted = useIsMounted();
-
   const submit = async (data: ExperienceFormValues) => {
-    const { experienceId, situation, task, action, result } = data;
+    const { experienceId, situation, task, action, result, writeStatus } = data;
+    const isReadyToSubmit = writeStatus?.slice(0, 3).every((status) => status === '작성완료');
+    if (!isReadyToSubmit) {
+      return;
+    }
+
     const response = await submitExperience({
       experienceId,
       situation,
@@ -243,6 +231,16 @@ const Layout = ({ children }: LayoutProps) => {
     if ('ExperienceInfo' in response) push('/');
   };
 
+  const readyToAIRecommendation = () => {
+    const writeStatus = methods.getValues('writeStatus');
+    const isReadyToAIRecommendation = writeStatus?.slice(0, 3).every((status) => status === '작성완료');
+    if (!isReadyToAIRecommendation) {
+      AI진입조건모달Open();
+      return;
+    }
+    push('/analyze/verify');
+  };
+
   return (
     <FormProvider {...methods}>
       <form onSubmit={methods.handleSubmit(submit)}>
@@ -253,24 +251,7 @@ const Layout = ({ children }: LayoutProps) => {
           <div className="flex flex-row">
             <div className="min-w-[770px] mr-[46px] mb-[32px]">
               {children}
-              <div className="flex-center mt-[32px] gap-[12px]">
-                {pathname === ROUTES.EXPERIENCE ? null : (
-                  <Button type="button" variant="gray200" size="XL" onClick={handlePrevButton}>
-                    이전으로
-                  </Button>
-                )}
-                {pathname === ROUTES.VERIFY ? (
-                  <Button type="submit" variant="gray900" size="XL">
-                    경험카드 만들기
-                  </Button>
-                ) : (
-                  <Link href={handleNextButton() as Route}>
-                    <Button type="button" variant="gray900" size="XL" onClick={stepByStepSave}>
-                      다음으로
-                    </Button>
-                  </Link>
-                )}
-              </div>
+              <PrevNextButton stepByStepSave={stepByStepSave} readyToAIRecommendation={readyToAIRecommendation} />
             </div>
 
             {/* Aside */}
@@ -287,7 +268,11 @@ const Layout = ({ children }: LayoutProps) => {
                 <Lottie src="/lotties/lumos-smile.json" />
               </div>
               <Progress />
-              <StepMenu status={writeStatus as WriteStatusType[]} />
+              <StepMenu
+                status={writeStatus as WriteStatusType[]}
+                stepByStepSave={stepByStepSave}
+                readyToAIRecommendation={readyToAIRecommendation}
+              />
               <div className="absolute top-[calc(100%+16px)] left-[0px] right-[0px]">
                 <Button
                   type="button"
@@ -309,6 +294,13 @@ const Layout = ({ children }: LayoutProps) => {
         </div>
         {isMounted && <DevTool control={methods.control} />}
       </form>
+      <AI진입조건모달
+        size="3xl"
+        isOpen={isAI진입조건모달Open}
+        onClose={AI진입조건모달Close}
+        title={`앞의 단계를 작성해야 AI 직무역량 추천과\n경험카드를 받을 수 있어요`}
+        textContent="확인했어요"
+      />
     </FormProvider>
   );
 };
