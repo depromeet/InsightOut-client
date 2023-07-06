@@ -1,4 +1,4 @@
-import { useInfiniteQuery, useQuery, UseQueryOptions } from '@tanstack/react-query';
+import { useInfiniteQuery, UseInfiniteQueryOptions, useQuery, UseQueryOptions } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
 
 import { EXPERIENCE_API, EXPERIENCE_CAPABILITY_API, EXPERIENCE_COUNT_API } from '@/apis/experience/experience';
@@ -23,12 +23,16 @@ export const useGetExperiences = (
     }
   );
 
-export const useGetInfiniteExperiences = (params?: ExperienceParams['get']) =>
+export const useGetInfiniteExperiences = (
+  params?: ExperienceParams['get'],
+  options?: UseInfiniteQueryOptions<ExperiencesResponse, AxiosError>
+) =>
   useInfiniteQuery<ExperiencesResponse, AxiosError>(
     EXPERIENCE_KEY.list([{ ...params }]),
     ({ pageParam = 1 }) => EXPERIENCE_API.get({ ...params, page: pageParam }),
     {
       getNextPageParam: ({ meta: { hasNextPage, page } }) => (hasNextPage ? page + 1 : undefined),
+      ...options,
     }
   );
 
