@@ -5,6 +5,7 @@ export type ExperienceParams = {
   get: {
     id?: string;
     last?: boolean;
+    page?: number;
     capabilityId?: number;
     situation?: boolean;
     task?: boolean;
