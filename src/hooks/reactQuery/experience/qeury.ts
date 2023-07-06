@@ -39,3 +39,11 @@ export const useGetExperienceCapabilities = (
       ...options,
     }
   );
+
+export const useGetExperience = (
+  { id }: ExperienceParams['get'],
+  options?: UseQueryOptions<ExperiencesResponse, AxiosError>
+) =>
+  useQuery<ExperiencesResponse, AxiosError>(EXPERIENCE_KEY.details(), () => EXPERIENCE_API.getById({ id }), {
+    ...options,
+  });
