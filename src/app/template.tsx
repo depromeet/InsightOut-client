@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation';
 
 import userApi from '@/apis/user/user';
 import GlobalNavigationBar from '@/components/GlobalNavigationBar/GlobalNavigationBar';
+import OnboardingProvider from '@/components/Providers/OnboardingProvider';
 import AuthModal from '@/features/auth/components/AuthModal/AuthModal';
 import AuthProvider from '@/features/auth/components/Providers/AuthProvider';
 import { useAuthActions, useIsOpenSignUpModal, useIsRequesting, useIsSignedIn } from '@/features/auth/store';
@@ -31,7 +32,7 @@ export default function Template({ children }: StrictPropsWithChildren) {
     <>
       <AuthProvider>
         <GlobalNavigationBar isSignedIn={isSignedIn} isRequesting={isRequesting} />
-        {children}
+        <OnboardingProvider>{children}</OnboardingProvider>
       </AuthProvider>
       <AuthModal isOpen={isOpenSignUpModal} onClose={handleClickCloseButton} onAbortSignUp={handleAbortSignUp} />
     </>
