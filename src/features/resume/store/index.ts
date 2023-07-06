@@ -25,12 +25,14 @@ export const useSpellErrors = () => useQuestionStore((state) => state.spellError
 export const useQuestionActions = () => useQuestionStore((state) => state.actions);
 
 export const useExperienceStore = create<ExperienceStore>((set) => ({
+  experienceId: 0,
   capabilityKeyword: ALL_CAPABILITY_KEYWORD,
   actions: {
+    setExperienceId: (experienceId) => set(() => ({ experienceId })),
     setCapabilityKeyword: (capabilityKeyword) => set(() => ({ capabilityKeyword })),
   },
 }));
 
+export const useExperienceId = () => useExperienceStore((state) => state.experienceId);
 export const useCapabilityKeyword = () => useExperienceStore((state) => state.capabilityKeyword);
-
 export const useExperienceActions = () => useExperienceStore((state) => state.actions);

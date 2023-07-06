@@ -19,10 +19,12 @@ export interface QuestionStore extends QuestionState {
 }
 
 export interface ExperienceState {
+  experienceId: number;
   capabilityKeyword: string;
 }
 
 export interface ExperienceActions {
+  setExperienceId: (experienceId: ExperienceState['experienceId']) => void;
   setCapabilityKeyword: (capabilityKeyword: ExperienceState['capabilityKeyword']) => void;
 }
 
