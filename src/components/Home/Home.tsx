@@ -3,6 +3,11 @@ import Link from 'next/link';
 
 import { ROUTES } from '@/shared/constants/routes';
 
+import Home1 from '../../../public/images/home/img-home-1.png';
+import Home2 from '../../../public/images/home/img-home-2.png';
+import HomeEllipsisLeft from '../../../public/images/home/img-home-ellipsis-left.png';
+import HomeEllipsisRight from '../../../public/images/home/img-home-ellipsis-right.png';
+import HomeLogo from '../../../public/images/home/img-home-logo.png';
 import Badge from '../Badge/Badge';
 import SvgIconChevronRight from '../Icon/IconChevronRight';
 import SvgIconPairQuotation from '../Icon/IconPairQuotation';
@@ -29,7 +34,7 @@ const Home = () => {
           <StartButton route={ROUTES.EXPERIENCE}>경험 분해 시작하기</StartButton>
         </section>
         <section className="relative h-[1014px] bg-white">
-          <Image src={'/images/home/img-home-1.png'} fill alt="Home-1" className="object-contain w-full h-full" />
+          <Image src={Home1} fill alt="Home-1" className="object-contain w-full h-full" priority loading={'eager'} />
         </section>
         <section className="relative flex flex-col justify-center items-center pt-[170px] pb-[283px] bg-white z-[-1]">
           <div className="flex justify-center items-center mb-[286px] gap-[102px]">
@@ -63,7 +68,7 @@ const Home = () => {
                 ))}
               </div>
             </div>
-            <Image src={'/images/home/img-home-2.png'} width={486} height={486} alt="Home-2" />
+            <Image src={Home2} className="w-[486px] h-[486px]" alt="Home-2" />
           </div>
           <div className="flex flex-col items-center gap-[30px] w-[588px] mb-[170px]">
             <Badge variant="primary50-outline" size="L">
@@ -95,10 +100,8 @@ const Home = () => {
             </Looper>
           </div>
           <Image
-            src={'/images/home/img-home-ellipsis-left.png'}
+            src={HomeEllipsisLeft}
             className="absolute top-[413px] left-[-350px] w-[788px] h-[788px] z-[-1]"
-            width={788}
-            height={788}
             alt="Home-ellipsis-left"
             loading="eager"
           />
@@ -126,11 +129,9 @@ const Home = () => {
             <Image src={'/images/home/img-home-3.png'} fill alt="Home-3" />
           </div>
           <Image
-            src={'/images/home/img-home-ellipsis-right.png'}
+            src={HomeEllipsisRight}
             className="absolute top-[413px] right-[-350px] w-[788px] h-[788px] z-[-1]"
-            width={788}
-            height={788}
-            alt="Home-ellipsis-left"
+            alt="Home-ellipsis-right"
             loading="eager"
           />
         </section>
@@ -185,7 +186,7 @@ const Home = () => {
         </section>
       </main>
       <footer className="flex flex-col justify-center items-center h-[416px] bg-dark pt-[66px] pb-[35px]">
-        <Image src={'/images/home/img-home-logo.png'} className="mb-[35px]" width={192} height={41} alt="home-logo" />
+        <Image src={HomeLogo} className="w-[192px] h-[41px] mb-[35px]" alt="home-logo" />
         <p className="text-center text-white whitespace-pre-line b3 mb-[20px]">
           {'인사이트아웃은 모든 초보 구직자들을 응원합니다.\n더 나은 서비스를 위해 피드백 해주세요!'}
         </p>
