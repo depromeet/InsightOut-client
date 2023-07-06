@@ -17,3 +17,15 @@ export interface QuestionActions {
 export interface QuestionStore extends QuestionState {
   actions: QuestionActions;
 }
+
+export interface ExperienceState {
+  capabilityKeyword: string;
+}
+
+export interface ExperienceActions {
+  setCapabilityKeyword: (capabilityKeyword: ExperienceState['capabilityKeyword']) => void;
+}
+
+export interface ExperienceStore extends ExperienceState {
+  actions: ExperienceActions;
+}
