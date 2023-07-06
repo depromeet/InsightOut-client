@@ -5,9 +5,9 @@ import IconPencil from '@/components/Icon/IconPencil';
 import Tooltip from '@/components/Tooltip/Tooltip';
 import { useUpdateOnboarding } from '@/hooks/reactQuery/onboarding/mutation';
 import { useCreateResume } from '@/hooks/reactQuery/resume/mutation';
-import { useGetResumes } from '@/hooks/reactQuery/resume/query';
 import { useUserActions, useUserOnboarding } from '@/shared/store/user';
 
+import useResumeListWithUpdatedTitle from '../../hooks/useResumeListWithUpdatedTitle';
 import Resume from './Resume/Resume';
 import ResumeListContainer from './Resume/ResumeListContainer';
 
@@ -15,8 +15,8 @@ const Aside = () => {
   const { resume: isResumeOnboardingComplete, ...restOnboardings } = useUserOnboarding();
   const { setUserInfo } = useUserActions();
 
+  const { resumeList } = useResumeListWithUpdatedTitle();
   const { mutate: createResume } = useCreateResume();
-  const { data: resumeList } = useGetResumes();
   const { mutate: updateResumeOnboarding } = useUpdateOnboarding({
     onSuccess: () => setUserInfo({ onboarding: { ...restOnboardings, resume: true } }),
   });

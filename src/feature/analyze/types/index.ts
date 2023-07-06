@@ -6,13 +6,13 @@ export type WriteStatusType = (typeof WRITE_STATUS)[number];
 export type Keyword = Record<string, boolean>;
 export type KeywordEntriesType = [string, boolean][];
 
-type CapabilitiesType = { id: number; keyword: string };
+export type CapabilitiesType = { id: number; keyword: string };
 
 export interface ExperienceFormValues {
   /**
    * 경험 분해 키워드 가져올 때 필요한 id
    */
-  experienceId: number | null;
+  experienceId: number;
   /**
    * 경험 제목 (/analyze/experience)
    */
