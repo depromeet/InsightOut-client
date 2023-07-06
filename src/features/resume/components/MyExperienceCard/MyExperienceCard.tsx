@@ -15,7 +15,7 @@ const MyExperienceCard = () => {
         <MyExperienceCardHeader />
       </PrefetchHydration>
       <hr aria-orientation="horizontal" className="border-gray-200" />
-      <div className="flex">
+      <div className="flex h-[100%] overflow-hidden">
         {/* @ts-expect-error Server Component */}
         <PrefetchHydration
           queryKey={EXPERIENCE_KEY.list([{ take: CARD_COUNT_PER_LOAD }])}

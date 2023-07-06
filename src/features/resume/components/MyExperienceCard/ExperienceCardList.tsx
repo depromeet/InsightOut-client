@@ -6,7 +6,7 @@ import { ALL_CAPABILITY_KEYWORD } from '@/features/collection/constants';
 import getExperiencePeriod from '@/features/collection/utils/getExperiencePeriod';
 import getFilteredExperiences from '@/features/collection/utils/getFilteredExperiences';
 import { useGetInfiniteExperiences } from '@/hooks/reactQuery/experience/qeury';
-import useIntersect from '@/hooks/useIntersect';
+import useIntersection from '@/hooks/useIntersection';
 
 import { CARD_COUNT_PER_LOAD } from '../../constants/cardCountPerLoad';
 import { useCapabilityKeyword, useExperienceActions, useExperienceId } from '../../store';
@@ -28,7 +28,7 @@ const ExperienceCardList = () => {
 
   const experiences = useMemo(() => (data ? data.pages.flatMap(({ data }) => data) : []), [data]);
 
-  const ref = useIntersect((entry, observer) => {
+  const ref = useIntersection((entry, observer) => {
     observer.unobserve(entry.target);
 
     if (hasNextPage && !isFetching) fetchNextPage();
