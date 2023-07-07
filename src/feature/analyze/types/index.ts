@@ -1,10 +1,18 @@
+import { WRITE_STATUS } from '../constants';
+
 type ExperienceStatus = 'INPROGRESS' | 'DONE';
+
+export type WriteStatusType = (typeof WRITE_STATUS)[number];
+export type Keyword = Record<string, boolean>;
+export type KeywordEntriesType = [string, boolean][];
+
+export type CapabilitiesType = { id: number; keyword: string };
 
 export interface ExperienceFormValues {
   /**
    * 경험 분해 키워드 가져올 때 필요한 id
    */
-  experienceId: number | null;
+  experienceId: number;
   /**
    * 경험 제목 (/analyze/experience)
    */
@@ -32,6 +40,10 @@ export interface ExperienceFormValues {
   endMM?: string;
   endDate: string;
   /**
+   * 키워드 리스트, 제출할 땐 Object.fromEntries()로 풀어서 객체형식으로 보내기
+   */
+  keywords: KeywordEntriesType;
+  /**
    * 경험 내용(STAR) 중 S (/analyze/information)
    */
   situation: string;
@@ -51,6 +63,16 @@ export interface ExperienceFormValues {
    * 경험 카드 작성 상태
    */
   experienceStatus: ExperienceStatus;
+  /**
+   * 각 스텝의 작성 상태 (제출하기 전에 해당 property 삭제하고 제출하기)
+   */
+  writeStatus?: WriteStatusType[];
+  /**
+   * Chat GPT 추천 키워드 api response
+   */
+  capabilities: CapabilitiesType[];
+  /**
+   * Chat GPT 자기소개서 생성 프롬프트 api response
+   */
+  resume: string;
 }
-
-export type Keyword = Record<string, boolean>;

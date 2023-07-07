@@ -1,15 +1,17 @@
 import React, { useMemo } from 'react';
-import IconTooltipArrowTop from '@/components/Icon/IconTooltipArrowTop';
+
 import IconTooltipArrowBottom from '@/components/Icon/IconTooltipArrowBottom';
 import IconTooltipArrowLeft from '@/components/Icon/IconTooltipArrowLeft';
 import IconTooltipArrowRight from '@/components/Icon/IconTooltipArrowRight';
-import styles from './TooltipArrow.module.scss';
+import IconTooltipArrowTop from '@/components/Icon/IconTooltipArrowTop';
 import { tw } from '@/shared/utils/tailwindMerge';
+
+import styles from './TooltipArrow.module.scss';
 
 type TooltipArrowProps = {
   /** @description 클래스네임 */
   className: string;
-  /** @description 툴팁 타입 (strong, light) */
+  /** @description 툴팁 타입 (strong, light, primary) */
   type: TooltipType;
   /** @description 툴팁 포지션 (center-top, center-bottom, right-top, right-bottom, left-top, left-bottom, side-left-center, side-right-center) */
   position: TooltipPosition;

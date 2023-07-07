@@ -1,15 +1,23 @@
-import isEmpty from 'lodash/isEmpty';
+import { ExperienceFormValues } from '@/feature/analyze/types';
+
 import instance from '..';
 import { ExperienceParams, ExperienceResponse } from './types/experience';
-import { objToQueryString } from '@/shared/utils/objToQueryString';
 
 const experienceApi = {
-  get: async (params: ExperienceParams['get']) => {
-    const queryString = isEmpty(params) ? '' : `?${objToQueryString(params)}`;
-    return await instance.get<ExperienceResponse, ExperienceResponse>(`/experience${queryString}`);
-  },
-  post: async ({ ...params }: ExperienceParams['post']) =>
-    await instance.post<ExperienceResponse, ExperienceResponse>('/experience', params),
+  /**
+   * 경험 단일 조회
+   */
+  get: async ({ experienceId }: ExperienceParams['get']) =>
+    await instance.get<ExperienceResponse, ExperienceResponse>(`/experience/${experienceId}`),
+  /**
+   * 경험 정보 생성하기
+   */
+  post: async () => await instance.post<ExperienceResponse, ExperienceResponse>('/experience'),
+  /**
+   * 경험 정보 수정 (임시저장)
+   */
+  put: async ({ experienceId, ...params }: ExperienceParams['put']) =>
+    await instance.put<ExperienceFormValues, ExperienceFormValues>(`/experience/${experienceId}`, params),
 };
 
 export default experienceApi;

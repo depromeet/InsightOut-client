@@ -1,15 +1,20 @@
 /* eslint-disable react/display-name */
-import { ModalHeader as ModalHeaderWrapper } from '@chakra-ui/react';
 import { PropsWithChildren } from 'react';
 
-const ModalHeader = ({ children }: PropsWithChildren) => <ModalHeaderWrapper>{children}</ModalHeaderWrapper>;
+import { ModalHeader as ModalHeaderWrapper } from '@chakra-ui/react';
 
-type TiTleProps = {
+type ModalHeaderProps = { className?: string } & PropsWithChildren;
+
+const ModalHeader = ({ className, children }: ModalHeaderProps) => (
+  <ModalHeaderWrapper className={className}>{children}</ModalHeaderWrapper>
+);
+
+type TitleProps = {
   title: string;
   subTitle?: string;
 };
 
-ModalHeader.Title = ({ title, subTitle }: TiTleProps) => {
+ModalHeader.Title = ({ title, subTitle }: TitleProps) => {
   return (
     <ModalHeader>
       <h5 className="h5 tex">{title}</h5>

@@ -1,6 +1,8 @@
+
+import { Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, ModalOverlay } from '@chakra-ui/react';
+
 import { MAX_LENGTH } from '@/shared/constants/maxLength';
 import formatUpdatedAt from '@/shared/utils/formatUpdateAt';
-import { Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, ModalOverlay } from '@chakra-ui/react';
 
 type Props = {
   isOpen: boolean;

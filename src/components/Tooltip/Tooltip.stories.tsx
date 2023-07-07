@@ -1,6 +1,7 @@
-import { Meta, StoryObj } from '@storybook/react';
-import Tooltip from './Tooltip';
 import { Flex, Heading } from '@chakra-ui/react';
+import { Meta, StoryObj } from '@storybook/react';
+
+import Tooltip from './Tooltip';
 
 const meta = {
   title: 'Components/Tooltip',

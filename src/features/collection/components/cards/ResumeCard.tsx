@@ -1,24 +1,26 @@
 'use client';
 
+import React, { useRef } from 'react';
+
+import { useDisclosure } from '@chakra-ui/react';
+
 import ActionList from '@/components/ActionList/ActionList';
 import IconMoreVertical from '@/components/Icon/IconMoreVertical';
+import { TextLengthMessage } from '@/components/Input/TextLengthMessage';
 import Modal from '@/components/Modal/Modal';
 import ModalFooter from '@/components/Modal/ModalFooter';
 import ModalHeader from '@/components/Modal/ModalHeader';
-import formatUpdatedAt from '@/shared/utils/formatUpdateAt';
-import { useDisclosure } from '@chakra-ui/react';
-import React, { useRef } from 'react';
-import ResumeAnswerModalCard from './ResumeAnswerModalCard';
+import { QuestionData } from '@/features/resume/types/question';
 import { MAX_LENGTH } from '@/shared/constants/maxLength';
-import { TextLengthMessage } from '@/components/Input/TextLengthMessage';
+import formatUpdatedAt from '@/shared/utils/formatUpdateAt';
+
+import ResumeAnswerModalCard from './ResumeAnswerModalCard';
 
 type Props = {
-  updatedAt: string;
-  title: string;
-  answer: string;
+  question: QuestionData;
 };
 
-const ResumeCard = ({ updatedAt, title, answer }: Props) => {
+const ResumeCard = ({ question: { answer, title, updatedAt } }: Props) => {
   const answerPRef = useRef<HTMLParagraphElement>(null);
 
   const {

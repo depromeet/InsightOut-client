@@ -1,7 +1,7 @@
 // Base
 
 .root {
-  @apply flex justify-center items-center rounded-[8px];
+  @apply flex justify-center items-center rounded-[8px] w-fit h-fit;
 }
 
 // Styles
@@ -33,7 +33,7 @@
 // Sizes
 
 .S {
-  @apply py-[2px] px-[6px] text-[12px] font-medium leading-[16px];
+  @apply py-[2px] px-[6px] text-[12px] font-medium leading-[16px] h-[20px];
 }
 
 .M {

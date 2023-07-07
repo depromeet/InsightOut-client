@@ -1,21 +1,19 @@
-'use client';
-
 import { useQuery, UseQueryOptions } from '@tanstack/react-query';
-import { ANALYZE_KEY } from '@/shared/constants/querykeys';
-import { ExperienceParams, ExperienceResponse } from '@/apis/analyze/types/experience';
-import experienceApi from '@/apis/analyze/experience';
 import { AxiosError } from 'axios';
 
-export const useFetchAnalyze = (
-  params?: ExperienceParams['get'],
+import experienceApi from '@/apis/analyze/experience';
+import { ExperienceParams, ExperienceResponse } from '@/apis/analyze/types/experience';
+import { ANALYZE_KEY } from '@/shared/constants/querykeys';
+
+export const useGetExperience = (
+  { experienceId }: ExperienceParams['get'],
   options?: UseQueryOptions<ExperienceResponse, AxiosError>
 ) => {
   return useQuery<ExperienceResponse, AxiosError>(
-    ANALYZE_KEY.detail([{ ...params }]),
-    () => experienceApi.get({ ...params }),
+    ANALYZE_KEY.detail([{ experienceId }]),
+    () => experienceApi.get({ experienceId }),
     {
       ...options,
-      staleTime: Infinity,
       onSuccess(data) {
         options?.onSuccess?.(data);
       },
