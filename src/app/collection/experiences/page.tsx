@@ -28,7 +28,7 @@ const Page = () => {
   const shownCapabilities: Capability[] = [allCapability, ..._capabilites];
 
   const [sortBy, setSortBy] = useState<keyof typeof EXPERIENCE_SORT_BY>('EXPERIENCE_TIME');
-  const [selectedCapability, setSelectedCapability] = useState<Capability>(allCapability);
+  const [selectedCapability, setSelectedCapability] = useState(allCapability);
 
   const handleTimeSortClick = () => {
     setSortBy(() => (sortBy === 'EXPERIENCE_TIME' ? 'UPDATED_AT' : 'EXPERIENCE_TIME'));
