@@ -1,7 +1,8 @@
 import { Flex, Heading } from '@chakra-ui/react';
-import Tab from './Tab';
 import { Meta, StoryObj } from '@storybook/react';
+
 import Badge from '../Badge/Badge';
+import Tab from './Tab';
 
 const meta = {
   title: 'Components/Tab',

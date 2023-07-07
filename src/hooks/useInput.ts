@@ -1,4 +1,4 @@
-import { useState, useCallback, ChangeEvent } from 'react';
+import { ChangeEvent, useCallback, useState } from 'react';
 
 // eslint-disable-next-line unused-imports/no-unused-vars
 type onChangeType = (event: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => void;

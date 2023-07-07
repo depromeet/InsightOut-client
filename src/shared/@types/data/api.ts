@@ -1,4 +1,5 @@
 import { AxiosError } from 'axios';
+
 import { HTTP_STATUS_CODE } from '@/shared/constants/http';
 
 type HttpStatusCode = (typeof HTTP_STATUS_CODE)[keyof typeof HTTP_STATUS_CODE];

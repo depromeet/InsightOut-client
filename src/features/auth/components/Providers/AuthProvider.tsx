@@ -1,11 +1,15 @@
 'use client';
 
 import { useEffect } from 'react';
-import { useAuthActions, useIsSignedIn, useIsTokenRequired } from '@/features/auth/store';
-import authApi from '@/apis/auth/auth';
-import { useRouter } from 'next/navigation';
+
 import { isAxiosError } from 'axios';
+import { useRouter } from 'next/navigation';
+
+import authApi from '@/apis/auth/auth';
+import userApi from '@/apis/user/user';
+import { useAuthActions, useIsSignedIn, useIsTokenRequired } from '@/features/auth/store';
 import { InsightOutResponseError } from '@/shared/@types/data/api';
+import { useUserActions } from '@/shared/store/user';
 import { isRefreshTokenExpired, isTokenNotExist } from '@/shared/utils/http';
 
 export default function AuthProvider({ children }: StrictPropsWithChildren) {
@@ -13,6 +17,7 @@ export default function AuthProvider({ children }: StrictPropsWithChildren) {
   const isSignedIn = useIsSignedIn();
   const isTokenRequired = useIsTokenRequired();
   const { setIsSignedIn, setIsTokenRequired, setIsRequesting } = useAuthActions();
+  const { setUserInfo } = useUserActions();
 
   useEffect(() => {
     if (isSignedIn) return;
@@ -35,6 +40,8 @@ export default function AuthProvider({ children }: StrictPropsWithChildren) {
          * Access Token이 존재하지 않을 경우 재발급
          */
         await authApi.reIssue();
+        const userInfo = await userApi.get();
+        setUserInfo(userInfo);
         setIsRequesting(false);
         setIsSignedIn(true);
       } catch (error) {
@@ -53,7 +60,7 @@ export default function AuthProvider({ children }: StrictPropsWithChildren) {
         }
       }
     })();
-  }, [isSignedIn, setIsRequesting, setIsSignedIn, setIsTokenRequired]);
+  }, [isSignedIn, setIsRequesting, setIsSignedIn, setIsTokenRequired, setUserInfo]);
 
   return <>{children}</>;
 }

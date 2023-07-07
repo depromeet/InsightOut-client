@@ -1,11 +1,12 @@
 'use client';
 
 import React from 'react';
+import { Controller, useFormContext } from 'react-hook-form';
+
 import TextAreaField from '@/components/Input/TextAreaField/TextAreaField';
 import QuestionCard from '@/components/QuestionCard/QuestionCard';
-import { callbackRefWithResizeHeight } from '@/shared/utils/callbackRefWithResizeHeight';
-import { Controller, useFormContext } from 'react-hook-form';
 import { ExperienceFormValues } from '@/feature/analyze/types';
+import { callbackRefWithResizeHeight } from '@/shared/utils/callbackRefWithResizeHeight';
 
 const InformationPage = () => {
   const { control } = useFormContext<ExperienceFormValues>();

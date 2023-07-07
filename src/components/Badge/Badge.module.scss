@@ -1,39 +1,39 @@
 // Base
 
 .root {
-  @apply flex justify-center items-center rounded-[8px];
+  @apply flex justify-center items-center rounded-[8px] w-fit h-fit;
 }
 
 // Styles
 
-.gray-100-outline {
+.gray100-outline {
   @apply text-sub bg-gray-100 border-[1px] border-solid border-gray-400 m-[-1px];
 }
 
-.primary-50-outline {
+.primary50-outline {
   @apply text-primary-500 bg-primary-50 border-[1px] border-solid border-primary-200 m-[-1px];
 }
 
-.secondary-50-outline {
+.secondary50-outline {
   @apply text-secondary-700 bg-secondary-50 border-[1px] border-solid border-secondary-300 m-[-1px];
 }
 
-.primary-500 {
+.primary500 {
   @apply text-white bg-primary-500 border-none;
 }
 
-.secondary-400 {
+.secondary400 {
   @apply text-white bg-secondary-400  border-none;
 }
 
-.gray-900 {
+.gray900 {
   @apply text-white bg-gray-900  border-none;
 }
 
 // Sizes
 
 .S {
-  @apply py-[2px] px-[6px] text-[12px] font-medium leading-[16px];
+  @apply py-[2px] px-[6px] text-[12px] font-medium leading-[16px] h-[20px];
 }
 
 .M {

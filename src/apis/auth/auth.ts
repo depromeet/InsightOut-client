@@ -1,5 +1,6 @@
+import { AUTH_API } from '@/features/auth/constants/api';
+
 import instance from '..';
-import { AUTH_API } from '@/features/auth/shared/constants/api';
 import { AccessToken, SignInData } from './types/auth';
 
 const authApi = {
@@ -13,7 +14,16 @@ const authApi = {
    *
    * @description cookie에 담겨있는 refreshToken을 활용하여 accessToken 재발급
    */
-  reIssue: () => instance.post<any, AccessToken>(AUTH_API.REISSUE),
+  reIssue: () => instance.post<unknown, AccessToken>(AUTH_API.REISSUE),
+  /**
+   *
+   * @description refreshToken을 전달하여 회원 탈퇴
+   */
+  withdraw: () => instance.delete(AUTH_API.WITHDRAW),
+  /**
+   * @description 로그아웃
+   */
+  signOut: () => instance.post(AUTH_API.SIGN_OUT),
 };
 
 export default authApi;

@@ -1,5 +1,7 @@
-import { ReactNode, forwardRef } from 'react';
+import { forwardRef, ReactNode } from 'react';
+
 import cn from 'classnames';
+
 import styles from './Button.module.scss';
 
 type ButtonProps = MergeComponentProps<

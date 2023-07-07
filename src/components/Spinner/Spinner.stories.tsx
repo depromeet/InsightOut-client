@@ -1,6 +1,7 @@
 import { Box, Flex, Heading } from '@chakra-ui/react';
-import Spinner from './Spinner';
 import { Meta, StoryObj } from '@storybook/react';
+
+import Spinner from './Spinner';
 
 const meta = {
   title: 'Components/Spinner',
