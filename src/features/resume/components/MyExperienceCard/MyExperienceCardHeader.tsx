@@ -16,6 +16,10 @@ const MyExperienceCardHeader = () => {
   const allCapability = getAllCapability(capabilities ?? []);
   const capabilityList: Capability[] = [allCapability, ...(capabilities ?? [])];
 
+  const handleChipClick = (item: Capability) => {
+    setCapabilityKeyword(item.keyword);
+  };
+
   return (
     <header className="flex flex-col pt-[28px] pl-[35px] pr-[37px]">
       <div className="flex items-center gap-[6px]">
@@ -31,7 +35,7 @@ const MyExperienceCardHeader = () => {
             chipSize="S"
             items={capabilityList ?? []}
             selectedItem={selectedCapabilitykeyword}
-            changeItem={setCapabilityKeyword}
+            changeItem={handleChipClick}
           />
         </div>
       </div>
