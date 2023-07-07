@@ -236,6 +236,7 @@ const Layout = ({ children }: LayoutProps) => {
     });
 
     // FIXME: 성공하면 보내는 곳은 준하님이 이어서 작업해주시면 됩니다.
+    // TODO: 경험카드 페이지로 보내고 제출하는 로직으로 변경하기 or 제출하고 여기서 로딩 모달을 띄우고 완료하면 경험카드 페이지로 보내기
     if ('ExperienceInfo' in response) push('/');
   };
 
