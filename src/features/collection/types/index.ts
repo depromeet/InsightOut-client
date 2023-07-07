@@ -2,8 +2,6 @@ export type Capability = {
   id: number;
   keyword: string;
   count: number;
-  // TODO: Capability keyword ai 어떻게 되는지 확인
-  isAi?: boolean;
 };
 
 export interface Experience {

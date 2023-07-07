@@ -28,7 +28,7 @@ const Page = () => {
   const shownCapabilities: Capability[] = [allCapability, ..._capabilites];
 
   const [sortBy, setSortBy] = useState<keyof typeof EXPERIENCE_SORT_BY>('EXPERIENCE_TIME');
-  const [selectedCapabilitykeyword, setSelectedCapabilityKeyword] = useState(allCapability.keyword);
+  const [selectedCapability, setSelectedCapability] = useState<Capability>(allCapability);
 
   const handleTimeSortClick = () => {
     setSortBy(() => (sortBy === 'EXPERIENCE_TIME' ? 'UPDATED_AT' : 'EXPERIENCE_TIME'));
@@ -38,9 +38,9 @@ const Page = () => {
   let __experiences = experiences?.data || [];
   if (experiences?.data) {
     const _experiences =
-      selectedCapabilitykeyword === allCapability.keyword
+      selectedCapability.keyword === allCapability.keyword
         ? experiences?.data ?? []
-        : getFilteredExperiences(experiences?.data ?? [], selectedCapabilitykeyword);
+        : getFilteredExperiences(experiences?.data ?? [], selectedCapability.keyword);
 
     __experiences = getSortedExperiences(_experiences, sortBy);
   }
@@ -49,8 +49,8 @@ const Page = () => {
     <>
       <ChipListNav
         items={shownCapabilities}
-        selectedItem={selectedCapabilitykeyword}
-        changeItem={setSelectedCapabilityKeyword}
+        selectedItem={selectedCapability.keyword}
+        changeItem={setSelectedCapability}
         Right={
           <div>
             <TextButton size="L" leftIcon={<IconClock className="fill-none" />} onClick={handleTimeSortClick}>
