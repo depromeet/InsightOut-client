@@ -5,6 +5,7 @@ import { usePathname } from 'next/navigation';
 import Badge from '@/components/Badge/Badge';
 import Tab from '@/components/Tab/Tab';
 import { useGetExperienceCount } from '@/hooks/reactQuery/experience/qeury';
+import { useGetResumesCount } from '@/hooks/reactQuery/resume/query';
 import { COLLECTION_TABS } from '@/shared/constants/tabs';
 import addPlusMarkOver99 from '@/shared/utils/addPlusMarkOver99';
 
@@ -12,10 +13,10 @@ const Template = ({ children }: { children: React.ReactNode }) => {
   const currentPath = usePathname();
 
   const { data: experienceCount } = useGetExperienceCount();
+  const { data: resumeCount } = useGetResumesCount();
   //TODO: 추가 count API 적용
-  const resumeCount = 100;
   const aiRecommendCount = 20;
-  const counts = [experienceCount?.experience || 0, resumeCount, aiRecommendCount];
+  const counts = [experienceCount?.experience || 0, resumeCount?.resume || 0, aiRecommendCount];
 
   const shownCollectionTabs = COLLECTION_TABS.map((tab, index) => {
     return { ...tab, count: counts[index] };

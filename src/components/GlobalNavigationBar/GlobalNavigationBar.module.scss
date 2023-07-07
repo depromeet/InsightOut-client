@@ -20,5 +20,5 @@
 }
 
 .user-profile {
-  @apply w-[32px] h-[32px] bg-white border-[1px] border-solid border-primary-50 rounded-[12px] drop-shadow-user-profile shrink-0;
+  @apply flex justify-center items-center w-[32px] h-[32px] bg-white border-[1px] border-solid border-primary-50 rounded-[12px] drop-shadow-user-profile shrink-0;
 }

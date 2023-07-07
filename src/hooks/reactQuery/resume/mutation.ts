@@ -1,10 +1,11 @@
-import { AxiosResponse, AxiosError } from 'axios';
-import { UseMutationOptions, useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation, UseMutationOptions, useQueryClient } from '@tanstack/react-query';
+import { AxiosError, AxiosResponse } from 'axios';
+import { useRouter } from 'next/navigation';
 
-import { RESUME_KEY } from '@/shared/constants/querykeys';
-
-import { ResumeParams } from '@/apis/resume/types/resume';
 import resumeApi from '@/apis/resume/resume';
+import { ResumeParams } from '@/apis/resume/types/resume';
+import { ResumeData } from '@/features/resume/types/resume';
+import { RESUME_KEY } from '@/shared/constants/querykeys';
 
 export const useCreateResume = (options?: UseMutationOptions<AxiosResponse, AxiosError>) => {
   const queryClient = useQueryClient();
@@ -12,7 +13,7 @@ export const useCreateResume = (options?: UseMutationOptions<AxiosResponse, Axio
   return useMutation(resumeApi.post, {
     ...options,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: [RESUME_KEY.lists()] });
+      queryClient.invalidateQueries({ queryKey: RESUME_KEY.lists() });
     },
   });
 };
@@ -26,18 +27,30 @@ export const useUpdateResumeTitle = (
   return useMutation((title) => resumeApi.patch({ resumeId, payload: { title } }), {
     ...options,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: [RESUME_KEY.lists()] });
+      queryClient.invalidateQueries({ queryKey: RESUME_KEY.lists() });
     },
   });
 };
 
-export const useDeleteResume = (options?: UseMutationOptions<AxiosResponse, AxiosError, ResumeParams['delete']>) => {
+export const useDeleteResume = (
+  resumeId: ResumeParams['delete']['resumeId'],
+  options?: UseMutationOptions<AxiosResponse, AxiosError, ResumeParams['delete']>
+) => {
   const queryClient = useQueryClient();
+  const router = useRouter();
 
-  return useMutation((resumeId) => resumeApi.delete(resumeId), {
+  return useMutation(() => resumeApi.delete({ resumeId }), {
     ...options,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: [RESUME_KEY.lists()] });
+    onSuccess: async () => {
+      const resumeList = queryClient.getQueryData<ResumeData[]>(RESUME_KEY.lists());
+      if (resumeList) {
+        const deletedResumeIndex = resumeList.findIndex(({ id }) => id === resumeId);
+        const nextResumeIndex = deletedResumeIndex === 0 ? 1 : deletedResumeIndex - 1;
+
+        router.push(`/resumes/${resumeList[nextResumeIndex].id}`);
+      }
+
+      await queryClient.invalidateQueries({ queryKey: RESUME_KEY.lists() });
     },
   });
 };

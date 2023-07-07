@@ -1,15 +1,13 @@
 import { Keyword } from '@/feature/analyze/types';
 
 export type KeywordParams = {
-  get: { experienceId: string };
+  get: { experienceId: number };
   post: { keyword: string };
-  update: { keyword: Keyword; experienceId: string };
+  update: { keywords: Keyword; experienceId?: number };
 };
 
 export type keywordResponse = {
-  get: {
-    keyword: Keyword;
-  };
+  get: Keyword;
   post: {
     id: number;
     keyword: string;
