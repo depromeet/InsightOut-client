@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useState } from 'react';
 
 import TextButton from '@/components/Button/TextButton';
 import IconClock from '@/components/Icon/IconClock';
@@ -11,32 +11,14 @@ import { Capability, Experience } from '@/features/collection/types';
 import getAllCapability from '@/features/collection/utils/getAllCapabilityBadgeItem';
 import getFilteredExperiences from '@/features/collection/utils/getFilteredExperiences';
 import getSortedExperiences from '@/features/collection/utils/getSortedExperiences';
-import {
-  useGetExperienceCapabilities,
-  // useGetExperiences,
-  useGetInfiniteExperiences,
-} from '@/hooks/reactQuery/experience/qeury';
-import useIntersection from '@/hooks/useIntersection';
+import { useGetExperienceCapabilities, useGetExperiences } from '@/hooks/reactQuery/experience/qeury';
 
 const Page = () => {
   const { data: capabilities } = useGetExperienceCapabilities();
 
   const _capabilites = capabilities || [];
 
-  /**
-   * 무한스크롤 적용을 위해 주석처리했습니다.
-   * - 무한스크롤 관련 코드: 32 ~ 39줄
-   */
-  // const { data: experiences } = useGetExperiences();
-
-  const { data, fetchNextPage, hasNextPage, isFetching } = useGetInfiniteExperiences();
-  const experiences = useMemo(() => (data ? data.pages.flatMap(({ data }) => data) : []), [data]);
-
-  const ref = useIntersection((entry, observer) => {
-    observer.unobserve(entry.target);
-
-    if (hasNextPage && !isFetching) fetchNextPage();
-  });
+  const { data: experiences } = useGetExperiences();
 
   // TODO: notFound 처리
   // if (!experiences) notFound();
@@ -46,19 +28,19 @@ const Page = () => {
   const shownCapabilities: Capability[] = [allCapability, ..._capabilites];
 
   const [sortBy, setSortBy] = useState<keyof typeof EXPERIENCE_SORT_BY>('EXPERIENCE_TIME');
-  const [selectedCapabilitykeyword, setSelectedCapabilityKeyword] = useState(allCapability.keyword);
+  const [selectedCapability, setSelectedCapability] = useState(allCapability);
 
   const handleTimeSortClick = () => {
     setSortBy(() => (sortBy === 'EXPERIENCE_TIME' ? 'UPDATED_AT' : 'EXPERIENCE_TIME'));
   };
 
   // TODO: 백엔드와 경험 시간 값을 논의 refactor
-  let __experiences = experiences || [];
-  if (experiences) {
+  let __experiences = experiences?.data || [];
+  if (experiences?.data) {
     const _experiences =
-      selectedCapabilitykeyword === allCapability.keyword
-        ? experiences ?? []
-        : getFilteredExperiences(experiences ?? [], selectedCapabilitykeyword);
+      selectedCapability.keyword === allCapability.keyword
+        ? experiences?.data ?? []
+        : getFilteredExperiences(experiences?.data ?? [], selectedCapability.keyword);
 
     __experiences = getSortedExperiences(_experiences, sortBy);
   }
@@ -67,8 +49,8 @@ const Page = () => {
     <>
       <ChipListNav
         items={shownCapabilities}
-        selectedItem={selectedCapabilitykeyword}
-        changeItem={setSelectedCapabilityKeyword}
+        selectedItem={selectedCapability.keyword}
+        changeItem={setSelectedCapability}
         Right={
           <div>
             <TextButton size="L" leftIcon={<IconClock className="fill-none" />} onClick={handleTimeSortClick}>
@@ -84,7 +66,6 @@ const Page = () => {
               <ExperienceListCard {...experience} />
             </li>
           ))}
-          <div ref={ref}></div>
         </ul>
       </section>
     </>

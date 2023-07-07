@@ -2,8 +2,6 @@ export type Capability = {
   id: number;
   keyword: string;
   count: number;
-  // TODO: Capability keyword ai 어떻게 되는지 확인
-  isAi?: boolean;
 };
 
 export interface Experience {
@@ -23,3 +21,15 @@ export interface Experience {
 }
 
 export type ExperienceStatus = 'INPROGRESS' | 'DONE';
+export type Capacity = {
+  id: number;
+  keyword: string;
+  count: number;
+};
+
+export interface ResumeTitle {
+  id: number;
+  title?: string;
+  createdAt: string;
+  updatedAt: string;
+}

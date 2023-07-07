@@ -214,11 +214,11 @@ ExperienceCard.AIQuestions = ({ aiRecommendQuestions }: ExperienceCardAIQuestion
 );
 
 type ExperienceCardBodyBackProps = {
-  capabilities: Omit<Capability, 'count'>[];
+  capabilities?: Capability[];
+  aiCapabilities?: Capability[];
 };
 
-ExperienceCard.BodyBack = ({ capabilities }: ExperienceCardBodyBackProps) => {
-  const userCapabilities = capabilities.filter(({ isAi }) => !isAi);
+ExperienceCard.BodyBack = ({ capabilities, aiCapabilities }: ExperienceCardBodyBackProps) => {
   return (
     <div className="h-full">
       <div className="flex flex-col w-[690px] text-left">
@@ -242,13 +242,15 @@ ExperienceCard.BodyBack = ({ capabilities }: ExperienceCardBodyBackProps) => {
             </Tag>
           </div>
           <ul className="flex flex-row gap-[8px]">
-            {userCapabilities.map(({ keyword }, index) => (
-              <li key={`back-capability-${keyword}-${index}`}>
-                <Tag variant="primary500" size="M">
-                  {keyword}
-                </Tag>
-              </li>
-            ))}
+            {capabilities
+              ? capabilities.map(({ keyword }, index) => (
+                  <li key={`back-capability-${keyword}-${index}`}>
+                    <Tag variant="primary500" size="M">
+                      {keyword}
+                    </Tag>
+                  </li>
+                ))
+              : ''}
           </ul>
         </div>
         <div>
