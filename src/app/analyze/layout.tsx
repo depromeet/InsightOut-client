@@ -16,14 +16,16 @@ import TooltipRelativeContent from '@/components/Tooltip/TooltipRelativeContent'
 import { initialValue, STEPS } from '@/feature/analyze/constants';
 import StepMenu from '@/feature/analyze/layout/StepMenu';
 import AI진입조건모달 from '@/feature/analyze/modal/BaseDialog';
+import 경험분석로딩모달 from '@/feature/analyze/modal/LoadingModal';
 import PrevNextButton from '@/feature/analyze/PrevNextButton.tsx/PrevNextButton';
 import { ExperienceFormValues, WriteStatusType } from '@/feature/analyze/types';
 import SavingCaption from '@/features/resume/components/ResumeForm/SavingCaption';
-import { useSubmitExperience } from '@/hooks/reactQuery/ai/mutation';
+import { useCreateRecommendKeyword, useSubmitExperience } from '@/hooks/reactQuery/ai/mutation';
 import { useCreateExperience, useUpdateExperience } from '@/hooks/reactQuery/analyze/mutation';
 import { useGetExperience } from '@/hooks/reactQuery/analyze/query';
 import { useUpdateKeyword } from '@/hooks/reactQuery/keyword/mutation';
 import { useIsMounted } from '@/hooks/useIsMounted';
+import { useOnceFlag } from '@/hooks/useOnceFlag';
 import { ROUTES } from '@/shared/constants/routes';
 import formatYYMMDDhhmm from '@/shared/utils/date/formatYYMMDDhhmm';
 
@@ -35,8 +37,14 @@ const Layout = ({ children }: LayoutProps) => {
   const pathname = usePathname();
   const prevPathname = usePrevious(pathname);
   const isMounted = useIsMounted();
+  const [usedOnce, disableOnceFlag] = useOnceFlag();
 
   const { isOpen: isAI진입조건모달Open, onOpen: AI진입조건모달Open, onClose: AI진입조건모달Close } = useDisclosure();
+  const {
+    isOpen: is경험분석로딩모달Open,
+    onOpen: 경험분석로딩모달Open,
+    onClose: 경험분석로딩모달Close,
+  } = useDisclosure();
 
   const currentStepIndex = (STEPS.find((v) => v.route === pathname)?.id ?? 1) - 1;
   const prevStepIndex = (STEPS.find((v) => v.route === prevPathname)?.id ?? 1) - 1;
@@ -94,10 +102,10 @@ const Layout = ({ children }: LayoutProps) => {
       },
     }
   );
-  console.log(data);
 
   const { mutate: updateExperience, status: updateExperienceStatus } = useUpdateExperience(experienceId);
   const { mutateAsync: submitExperience } = useSubmitExperience();
+  const { mutateAsync: createRecommendKeyword } = useCreateRecommendKeyword();
 
   const TOOLTIP_CONTENTS = [
     `“000님 좋은 시작이에요”`,
@@ -231,14 +239,32 @@ const Layout = ({ children }: LayoutProps) => {
     if ('ExperienceInfo' in response) push('/');
   };
 
-  const readyToAIRecommendation = () => {
-    const writeStatus = methods.getValues('writeStatus');
+  const readyToAIRecommendation = async () => {
+    const [writeStatus, situation, task, action, result] = methods.getValues([
+      'writeStatus',
+      'situation',
+      'task',
+      'action',
+      'result',
+    ]);
     const isReadyToAIRecommendation = writeStatus?.slice(0, 3).every((status) => status === '작성완료');
     if (!isReadyToAIRecommendation) {
       AI진입조건모달Open();
       return;
+    } else if (isReadyToAIRecommendation && !usedOnce) {
+      경험분석로딩모달Open();
+      const { capabilities } = await createRecommendKeyword({
+        experienceId,
+        situation,
+        task,
+        action,
+        result,
+      });
+      methods.setValue('capabilities', capabilities);
+      disableOnceFlag();
+      경험분석로딩모달Close();
+      push('/analyze/verify');
     }
-    push('/analyze/verify');
   };
 
   return (
@@ -301,6 +327,8 @@ const Layout = ({ children }: LayoutProps) => {
         title={`앞의 단계를 작성해야 AI 직무역량 추천과\n경험카드를 받을 수 있어요`}
         textContent="확인했어요"
       />
+      {/* 경험 분석 로딩 모달 */}
+      <경험분석로딩모달 size="3xl" isOpen={is경험분석로딩모달Open} onClose={경험분석로딩모달Close} />
     </FormProvider>
   );
 };

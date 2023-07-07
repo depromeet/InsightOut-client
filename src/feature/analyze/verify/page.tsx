@@ -10,7 +10,7 @@ import QuestionCard from '@/components/QuestionCard/QuestionCard';
 import Tag from '@/components/Tag/Tag';
 import AICapabilityKeyword from '@/feature/analyze/verify/AICapabilityKeyword';
 import SelectedKeywordContainer from '@/feature/analyze/verify/SelectedKeywordContainer';
-import { useCreateRecommendKeyword, useCreateRecommendResume } from '@/hooks/reactQuery/ai/mutation';
+import { useCreateRecommendResume } from '@/hooks/reactQuery/ai/mutation';
 
 import { CapabilitiesType, ExperienceFormValues } from '../types';
 
@@ -37,23 +37,14 @@ const VerifyPage = () => {
     'resume',
   ]);
 
-  const { mutateAsync: createRecommendKeyword } = useCreateRecommendKeyword();
-
   const { mutateAsync: createRecommendResume, isLoading: isRecommendResumeLoading } = useCreateRecommendResume();
+
   useEffect(() => {
     (async () => {
       if (!!situation && !!task && !!action && !!result && isNumber(experienceId)) {
-        const { capabilities } = await createRecommendKeyword({
-          experienceId,
-          situation,
-          task,
-          action,
-          result,
-        });
-        setValue('capabilities', capabilities);
         const { resume } = await createRecommendResume({
           experienceId,
-          capabilityIds: capabilities.map(({ id }) => id).slice(0, 2),
+          capabilityIds: recommendKeywordList.map(({ id }) => id).slice(0, 2),
           situation,
           task,
           action,
@@ -62,7 +53,7 @@ const VerifyPage = () => {
         setValue('resume', resume);
       }
     })();
-  }, [action, experienceId, result, situation, task, setValue, createRecommendKeyword, createRecommendResume]);
+  }, [action, experienceId, result, situation, task, setValue, createRecommendResume, recommendKeywordList]);
 
   return (
     <>
