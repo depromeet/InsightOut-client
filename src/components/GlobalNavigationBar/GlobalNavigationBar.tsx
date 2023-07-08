@@ -72,20 +72,9 @@ const GlobalNavigationBar = ({
     return false;
   };
 
-  const handleClickExperience = () => {
+  const handleRouter = (route: Route) => {
     if (!checkIsSignedIn()) return;
-    router.push(ROUTES.EXPERIENCE as Route);
-  };
-
-  const handleClickResumes = () => {
-    if (!checkIsSignedIn()) return;
-    router.push(ROUTES.RESUMES as Route);
-  };
-
-  const handleClickCollection = () => {
-    if (!checkIsSignedIn()) return;
-    // @TODO ROUTES 상수에 모아보기 라우터 추가 필요
-    router.push('/collection/experiences' as Route);
+    router.push(route);
   };
 
   return (
@@ -106,17 +95,17 @@ const GlobalNavigationBar = ({
           <ul className="flex items-center gap-[24px]">
             <li
               className={cn(styles.link, { [styles.focus]: pathName === ROUTES.EXPERIENCE })}
-              onClick={handleClickExperience}>
+              onClick={() => handleRouter(ROUTES.EXPERIENCE as Route)}>
               경험분해
             </li>
             <li
               className={cn(styles.link, { [styles.focus]: pathName === ROUTES.RESUMES })}
-              onClick={handleClickResumes}>
+              onClick={() => handleRouter(ROUTES.RESUMES as Route)}>
               자기소개서 작성하기
             </li>
             <li
               className={cn(styles.link, { [styles.focus]: pathName === '/collection/experiences' })}
-              onClick={handleClickCollection}>
+              onClick={() => handleRouter('/collection/experiences' as Route)}>
               모아보기
             </li>
           </ul>
