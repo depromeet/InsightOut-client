@@ -63,7 +63,6 @@ const GlobalNavigationBar = ({
       isClosable: true,
       position: 'top',
     });
-    return;
   };
 
   const checkIsSignedIn = () => {
