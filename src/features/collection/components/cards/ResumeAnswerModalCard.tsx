@@ -34,7 +34,7 @@ const ResumeAnswerModalCard = ({ isOpen, onClose, updatedAt, title, answer, aiCa
                 <span className="text-secondary-500">{answer.length}자</span>/{MAX_LENGTH.QUESTION}자
               </b>
             </div>
-            {aiCapabilities ? <ResumeAnswerModalCard.AiCapabilities aiCapabilities={aiCapabilities} /> : ''}
+            {/* {aiCapabilities ? <ResumeAnswerModalCard.AiCapabilities aiCapabilities={aiCapabilities} /> : ''} */}
           </ModalFooter>
         </ModalContent>
       </Modal>
