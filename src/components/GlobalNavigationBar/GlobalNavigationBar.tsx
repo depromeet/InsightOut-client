@@ -56,7 +56,7 @@ const GlobalNavigationBar = ({
 
   const handleClickMyPage = () => {
     toast({
-      title: '마이 페이지는 준비 중이에요 !',
+      title: '마이 페이지는 준비 중이에요',
       status: 'info',
       duration: 2000,
       isClosable: true,
@@ -65,35 +65,67 @@ const GlobalNavigationBar = ({
     return;
   };
 
+  const checkIsSignedIn = () => {
+    if (isSignedIn) return true;
+
+    toast({
+      title: '먼저 로그인이 필요해요',
+      status: 'warning',
+      duration: 2000,
+      isClosable: true,
+      position: 'top',
+    });
+
+    return false;
+  };
+
+  const handleClickExperience = () => {
+    if (!checkIsSignedIn()) return;
+    router.push(ROUTES.EXPERIENCE);
+  };
+
+  const handleClickResumes = () => {
+    if (!checkIsSignedIn()) return;
+    router.push(ROUTES.RESUMES as Route);
+  };
+
+  const handleClickCollection = () => {
+    if (!checkIsSignedIn()) return;
+    // @TODO ROUTES 상수에 모아보기 라우터 추가 필요
+    router.push('/collection' as Route);
+  };
+
   return (
     <>
       <header {...props} className={rootClassName}>
-        <Flex alignItems={'center'} gap={'115px'}>
-          <Link className={styles.link} href={{ pathname: ROUTES.HOME }}>
-            <Image
-              src={'/images/home/img-home-logo.png'}
-              className="w-[142px] h-[31px]"
-              width={142}
-              height={31}
-              alt="home-logo"
-            />
-          </Link>
-          <Flex alignItems={'center'} gap={'24px'}>
-            <Link
+        <nav className="flex items-center gap-[115px]">
+          <ul>
+            <li className={styles.link} onClick={() => router.push(ROUTES.HOME)}>
+              <Image
+                src={'/images/home/img-home-logo.png'}
+                className="w-[142px] h-[31px]"
+                width={142}
+                height={31}
+                alt="home-logo"
+              />
+            </li>
+          </ul>
+          <ul className="flex items-center gap-[24px]">
+            <li
               className={cn(styles.link, { [styles.focus]: pathName === ROUTES.EXPERIENCE })}
-              href={{ pathname: ROUTES.EXPERIENCE }}>
+              onClick={handleClickExperience}>
               경험분해
-            </Link>
-            <Link className={cn(styles.link, { [styles.focus]: pathName === '/demo' })} href={{ pathname: '/demo' }}>
+            </li>
+            <li className={cn(styles.link, { [styles.focus]: pathName === '/demo' })} onClick={handleClickResumes}>
               자기소개서 작성하기
-            </Link>
-            <Link
+            </li>
+            <li
               className={cn(styles.link, { [styles.focus]: pathName === '/collection/experiences' })}
-              href={{ pathname: '/collection/experiences' }}>
+              onClick={handleClickCollection}>
               모아보기
-            </Link>
-          </Flex>
-        </Flex>
+            </li>
+          </ul>
+        </nav>
         {isRequesting ? (
           <Flex width={140} justifyContent={'center'}>
             <Spinner size="L" style="primary500" />
