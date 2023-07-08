@@ -14,7 +14,7 @@ import CategoriesContents from '@/features/auth/components/AuthModal/ModalConten
 import SignUpContents from '@/features/auth/components/AuthModal/ModalContents/SignUpContents';
 import StartNowContents from '@/features/auth/components/AuthModal/ModalContents/StartNowContents';
 import WelcomeContents from '@/features/auth/components/AuthModal/ModalContents/WelcomeContents';
-import { ROUTES } from '@/shared/constants/routes';
+import { ROUTES, SIGN_UP_ROUTES } from '@/shared/constants/routes';
 import { useUserNickname, useUserOnboarding } from '@/shared/store/user';
 
 import useGoogleLogin from '../../hooks/useGoogleLogin';
@@ -61,7 +61,7 @@ const AuthModal = ({ isOpen, onClose, onAbortSignUp }: AuthModalProps) => {
   const handleChooseJob = async () => {
     await onboardingApi.patch({ field: true });
     await userApi.patch({ nickname, field: selectedCategory.field });
-    router.push('/?steps=startnow');
+    router.push(SIGN_UP_ROUTES.START_NOW);
   };
 
   /**
@@ -72,7 +72,7 @@ const AuthModal = ({ isOpen, onClose, onAbortSignUp }: AuthModalProps) => {
       setIsSignedIn(true);
       onClose();
     } else {
-      router.push('/?steps=categories');
+      router.push(SIGN_UP_ROUTES.CATEGORIES);
     }
   };
 

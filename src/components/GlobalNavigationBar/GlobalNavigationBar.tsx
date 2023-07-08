@@ -9,7 +9,7 @@ import { usePathname, useRouter } from 'next/navigation';
 
 import AuthModal from '@/features/auth/components/AuthModal/AuthModal';
 import { useAuthActions } from '@/features/auth/store';
-import { ROUTES } from '@/shared/constants/routes';
+import { ROUTES, SIGN_UP_ROUTES } from '@/shared/constants/routes';
 import { useUserImageUrl } from '@/shared/store/user';
 import { tw } from '@/shared/utils/tailwindMerge';
 
@@ -51,7 +51,7 @@ const GlobalNavigationBar = ({
 
   const handleClickLoginButton = () => {
     setIsOpenSignUpModal(true);
-    router.push('/?steps=signUp');
+    router.push(SIGN_UP_ROUTES.SIGN_UP);
   };
 
   const handleClickMyPage = () => {
@@ -68,7 +68,7 @@ const GlobalNavigationBar = ({
   const checkIsSignedIn = () => {
     if (isSignedIn) return true;
     setIsOpenSignUpModal(true);
-    router.push('/?steps=signUp');
+    router.push(SIGN_UP_ROUTES.SIGN_UP);
     return false;
   };
 
