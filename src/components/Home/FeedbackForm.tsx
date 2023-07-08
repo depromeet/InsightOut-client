@@ -4,7 +4,7 @@ import { useRef } from 'react';
 
 import { useToast } from '@chakra-ui/react';
 
-import instance from '@/apis';
+import userApi from '@/apis/user/user';
 import Button from '@/components/Button/Button';
 
 import TextField from '../Input/TextField/TextField';
@@ -29,7 +29,7 @@ const FeedbackForm = () => {
       return;
     }
 
-    await instance.post('/users/feedback', { contents: value });
+    await userApi.postFeedback({ contents: value });
   };
 
   return (
