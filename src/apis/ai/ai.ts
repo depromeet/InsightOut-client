@@ -1,4 +1,5 @@
 import instance from '..';
+import { CountResponse } from '../resume/types/count';
 import { AiParams, AiResponse } from './types/ai';
 
 const aiApi = {
@@ -17,6 +18,10 @@ const aiApi = {
    */
   submit: async (payload: AiParams['submit']) =>
     await instance.post<AiResponse['submit'], AiResponse['submit']>('/ai/experience-card', payload),
+  /**
+   * 추천 자기소개서 개수 조회
+   */
+  count: async () => await instance.get<CountResponse['get'], CountResponse['get']>('/ai/count'),
 };
 
 export default aiApi;
