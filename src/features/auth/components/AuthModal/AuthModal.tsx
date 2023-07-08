@@ -13,6 +13,7 @@ import CategoriesContents from '@/features/auth/components/AuthModal/ModalConten
 import SignUpContents from '@/features/auth/components/AuthModal/ModalContents/SignUpContents';
 import StartNowContents from '@/features/auth/components/AuthModal/ModalContents/StartNowContents';
 import WelcomeContents from '@/features/auth/components/AuthModal/ModalContents/WelcomeContents';
+import { ROUTES } from '@/shared/constants/routes';
 import { useUserNickname, useUserOnboarding } from '@/shared/store/user';
 
 import useGoogleLogin from '../../hooks/useGoogleLogin';
@@ -50,6 +51,7 @@ const AuthModal = ({ isOpen, onClose, onAbortSignUp }: AuthModalProps) => {
     setIsSignedIn(true);
     setIsTokenRequired(false);
     onClose();
+    router.push(ROUTES.EXPERIENCE);
   };
 
   /**

@@ -92,7 +92,7 @@ const GlobalNavigationBar = ({
   const handleClickCollection = () => {
     if (!checkIsSignedIn()) return;
     // @TODO ROUTES 상수에 모아보기 라우터 추가 필요
-    router.push('/collection' as Route);
+    router.push('/collection/experiences' as Route);
   };
 
   return (
@@ -116,7 +116,9 @@ const GlobalNavigationBar = ({
               onClick={handleClickExperience}>
               경험분해
             </li>
-            <li className={cn(styles.link, { [styles.focus]: pathName === '/demo' })} onClick={handleClickResumes}>
+            <li
+              className={cn(styles.link, { [styles.focus]: pathName === ROUTES.RESUMES })}
+              onClick={handleClickResumes}>
               자기소개서 작성하기
             </li>
             <li
