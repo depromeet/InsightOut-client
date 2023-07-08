@@ -17,3 +17,17 @@ export interface QuestionActions {
 export interface QuestionStore extends QuestionState {
   actions: QuestionActions;
 }
+
+export interface ExperienceState {
+  experienceId: number;
+  capabilityKeyword: string;
+}
+
+export interface ExperienceActions {
+  setExperienceId: (experienceId: ExperienceState['experienceId']) => void;
+  setCapabilityKeyword: (capabilityKeyword: ExperienceState['capabilityKeyword']) => void;
+}
+
+export interface ExperienceStore extends ExperienceState {
+  actions: ExperienceActions;
+}

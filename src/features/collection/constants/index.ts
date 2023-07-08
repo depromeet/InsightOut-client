@@ -16,3 +16,5 @@ export const INITIAL_RESUME: ResumeTitle = {
   updatedAt: '',
   title: '',
 };
+
+export const ALL_CAPABILITY_KEYWORD = '전체';
