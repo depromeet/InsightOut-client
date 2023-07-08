@@ -9,6 +9,7 @@ import { usePathname, useRouter } from 'next/navigation';
 
 import AuthModal from '@/features/auth/components/AuthModal/AuthModal';
 import { useAuthActions } from '@/features/auth/store';
+import getResumeRoute from '@/features/resume/utils/getResumeRoute';
 import { ROUTES, SIGN_UP_ROUTES } from '@/shared/constants/routes';
 import { useUserImageUrl } from '@/shared/store/user';
 import { tw } from '@/shared/utils/tailwindMerge';
@@ -49,6 +50,7 @@ const GlobalNavigationBar = ({
   const { setIsOpenSignUpModal } = useAuthActions();
   const router = useRouter();
   const toast = useToast();
+  const resumeRoute = getResumeRoute();
 
   const handleClickLoginButton = () => {
     setIsOpenSignUpModal(true);
