@@ -1,17 +1,18 @@
-import React, { HTMLAttributes, useCallback, useEffect, useRef, useState } from 'react';
+import React, { HTMLAttributes, useEffect, useRef, useState } from 'react';
 import { useFormContext, useWatch } from 'react-hook-form';
 
-import { usePrevious } from '@chakra-ui/react';
 import cn from 'classnames';
 import { usePathname } from 'next/navigation';
 
 import Badge from '@/components/Badge/Badge';
 import { useUpdateEffect } from '@/hooks/useUpdateEffect';
-import { ROUTES } from '@/shared/constants/routes';
 
-import { STEPS } from '../constants';
+import { STEP, STEPS } from '../constants';
 import { ExperienceFormValues, WriteStatusType } from '../types';
 import styles from './StepMenuItem.module.scss';
+
+const 경험정보질문갯수 = 3;
+const 경험내용질문갯수 = 4;
 
 interface StepMenuItemProps extends Pick<HTMLAttributes<HTMLLIElement>, 'className'> {
   title: (typeof STEPS)[number]['title'];
@@ -20,8 +21,6 @@ interface StepMenuItemProps extends Pick<HTMLAttributes<HTMLLIElement>, 'classNa
 
 const StepMenuItem = ({ title, status, className }: StepMenuItemProps) => {
   const pathname = usePathname();
-  const prevPathname = usePrevious(pathname);
-  const prevStepIndex = (STEPS.find((v) => v.route === prevPathname)?.id ?? 1) - 1;
   const currentStepIndex = (STEPS.find((v) => v.route === pathname)?.id ?? 1) - 1;
 
   const classNames = cn(styles.root, styles[status], className);
@@ -56,94 +55,37 @@ const StepMenuItem = ({ title, status, className }: StepMenuItemProps) => {
 
   const getTitle = () => {
     if (title === '경험정보') {
-      return `${title}(${경험정보count}/3)`;
+      return `${title}(${경험정보count}/${경험정보질문갯수})`;
     }
     if (title === '경험내용') {
-      return `${title}(${경험내용count}/4)`;
+      return `${title}(${경험내용count}/${경험내용질문갯수})`;
     }
 
     return title;
   };
 
-  const setWriteStatus = useCallback(
-    (target: WriteStatusType[], status: WriteStatusType) => {
-      target[prevStepIndex] = status;
-      setValue('writeStatus', target);
-    },
-    [setValue, prevStepIndex]
-  );
-
-  useEffect(() => {
-    const writeStatus = getValues('writeStatus') as WriteStatusType[];
-    const copyWriteStatus = [...(writeStatus as WriteStatusType[])];
-
-    if (경험정보count === 3 || 경험내용count === 4) {
-      copyWriteStatus[currentStepIndex] = '작성완료';
-      setValue('writeStatus', copyWriteStatus);
-    } else {
-      copyWriteStatus[currentStepIndex] = '작성중';
-      setValue('writeStatus', copyWriteStatus);
-    }
-  }, [경험정보count, 경험내용count, currentStepIndex, setValue, getValues]);
-
   useEffect(() => {
     const writeStatus = getValues('writeStatus') as WriteStatusType[];
     const copyWriteStatus = [...writeStatus];
 
-    // 이탈시 validation check
-    return () => {
-      switch (prevPathname) {
-        case ROUTES.EXPERIENCE:
-          const experiencePageValues = getValues([
-            'title',
-            'startYYYY',
-            'startMM',
-            'endYYYY',
-            'endMM',
-            'experienceRole',
-            'motivation',
-          ]);
-          if (experiencePageValues.every((v) => !!v)) {
-            setWriteStatus(copyWriteStatus, '작성완료');
-          } else if (experiencePageValues.some((v) => !!v)) {
-            setWriteStatus(copyWriteStatus, '작성중');
-          } else {
-            setWriteStatus(copyWriteStatus, '미작성');
-          }
-          break;
-        case ROUTES.KEYWORD:
-          const keywords = getValues('keywords');
-          if (keywords.some(([, isSelected]) => isSelected === true)) {
-            setWriteStatus(copyWriteStatus, '작성완료');
-          } else {
-            setWriteStatus(copyWriteStatus, '미작성');
-          }
-          break;
-        case ROUTES.INFORMATION:
-          const informationPageValues = getValues(['situation', 'task', 'action', 'result']);
-          if (informationPageValues.every((v) => !!v)) {
-            setWriteStatus(copyWriteStatus, '작성완료');
-          } else if (informationPageValues.some((v) => !!v)) {
-            setWriteStatus(copyWriteStatus, '작성중');
-          } else {
-            setWriteStatus(copyWriteStatus, '미작성');
-          }
-          break;
-        case ROUTES.VERIFY:
-          const [capabilities, resume] = getValues(['capabilities', 'resume']);
-          if (!!capabilities.length && !!resume) {
-            setWriteStatus(copyWriteStatus, '작성완료');
-          } else if (!!capabilities.length || !!resume) {
-            setWriteStatus(copyWriteStatus, '작성중');
-          } else {
-            setWriteStatus(copyWriteStatus, '미작성');
-          }
-          break;
-        default:
-          break;
+    if (currentStepIndex === STEP.experience - 1)
+      if (경험정보count === 경험정보질문갯수) {
+        copyWriteStatus[currentStepIndex] = '작성완료';
+        setValue('writeStatus', copyWriteStatus);
+      } else if (0 < 경험정보count && 경험정보count < 경험정보질문갯수) {
+        copyWriteStatus[currentStepIndex] = '작성중';
+        setValue('writeStatus', copyWriteStatus);
       }
-    };
-  }, [getValues, pathname, prevPathname, currentStepIndex, setWriteStatus]);
+
+    if (currentStepIndex === STEP.information - 1)
+      if (경험내용count === 경험내용질문갯수) {
+        copyWriteStatus[currentStepIndex] = '작성완료';
+        setValue('writeStatus', copyWriteStatus);
+      } else if (0 < 경험내용count && 경험내용count < 경험내용질문갯수) {
+        copyWriteStatus[currentStepIndex] = '작성중';
+        setValue('writeStatus', copyWriteStatus);
+      }
+  }, [경험정보count, 경험내용count, currentStepIndex, setValue, getValues]);
 
   // TODO: 리팩토링 하기
   /**

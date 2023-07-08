@@ -1,9 +1,9 @@
 'use client';
 
-import React, { useEffect } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { FormProvider, useForm, useWatch } from 'react-hook-form';
 
-import { useDisclosure } from '@chakra-ui/react';
+import { useDisclosure, usePrevious } from '@chakra-ui/react';
 import { DevTool } from '@hookform/devtools';
 import isNumber from 'lodash/isNumber';
 import { usePathname, useRouter } from 'next/navigation';
@@ -35,6 +35,7 @@ export interface LayoutProps {
 const Layout = ({ children }: LayoutProps) => {
   const { push } = useRouter();
   const pathname = usePathname();
+  const prevPathname = usePrevious(pathname);
   const isMounted = useIsMounted();
   const [usedOnce, disableOnceFlag] = useOnceFlag();
 
@@ -46,6 +47,7 @@ const Layout = ({ children }: LayoutProps) => {
   } = useDisclosure();
 
   const currentStepIndex = (STEPS.find((v) => v.route === pathname)?.id ?? 1) - 1;
+  const prevStepIndex = (STEPS.find((v) => v.route === prevPathname)?.id ?? 1) - 1;
 
   const methods = useForm({
     mode: 'all',
@@ -155,6 +157,73 @@ const Layout = ({ children }: LayoutProps) => {
       result,
     });
   };
+
+  const setWriteStatus = useCallback(
+    (target: WriteStatusType[], status: WriteStatusType) => {
+      target[prevStepIndex] = status;
+      methods.setValue('writeStatus', target);
+    },
+    [methods, prevStepIndex]
+  );
+
+  useEffect(() => {
+    const writeStatus = methods.getValues('writeStatus') as WriteStatusType[];
+    const copyWriteStatus = [...writeStatus];
+
+    // 이탈시 validation check
+    return () => {
+      switch (prevPathname) {
+        case ROUTES.EXPERIENCE:
+          const experiencePageValues = methods.getValues([
+            'title',
+            'startYYYY',
+            'startMM',
+            'endYYYY',
+            'endMM',
+            'experienceRole',
+            'motivation',
+          ]);
+          if (experiencePageValues.every((v) => !!v)) {
+            setWriteStatus(copyWriteStatus, '작성완료');
+          } else if (experiencePageValues.some((v) => !!v)) {
+            setWriteStatus(copyWriteStatus, '작성중');
+          } else {
+            setWriteStatus(copyWriteStatus, '미작성');
+          }
+          break;
+        case ROUTES.KEYWORD:
+          const keywords = methods.getValues('keywords');
+          if (keywords.some(([, isSelected]) => isSelected === true)) {
+            setWriteStatus(copyWriteStatus, '작성완료');
+          } else {
+            setWriteStatus(copyWriteStatus, '미작성');
+          }
+          break;
+        case ROUTES.INFORMATION:
+          const informationPageValues = methods.getValues(['situation', 'task', 'action', 'result']);
+          if (informationPageValues.every((v) => !!v)) {
+            setWriteStatus(copyWriteStatus, '작성완료');
+          } else if (informationPageValues.some((v) => !!v)) {
+            setWriteStatus(copyWriteStatus, '작성중');
+          } else {
+            setWriteStatus(copyWriteStatus, '미작성');
+          }
+          break;
+        case ROUTES.VERIFY:
+          const [capabilities, resume] = methods.getValues(['capabilities', 'resume']);
+          if (!!capabilities.length && !!resume) {
+            setWriteStatus(copyWriteStatus, '작성완료');
+          } else if (!!capabilities.length || !!resume) {
+            setWriteStatus(copyWriteStatus, '작성중');
+          } else {
+            setWriteStatus(copyWriteStatus, '미작성');
+          }
+          break;
+        default:
+          break;
+      }
+    };
+  }, [methods, pathname, prevPathname, setWriteStatus]);
 
   const submit = async (data: ExperienceFormValues) => {
     const { experienceId, situation, task, action, result, writeStatus } = data;
