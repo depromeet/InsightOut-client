@@ -1,19 +1,26 @@
 /* eslint-disable react/display-name */
 import React from 'react';
-import { useDisclosure } from '@chakra-ui/react';
+
+import { Modal, useDisclosure } from '@chakra-ui/react';
+
 import ActionList from '@/components/ActionList/ActionList';
-import IconMoreVertical from '@/components/Icon/IconMoreVertical';
-import formatUpdatedAt from '@/shared/utils/formatUpdateAt';
-import Tag from '@/components/Tag/Tag';
 import Button from '@/components/Button/Button';
+import IconMoreVertical from '@/components/Icon/IconMoreVertical';
+import ModalFooter from '@/components/Modal/ModalFooter';
+import ModalHeader from '@/components/Modal/ModalHeader';
+import Tag from '@/components/Tag/Tag';
+import formatUpdatedAt from '@/shared/utils/formatUpdateAt';
+
+import ResumeAnswerModalCard from './ResumeAnswerModalCard';
 
 type Props = {
   updatedAt: string;
   title: string;
   answer: string;
+  aiCapabilities: string[];
 };
 
-const AiRecommendResumeCard = ({ title, answer, updatedAt }: Props) => {
+const AiRecommendResumeCard = ({ title, answer, updatedAt, aiCapabilities }: Props) => {
   const {
     isOpen: isOpenActionListModal,
     onOpen: onOpenActionListModal,
@@ -28,13 +35,31 @@ const AiRecommendResumeCard = ({ title, answer, updatedAt }: Props) => {
   return (
     <>
       <div className="border rounded-[24px] hover:shadow-S4 p-[24px]" onClick={onOpenAiResumeAnswerModal}>
-        <AiRecommendResumeCard.Header
-          title={title}
-          updatedAt={updatedAt}
-          onOpenActionListModal={onOpenActionListModal}
-        />
+        <AiRecommendResumeCard.Header title={title} updatedAt={updatedAt} />
         <AiRecommendResumeCard.Footer />
       </div>
+      <ResumeAnswerModalCard
+        isOpen={isOpenAiResumeAnswerModal}
+        onClose={onCloseAiResumeAnswerModal}
+        title={title}
+        answer={answer}
+        updatedAt={updatedAt}
+        aiCapabilities={aiCapabilities}
+      />
+      <Modal size="md" isOpen={isOpenActionListModal} onClose={onCloseActionListModal}>
+        <ModalHeader.Title
+          title="해당 AI 추천 자기소개서를 삭제하실건가요?"
+          subTitle="삭제한 AI 추천 자기소개서는 다시 복구할 수 없어요"
+        />
+        <ModalFooter.TwoButton
+          leftTextContent="취소하기"
+          handleLeftClick={onCloseActionListModal}
+          rightTextContent="삭제하기"
+          handleRightClick={() => {
+            console.log('삭제하기');
+          }}
+        />
+      </Modal>
     </>
   );
 };
@@ -42,11 +67,10 @@ const AiRecommendResumeCard = ({ title, answer, updatedAt }: Props) => {
 type AiRecommendResumeCardHeaderProps = {
   title: string;
   updatedAt: string;
-  onOpenActionListModal: () => void;
 };
 
-AiRecommendResumeCard.Header = ({ title, updatedAt, onOpenActionListModal }: AiRecommendResumeCardHeaderProps) => (
-  <header>
+AiRecommendResumeCard.Header = ({ title, updatedAt }: AiRecommendResumeCardHeaderProps) => (
+  <header className="relative">
     <b className="b4 mb-[5px]">{formatUpdatedAt(updatedAt) + ' 마지막 수정'}</b>
     <h6 className="h6">{title}</h6>
     <ActionList>
@@ -56,7 +80,7 @@ AiRecommendResumeCard.Header = ({ title, updatedAt, onOpenActionListModal }: AiR
         <IconMoreVertical />
       </ActionList.Button>
       <ActionList.ItemWrapper>
-        <ActionList.Item onClick={onOpenActionListModal}>삭제하기</ActionList.Item>
+        <ActionList.Item onClick={() => console.log('삭제하기')}>삭제하기</ActionList.Item>
       </ActionList.ItemWrapper>
     </ActionList>
   </header>
