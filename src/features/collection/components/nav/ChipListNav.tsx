@@ -12,36 +12,49 @@ type Props<T> = {
 };
 
 type Item = {
-  id: number;
+  id?: number;
   count?: number;
   keyword?: string;
   title?: string;
 };
 
-const ChipListNav = <T extends Item>({ items, selectedItem, changeItem, Right }: Props<T>) => {
+const ChipListNav = <T extends Item | string>({ items, selectedItem, changeItem, Right }: Props<T>) => {
   return (
     <section className="flex flex-row justify-between items-center my-[24px] ">
       <nav className="flex flex-row items-center gap-[8px] h-[54px] overflow-x-auto whitespace-nowrap scrollbar-hide">
         {items.map((item: T) => {
-          const { id, count, keyword, title } = item;
-          const chipContents = keyword || title || '';
-          return (
-            <li key={id} className="list-none">
-              <Chip
-                size="M"
-                variant={selectedItem === chipContents ? 'secondary-pressed' : 'secondary'}
-                badge={
-                  count ? (
-                    <Badge variant="gray100-outline" size="S">
-                      {addPlusMarkOver99(count)}
-                    </Badge>
-                  ) : undefined
-                }
-                onClick={changeItem ? () => changeItem(item) : undefined}>
-                {chipContents}
-              </Chip>
-            </li>
-          );
+          if (typeof item === 'string') {
+            return (
+              <li key={item} className="list-none">
+                <Chip
+                  size="M"
+                  variant={selectedItem === item ? 'secondary-pressed' : 'secondary'}
+                  onClick={changeItem ? () => changeItem(item) : undefined}>
+                  {item}
+                </Chip>
+              </li>
+            );
+          } else {
+            const { id, count, keyword, title } = item;
+            const chipContents = keyword || title || '';
+            return (
+              <li key={id} className="list-none">
+                <Chip
+                  size="M"
+                  variant={selectedItem === chipContents ? 'secondary-pressed' : 'secondary'}
+                  badge={
+                    count ? (
+                      <Badge variant="gray100-outline" size="S">
+                        {addPlusMarkOver99(count)}
+                      </Badge>
+                    ) : undefined
+                  }
+                  onClick={changeItem ? () => changeItem(item) : undefined}>
+                  {chipContents}
+                </Chip>
+              </li>
+            );
+          }
         })}
       </nav>
       {Right}

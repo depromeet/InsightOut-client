@@ -2,8 +2,8 @@
 
 import { useEffect, useState } from 'react';
 
-import Chip from '@/components/Chip/Chip';
 import AiRecommendResumeListCard from '@/features/collection/components/cards/AiRecommendResumeCard';
+import ChipListNav from '@/features/collection/components/nav/ChipListNav';
 import { useGetAiResumes } from '@/hooks/reactQuery/ai/query';
 
 const Page = () => {
@@ -24,22 +24,7 @@ const Page = () => {
 
   return (
     <div>
-      <section className="flex flex-row justify-between items-center my-[24px]">
-        <nav>
-          <ul className="flex flex-row gap-[8px]">
-            {aiRecommendKeyword.map((keyword) => (
-              <li key={'ai-keyword' + keyword} className="list-none">
-                <Chip
-                  size="M"
-                  variant={selectedAiRecommend === keyword ? 'secondary-pressed' : 'secondary'}
-                  onClick={() => setSelectedAiRecommend(keyword)}>
-                  {keyword}
-                </Chip>
-              </li>
-            ))}
-          </ul>
-        </nav>
-      </section>
+      <ChipListNav items={aiRecommendKeyword} selectedItem={selectedAiRecommend} changeItem={setSelectedAiRecommend} />
       <section>
         <ul className="flex flex-col gap-[40px]">
           {shownAiResumes.map(({ id, updatedAt, content, AiCapabilities }) => (
