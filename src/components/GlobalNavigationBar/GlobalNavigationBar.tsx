@@ -13,6 +13,7 @@ import { ROUTES, SIGN_UP_ROUTES } from '@/shared/constants/routes';
 import { useUserImageUrl } from '@/shared/store/user';
 import { tw } from '@/shared/utils/tailwindMerge';
 
+import HomeLogo from '../../../public/images/home/img-home-logo.png';
 import Button from '../Button/Button';
 import SvgIconGnbMyPage from '../Icon/IconGnbMyPage';
 import IconGoogleLogo from '../Icon/IconGoogleLogo';
@@ -83,13 +84,7 @@ const GlobalNavigationBar = ({
         <nav className="flex items-center gap-[115px]">
           <ul>
             <li className={styles.link} onClick={() => router.push(ROUTES.HOME)}>
-              <Image
-                src={'/images/home/img-home-logo.png'}
-                className="w-[142px] h-[31px]"
-                width={142}
-                height={31}
-                alt="home-logo"
-              />
+              <Image src={HomeLogo} className="w-[142px] h-[31px]" alt="home-logo" />
             </li>
           </ul>
           <ul className="flex items-center gap-[24px]">
