@@ -20,8 +20,8 @@ type Item = {
 
 const ChipListNav = <T extends Item>({ items, selectedItem, changeItem, Right }: Props<T>) => {
   return (
-    <section className="flex flex-row justify-between items-center my-[24px]">
-      <nav className="flex flex-row gap-[8px]">
+    <section className="flex flex-row justify-between items-center my-[24px] ">
+      <nav className="flex flex-row items-center gap-[8px] h-[54px] overflow-x-auto whitespace-nowrap scrollbar-hide">
         {items.map((item: T) => {
           const { id, count, keyword, title } = item;
           const chipContents = keyword || title || '';
