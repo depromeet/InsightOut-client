@@ -17,7 +17,7 @@ import { useUserNickname, useUserOnboarding } from '@/shared/store/user';
 
 import useGoogleLogin from '../../hooks/useGoogleLogin';
 import { useAuthActions } from '../../store';
-import { Category, SignUpConfig, SignUpSteps } from '../../types/store';
+import { Category, SignUpConfig, SignUpSteps } from '../../types/signUp';
 
 type AuthModalProps = {
   isOpen: boolean;
