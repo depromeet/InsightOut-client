@@ -207,7 +207,7 @@ const Layout = ({ children }: LayoutProps) => {
           setWriteStatus(copyWriteStatus, '미작성');
         }
         break;
-      default:
+      case ROUTES.VERIFY:
         const [capabilities, resume] = methods.getValues(['capabilities', 'resume']);
         if (!!capabilities.length && !!resume) {
           setWriteStatus(copyWriteStatus, '작성완료');
@@ -216,6 +216,8 @@ const Layout = ({ children }: LayoutProps) => {
         } else {
           setWriteStatus(copyWriteStatus, '미작성');
         }
+        break;
+      default:
         break;
     }
   }, [methods, pathname, prevPathname, currentStepIndex, setWriteStatus]);
@@ -265,7 +267,7 @@ const Layout = ({ children }: LayoutProps) => {
       disableOnceFlag();
       경험분석로딩모달Close();
       push('/analyze/verify');
-    }
+    } else push('/analyze/verify');
   };
 
   return (

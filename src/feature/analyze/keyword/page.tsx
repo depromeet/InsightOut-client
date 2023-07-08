@@ -20,8 +20,6 @@ import { ExperienceFormValues, KeywordEntriesType } from '../types';
 
 const deDuplicatedTwoDimensionalArray = (arr: KeywordEntriesType) => Object.entries(Object.fromEntries(arr));
 
-// TODO: 경험 분해 키워드 임시 저장 API (/experience/capability) 로 요청 보내기, 요청body: Object.fromEntries(keywordList.filter(([, isSelected]) => keyword[1] === true))
-
 const KeywordPage = () => {
   const [text, onChangeText, setText] = useInput('');
   const { setValue, control } = useFormContext<ExperienceFormValues>();
