@@ -1,0 +1,24 @@
+.outer {
+  @apply w-full overflow-hidden bg-white;
+}
+
+.inner {
+  @apply flex justify-center w-fit gap-[36px];
+
+  &[data-animate='true'] .inner-item {
+    animation: slideAnim linear infinite;
+  }
+}
+
+.inner-item {
+  @apply flex w-max animate-none gap-[36px];
+}
+
+@keyframes slideAnim {
+  from {
+    transform: translateX(0%);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}

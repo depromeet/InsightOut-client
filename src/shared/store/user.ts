@@ -10,7 +10,7 @@ export const userStore = create<UserState>((set) => ({
       field: false,
       experience: false,
       experienceStepper: false,
-      resume: false,
+      resume: true,
       collection: false,
     },
     email: '',
