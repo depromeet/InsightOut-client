@@ -5,9 +5,9 @@ import { useRouter } from 'next/navigation';
 import userApi from '@/apis/user/user';
 import GlobalNavigationBar from '@/components/GlobalNavigationBar/GlobalNavigationBar';
 import OnboardingProvider from '@/components/Providers/OnboardingProvider';
-import AuthModal from '@/features/auth/components/AuthModal/AuthModal';
 import AuthProvider from '@/features/auth/components/Providers/AuthProvider';
 import { useAuthActions, useIsOpenSignUpModal, useIsRequesting, useIsSignedIn } from '@/features/auth/store';
+import { ROUTES } from '@/shared/constants/routes';
 import { useUserNickname } from '@/shared/store/user';
 
 export default function Template({ children }: StrictPropsWithChildren) {
@@ -20,7 +20,7 @@ export default function Template({ children }: StrictPropsWithChildren) {
 
   const handleClickCloseButton = () => {
     setIsOpenSignUpModal(false);
-    router.replace('/');
+    router.replace(ROUTES.HOME);
   };
 
   const handleAbortSignUp = async () => {
@@ -29,12 +29,15 @@ export default function Template({ children }: StrictPropsWithChildren) {
   };
 
   return (
-    <>
-      <AuthProvider>
-        <GlobalNavigationBar isSignedIn={isSignedIn} isRequesting={isRequesting} />
-        <OnboardingProvider>{children}</OnboardingProvider>
-      </AuthProvider>
-      <AuthModal isOpen={isOpenSignUpModal} onClose={handleClickCloseButton} onAbortSignUp={handleAbortSignUp} />
-    </>
+    <AuthProvider>
+      <GlobalNavigationBar
+        isSignedIn={isSignedIn}
+        isRequesting={isRequesting}
+        isOpenSignUpModal={isOpenSignUpModal}
+        onCloseAuthModal={handleClickCloseButton}
+        onAbortSignUp={handleAbortSignUp}
+      />
+      <OnboardingProvider>{children}</OnboardingProvider>
+    </AuthProvider>
   );
 }

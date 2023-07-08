@@ -7,6 +7,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 
+import AuthModal from '@/features/auth/components/AuthModal/AuthModal';
 import { useAuthActions } from '@/features/auth/store';
 import { ROUTES } from '@/shared/constants/routes';
 import { useUserImageUrl } from '@/shared/store/user';
@@ -27,9 +28,20 @@ type GlobalNavigationBarProps = ComponentPropsWithoutRef<'header'> & {
    * Auth 관련 요청이 진행 중인지 여부 (스피너 출력을 위해 필요)
    */
   isRequesting: boolean;
+  isOpenSignUpModal: boolean;
+  onCloseAuthModal: () => void;
+  onAbortSignUp: () => void;
 };
 
-const GlobalNavigationBar = ({ className, isSignedIn, isRequesting, ...props }: GlobalNavigationBarProps) => {
+const GlobalNavigationBar = ({
+  className,
+  isSignedIn,
+  isRequesting,
+  isOpenSignUpModal,
+  onCloseAuthModal,
+  onAbortSignUp,
+  ...props
+}: GlobalNavigationBarProps) => {
   const rootClassName = tw(styles.root, className);
   const pathName = usePathname();
   const profileImgUrl = useUserImageUrl();
@@ -100,6 +112,7 @@ const GlobalNavigationBar = ({ className, isSignedIn, isRequesting, ...props }: 
           </Button>
         )}
       </header>
+      <AuthModal isOpen={isOpenSignUpModal} onClose={onCloseAuthModal} onAbortSignUp={onAbortSignUp} />
     </>
   );
 };
