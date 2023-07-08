@@ -4,6 +4,7 @@ import React, { useEffect } from 'react';
 import { useFormContext } from 'react-hook-form';
 
 import isNumber from 'lodash/isNumber';
+import { useRouter } from 'next/navigation';
 
 import TextAreaField from '@/components/Input/TextAreaField/TextAreaField';
 import QuestionCard from '@/components/QuestionCard/QuestionCard';
@@ -11,8 +12,10 @@ import Tag from '@/components/Tag/Tag';
 import AICapabilityKeyword from '@/feature/analyze/verify/AICapabilityKeyword';
 import SelectedKeywordContainer from '@/feature/analyze/verify/SelectedKeywordContainer';
 import { useCreateRecommendResume } from '@/hooks/reactQuery/ai/mutation';
+import { useOnceFlag } from '@/hooks/useOnceFlag';
 
 import { CapabilitiesType, ExperienceFormValues } from '../types';
+import AIResumeLoading from './AIResumeLoading';
 
 export const renderRecommendKeyword = (arr: CapabilitiesType[]) => {
   if (arr.length === 1) return <span className="text-secondary-500">{arr?.[0]?.keyword}</span>;
@@ -25,23 +28,32 @@ export const renderRecommendKeyword = (arr: CapabilitiesType[]) => {
 };
 
 const VerifyPage = () => {
+  const { back } = useRouter();
   const { getValues, setValue } = useFormContext<ExperienceFormValues>();
-  const [situation, task, action, result, keywordList, experienceId, recommendKeywordList, resume] = getValues([
-    'situation',
-    'task',
-    'action',
-    'result',
-    'keywords',
-    'experienceId',
-    'capabilities',
-    'resume',
-  ]);
+  const [situation, task, action, result, keywordList, experienceId, recommendKeywordList, resume, writeStatus] =
+    getValues([
+      'situation',
+      'task',
+      'action',
+      'result',
+      'keywords',
+      'experienceId',
+      'capabilities',
+      'resume',
+      'writeStatus',
+    ]);
 
+  const [usedOnce, disableOnceFlag] = useOnceFlag();
   const { mutateAsync: createRecommendResume, isLoading: isRecommendResumeLoading } = useCreateRecommendResume();
 
   useEffect(() => {
+    const isReadyToAIRecommendation = writeStatus?.slice(0, 3).every((status) => status === '작성완료');
+    if (!isReadyToAIRecommendation) back();
+  }, [back, writeStatus]);
+
+  useEffect(() => {
     (async () => {
-      if (!!situation && !!task && !!action && !!result && isNumber(experienceId)) {
+      if (!!situation && !!task && !!action && !!result && isNumber(experienceId) && !usedOnce) {
         const { resume } = await createRecommendResume({
           experienceId,
           capabilityIds: recommendKeywordList.map(({ id }) => id).slice(0, 2),
@@ -51,9 +63,21 @@ const VerifyPage = () => {
           result,
         });
         setValue('resume', resume);
+        disableOnceFlag();
       }
     })();
-  }, [action, experienceId, result, situation, task, setValue, createRecommendResume, recommendKeywordList]);
+  }, [
+    action,
+    experienceId,
+    result,
+    situation,
+    task,
+    setValue,
+    createRecommendResume,
+    recommendKeywordList,
+    usedOnce,
+    disableOnceFlag,
+  ]);
 
   return (
     <>
@@ -80,18 +104,18 @@ const VerifyPage = () => {
           </SelectedKeywordContainer>
         </>
       </QuestionCard>
-      <QuestionCard
-        title={
-          <div className="h6">
-            {renderRecommendKeyword(recommendKeywordList)}을 활용해
-            <br />
-            이렇게 자기소개서를 써보는건 어떨까요?
-          </div>
-        }
-        subTitle="AI 자기소개서는 상단의 모아보기 탭에서 다시 확인할 수 있어요">
-        {isRecommendResumeLoading ? (
-          <div>loading...</div>
-        ) : (
+      {isRecommendResumeLoading ? (
+        <AIResumeLoading recommendKeywordList={recommendKeywordList} />
+      ) : (
+        <QuestionCard
+          title={
+            <div className="h6">
+              {renderRecommendKeyword(recommendKeywordList)}을 활용해
+              <br />
+              이렇게 자기소개서를 써보는건 어떨까요?
+            </div>
+          }
+          subTitle="AI 자기소개서는 상단의 모아보기 탭에서 다시 확인할 수 있어요">
           <TextAreaField
             readOnly
             autoSize
@@ -101,8 +125,8 @@ const VerifyPage = () => {
             maxLength={1000}
             value={resume}
           />
-        )}
-      </QuestionCard>
+        </QuestionCard>
+      )}
     </>
   );
 };
