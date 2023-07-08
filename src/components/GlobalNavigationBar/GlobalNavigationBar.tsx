@@ -67,21 +67,14 @@ const GlobalNavigationBar = ({
 
   const checkIsSignedIn = () => {
     if (isSignedIn) return true;
-
-    toast({
-      title: '먼저 로그인이 필요해요',
-      status: 'warning',
-      duration: 2000,
-      isClosable: true,
-      position: 'top',
-    });
-
+    setIsOpenSignUpModal(true);
+    router.push('/?steps=signUp');
     return false;
   };
 
   const handleClickExperience = () => {
     if (!checkIsSignedIn()) return;
-    router.push(ROUTES.EXPERIENCE);
+    router.push(ROUTES.EXPERIENCE as Route);
   };
 
   const handleClickResumes = () => {
