@@ -1,6 +1,6 @@
 import { ComponentPropsWithoutRef } from 'react';
 
-import { Flex } from '@chakra-ui/react';
+import { Flex, useToast } from '@chakra-ui/react';
 import cn from 'classnames';
 import { Route } from 'next';
 import Image from 'next/image';
@@ -47,10 +47,22 @@ const GlobalNavigationBar = ({
   const profileImgUrl = useUserImageUrl();
   const { setIsOpenSignUpModal } = useAuthActions();
   const router = useRouter();
+  const toast = useToast();
 
   const handleClickLoginButton = () => {
     setIsOpenSignUpModal(true);
     router.push('/?steps=signUp');
+  };
+
+  const handleClickMyPage = () => {
+    toast({
+      title: '마이 페이지는 준비 중이에요 !',
+      status: 'info',
+      duration: 2000,
+      isClosable: true,
+      position: 'top',
+    });
+    return;
   };
 
   return (
@@ -90,7 +102,7 @@ const GlobalNavigationBar = ({
           <Link
             className={cn(styles.link, styles.myPage, { [styles.focus]: pathName === '/demo' })}
             href={'#' as Route}>
-            <Flex justifyContent={'space-between'} alignItems={'center'} gap={'10px'}>
+            <Flex justifyContent={'space-between'} alignItems={'center'} gap={'10px'} onClick={handleClickMyPage}>
               {profileImgUrl.length > 0 ? (
                 <div className={styles['user-profile']}>
                   <Image src={profileImgUrl} width={20} height={20} alt="use-profile" />
