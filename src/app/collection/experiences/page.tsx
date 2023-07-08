@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 
 import TextButton from '@/components/Button/TextButton';
 import IconClock from '@/components/Icon/IconClock';
@@ -11,14 +11,32 @@ import { Capability, Experience } from '@/features/collection/types';
 import getAllCapability from '@/features/collection/utils/getAllCapabilityBadgeItem';
 import getFilteredExperiences from '@/features/collection/utils/getFilteredExperiences';
 import getSortedExperiences from '@/features/collection/utils/getSortedExperiences';
-import { useGetExperienceCapabilities, useGetExperiences } from '@/hooks/reactQuery/experience/qeury';
+import {
+  useGetExperienceCapabilities,
+  // useGetExperiences,
+  useGetInfiniteExperiences,
+} from '@/hooks/reactQuery/experience/qeury';
+import useIntersection from '@/hooks/useIntersection';
 
 const Page = () => {
   const { data: capabilities } = useGetExperienceCapabilities();
 
   const _capabilites = capabilities || [];
 
-  const { data: experiences } = useGetExperiences();
+  /**
+   * 무한스크롤 적용을 위해 주석처리했습니다.
+   * - 무한스크롤 관련 코드: 32 ~ 39줄
+   */
+  // const { data: experiences } = useGetExperiences();
+
+  const { data, fetchNextPage, hasNextPage, isFetching } = useGetInfiniteExperiences();
+  const experiences = useMemo(() => (data ? data.pages.flatMap(({ data }) => data) : []), [data]);
+
+  const ref = useIntersection((entry, observer) => {
+    observer.unobserve(entry.target);
+
+    if (hasNextPage && !isFetching) fetchNextPage();
+  });
 
   // TODO: notFound 처리
   // if (!experiences) notFound();
@@ -35,12 +53,12 @@ const Page = () => {
   };
 
   // TODO: 백엔드와 경험 시간 값을 논의 refactor
-  let __experiences = experiences?.data || [];
-  if (experiences?.data) {
+  let __experiences = experiences || [];
+  if (experiences) {
     const _experiences =
       selectedCapability.keyword === allCapability.keyword
-        ? experiences?.data ?? []
-        : getFilteredExperiences(experiences?.data ?? [], selectedCapability.keyword);
+        ? experiences ?? []
+        : getFilteredExperiences(experiences ?? [], selectedCapability.keyword);
 
     __experiences = getSortedExperiences(_experiences, sortBy);
   }
@@ -66,6 +84,7 @@ const Page = () => {
               <ExperienceListCard {...experience} />
             </li>
           ))}
+          <div ref={ref}></div>
         </ul>
       </section>
     </>
