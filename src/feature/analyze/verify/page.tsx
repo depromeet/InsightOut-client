@@ -12,7 +12,6 @@ import Tag from '@/components/Tag/Tag';
 import AICapabilityKeyword from '@/feature/analyze/verify/AICapabilityKeyword';
 import SelectedKeywordContainer from '@/feature/analyze/verify/SelectedKeywordContainer';
 import { useCreateRecommendResume } from '@/hooks/reactQuery/ai/mutation';
-import { useOnceFlag } from '@/hooks/useOnceFlag';
 
 import { CapabilitiesType, ExperienceFormValues } from '../types';
 import AIResumeLoading from './AIResumeLoading';
@@ -43,7 +42,6 @@ const VerifyPage = () => {
       'writeStatus',
     ]);
 
-  const [usedOnce, disableOnceFlag] = useOnceFlag();
   const { mutateAsync: createRecommendResume, isLoading: isRecommendResumeLoading } = useCreateRecommendResume();
 
   useEffect(() => {
@@ -52,8 +50,9 @@ const VerifyPage = () => {
   }, [back, writeStatus]);
 
   useEffect(() => {
+    if (resume) return;
     (async () => {
-      if (!!situation && !!task && !!action && !!result && isNumber(experienceId) && !usedOnce) {
+      if (!!situation && !!task && !!action && !!result && isNumber(experienceId)) {
         const { resume } = await createRecommendResume({
           experienceId,
           capabilityIds: recommendKeywordList.map(({ id }) => id).slice(0, 2),
@@ -63,21 +62,9 @@ const VerifyPage = () => {
           result,
         });
         setValue('resume', resume);
-        disableOnceFlag();
       }
     })();
-  }, [
-    action,
-    experienceId,
-    result,
-    situation,
-    task,
-    setValue,
-    createRecommendResume,
-    recommendKeywordList,
-    usedOnce,
-    disableOnceFlag,
-  ]);
+  }, [action, experienceId, result, situation, task, setValue, createRecommendResume, recommendKeywordList, resume]);
 
   return (
     <>
