@@ -20,6 +20,8 @@ const Page = () => {
     setSelectedAiRecommend(initialAiRecommenedKeyword);
   }, [initialAiRecommenedKeyword]);
 
+  const shownAiResumes = aiRecommend.filter(({ AiCapabilities }) => AiCapabilities.includes(selectedAiRecommend));
+
   return (
     <div>
       <section className="flex flex-row justify-between items-center my-[24px]">
@@ -40,7 +42,7 @@ const Page = () => {
       </section>
       <section>
         <ul className="flex flex-col gap-[40px]">
-          {aiRecommend.map(({ id, updatedAt, content, AiCapabilities }) => (
+          {shownAiResumes.map(({ id, updatedAt, content, AiCapabilities }) => (
             <li key={id}>
               <AiRecommendResumeListCard
                 // API에 타이틀 추가
