@@ -6,9 +6,11 @@ import { Modal, useDisclosure } from '@chakra-ui/react';
 import ActionList from '@/components/ActionList/ActionList';
 import Button from '@/components/Button/Button';
 import IconMoreVertical from '@/components/Icon/IconMoreVertical';
+import { TextLengthMessage } from '@/components/Input/TextLengthMessage';
 import ModalFooter from '@/components/Modal/ModalFooter';
 import ModalHeader from '@/components/Modal/ModalHeader';
 import Tag from '@/components/Tag/Tag';
+import { MAX_LENGTH } from '@/shared/constants/maxLength';
 import formatUpdatedAt from '@/shared/utils/formatUpdateAt';
 
 import ResumeAnswerModalCard from './ResumeAnswerModalCard';
@@ -21,11 +23,7 @@ type Props = {
 };
 
 const AiRecommendResumeCard = ({ title, answer, updatedAt, aiCapabilities }: Props) => {
-  const {
-    isOpen: isOpenActionListModal,
-    onOpen: onOpenActionListModal,
-    onClose: onCloseActionListModal,
-  } = useDisclosure();
+  const { isOpen: isOpenActionListModal, onClose: onCloseActionListModal } = useDisclosure();
   const {
     isOpen: isOpenAiResumeAnswerModal,
     onOpen: onOpenAiResumeAnswerModal,
@@ -36,6 +34,12 @@ const AiRecommendResumeCard = ({ title, answer, updatedAt, aiCapabilities }: Pro
     <>
       <div className="border rounded-[24px] hover:shadow-S4 p-[24px]" onClick={onOpenAiResumeAnswerModal}>
         <AiRecommendResumeCard.Header title={title} updatedAt={updatedAt} />
+        <div>
+          <p className="w-full bg-transparent resize-none line-clamp-5 b2">{answer}</p>
+        </div>
+        <div className="flex flex-row-reverse mt-[8px] text-[14px]">
+          <TextLengthMessage currentLength={answer.length} maxLength={MAX_LENGTH.AI_RESUME} />
+        </div>
         <AiRecommendResumeCard.Footer />
       </div>
       <ResumeAnswerModalCard
@@ -88,7 +92,7 @@ AiRecommendResumeCard.Header = ({ title, updatedAt }: AiRecommendResumeCardHeade
 
 AiRecommendResumeCard.Footer = () => {
   return (
-    <div>
+    <div className="mt-[8px]">
       <h4 className="subhead4 mb-[4px]">AI 추천 키워드</h4>
       <div className="flex flex-row justify-between">
         <Tag size="M" variant="secondary50-outline">

@@ -16,7 +16,7 @@ const Template = ({ children }: { children: React.ReactNode }) => {
   const { data: experienceCount } = useGetExperienceCount();
   const { data: resumeCount } = useGetResumesCount();
   const { data: aiRecommendCount } = useGetAiRecommendCount();
-  const counts = [experienceCount?.experience || 0, resumeCount?.resume || 0, aiRecommendCount?.resume || 0];
+  const counts = [experienceCount?.experience || 0, resumeCount?.resume || 0, aiRecommendCount?.count || 0];
 
   const shownCollectionTabs = COLLECTION_TABS.map((tab, index) => {
     return { ...tab, count: counts[index] };

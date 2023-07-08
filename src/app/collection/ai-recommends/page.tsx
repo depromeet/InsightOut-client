@@ -1,74 +1,36 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import Chip from '@/components/Chip/Chip';
 import AiRecommendResumeListCard from '@/features/collection/components/cards/AiRecommendResumeCard';
+import { useGetAiResumes } from '@/hooks/reactQuery/ai/query';
 
 const Page = () => {
-  const aiRecommendKeyword = [
-    {
-      id: 1234,
-      keyword: '창의력',
-    },
-    {
-      id: 1235,
-      keyword: '추진력',
-    },
-    {
-      id: 1236,
-      keyword: '커뮤니케이션',
-    },
-  ];
+  const { data } = useGetAiResumes();
 
-  const aiRecommend = [
-    {
-      id: 1234,
-      title: '디프만 13기 지원동기',
-      updatedAt: '2023-06-16T14:42:03.702Z',
-      answer:
-        '업무 개선을 통해 효율성을 높인 경험이 있습니다. 대학교에서 근로장학생으로, 교수님의 비대면 수업을 보조하는 업무를 맡았습니다. 당시 업무 체계는 교수님, 학생들의 민원이 발생할 때 교직원 선생님의 지시에 따라 해결했습니다. 민원이 동시에 발생해서 교직원 선생님의 지시가 불가능했을 때 적시에 해결하지 못하는 문제가 존재해서 업무 개선의 필요성을 느꼈습니다. 업무 개선을 통해 효율성을 높인 경험이 있습니다. 대학교에서 근로장학생으로, 교수님의 비대면 수업을 보조하는 업무를 맡았습니다. 당시 업무 체계는 교수님, 학생들의 민원이 발생할 때 교직원 선생님의 지시에 따라 해결했습니다. 민원이 동시에 발생해서 교직원 선생님의 지시가 불가능했을 때 적시에 해결하지 못하는 문제가 존재해서 업무 개선의 필요성을 느꼈습니다. 업무 개선을 통해 효지시에 따라 해결했습니다. 민원이 동시에 발생해서 교직원 선생님의 지시가 불가능했을 때 적시에 해결하지 못하는 문제가 존재해서 업무 개선의 필요성을 느꼈습니다. 업무 개선 효율성을 개선했습니다.업무 개선을 통해 효율성을 높인 경험이 있습니다. 대학교에서 근로장학생으로, 교수님의 비대면 수업을 보조하는 업무를 맡았습니다. 당시 업무 체계는 교수님, 학생들의 민원이 발생할 때 교직원 선생님의 지시에 따라 해결했습니다. 민원이 동시에 발생해서 교직원 선생님의 지시가 불가능했을 때 적시에 해결하지 못하는 문제가 존재해서 업무 개선의 필요성을 느꼈습니다. 업무 개선을 통해 효율성을 높인 경험이 있습니다. 대학교에서 근로장학생으로, 교수님의 비대면 수업을 보조하는 업무를 맡았습니다. 당시 업무 체계는 교수님, 학생들의 민원이 발생할 때 교직원 선생님의 지시에 따라 해결했습니다. 민원이 동시에 발생해서 교직원 선생님의 지시가 불가능했을 때 적시에 해결하지 못하는 문제가 존재해서 업무 개선의 필요성을 느꼈습니다. 업무 개선을 통해 효지시에 따라 해결했습니다. 민원이 동시에 발생해서 교직원 선생님의 지시가 불가능했을 때 적시에 해결하지 못하는 문제가 존재해서 업무 개선의 필요성을 느꼈습니다. 업무 개선 효율성을 개선했습니다.업무 개선을 통해 효율성을 높인 경험이 있습니다. 대학교에서 근로장학생으로, 교수님의 비대면 수업을 보조하는 업무를 맡았습니다. 당시 업무 체계는 교수님, 학생들의 민원이 발생할 때 교직원 선생님의 지시에 따라 해결했습니다. 민원이 동시에 발생해서 교직원 선생님의 지시가 불가능했을 때 적시에 해결하지 못하는 문제가 존재해서 업무 개선의 필요성을 느꼈습니다. 업무 개선을 통해 효율성을 높인 경험이 있습니다. 대학교에서 근로장학생으로, 교수님의 비대면 수업을 보조하는 업무를 맡았습니다. 당시 업무 체계는 교수님, 학생들의 민원이 발생할 때 교직원 선생님의 지시에 따라 해결했습니다. 민원이 동시에 발생해서 교직원 선생님의 지시가 불가능했을 때 적시에 해결하지 못하는 문제가 존재해서 업무 개선의 필요성을 느꼈습니다. 업무 개선을 통해 효지시에 따라 해결했습니다. 민원이 동시에 발생해서 교직원 선생님의 지시가 불가능했을 때 적시에 해결하지 못하는 문제가 존재해서 업무 개선의 필요성을 느꼈습니다. 업무 개선 효율성을 개선했습니다.업무 개선을 통해 효율성을 높인 경험이 있습니다. 대학교에서 근로장학생으로, 교수님의 비대면 수업을 보조하는 업무를 맡았습니다. 당시 업무 체계는 교수님, 학생들의 민원이 발생할 때 교직원 선생님의 지시에 따라 해결했습니다. 민원이 동시에 발생해서 교직원 선생님의 지시가 불가능했을 때 적시에 해결하지 못하는 문제가 존재해서 업무 개선의 필요성을 느꼈습니다. 업무 개선을 통해 효율성을 높인 경험이 있습니다. 대학교에서 근로장학생으로, 교수님의 비대면 수업을 보조하는 업무를 맡았습니다. 당시 업무 체계는 교수님, 학생들의 민원이 발생할 때 교직원 선생님의 지시에 따라 해결했습니다. 민원이 동시에 발생해서 교직원 선생님의 지시가 불가능했을 때 적시에 해결하지 못하는 문제가 존재해서 업무 개선의 필요성을 느꼈습니다. 업무 개선을 통해 효지시에 따라 해결했습니다. 민원이 동시에 발생해서 교직원 선생님의 지시가 불가능했을 때 적시에 해결하지 못하는 문제가 존재해서 업무 개선의 필요성을 느꼈습니다. 업무 개선 효율성을 개선했습니다.',
-      aiCapabilities: ['협업 능력', '추진력'],
-    },
-    {
-      id: 1235,
-      title: '디프만 13기 지원동기',
-      updatedAt: '2023-06-16T14:42:03.702Z',
-      answer:
-        '업무 개선을 통해 효율성을 높인 경험이 있습니다. 대학교에서 근로장학생으로, 교수님의 비대면 수업을 보조하는 업무를 맡았습니다. 당시 업무 체계는 교수님, 학생들의 민원이 발생할 때 교직원 선생님의 지시에 따라 해결했습니다. 민원이 동시에 발생해서 교직원 선생님의 지시가 불가능했을 때 적시에 해결하지 못하는 문제가 존재해서 업무 개선의 필요성을 느꼈습니다. 업무 개선을 통해 효율성을 높인 경험이 있습니다. 대학교에서 근로장학생으로, 교수님의 비대면 수업을 보조하는 업무를 맡았습니다. 당시 업무 체계는 교수님, 학생들의 민원이 발생할 때 교직원 선생님의 지시에 따라 해결했습니다. 민원이 동시에 발생해서 교직원 선생님의 지시가 불가능했을 때 적시에 해결하지 못하는 문제가 존재해서 업무 개선의 필요성을 느꼈습니다. 업무 개선을 통해 효지시에 따라 해결했습니다. 민원이 동시에 발생해서 교직원 선생님의 지시가 불가능했을 때 적시에 해결하지 못하는 문제가 존재해서 업무 개선의 필요성을 느꼈습니다. 업무 개선 효율성을 개선했습니다.',
-      aiCapabilities: ['협업 능력', '추진력'],
-    },
-    {
-      id: 1236,
-      title: '디프만 13기 지원동기',
-      updatedAt: '2023-06-16T14:42:03.702Z',
-      answer:
-        '업무 개선을 통해 효율성을 높인 경험이 있습니다. 대학교에서 근로장학생으로, 교수님의 비대면 수업을 보조하는 업무를 맡았습니다. 당시 업무 체계는 교수님, 학생들의 민원이 발생할 때 교직원 선생님의 지시에 따라 해결했습니다. 민원이 동시에 발생해서 교직원 선생님의 지시가 불가능했을 때 적시에 해결하지 못하는 문제가 존재해서 업무 개선의 필요성을 느꼈습니다. 업무 개선을 통해 효율성을 높인 경험이 있습니다. 대학교에서 근로장학생으로, 교수님의 비대면 수업을 보조하는 업무를 맡았습니다. 당시 업무 체계는 교수님, 학생들의 민원이 발생할 때 교직원 선생님의 지시에 따라 해결했습니다. 민원이 동시에 발생해서 교직원 선생님의 지시가 불가능했을 때 적시에 해결하지 못하는 문제가 존재해서 업무 개선의 필요성을 느꼈습니다. 업무 개선을 통해 효지시에 따라 해결했습니다. 민원이 동시에 발생해서 교직원 선생님의 지시가 불가능했을 때 적시에 해결하지 못하는 문제가 존재해서 업무 개선의 필요성을 느꼈습니다. 업무 개선 효율성을 개선했습니다.',
-      aiCapabilities: ['협업 능력', '추진력'],
-    },
-    {
-      id: 1237,
-      title: '디프만 13기 지원동기',
-      updatedAt: '2023-06-16T14:42:03.702Z',
-      answer:
-        '업무 개선을 통해 효율성을 높인 경험이 있습니다. 대학교에서 근로장학생으로, 교수님의 비대면 수업을 보조하는 업무를 맡았습니다. 당시 업무 체계는 교수님, 학생들의 민원이 발생할 때 교직원 선생님의 지시에 따라 해결했습니다. 민원이 동시에 발생해서 교직원 선생님의 지시가 불가능했을 때 적시에 해결하지 못하는 문제가 존재해서 업무 개선의 필요성을 느꼈습니다. 업무 개선을 통해 효율성을 높인 경험이 있습니다. 대학교에서 근로장학생으로, 교수님의 비대면 수업을 보조하는 업무를 맡았습니다. 당시 업무 체계는 교수님, 학생들의 민원이 발생할 때 교직원 선생님의 지시에 따라 해결했습니다. 민원이 동시에 발생해서 교직원 선생님의 지시가 불가능했을 때 적시에 해결하지 못하는 문제가 존재해서 업무 개선의 필요성을 느꼈습니다. 업무 개선을 통해 효지시에 따라 해결했습니다. 민원이 동시에 발생해서 교직원 선생님의 지시가 불가능했을 때 적시에 해결하지 못하는 문제가 존재해서 업무 개선의 필요성을 느꼈습니다. 업무 개선 효율성을 개선했습니다.',
-      aiCapabilities: ['협업 능력', '추진력'],
-    },
-  ];
+  const aiRecommendKeyword = data?.availableKeywords || [];
+  const aiRecommend = data?.AiResumes || [];
 
-  const [selectedAiRecommendId, setSelectedAiRecommendId] = useState(aiRecommendKeyword[0].id);
+  const initialAiRecommenedKeyword = aiRecommendKeyword[0];
+
+  const [selectedAiRecommend, setSelectedAiRecommend] = useState(initialAiRecommenedKeyword);
+
+  useEffect(() => {
+    setSelectedAiRecommend(initialAiRecommenedKeyword);
+  }, [initialAiRecommenedKeyword]);
 
   return (
     <div>
       <section className="flex flex-row justify-between items-center my-[24px]">
         <nav>
           <ul className="flex flex-row gap-[8px]">
-            {aiRecommendKeyword.map(({ id, keyword }) => (
-              <li key={id} className="list-none">
+            {aiRecommendKeyword.map((keyword) => (
+              <li key={'ai-keyword' + keyword} className="list-none">
                 <Chip
                   size="M"
-                  variant={selectedAiRecommendId === id ? 'secondary-pressed' : 'secondary'}
-                  onClick={() => setSelectedAiRecommendId(id)}>
+                  variant={selectedAiRecommend === keyword ? 'secondary-pressed' : 'secondary'}
+                  onClick={() => setSelectedAiRecommend(keyword)}>
                   {keyword}
                 </Chip>
               </li>
@@ -78,13 +40,14 @@ const Page = () => {
       </section>
       <section>
         <ul className="flex flex-col gap-[40px]">
-          {aiRecommend.map(({ id, title, updatedAt, answer, aiCapabilities }) => (
+          {aiRecommend.map(({ id, updatedAt, content, AiCapabilities }) => (
             <li key={id}>
               <AiRecommendResumeListCard
-                title={title}
+                // API에 타이틀 추가
+                title={`[${AiCapabilities.map((capability) => capability).join(', ')}] 키워드로 AI가 추천한 자기소개서`}
                 updatedAt={updatedAt}
-                answer={answer}
-                aiCapabilities={aiCapabilities}
+                answer={content}
+                aiCapabilities={AiCapabilities}
               />
             </li>
           ))}

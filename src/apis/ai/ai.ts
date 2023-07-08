@@ -1,5 +1,6 @@
+import { objToQueryString } from '@/shared/utils/objToQueryString';
+
 import instance from '..';
-import { CountResponse } from '../resume/types/count';
 import { AiParams, AiResponse } from './types/ai';
 
 const aiApi = {
@@ -21,7 +22,11 @@ const aiApi = {
   /**
    * 추천 자기소개서 개수 조회
    */
-  count: async () => await instance.get<CountResponse['get'], CountResponse['get']>('/ai/count'),
+  count: async () => await instance.get<AiResponse['count'], AiResponse['count']>('/ai/ai-resume/count'),
+  aiResume: async (aiKeyword: AiParams['aiKeyword']) => {
+    const query = aiKeyword ? objToQueryString(aiKeyword) : '';
+    return await instance.get<AiResponse['AiResume'], AiResponse['AiResume']>(`${'/ai/ai-resume' + query}`);
+  },
 };
 
 export default aiApi;
