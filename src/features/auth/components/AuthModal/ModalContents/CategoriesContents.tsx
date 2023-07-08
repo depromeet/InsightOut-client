@@ -29,7 +29,7 @@ import ModalFooter from '@/components/Modal/ModalFooter';
 import ModalHeader from '@/components/Modal/ModalHeader';
 import { Field } from '@/shared/constants/user';
 
-import CategoryCard from '../CategoryCard/CategoryCard';
+import Category from '../Category/Category';
 
 type CategoriesContentsProps = {
   nickname: string;
@@ -82,7 +82,7 @@ const CategoriesContents = ({
       <Grid templateColumns={'repeat(4, 1fr)'} gap={13}>
         {JOB_CATEGORIES.map(({ title, icon, field }) => (
           <GridItem key={title}>
-            <CategoryCard
+            <Category
               title={title}
               icon={icon}
               isSelected={title === selectedCategory.title}

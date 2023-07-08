@@ -101,7 +101,7 @@ const AuthModal = ({ isOpen, onClose, onAbortSignUp }: AuthModalProps) => {
   } as const;
 
   const getSignUpConfig = () => {
-    if (!currentStep) return { modalSize: '5xl', contents: <></> };
+    if (!currentStep) return { modalSize: 'md', contents: <></> };
     return { modalSize: SIGN_UP_STEPS[currentStep].modalSize, contents: SIGN_UP_STEPS[currentStep].contents };
   };
 

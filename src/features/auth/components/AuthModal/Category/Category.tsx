@@ -2,9 +2,9 @@ import { ReactElement } from 'react';
 
 import cn from 'classnames';
 
-import styles from './CategoryCard.module.scss';
+import styles from './Category.module.scss';
 
-type CategoryCardProps = MergeComponentProps<
+type CategoryProps = MergeComponentProps<
   'div',
   {
     icon: ReactElement<SVGAElement>;
@@ -13,7 +13,7 @@ type CategoryCardProps = MergeComponentProps<
   }
 >;
 
-const CategoryCard = ({ className, icon, title, isSelected, ...props }: CategoryCardProps) => {
+const Category = ({ className, icon, title, isSelected, ...props }: CategoryProps) => {
   const rootClassName = cn(styles.root, { [styles.selected]: isSelected }, className);
 
   return (
@@ -24,4 +24,4 @@ const CategoryCard = ({ className, icon, title, isSelected, ...props }: Category
   );
 };
 
-export default CategoryCard;
+export default Category;
