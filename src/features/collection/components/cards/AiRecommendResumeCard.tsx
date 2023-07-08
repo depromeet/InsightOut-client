@@ -40,7 +40,7 @@ const AiRecommendResumeCard = ({ title, answer, updatedAt, aiCapabilities }: Pro
         <div className="flex flex-row-reverse mt-[8px] text-[14px]">
           <TextLengthMessage currentLength={answer.length} maxLength={MAX_LENGTH.AI_RESUME} />
         </div>
-        <AiRecommendResumeCard.Footer />
+        <AiRecommendResumeCard.Footer aiCapabilities={aiCapabilities} />
       </div>
       <ResumeAnswerModalCard
         isOpen={isOpenAiResumeAnswerModal}
@@ -90,14 +90,24 @@ AiRecommendResumeCard.Header = ({ title, updatedAt }: AiRecommendResumeCardHeade
   </header>
 );
 
-AiRecommendResumeCard.Footer = () => {
+type FooterProps = {
+  aiCapabilities: string[];
+};
+
+AiRecommendResumeCard.Footer = ({ aiCapabilities }: FooterProps) => {
   return (
     <div className="mt-[8px]">
       <h4 className="subhead4 mb-[4px]">AI 추천 키워드</h4>
       <div className="flex flex-row justify-between">
-        <Tag size="M" variant="secondary50-outline">
-          창의력
-        </Tag>
+        <ul className="flex flex-row gap-[4px]">
+          {aiCapabilities.map((aiCapability, index) => (
+            <li key={`ai-${aiCapabilities}-${index}`}>
+              <Tag size="M" variant="secondary50-outline">
+                {aiCapability}
+              </Tag>
+            </li>
+          ))}
+        </ul>
         <Button size="M" variant="gray200">
           경험카드 확인하기
         </Button>
