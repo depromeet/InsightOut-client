@@ -3,6 +3,7 @@
 
 import { useState } from 'react';
 
+import { Route } from 'next';
 import { useRouter, useSearchParams } from 'next/navigation';
 
 import onboardingApi from '@/apis/onboarding/onboarding';
@@ -51,7 +52,7 @@ const AuthModal = ({ isOpen, onClose, onAbortSignUp }: AuthModalProps) => {
     setIsSignedIn(true);
     setIsTokenRequired(false);
     onClose();
-    router.push(ROUTES.EXPERIENCE);
+    router.push(ROUTES.EXPERIENCE as Route);
   };
 
   /**
@@ -103,7 +104,7 @@ const AuthModal = ({ isOpen, onClose, onAbortSignUp }: AuthModalProps) => {
   } as const;
 
   const getSignUpConfig = () => {
-    if (!currentStep) return { modalSize: 'md', contents: <></> };
+    if (!currentStep) return { modalSize: 'md', contents: <Spinner size="L" style="primary500" /> };
     return { modalSize: SIGN_UP_STEPS[currentStep].modalSize, contents: SIGN_UP_STEPS[currentStep].contents };
   };
 
