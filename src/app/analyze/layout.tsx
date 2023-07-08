@@ -170,56 +170,63 @@ const Layout = ({ children }: LayoutProps) => {
     const writeStatus = methods.getValues('writeStatus') as WriteStatusType[];
     const copyWriteStatus = [...writeStatus];
 
-    switch (prevPathname) {
-      case ROUTES.EXPERIENCE:
-        const experiencePageValues = methods.getValues([
-          'title',
-          'startYYYY',
-          'startMM',
-          'endYYYY',
-          'endMM',
-          'experienceRole',
-          'motivation',
-        ]);
-        if (experiencePageValues.every((v) => !!v)) {
-          setWriteStatus(copyWriteStatus, '작성완료');
-        } else if (experiencePageValues.some((v) => !!v)) {
-          setWriteStatus(copyWriteStatus, '작성중');
-        } else {
-          setWriteStatus(copyWriteStatus, '미작성');
-        }
-        break;
-      case ROUTES.KEYWORD:
-        const keywords = methods.getValues('keywords');
-        if (keywords.some(([, isSelected]) => isSelected === true)) {
-          setWriteStatus(copyWriteStatus, '작성완료');
-        } else {
-          setWriteStatus(copyWriteStatus, '미작성');
-        }
-        break;
-      case ROUTES.INFORMATION:
-        const informationPageValues = methods.getValues(['situation', 'task', 'action', 'result']);
-        if (informationPageValues.every((v) => !!v)) {
-          setWriteStatus(copyWriteStatus, '작성완료');
-        } else if (informationPageValues.some((v) => !!v)) {
-          setWriteStatus(copyWriteStatus, '작성중');
-        } else {
-          setWriteStatus(copyWriteStatus, '미작성');
-        }
-        break;
-      case ROUTES.VERIFY:
-        const [capabilities, resume] = methods.getValues(['capabilities', 'resume']);
-        if (!!capabilities.length && !!resume) {
-          setWriteStatus(copyWriteStatus, '작성완료');
-        } else if (!!capabilities.length || !!resume) {
-          setWriteStatus(copyWriteStatus, '작성중');
-        } else {
-          setWriteStatus(copyWriteStatus, '미작성');
-        }
-        break;
-      default:
-        break;
-    }
+    // 진입시 무조건 작성중
+    copyWriteStatus[currentStepIndex] = '작성중';
+    methods.setValue('writeStatus', copyWriteStatus);
+
+    // 이탈시 validation check
+    return () => {
+      switch (prevPathname) {
+        case ROUTES.EXPERIENCE:
+          const experiencePageValues = methods.getValues([
+            'title',
+            'startYYYY',
+            'startMM',
+            'endYYYY',
+            'endMM',
+            'experienceRole',
+            'motivation',
+          ]);
+          if (experiencePageValues.every((v) => !!v)) {
+            setWriteStatus(copyWriteStatus, '작성완료');
+          } else if (experiencePageValues.some((v) => !!v)) {
+            setWriteStatus(copyWriteStatus, '작성중');
+          } else {
+            setWriteStatus(copyWriteStatus, '미작성');
+          }
+          break;
+        case ROUTES.KEYWORD:
+          const keywords = methods.getValues('keywords');
+          if (keywords.some(([, isSelected]) => isSelected === true)) {
+            setWriteStatus(copyWriteStatus, '작성완료');
+          } else {
+            setWriteStatus(copyWriteStatus, '미작성');
+          }
+          break;
+        case ROUTES.INFORMATION:
+          const informationPageValues = methods.getValues(['situation', 'task', 'action', 'result']);
+          if (informationPageValues.every((v) => !!v)) {
+            setWriteStatus(copyWriteStatus, '작성완료');
+          } else if (informationPageValues.some((v) => !!v)) {
+            setWriteStatus(copyWriteStatus, '작성중');
+          } else {
+            setWriteStatus(copyWriteStatus, '미작성');
+          }
+          break;
+        case ROUTES.VERIFY:
+          const [capabilities, resume] = methods.getValues(['capabilities', 'resume']);
+          if (!!capabilities.length && !!resume) {
+            setWriteStatus(copyWriteStatus, '작성완료');
+          } else if (!!capabilities.length || !!resume) {
+            setWriteStatus(copyWriteStatus, '작성중');
+          } else {
+            setWriteStatus(copyWriteStatus, '미작성');
+          }
+          break;
+        default:
+          break;
+      }
+    };
   }, [methods, pathname, prevPathname, currentStepIndex, setWriteStatus]);
 
   const submit = async (data: ExperienceFormValues) => {
