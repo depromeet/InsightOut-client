@@ -11,7 +11,7 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof Category>;
 
-export const _CategoryCard: Story = {
+export const _Category: Story = {
   args: { title: '개발' },
   render: (args) => (
     <Flex>
