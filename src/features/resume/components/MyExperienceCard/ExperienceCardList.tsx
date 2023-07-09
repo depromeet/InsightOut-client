@@ -10,6 +10,7 @@ import useIntersection from '@/hooks/useIntersection';
 
 import { CARD_COUNT_PER_LOAD } from '../../constants/cardCountPerLoad';
 import { useCapabilityKeyword, useExperienceActions, useExperienceId } from '../../store';
+import NotFoundExperienceCard from '../NotFound/NotFoundExperienceCard';
 import ExperienceCard from './ExperienceCard';
 
 const ExperienceCardList = () => {
@@ -40,6 +41,8 @@ const ExperienceCardList = () => {
     selectedCapabilitykeyword === ALL_CAPABILITY_KEYWORD
       ? experiences
       : getFilteredExperiences(experiences, selectedCapabilitykeyword);
+
+  if (experiences?.length === 0) return <NotFoundExperienceCard />;
 
   return (
     <div className="relative after:content-[''] after:absolute after:bottom-0 after:w-[100%] after:h-[62px] after:bg-gradient-to-t after:from-[#F1F7FE] after:to-[rgba(243, 249, 255, 0.00)]">
