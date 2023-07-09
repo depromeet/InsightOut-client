@@ -12,7 +12,7 @@ const MyExperienceCardHeader = () => {
   const selectedCapabilitykeyword = useCapabilityKeyword();
   const { setCapabilityKeyword } = useExperienceActions();
 
-  const { data: capabilities } = useGetExperienceCapabilities();
+  const { data: capabilities } = useGetExperienceCapabilities({ isCompleted: true });
   const allCapability = getAllCapability(capabilities ?? []);
   const capabilityList: Capability[] = [allCapability, ...(capabilities ?? [])];
 
