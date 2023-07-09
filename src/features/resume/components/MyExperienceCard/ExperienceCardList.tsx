@@ -26,7 +26,11 @@ const ExperienceCardList = () => {
     }
   );
 
-  const experiences = useMemo(() => (data ? data.pages.flatMap(({ data }) => data) : []), [data]);
+  const experiences = useMemo(
+    () =>
+      data ? data.pages.flatMap(({ data }) => data.filter(({ experienceStatus }) => experienceStatus === 'DONE')) : [],
+    [data]
+  );
 
   const ref = useIntersection((entry, observer) => {
     observer.unobserve(entry.target);
@@ -35,7 +39,7 @@ const ExperienceCardList = () => {
   });
 
   const selectedCapabilitykeyword = useCapabilityKeyword();
-  // TODO: 작성 완료된 경험 카드만 필터링 + ChipNav
+
   const filteredExperiencesByKeyword =
     selectedCapabilitykeyword === ALL_CAPABILITY_KEYWORD
       ? experiences
