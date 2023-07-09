@@ -126,6 +126,10 @@
   .experience {
     @apply w-full border-[1px] border-primary-100 rounded-[24px] bg-white;
   }
+
+  .menulist {
+    box-shadow: 0px 8px 24px 0px rgba(0, 0, 0, 0.16);
+  }
 }
 
 @layer components {
