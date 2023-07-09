@@ -23,10 +23,10 @@ export const EXPERIENCE_API = {
 };
 
 export const EXPERIENCE_CAPABILITY_API = {
-  get: async (parmas: ExperienceCapabilityParams['get']) => {
-    const { experienceId } = parmas;
+  get: async ({ experienceId, isCompleted }: ExperienceCapabilityParams['get']) => {
+    const queryString = isCompleted ? `?${objToQueryString({ isCompleted })}` : '';
     return await instance.get<ExperienceCapabilityParams['get'], ExperienceCapabilityResponse['get']>(
-      `${EXPERIENCE_API_URL}/capability${experienceId ? '/' + experienceId : ''}`
+      `${EXPERIENCE_API_URL}/capability${experienceId ? '/' + experienceId : ''}` + queryString
     );
   },
 };
