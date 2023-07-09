@@ -1,16 +1,25 @@
-import type { Keyword } from '@/feature/analyze/types';
-
 import instance from '..';
-import { KeywordParams } from './types/keyword';
+import { KeywordParams, keywordResponse } from './types/keyword';
 
 const keywordApi = {
+  /**
+   * 키워드 단일 조회
+   */
   get: ({ experienceId }: KeywordParams['get']) =>
-    instance.get<Keyword, Keyword>(`/experience/capability/${experienceId}`),
-  // 키워드 추가
+    instance.get<keywordResponse['get'], keywordResponse['get']>(`/experience/capability/${experienceId}`),
+  /**
+   * 키워드 추가하기
+   */
   post: ({ keyword }: KeywordParams['post']) =>
-    instance.post<Keyword, Keyword>('/experience/capability/keyword', { keyword }),
-  // 임시저장
-  update: () => instance.post<Keyword, Keyword>('/experience/capability'),
+    instance.post<keywordResponse['post'], keywordResponse['post']>('/experience/capability/keyword', { keyword }),
+  /**
+   * 임시저장
+   */
+  update: ({ experienceId, keywords }: KeywordParams['update']) =>
+    instance.post<keywordResponse['update'], keywordResponse['update']>('/experience/capability', {
+      experienceId,
+      keywords,
+    }),
 };
 
 export default keywordApi;

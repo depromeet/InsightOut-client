@@ -7,12 +7,10 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 
-import userApi from '@/apis/user/user';
-import AuthModal from '@/features/auth/components/AuthModal/AuthModal';
-import { useAuthActions, useIsOpenSignUpModal } from '@/features/auth/store';
+import { useAuthActions } from '@/features/auth/store';
 import getResumeRoute from '@/features/resume/utils/getResumeRoute';
 import { ROUTES } from '@/shared/constants/routes';
-import { useUserImageUrl, useUserNickname } from '@/shared/store/user';
+import { useUserImageUrl } from '@/shared/store/user';
 import { tw } from '@/shared/utils/tailwindMerge';
 
 import Button from '../Button/Button';
@@ -35,10 +33,8 @@ type GlobalNavigationBarProps = ComponentPropsWithoutRef<'header'> & {
 const GlobalNavigationBar = ({ className, isSignedIn, isRequesting, ...props }: GlobalNavigationBarProps) => {
   const rootClassName = tw(styles.root, className);
   const pathName = usePathname();
-  const isOpenSignUpModal = useIsOpenSignUpModal();
-  const nickname = useUserNickname();
   const profileImgUrl = useUserImageUrl();
-  const { setIsOpenSignUpModal, setIsSignedIn } = useAuthActions();
+  const { setIsOpenSignUpModal } = useAuthActions();
   const router = useRouter();
   const resumeRoute = getResumeRoute();
 
@@ -47,24 +43,18 @@ const GlobalNavigationBar = ({ className, isSignedIn, isRequesting, ...props }: 
     router.push('/?steps=signUp');
   };
 
-  const handleClickCloseButton = () => {
-    setIsOpenSignUpModal(false);
-    router.replace('/');
-  };
-
-  const handleAbortSignUp = async () => {
-    await userApi.patch({ nickname, field: null });
-    setIsSignedIn(true);
-  };
-
   return (
     <>
       <header {...props} className={rootClassName}>
         <Flex alignItems={'center'} gap={'115px'}>
-          <Link
-            className={cn(styles.link, { [styles.focus]: pathName === ROUTES.HOME })}
-            href={{ pathname: ROUTES.HOME }}>
-            로고
+          <Link className={styles.link} href={{ pathname: ROUTES.HOME }}>
+            <Image
+              src={'/images/home/img-home-logo.png'}
+              className="w-[142px] h-[31px]"
+              width={142}
+              height={31}
+              alt="home-logo"
+            />
           </Link>
           <Flex alignItems={'center'} gap={'24px'}>
             <Link
@@ -114,7 +104,6 @@ const GlobalNavigationBar = ({ className, isSignedIn, isRequesting, ...props }: 
           </Button>
         )}
       </header>
-      <AuthModal isOpen={isOpenSignUpModal} onClose={handleClickCloseButton} onAbortSignUp={handleAbortSignUp} />
     </>
   );
 };

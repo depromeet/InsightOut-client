@@ -17,8 +17,8 @@ type TitleProps = {
 ModalHeader.Title = ({ title, subTitle }: TitleProps) => {
   return (
     <ModalHeader>
-      <h5 className="h5 tex">{title}</h5>
-      <p className="b1">{subTitle}</p>
+      <h5 className="whitespace-pre h5">{title}</h5>
+      <p className="whitespace-pre b1">{subTitle}</p>
     </ModalHeader>
   );
 };

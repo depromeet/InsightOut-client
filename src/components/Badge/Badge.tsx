@@ -7,7 +7,7 @@ import styles from './Badge.module.scss';
 type BadgeProps = MergeComponentProps<
   'div',
   {
-    /** @description 뱃지 스타일 (tertiary, outlined-primary, outlined-secondary, filled-primary, filled-secondary, dark) */
+    /** @description 뱃지 스타일 (primary500, primary50-outline, secondary400, secondary50-outline, gray100-outline, gray900) */
     variant: BadgeVariant;
     /** @description 뱃지 사이즈 (S, M, L) */
     size: BadgeSize;

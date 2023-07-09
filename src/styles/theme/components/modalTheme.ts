@@ -9,10 +9,24 @@ const sm = defineStyle({
 const md = defineStyle({
   w: '767px',
 });
+const resumeAnswer = defineStyle({
+  w: '1085px',
+  h: '735px',
+});
+
+const experienceModalCard = defineStyle({
+  w: '1149px',
+  h: '936px',
+  p: 0,
+  m: 0,
+  bg: 'none',
+});
 
 const sizes = {
   sm: definePartsStyle({ dialog: sm }),
   md: definePartsStyle({ dialog: md }),
+  experienceModalCard: definePartsStyle({ dialog: experienceModalCard }),
+  resumeAnswer: definePartsStyle({ dialog: resumeAnswer }),
 };
 
 const baseStyle = definePartsStyle({
