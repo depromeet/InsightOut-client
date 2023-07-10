@@ -13,7 +13,7 @@ export const useCreateQuestion = (
   return useMutation((resumeId) => questionApi.post({ payload: { resumeId } }), {
     ...options,
     onSuccess: (data, variables, context) => {
-      queryClient.invalidateQueries({ queryKey: [RESUME_KEY.lists()] });
+      queryClient.invalidateQueries({ queryKey: RESUME_KEY.lists() });
       options?.onSuccess?.(data, variables, context);
     },
   });
@@ -28,8 +28,8 @@ export const useUpdateQuestion = (
   return useMutation((payload) => questionApi.patch({ questionId, payload }), {
     ...options,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: [RESUME_KEY.lists()] });
-      queryClient.invalidateQueries({ queryKey: [QUESTION_KEY.detail([questionId])] });
+      queryClient.invalidateQueries({ queryKey: RESUME_KEY.lists() });
+      queryClient.invalidateQueries({ queryKey: QUESTION_KEY.detail([questionId]) });
     },
   });
 };
@@ -42,7 +42,7 @@ export const useDeleteQuestion = (
   return useMutation((questionId) => questionApi.delete({ questionId }), {
     ...options,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: [RESUME_KEY.lists()] });
+      queryClient.invalidateQueries({ queryKey: RESUME_KEY.lists() });
     },
   });
 };
