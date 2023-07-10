@@ -3,8 +3,7 @@
 
 import { useState } from 'react';
 
-import { Badge } from '@chakra-ui/react';
-
+import Badge from '@/components/Badge/Badge';
 import Button from '@/components/Button/Button';
 import TextAreaField from '@/components/Input/TextAreaField/TextAreaField';
 import Tag from '@/components/Tag/Tag';
@@ -169,23 +168,27 @@ ExperienceCard.Image = ({ summaries, keyword, experienceStatus }: ExperienceCard
     <div className="w-[480px] h-[616px] flex items-center justify-center">
       <CapabilityImage keyword={keyword} experienceStatus={experienceStatus} width={432} height={453} />
       {experienceStatus === 'INPROGRESS' && (
-        <Badge variant="gray100-outline" size="S" className="absolute top-[24px] left-[24px]">
+        <Badge variant="gray100-outline" size="M" className="absolute top-[24px] left-[24px]">
           작성중
         </Badge>
       )}
       <div className="absolute flex flex-col bottom-[24px] left-[24px]">
-        <span className="text-left text-white b4 mb-[6px]">경험요약</span>
-        <ul className="flex flex-row gap-[8px]">
-          {summaries
-            ? summaries.map((summary, index) => (
+        {summaries?.length ? (
+          <>
+            <span className="text-left text-white b4 mb-[6px]">경험요약</span>
+            <ul className="flex flex-row gap-[8px]">
+              {summaries.map((summary, index) => (
                 <li key={`ExperienceCardModal-${index}-${summary}`}>
                   <Tag variant="gray800" size="L">
                     {summary}
                   </Tag>
                 </li>
-              ))
-            : ''}
-        </ul>
+              ))}
+            </ul>
+          </>
+        ) : (
+          ''
+        )}
       </div>
     </div>
   </div>
