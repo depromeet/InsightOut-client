@@ -1,4 +1,7 @@
 export type AiParams = {
+  aiKeyword?: {
+    aiKeyword?: string;
+  };
   keyword: {
     experienceId: number;
     situation: string;
@@ -24,6 +27,13 @@ export type AiParams = {
 };
 
 export type AiResponse = {
+  count: {
+    count: number;
+  };
+  AiResume: {
+    availableKeywords: string[];
+    AiResumes: AiResume[];
+  };
   keyword: {
     capabilities: [
       {
@@ -63,4 +73,11 @@ export type AiResponse = {
     startDate: string;
     endDate: string;
   };
+};
+
+type AiResume = {
+  id: number;
+  content: string;
+  updatedAt: string;
+  AiCapabilities: string[];
 };

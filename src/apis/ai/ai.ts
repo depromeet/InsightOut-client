@@ -1,3 +1,5 @@
+import { objToQueryString } from '@/shared/utils/objToQueryString';
+
 import instance from '..';
 import { AiParams, AiResponse } from './types/ai';
 
@@ -17,6 +19,14 @@ const aiApi = {
    */
   submit: async (payload: AiParams['submit']) =>
     await instance.post<AiResponse['submit'], AiResponse['submit']>('/ai/experience-card', payload),
+  /**
+   * 추천 자기소개서 개수 조회
+   */
+  count: async () => await instance.get<AiResponse['count'], AiResponse['count']>('/ai/ai-resume/count'),
+  aiResume: async (aiKeyword: AiParams['aiKeyword']) => {
+    const query = aiKeyword ? objToQueryString(aiKeyword) : '';
+    return await instance.get<AiResponse['AiResume'], AiResponse['AiResume']>(`${'/ai/ai-resume' + query}`);
+  },
 };
 
 export default aiApi;
