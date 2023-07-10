@@ -13,9 +13,9 @@ type Props = {
   experienceStatus: ExperienceStatus;
 };
 
-const ExperienceImage = ({ width, heigth, keyword, experienceStatus }: Props) => {
+const CapabilityImage = ({ width, heigth, keyword, experienceStatus }: Props) => {
   const image = experienceStatus === 'INPROGRESS' ? inprogress : CAPABILITYES_IMAGE[keyword] || common;
   return <Image src={image} alt="keyword" width={width} height={heigth} />;
 };
 
-export default ExperienceImage;
+export default CapabilityImage;
