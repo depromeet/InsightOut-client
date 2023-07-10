@@ -1,11 +1,10 @@
 import { ComponentProps } from 'react';
 
 import Image from 'next/image';
+import lumosNocard from 'public/images/lumos-nocard.png';
 
 import Button from '@/components/Button/Button';
 import { tw } from '@/shared/utils/tailwindMerge';
-
-import lumosNocard from '../../../../../public/images/lumos-nocard.png';
 
 type NotFoundProps = {
   title: string;
