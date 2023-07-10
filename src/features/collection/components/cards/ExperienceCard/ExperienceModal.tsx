@@ -1,0 +1,42 @@
+import React from 'react';
+
+import { Modal, ModalContent, ModalOverlay } from '@chakra-ui/react';
+
+import ExperienceCard from './ExperienceCard';
+
+type Props = {
+  isOpen: boolean;
+  onClose: () => void;
+  period: string;
+  title: string;
+  summaryKeywords?: string[];
+  experienceCapabilityKeywords?: string[];
+  aiRecommendKeywords?: string[];
+};
+
+const ExperienceModal = ({
+  isOpen,
+  onClose,
+  title,
+  period,
+  summaryKeywords,
+  experienceCapabilityKeywords,
+  aiRecommendKeywords,
+}: Props) => {
+  return (
+    <Modal isOpen={isOpen} onClose={onClose} isCentered>
+      <ModalOverlay />
+      <ModalContent bg={'none'} shadow={'none'}>
+        <ExperienceCard
+          title={title}
+          period={period}
+          summaryKeywords={summaryKeywords}
+          experienceCapabilityKeywords={experienceCapabilityKeywords}
+          aiRecommendKeywords={aiRecommendKeywords}
+        />
+      </ModalContent>
+    </Modal>
+  );
+};
+
+export default ExperienceModal;

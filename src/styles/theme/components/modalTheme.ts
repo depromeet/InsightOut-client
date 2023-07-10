@@ -14,9 +14,18 @@ const resumeAnswer = defineStyle({
   h: '735px',
 });
 
+const experienceModalCard = defineStyle({
+  w: '1149px',
+  h: '936px',
+  p: 0,
+  m: 0,
+  bg: 'none',
+});
+
 const sizes = {
   sm: definePartsStyle({ dialog: sm }),
   md: definePartsStyle({ dialog: md }),
+  experienceModalCard: definePartsStyle({ dialog: experienceModalCard }),
   resumeAnswer: definePartsStyle({ dialog: resumeAnswer }),
 };
 
