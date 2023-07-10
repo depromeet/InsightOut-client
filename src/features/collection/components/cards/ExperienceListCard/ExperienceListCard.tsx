@@ -4,7 +4,6 @@
 import { Fragment } from 'react';
 
 import { Divider, useDisclosure } from '@chakra-ui/react';
-import Image from 'next/image';
 
 import ActionList from '@/components/ActionList/ActionList';
 import Badge from '@/components/Badge/Badge';
@@ -15,9 +14,9 @@ import ModalHeader from '@/components/Modal/ModalHeader';
 import Tag from '@/components/Tag/Tag';
 import { MESSAGE } from '@/features/collection/constants';
 
-import cardImage from '../../../../../../public/images/card1.png';
 import { Experience, ExperienceStatus } from '../../../types';
 import getExperiencePeriod from '../../../utils/getExperiencePeriod';
+import CapabilityImage from '../CapabilityImage';
 import ExperienceModal from '../ExperienceCard/ExperienceModal';
 
 type Props = Experience;
@@ -55,6 +54,7 @@ const ExperienceListCard = ({
         }}>
         <ExperienceListCard.Top
           id={id}
+          keyword={experienceCapabilityKeywords ? experienceCapabilityKeywords[0] : ''}
           experienceStatus={experienceStatus}
           summaryKeywords={summaryKeywords}
           onOpenActionListModal={onOpenActionListModal}
@@ -88,6 +88,7 @@ const ExperienceListCard = ({
         isOpen={isOpenExperienceCardModal}
         onClose={onCloseExperienceCardModal}
         period={experiencePeriod}
+        experienceStatus={experienceStatus}
         title={title || ''}
         summaryKeywords={summaryKeywords}
         experienceCapabilityKeywords={experienceCapabilityKeywords}
@@ -102,6 +103,7 @@ type ExperienceListCardTopProps = {
   experienceStatus: ExperienceStatus;
   onOpenActionListModal: () => void;
   summaryKeywords?: string[];
+  keyword: string;
 };
 
 ExperienceListCard.Top = ({
@@ -109,12 +111,12 @@ ExperienceListCard.Top = ({
   experienceStatus,
   onOpenActionListModal,
   summaryKeywords,
+  keyword,
 }: ExperienceListCardTopProps) => (
   <div className="relative w-[341px] h-[345px] bg-black rounded-[16px]">
     {/* 카드 이미지 */}
     <div className="w-[341px] h-[345px] flex items-center justify-center">
-      {/* 🚨TODO: 키워드별 cardImage */}
-      <Image src={cardImage} alt="경험카드" width={250} height={250} />
+      <CapabilityImage keyword={keyword} experienceStatus={experienceStatus} width={250} height={250} />
     </div>
     {/* 상태 */}
     {experienceStatus === 'INPROGRESS' && (

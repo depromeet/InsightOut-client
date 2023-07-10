@@ -9,13 +9,13 @@ import { CAPABILITYES_IMAGE } from '../../constants';
 type Props = {
   keyword: string;
   width: number;
-  heigth: number;
+  height: number;
   experienceStatus: ExperienceStatus;
 };
 
-const CapabilityImage = ({ width, heigth, keyword, experienceStatus }: Props) => {
+const CapabilityImage = ({ width, height, keyword, experienceStatus }: Props) => {
   const image = experienceStatus === 'INPROGRESS' ? inprogress : CAPABILITYES_IMAGE[keyword] || common;
-  return <Image src={image} alt="keyword" width={width} height={heigth} />;
+  return <Image src={image} alt="keyword" width={width} height={height} />;
 };
 
 export default CapabilityImage;
