@@ -1,9 +1,9 @@
 import Image from 'next/image';
+import common from 'public/images/capabilites/common.png';
+import inprogress from 'public/images/capabilites/inprogress.png';
 
 import { ExperienceStatus } from '@/feature/analyze/types';
 
-import common from '../../../../../public/images/capabilites/common.png';
-import inprogress from '../../../../../public/images/capabilites/inprogress.png';
 import { CAPABILITYES_IMAGE } from '../../constants';
 
 type Props = {

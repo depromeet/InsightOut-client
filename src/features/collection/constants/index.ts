@@ -1,9 +1,8 @@
 import { StaticImageData } from 'next/image';
-
-import logical from '../../../../public/images/capabilites/logical.png';
-import performance from '../../../../public/images/capabilites/performance.png';
-import relationship from '../../../../public/images/capabilites/relationship.png';
-import selfBased from '../../../../public/images/capabilites/self_based.png';
+import logical from 'public/images/capabilites/logical.png';
+import performance from 'public/images/capabilites/performance.png';
+import relationship from 'public/images/capabilites/relationship.png';
+import selfBased from 'public/images/capabilites/self_based.png';
 
 export const ANSWER_MAX_LENGTH = 2000;
 
@@ -47,7 +46,6 @@ export const MESSAGE = {
   DELETE_EXPERIENCE_CARD_TITLE: '[경험제목]\n카드를 삭제하실건가요?',
   DELETE_EXPERIENCE_CARD_SUBTITLE: '삭제한 카드는 다시 복구할 수 없어요',
 };
-export const ANSWER_MAX_LENGTH = 2000;
 
 export const INITIAL_RESUME: ResumeTitle = {
   createdAt: '',
@@ -55,4 +53,3 @@ export const INITIAL_RESUME: ResumeTitle = {
   updatedAt: '',
   title: '',
 };
-
