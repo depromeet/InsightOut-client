@@ -10,22 +10,12 @@ import NotFound from './NotFound';
 const NotFoundResume = () => {
   const { push } = useRouter();
 
-  const { resume: isResumeOnboardingComplete, ...restOnboardings } = useUserOnboarding();
+  const { resume: isResumeOnboardingComplete } = useUserOnboarding();
   const { setUserInfo } = useUserActions();
 
-  const { mutate: updateResumeOnboarding } = useUpdateOnboarding({
-    onSuccess: () => setUserInfo({ onboarding: { ...restOnboardings, resume: true } }),
-  });
-  const { mutate: createQuestion } = useCreateQuestion({
-    onSuccess: ({ id: questionId }) => {
-      push(`/resumes/${questionId}`);
-    },
-  });
-  const { mutate: createResume } = useCreateResume({
-    onSuccess: ({ id: resumeId }) => {
-      createQuestion(resumeId);
-    },
-  });
+  const { mutateAsync: updateResumeOnboarding } = useUpdateOnboarding();
+  const { mutateAsync: createQuestion } = useCreateQuestion();
+  const { mutateAsync: createResume } = useCreateResume();
 
   /**
    * 자기소개서 추가하기 버튼 클릭 시
@@ -34,9 +24,16 @@ const NotFoundResume = () => {
    * 3. 생성된 questionId로 이동: /resumes/${questionId}
    * 4. 온보딩하지 않았을 경우, 온보딩 값 업데이트
    */
-  const handleAddResumeButtonClick = () => {
-    createResume();
-    if (!isResumeOnboardingComplete) updateResumeOnboarding({ resume: true });
+  const handleAddResumeButtonClick = async () => {
+    const { id: resumeId } = await createResume();
+    const { id: questionId } = await createQuestion(resumeId);
+
+    push(`/resumes/${questionId}`);
+
+    if (!isResumeOnboardingComplete) {
+      const onboarding = await updateResumeOnboarding({ resume: true });
+      setUserInfo({ onboarding });
+    }
   };
 
   return (
