@@ -6,9 +6,7 @@ import selfBased from 'public/images/capabilites/self_based.png';
 
 export const ANSWER_MAX_LENGTH = 2000;
 
-type CapabilitiesImage = {
-  [key: string]: StaticImageData;
-};
+type CapabilitiesImage = Record<string, StaticImageData>;
 
 export const CAPABILITYES_IMAGE: CapabilitiesImage = {
   고객지향성: relationship,
