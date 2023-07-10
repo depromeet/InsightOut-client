@@ -6,4 +6,5 @@ export const ROUTES = {
   VERIFY: '/analyze/verify',
   COMPLETE: '/analyze/complete',
   RESUMES: '/resumes',
+  MY_PAGE: '/mypage',
 } as const;

@@ -1,12 +1,15 @@
 import { forwardRef } from 'react';
 
+import { Route } from 'next';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 
 import authApi from '@/apis/auth/auth';
 import SvgIconGnbMyPage from '@/components/Icon/IconGnbMyPage';
 import SvgIconLogIn from '@/components/Icon/IconLogIn';
 import SvgIconSettingLine from '@/components/Icon/IconSettingLine';
 import { useAuthActions } from '@/features/auth/store';
+import { ROUTES } from '@/shared/constants/routes';
 
 type MyPageTabProps = {
   profileImgUrl: string;
@@ -18,6 +21,7 @@ type MyPageTabProps = {
  * GNB 마이페이지 hover 시 출력되는 Tab
  */
 const MyPageTab = forwardRef<HTMLDivElement, MyPageTabProps>(({ profileImgUrl = '', nickname, email }, ref) => {
+  const router = useRouter();
   const { setIsSignedIn } = useAuthActions();
 
   const handleClickSignOut = async () => {
@@ -41,7 +45,9 @@ const MyPageTab = forwardRef<HTMLDivElement, MyPageTabProps>(({ profileImgUrl = 
         </div>
       </div>
       <div className="flex flex-col pt-[12px]">
-        <button className="flex items-center w-[200px] h-[44px] py-[12px] px-[14px] rounded-[2px] bg-white text-sub gap-[4px] b1 hover:bg-gray-50">
+        <button
+          className="flex items-center w-[200px] h-[44px] py-[12px] px-[14px] rounded-[2px] bg-white text-sub gap-[4px] b1 hover:bg-gray-50"
+          onClick={() => router.push(ROUTES.MY_PAGE as Route)}>
           <SvgIconSettingLine />
           계정정보
         </button>
