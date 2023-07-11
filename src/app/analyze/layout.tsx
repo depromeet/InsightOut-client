@@ -276,7 +276,8 @@ const Layout = ({ children }: LayoutProps) => {
   return (
     <FormProvider {...methods}>
       <form onSubmit={methods.handleSubmit(submit)}>
-        <div className="pt-[105px] mx-auto max-w-[1200px] h-[100%]">
+        <div className="absolute w-[100%] h-[518px] top-0 left-0 right-0 bottom-0 bg-[linear-gradient(180deg,rgba(201,196,252,0.35)_0%,rgba(201,196,252,0.00)_100%)] -z-10" />
+        <div className="pt-[120px] mx-auto max-w-[1200px] h-[100%]">
           <div className="experience px-[90.5px] py-[40px] mb-[32px]">
             <Stepper />
           </div>
