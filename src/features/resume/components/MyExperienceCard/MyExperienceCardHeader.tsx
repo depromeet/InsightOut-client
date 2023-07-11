@@ -3,7 +3,6 @@
 import IconCards from '@/components/Icon/IconCards';
 import ChipListNav from '@/features/collection/components/nav/ChipListNav';
 import { Capability } from '@/features/collection/types';
-import getAllCapability from '@/features/collection/utils/getAllCapabilityBadgeItem';
 import { useGetExperienceCapabilities } from '@/hooks/reactQuery/experience/qeury';
 
 import { useCapabilityKeyword, useExperienceActions } from '../../store';
@@ -13,8 +12,6 @@ const MyExperienceCardHeader = () => {
   const { setCapabilityKeyword } = useExperienceActions();
 
   const { data: capabilities } = useGetExperienceCapabilities({ isCompleted: true });
-  const allCapability = getAllCapability(capabilities ?? []);
-  const capabilityList: Capability[] = [allCapability, ...(capabilities ?? [])];
 
   const handleChipClick = (item: Capability) => {
     setCapabilityKeyword(item.keyword);
@@ -33,7 +30,7 @@ const MyExperienceCardHeader = () => {
         <div className="overflow-x-scroll">
           <ChipListNav
             chipSize="S"
-            items={capabilityList ?? []}
+            items={capabilities ?? []}
             selectedItem={selectedCapabilitykeyword}
             changeItem={handleChipClick}
           />

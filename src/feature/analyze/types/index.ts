@@ -1,6 +1,6 @@
 import { WRITE_STATUS } from '../constants';
 
-type ExperienceStatus = 'INPROGRESS' | 'DONE';
+export type ExperienceStatus = 'INPROGRESS' | 'DONE';
 
 export type WriteStatusType = (typeof WRITE_STATUS)[number];
 export type Keyword = Record<string, boolean>;
