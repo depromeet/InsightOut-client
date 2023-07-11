@@ -3,11 +3,9 @@
 import React, { useCallback, useEffect } from 'react';
 import { FormProvider, useForm, useWatch } from 'react-hook-form';
 
-import { usePrevious } from '@chakra-ui/react';
+import { useDisclosure, usePrevious } from '@chakra-ui/react';
 import { DevTool } from '@hookform/devtools';
 import isNumber from 'lodash/isNumber';
-import { Route } from 'next';
-import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 
 import Button from '@/components/Button/Button';
@@ -17,13 +15,17 @@ import Stepper from '@/components/Stepper/Stepper';
 import TooltipRelativeContent from '@/components/Tooltip/TooltipRelativeContent';
 import { initialValue, STEPS } from '@/feature/analyze/constants';
 import StepMenu from '@/feature/analyze/layout/StepMenu';
+import AI진입조건모달 from '@/feature/analyze/modal/BaseDialog';
+import 경험분석로딩모달 from '@/feature/analyze/modal/LoadingModal';
+import PrevNextButton from '@/feature/analyze/PrevNextButton/PrevNextButton';
 import { ExperienceFormValues, WriteStatusType } from '@/feature/analyze/types';
 import SavingCaption from '@/features/resume/components/ResumeForm/SavingCaption';
-import { useSubmitExperience } from '@/hooks/reactQuery/ai/mutation';
+import { useCreateRecommendKeyword, useSubmitExperience } from '@/hooks/reactQuery/ai/mutation';
 import { useCreateExperience, useUpdateExperience } from '@/hooks/reactQuery/analyze/mutation';
 import { useGetExperience } from '@/hooks/reactQuery/analyze/query';
 import { useUpdateKeyword } from '@/hooks/reactQuery/keyword/mutation';
 import { useIsMounted } from '@/hooks/useIsMounted';
+import { useOnceFlag } from '@/hooks/useOnceFlag';
 import { ROUTES } from '@/shared/constants/routes';
 import formatYYMMDDhhmm from '@/shared/utils/date/formatYYMMDDhhmm';
 
@@ -31,9 +33,18 @@ export interface LayoutProps {
   children: React.ReactNode;
 }
 const Layout = ({ children }: LayoutProps) => {
-  const { back, push } = useRouter();
+  const { push } = useRouter();
   const pathname = usePathname();
   const prevPathname = usePrevious(pathname);
+  const isMounted = useIsMounted();
+  const [usedOnce, disableOnceFlag] = useOnceFlag();
+
+  const { isOpen: isAI진입조건모달Open, onOpen: AI진입조건모달Open, onClose: AI진입조건모달Close } = useDisclosure();
+  const {
+    isOpen: is경험분석로딩모달Open,
+    onOpen: 경험분석로딩모달Open,
+    onClose: 경험분석로딩모달Close,
+  } = useDisclosure();
 
   const currentStepIndex = (STEPS.find((v) => v.route === pathname)?.id ?? 1) - 1;
   const prevStepIndex = (STEPS.find((v) => v.route === prevPathname)?.id ?? 1) - 1;
@@ -94,8 +105,7 @@ const Layout = ({ children }: LayoutProps) => {
 
   const { mutate: updateExperience, status: updateExperienceStatus } = useUpdateExperience(experienceId);
   const { mutateAsync: submitExperience } = useSubmitExperience();
-
-  console.log(data);
+  const { mutateAsync: createRecommendKeyword } = useCreateRecommendKeyword();
 
   const TOOLTIP_CONTENTS = [
     `“000님 좋은 시작이에요”`,
@@ -118,10 +128,6 @@ const Layout = ({ children }: LayoutProps) => {
       default:
         break;
     }
-  };
-  const handlePrevButton = () => {
-    stepByStepSave();
-    back();
   };
 
   const saveExperience = () => {
@@ -164,73 +170,68 @@ const Layout = ({ children }: LayoutProps) => {
     const writeStatus = methods.getValues('writeStatus') as WriteStatusType[];
     const copyWriteStatus = [...writeStatus];
 
-    switch (prevPathname) {
-      case ROUTES.EXPERIENCE:
-        const experiencePageValues = methods.getValues([
-          'title',
-          'startYYYY',
-          'startMM',
-          'endYYYY',
-          'endMM',
-          'experienceRole',
-          'motivation',
-        ]);
-        if (experiencePageValues.every((v) => !!v)) {
-          setWriteStatus(copyWriteStatus, '작성완료');
-        } else if (experiencePageValues.some((v) => !!v)) {
-          setWriteStatus(copyWriteStatus, '작성중');
-        } else {
-          setWriteStatus(copyWriteStatus, '미작성');
-        }
-        break;
-      case ROUTES.KEYWORD:
-        const keywords = methods.getValues('keywords');
-        if (keywords.some(([, isSelected]) => isSelected === true)) {
-          setWriteStatus(copyWriteStatus, '작성완료');
-        } else {
-          setWriteStatus(copyWriteStatus, '미작성');
-        }
-        break;
-      case ROUTES.INFORMATION:
-        const informationPageValues = methods.getValues(['situation', 'task', 'action', 'result']);
-        if (informationPageValues.every((v) => !!v)) {
-          setWriteStatus(copyWriteStatus, '작성완료');
-        } else if (informationPageValues.some((v) => !!v)) {
-          setWriteStatus(copyWriteStatus, '작성중');
-        } else {
-          setWriteStatus(copyWriteStatus, '미작성');
-        }
-        break;
-      default:
-        const [capabilities, resume] = methods.getValues(['capabilities', 'resume']);
-        if (!!capabilities.length && !!resume) {
-          setWriteStatus(copyWriteStatus, '작성완료');
-        } else if (!!capabilities.length || !!resume) {
-          setWriteStatus(copyWriteStatus, '작성중');
-        } else {
-          setWriteStatus(copyWriteStatus, '미작성');
-        }
-        break;
-    }
-  }, [methods, pathname, prevPathname, currentStepIndex, setWriteStatus]);
-
-  const handleNextButton = () => {
-    switch (pathname) {
-      case ROUTES.EXPERIENCE:
-        return ROUTES.KEYWORD;
-      case ROUTES.KEYWORD:
-        return ROUTES.INFORMATION;
-      case ROUTES.INFORMATION:
-        return ROUTES.VERIFY;
-      default:
-        return ROUTES.EXPERIENCE;
-    }
-  };
-
-  const isMounted = useIsMounted();
+    // 이탈시 validation check
+    return () => {
+      switch (prevPathname) {
+        case ROUTES.EXPERIENCE:
+          const experiencePageValues = methods.getValues([
+            'title',
+            'startYYYY',
+            'startMM',
+            'endYYYY',
+            'endMM',
+            'experienceRole',
+            'motivation',
+          ]);
+          if (experiencePageValues.every((v) => !!v)) {
+            setWriteStatus(copyWriteStatus, '작성완료');
+          } else if (experiencePageValues.some((v) => !!v)) {
+            setWriteStatus(copyWriteStatus, '작성중');
+          } else {
+            setWriteStatus(copyWriteStatus, '미작성');
+          }
+          break;
+        case ROUTES.KEYWORD:
+          const keywords = methods.getValues('keywords');
+          if (keywords.some(([, isSelected]) => isSelected === true)) {
+            setWriteStatus(copyWriteStatus, '작성완료');
+          } else {
+            setWriteStatus(copyWriteStatus, '미작성');
+          }
+          break;
+        case ROUTES.INFORMATION:
+          const informationPageValues = methods.getValues(['situation', 'task', 'action', 'result']);
+          if (informationPageValues.every((v) => !!v)) {
+            setWriteStatus(copyWriteStatus, '작성완료');
+          } else if (informationPageValues.some((v) => !!v)) {
+            setWriteStatus(copyWriteStatus, '작성중');
+          } else {
+            setWriteStatus(copyWriteStatus, '미작성');
+          }
+          break;
+        case ROUTES.VERIFY:
+          const [capabilities, resume] = methods.getValues(['capabilities', 'resume']);
+          if (!!capabilities.length && !!resume) {
+            setWriteStatus(copyWriteStatus, '작성완료');
+          } else if (!!capabilities.length || !!resume) {
+            setWriteStatus(copyWriteStatus, '작성중');
+          } else {
+            setWriteStatus(copyWriteStatus, '미작성');
+          }
+          break;
+        default:
+          break;
+      }
+    };
+  }, [methods, pathname, prevPathname, setWriteStatus]);
 
   const submit = async (data: ExperienceFormValues) => {
-    const { experienceId, situation, task, action, result } = data;
+    const { experienceId, situation, task, action, result, writeStatus } = data;
+    const isReadyToSubmit = writeStatus?.slice(0, 3).every((status) => status === '작성완료');
+    if (!isReadyToSubmit) {
+      return;
+    }
+
     const response = await submitExperience({
       experienceId,
       situation,
@@ -240,7 +241,36 @@ const Layout = ({ children }: LayoutProps) => {
     });
 
     // FIXME: 성공하면 보내는 곳은 준하님이 이어서 작업해주시면 됩니다.
+    // TODO: 경험카드 페이지로 보내고 제출하는 로직으로 변경하기 or 제출하고 여기서 로딩 모달을 띄우고 완료하면 경험카드 페이지로 보내기
     if ('ExperienceInfo' in response) push('/');
+  };
+
+  const readyToAIRecommendation = async () => {
+    const [writeStatus, situation, task, action, result] = methods.getValues([
+      'writeStatus',
+      'situation',
+      'task',
+      'action',
+      'result',
+    ]);
+    const isReadyToAIRecommendation = writeStatus?.slice(0, 3).every((status) => status === '작성완료');
+    if (!isReadyToAIRecommendation) {
+      AI진입조건모달Open();
+      return;
+    } else if (isReadyToAIRecommendation && !usedOnce) {
+      경험분석로딩모달Open();
+      const { capabilities } = await createRecommendKeyword({
+        experienceId,
+        situation,
+        task,
+        action,
+        result,
+      });
+      methods.setValue('capabilities', capabilities);
+      disableOnceFlag();
+      경험분석로딩모달Close();
+      push('/analyze/verify');
+    } else push('/analyze/verify');
   };
 
   return (
@@ -253,24 +283,7 @@ const Layout = ({ children }: LayoutProps) => {
           <div className="flex flex-row">
             <div className="min-w-[770px] mr-[46px] mb-[32px]">
               {children}
-              <div className="flex-center mt-[32px] gap-[12px]">
-                {pathname === ROUTES.EXPERIENCE ? null : (
-                  <Button type="button" variant="gray200" size="XL" onClick={handlePrevButton}>
-                    이전으로
-                  </Button>
-                )}
-                {pathname === ROUTES.VERIFY ? (
-                  <Button type="submit" variant="gray900" size="XL">
-                    경험카드 만들기
-                  </Button>
-                ) : (
-                  <Link href={handleNextButton() as Route}>
-                    <Button type="button" variant="gray900" size="XL" onClick={stepByStepSave}>
-                      다음으로
-                    </Button>
-                  </Link>
-                )}
-              </div>
+              <PrevNextButton stepByStepSave={stepByStepSave} readyToAIRecommendation={readyToAIRecommendation} />
             </div>
 
             {/* Aside */}
@@ -287,7 +300,11 @@ const Layout = ({ children }: LayoutProps) => {
                 <Lottie src="/lotties/lumos-smile.json" />
               </div>
               <Progress />
-              <StepMenu status={writeStatus as WriteStatusType[]} />
+              <StepMenu
+                status={writeStatus as WriteStatusType[]}
+                stepByStepSave={stepByStepSave}
+                readyToAIRecommendation={readyToAIRecommendation}
+              />
               <div className="absolute top-[calc(100%+16px)] left-[0px] right-[0px]">
                 <Button
                   type="button"
@@ -309,6 +326,15 @@ const Layout = ({ children }: LayoutProps) => {
         </div>
         {isMounted && <DevTool control={methods.control} />}
       </form>
+      <AI진입조건모달
+        size="3xl"
+        isOpen={isAI진입조건모달Open}
+        onClose={AI진입조건모달Close}
+        title={`앞의 단계를 작성해야 AI 직무역량 추천과\n경험카드를 받을 수 있어요`}
+        textContent="확인했어요"
+      />
+      {/* 경험 분석 로딩 모달 */}
+      <경험분석로딩모달 size="3xl" isOpen={is경험분석로딩모달Open} onClose={경험분석로딩모달Close} />
     </FormProvider>
   );
 };
