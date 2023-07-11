@@ -2,7 +2,7 @@ import { create } from 'zustand';
 
 import { ALL_CAPABILITY_KEYWORD } from '@/features/collection/constants';
 
-import { ExperienceStore,QuestionStore } from '../types/store';
+import { ExperienceStore, QuestionStore } from '../types/store';
 
 export const useQuestionStore = create<QuestionStore>((set) => ({
   title: '',

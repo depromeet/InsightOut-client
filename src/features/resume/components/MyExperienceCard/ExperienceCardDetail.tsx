@@ -25,6 +25,8 @@ const ExperienceCardDetail = () => {
   };
   const star = { situation, task, action, result };
 
+  if (!experience) return null;
+
   return (
     <article className="w-[330px] py-[22px] px-[24px]">
       <h3 className="subhead2 mb-[16px]">{title}</h3>
