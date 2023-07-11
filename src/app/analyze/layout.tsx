@@ -17,7 +17,7 @@ import { initialValue, STEPS } from '@/feature/analyze/constants';
 import StepMenu from '@/feature/analyze/layout/StepMenu';
 import AI진입조건모달 from '@/feature/analyze/modal/BaseDialog';
 import 경험분석로딩모달 from '@/feature/analyze/modal/LoadingModal';
-import PrevNextButton from '@/feature/analyze/PrevNextButton.tsx/PrevNextButton';
+import PrevNextButton from '@/feature/analyze/PrevNextButton/PrevNextButton';
 import { ExperienceFormValues, WriteStatusType } from '@/feature/analyze/types';
 import SavingCaption from '@/features/resume/components/ResumeForm/SavingCaption';
 import { useCreateRecommendKeyword, useSubmitExperience } from '@/hooks/reactQuery/ai/mutation';
