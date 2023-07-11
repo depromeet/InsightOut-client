@@ -14,6 +14,7 @@ const Confetti = () => {
     refAnimationInstance.current &&
       refAnimationInstance.current({
         ...opts,
+        zIndex: -1,
         origin: { y: 0.6 },
         particleCount: Math.floor(500 * particleRatio),
       });

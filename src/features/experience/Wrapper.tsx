@@ -15,7 +15,7 @@ const Wrapper = ({ children }: PropsWithChildren) => {
   // console.log(color);
 
   return (
-    <div className="h-[100vh] bg-dark relative overflow-hidden">
+    <div className="relative h-auto overflow-hidden bg-dark">
       <div className="absolute top-[0] right-0">
         <Image src={ellipseSecondary} alt="" width={456} height={437} />
       </div>

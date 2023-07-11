@@ -1,11 +1,16 @@
 import Lottie from '@/components/Lottie/Lottie';
 import { useUserNickname } from '@/shared/store/user';
 
-const Loading = () => {
+type Props = {
+  className: string;
+};
+
+const Loading = ({ className }: Props) => {
   const nickname = useUserNickname();
 
   return (
-    <section className="w-[709px] h-[581px] rounded-[24px] bg-white p-[40px] flex justify-center text-center">
+    <section
+      className={`w-[709px] h-[581px] rounded-[24px] bg-white p-[40px] flex justify-center text-center ${className}`}>
       <div className="w-full">
         <div className="mx-auto w-[400px] h-[400px] mb-[24px] flex justify-center">
           <Lottie src="/lotties/lumos-loading.json" />
