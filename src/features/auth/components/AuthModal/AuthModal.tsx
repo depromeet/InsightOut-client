@@ -1,7 +1,9 @@
+/* eslint-disable unused-imports/no-unused-vars */
 'use client';
 
 import { useState } from 'react';
 
+import { Route } from 'next';
 import { useRouter, useSearchParams } from 'next/navigation';
 
 import onboardingApi from '@/apis/onboarding/onboarding';
@@ -12,11 +14,12 @@ import CategoriesContents from '@/features/auth/components/AuthModal/ModalConten
 import SignUpContents from '@/features/auth/components/AuthModal/ModalContents/SignUpContents';
 import StartNowContents from '@/features/auth/components/AuthModal/ModalContents/StartNowContents';
 import WelcomeContents from '@/features/auth/components/AuthModal/ModalContents/WelcomeContents';
-import { Field } from '@/shared/constants/user';
+import { ROUTES, SIGN_UP_ROUTES } from '@/shared/constants/routes';
 import { useUserNickname, useUserOnboarding } from '@/shared/store/user';
 
 import useGoogleLogin from '../../hooks/useGoogleLogin';
 import { useAuthActions } from '../../store';
+import { Category, SignUpConfig, SignUpSteps } from '../../types/signUp';
 
 type AuthModalProps = {
   isOpen: boolean;
@@ -32,7 +35,9 @@ const AuthModal = ({ isOpen, onClose, onAbortSignUp }: AuthModalProps) => {
   const { setIsSignedIn, setIsTokenRequired } = useAuthActions();
   const { signIn, isLoading } = useGoogleLogin();
 
-  const [selectedCategory, setSelectedCategory] = useState<{ title: string; field: Field }>({ title: '', field: null });
+  const [selectedCategory, setSelectedCategory] = useState<Category>({ title: '', field: null });
+
+  const currentStep = searchParams.get('steps') as SignUpSteps | null;
 
   const handleCloseModal = () => {
     const isLastStep = !!searchParams.get('startnow');
@@ -47,6 +52,7 @@ const AuthModal = ({ isOpen, onClose, onAbortSignUp }: AuthModalProps) => {
     setIsSignedIn(true);
     setIsTokenRequired(false);
     onClose();
+    router.push(ROUTES.EXPERIENCE as Route);
   };
 
   /**
@@ -55,7 +61,7 @@ const AuthModal = ({ isOpen, onClose, onAbortSignUp }: AuthModalProps) => {
   const handleChooseJob = async () => {
     await onboardingApi.patch({ field: true });
     await userApi.patch({ nickname, field: selectedCategory.field });
-    router.push('/?steps=startnow');
+    router.push(SIGN_UP_ROUTES.START_NOW);
   };
 
   /**
@@ -66,49 +72,45 @@ const AuthModal = ({ isOpen, onClose, onAbortSignUp }: AuthModalProps) => {
       setIsSignedIn(true);
       onClose();
     } else {
-      router.push('/?steps=categories');
+      router.push(SIGN_UP_ROUTES.CATEGORIES);
     }
   };
 
-  const modalSize = () => {
-    const steps = searchParams.get('steps');
+  const SIGN_UP_STEPS: SignUpConfig = {
+    signUp: {
+      modalSize: 'md',
+      contents: <SignUpContents signIn={signIn} />,
+    },
+    welcome: {
+      modalSize: 'xl',
+      contents: <WelcomeContents nickname={nickname} onClickButton={handleClickGreeting} />,
+    },
+    categories: {
+      modalSize: '5xl',
+      contents: (
+        <CategoriesContents
+          nickname={nickname}
+          selectedCategory={selectedCategory}
+          onClickLeftButton={() => router.back()}
+          onClickCategory={setSelectedCategory}
+          onClickRightButton={handleChooseJob}
+        />
+      ),
+    },
+    startnow: {
+      modalSize: '5xl',
+      contents: <StartNowContents onClickLeftButton={() => router.back()} onClickRightButton={handleSignUpSuccess} />,
+    },
+  } as const;
 
-    switch (steps) {
-      case 'signUp':
-        return 'md';
-      case 'welcome':
-        return 'xl';
-      case 'categories':
-      case 'startnow':
-        return '5xl';
-    }
+  const getSignUpConfig = () => {
+    if (!currentStep) return { modalSize: 'md', contents: <Spinner size="L" style="primary500" /> };
+    return { modalSize: SIGN_UP_STEPS[currentStep].modalSize, contents: SIGN_UP_STEPS[currentStep].contents };
   };
 
-  const renderContents = () => {
-    const steps = searchParams.get('steps');
-
-    switch (steps) {
-      case 'signUp':
-        return <SignUpContents signIn={signIn} />;
-      case 'welcome':
-        return <WelcomeContents nickname={nickname} onClickButton={handleClickGreeting} />;
-      case 'categories':
-        return (
-          <CategoriesContents
-            nickname={nickname}
-            selectedCategory={selectedCategory}
-            onClickLeftButton={() => router.back()}
-            onClickCategory={setSelectedCategory}
-            onClickRightButton={handleChooseJob}
-          />
-        );
-      case 'startnow':
-        return <StartNowContents onClickLeftButton={() => router.back()} onClickRightButton={handleSignUpSuccess} />;
-    }
-  };
   return (
-    <Modal size={modalSize()} isOpen={isOpen} onClose={handleCloseModal}>
-      {isLoading ? <Spinner size="L" style="primary500" /> : renderContents()}
+    <Modal size={getSignUpConfig().modalSize} isOpen={isOpen} onClose={handleCloseModal}>
+      {isLoading ? <Spinner size="L" style="primary500" /> : getSignUpConfig().contents}
     </Modal>
   );
 };

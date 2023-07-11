@@ -1,21 +1,21 @@
 import { Flex } from '@chakra-ui/react';
 import { Meta, StoryObj } from '@storybook/react';
 
-import CategoryCard from './CategoryCard';
+import Category from './Category';
 
 const meta = {
   title: 'Auth/AuthModal',
-  component: CategoryCard,
-} satisfies Meta<typeof CategoryCard>;
+  component: Category,
+} satisfies Meta<typeof Category>;
 
 export default meta;
-type Story = StoryObj<typeof CategoryCard>;
+type Story = StoryObj<typeof Category>;
 
-export const _CategoryCard: Story = {
+export const _Category: Story = {
   args: { title: '개발' },
   render: (args) => (
     <Flex>
-      <CategoryCard {...args} />
+      <Category {...args} />
     </Flex>
   ),
 };
