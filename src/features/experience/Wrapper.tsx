@@ -7,12 +7,11 @@ import Image from 'next/image';
 import eclipsePrimay from '../../../public/images/ellipsePrimay.png';
 import ellipseSecondary from '../../../public/images/ellipseSecondary.png';
 
+// Backlog 배경 서서히 바뀌기
 // import useBackgroundColorTransition from '@/hooks/useBackgroundColorTransition';
 
 const Wrapper = ({ children }: PropsWithChildren) => {
   // const { color } = useBackgroundColorTransition([255, 255, 255], [37, 39, 48], 4000);
-
-  // console.log(color);
 
   return (
     <div className="relative h-auto overflow-hidden bg-dark">

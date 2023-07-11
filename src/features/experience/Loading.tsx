@@ -1,3 +1,5 @@
+'use client';
+
 import Lottie from '@/components/Lottie/Lottie';
 import { useUserNickname } from '@/shared/store/user';
 
