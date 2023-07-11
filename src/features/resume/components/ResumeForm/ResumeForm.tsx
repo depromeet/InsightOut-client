@@ -15,6 +15,7 @@ import formatYYMMDDhhmm from '@/shared/utils/date/formatYYMMDDhhmm';
 
 import { AUTO_SAVE_TIME } from '../../constants/autoSaveTime';
 import { useAnswer, useIsSpellCheckMode, useQuestionActions, useTitle } from '../../store';
+import NotFoundResume from '../NotFound/NotFoundResume';
 import SpellChecker from '../SpellChecker/SpellChecker';
 import SpellErrorPreview from '../SpellChecker/SpellErrorPreview';
 import SavingCaption from './SavingCaption';
@@ -61,10 +62,12 @@ const ResumeForm = () => {
     updateQuestion({ title, answer });
   };
 
+  if (!question) return <NotFoundResume />;
+
   return (
     <form onSubmit={handleResumeSubmit}>
       <header className="flex items-center justify-between mb-[14px]">
-        <SavingCaption updatedAt={formatYYMMDDhhmm(question?.updatedAt)} currentSavingStatus={status} />
+        <SavingCaption updatedAt={formatYYMMDDhhmm(question.updatedAt)} currentSavingStatus={status} />
         <div className="flex items-center gap-4">
           <TextLengthMessage currentLength={answer.length} maxLength={MAX_LENGTH.QUESTION} />
           <Button variant="gray900" size="M" disabled={answer.length === 0}>
@@ -89,7 +92,7 @@ const ResumeForm = () => {
           onBlur={handleAnswerBlur}
           maxLength={MAX_LENGTH.QUESTION}
           placeholder="질문에 대한 답변을 적어보세요."
-          className="w-[660px] h-[660px] resize-none b1 text-main placeholder:text-light"
+          className="w-[612px] h-[660px] resize-none b1 text-main placeholder:text-light"
         />
       )}
       <SpellChecker />

@@ -1,14 +1,9 @@
-import Badge from '@/components/Badge/Badge';
+'use client';
 
-// FIXME: GET /experience/star/{experienceId}
-const demoResponse = {
-  id: 1234,
-  title: '디프만 12기 백엔드 파트장',
-  situation: '코딩에 관심이 생겼고, 디자이너와 협업이 하고 싶었음',
-  task: '백엔드 파트장으로서 팀을 이끌어야 했고, 소셜 로그인 API를 모두 구현해야 했음',
-  action: '모든 API 명세를 읽어보았고, 어떻게 소셜 로그인 제공자 서버와 통신하는지 공부함',
-  result: '미친 성장을 할 수 있었다.',
-};
+import Badge from '@/components/Badge/Badge';
+import { useGetExperience } from '@/hooks/reactQuery/analyze/query';
+
+import { useExperienceId } from '../../store';
 
 const BADGE_CONTENT = {
   situation: '이런 상황이었어요',
@@ -18,8 +13,19 @@ const BADGE_CONTENT = {
 } as const;
 
 const ExperienceCardDetail = () => {
-  const { title, situation, task, action, result } = demoResponse;
+  const experienceId = useExperienceId();
+  const { data: experience } = useGetExperience({ experienceId });
+
+  const { title, situation, task, action, result } = experience ?? {
+    title: '',
+    situation: '',
+    task: '',
+    action: '',
+    result: '',
+  };
   const star = { situation, task, action, result };
+
+  if (!experience) return null;
 
   return (
     <article className="w-[330px] py-[22px] px-[24px]">

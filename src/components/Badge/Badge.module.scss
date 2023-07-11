@@ -1,7 +1,7 @@
 // Base
 
 .root {
-  @apply flex justify-center items-center rounded-[8px];
+  @apply flex justify-center items-center rounded-[8px] w-fit h-fit;
 }
 
 // Styles
