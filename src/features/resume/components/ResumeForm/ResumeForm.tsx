@@ -31,8 +31,8 @@ const ResumeForm = () => {
     { questionId },
     {
       onSuccess({ title, answer }) {
-        setTitle(title ?? ''); // NOTE: answer이 없을 때 서버에서 null을 보내줘서 빈 문자열로 바꿨습니다
-        setAnswer(answer ?? '');
+        setTitle(title);
+        setAnswer(answer);
       },
     }
   );
@@ -69,8 +69,8 @@ const ResumeForm = () => {
       <header className="flex items-center justify-between mb-[14px]">
         <SavingCaption updatedAt={formatYYMMDDhhmm(question.updatedAt)} currentSavingStatus={status} />
         <div className="flex items-center gap-4">
-          <TextLengthMessage currentLength={answer.length} maxLength={MAX_LENGTH.QUESTION} />
-          <Button variant="gray900" size="M" disabled={answer.length === 0}>
+          <TextLengthMessage currentLength={answer?.length} maxLength={MAX_LENGTH.QUESTION} />
+          <Button variant="gray900" size="M" disabled={answer?.length === 0}>
             임시 저장
           </Button>
         </div>
