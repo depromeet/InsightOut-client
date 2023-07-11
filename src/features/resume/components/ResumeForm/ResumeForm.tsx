@@ -40,20 +40,27 @@ const ResumeForm = () => {
 
   const titleTextareaRef = useRef<HTMLTextAreaElement>(null);
 
+  const debouncedUpdateTitle = useDebounce(() => updateQuestion({ title }), AUTO_SAVE_TIME);
+
   const handleTitleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     resizeHeight(titleTextareaRef);
     setTitle(e.target.value);
+    debouncedUpdateTitle();
   };
 
-  const debouncedUpdateQuestion = useDebounce(() => updateQuestion({ title, answer }), AUTO_SAVE_TIME);
+  const handleTitleBlur = () => {
+    updateQuestion({ title });
+  };
+
+  const debouncedUpdateAnswer = useDebounce(() => updateQuestion({ answer }), AUTO_SAVE_TIME);
 
   const handleAnswerChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setAnswer(e.target.value);
-    debouncedUpdateQuestion();
+    debouncedUpdateAnswer();
   };
 
   const handleAnswerBlur = () => {
-    updateQuestion({ title, answer });
+    updateQuestion({ answer });
   };
 
   const handleResumeSubmit = (e: FormEvent<HTMLFormElement>) => {
@@ -79,6 +86,7 @@ const ResumeForm = () => {
         ref={titleTextareaRef}
         value={title}
         onChange={handleTitleChange}
+        onBlur={handleTitleBlur}
         maxLength={MAX_LENGTH.TITLE}
         placeholder="문항 질문을 적어보세요."
         className="w-full min-h-[96px] py-[6px] resize-none subhead2 placeholder:text-light"
