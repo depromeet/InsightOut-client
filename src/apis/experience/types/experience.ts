@@ -6,6 +6,7 @@ export type ExperienceParams = {
     id?: string;
     last?: boolean;
     page?: number;
+    take?: number;
     capabilityId?: number;
     situation?: boolean;
     task?: boolean;
@@ -30,6 +31,12 @@ export type ExperiencesResponse = {
 export type ExperienceCapabilityParams = {
   get: {
     experienceId?: number;
+    /**
+     * 작성완료된 경험카드의 키워드만 조회할 수 있는 값
+     *
+     * @defaultValue false
+     */
+    isCompleted?: boolean;
   };
 };
 
