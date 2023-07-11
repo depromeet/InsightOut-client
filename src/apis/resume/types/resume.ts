@@ -9,4 +9,5 @@ export type ResumeParams = {
 export interface ResumeResponse {
   get: ResumeData[];
   getById: ResumeData;
+  post: Pick<ResumeData, 'id' | 'createdAt' | 'updatedAt'>;
 }

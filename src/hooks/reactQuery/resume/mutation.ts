@@ -3,17 +3,18 @@ import { AxiosError, AxiosResponse } from 'axios';
 import { useRouter } from 'next/navigation';
 
 import resumeApi from '@/apis/resume/resume';
-import { ResumeParams } from '@/apis/resume/types/resume';
+import { ResumeParams, ResumeResponse } from '@/apis/resume/types/resume';
 import { ResumeData } from '@/features/resume/types/resume';
 import { RESUME_KEY } from '@/shared/constants/querykeys';
 
-export const useCreateResume = (options?: UseMutationOptions<AxiosResponse, AxiosError>) => {
+export const useCreateResume = (options?: UseMutationOptions<ResumeResponse['post'], AxiosError>) => {
   const queryClient = useQueryClient();
 
   return useMutation(resumeApi.post, {
     ...options,
-    onSuccess: () => {
+    onSuccess: (data, variables, context) => {
       queryClient.invalidateQueries({ queryKey: RESUME_KEY.lists() });
+      options?.onSuccess?.(data, variables, context);
     },
   });
 };

@@ -15,6 +15,7 @@ import formatYYMMDDhhmm from '@/shared/utils/date/formatYYMMDDhhmm';
 
 import { AUTO_SAVE_TIME } from '../../constants/autoSaveTime';
 import { useAnswer, useIsSpellCheckMode, useQuestionActions, useTitle } from '../../store';
+import NotFoundResume from '../NotFound/NotFoundResume';
 import SpellChecker from '../SpellChecker/SpellChecker';
 import SpellErrorPreview from '../SpellChecker/SpellErrorPreview';
 import SavingCaption from './SavingCaption';
@@ -61,10 +62,12 @@ const ResumeForm = () => {
     updateQuestion({ title, answer });
   };
 
+  if (!question) return <NotFoundResume />;
+
   return (
     <form onSubmit={handleResumeSubmit}>
       <header className="flex items-center justify-between mb-[14px]">
-        <SavingCaption updatedAt={formatYYMMDDhhmm(question?.updatedAt)} currentSavingStatus={status} />
+        <SavingCaption updatedAt={formatYYMMDDhhmm(question.updatedAt)} currentSavingStatus={status} />
         <div className="flex items-center gap-4">
           <TextLengthMessage currentLength={answer.length} maxLength={MAX_LENGTH.QUESTION} />
           <Button variant="gray900" size="M" disabled={answer.length === 0}>
