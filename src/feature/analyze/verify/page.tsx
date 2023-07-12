@@ -14,6 +14,7 @@ import SelectedKeywordContainer from '@/feature/analyze/verify/SelectedKeywordCo
 import { useCreateRecommendResume } from '@/hooks/reactQuery/ai/mutation';
 import { useUserNickname } from '@/shared/store/user';
 
+import { STEP } from '../constants';
 import { CapabilitiesType, ExperienceFormValues } from '../types';
 import AIResumeLoading from './AIResumeLoading';
 
@@ -49,7 +50,9 @@ const VerifyPage = () => {
   useEffect(() => {
     const isReadyToAIRecommendation = writeStatus?.slice(0, 3).every((status) => status === '작성완료');
     if (!isReadyToAIRecommendation) back();
-  }, [back, writeStatus]);
+    else if (writeStatus?.[STEP.verify - 1] === '작성완료') return;
+    else setValue(`writeStatus.${STEP.verify - 1}`, '작성중');
+  }, [back, setValue, writeStatus]);
 
   useEffect(() => {
     if (resume) return;
@@ -64,6 +67,7 @@ const VerifyPage = () => {
           result,
         });
         setValue('resume', resume);
+        setValue(`writeStatus.${STEP.verify - 1}`, '작성완료');
       }
     })();
   }, [action, experienceId, result, situation, task, setValue, createRecommendResume, recommendKeywordList, resume]);
