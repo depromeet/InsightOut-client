@@ -25,6 +25,7 @@ import { useCreateRecommendKeyword, useSubmitExperience } from '@/hooks/reactQue
 import { useCreateExperience, useUpdateExperience } from '@/hooks/reactQuery/analyze/mutation';
 import { useGetExperience } from '@/hooks/reactQuery/analyze/query';
 import { useUpdateKeyword } from '@/hooks/reactQuery/keyword/mutation';
+import useBeforUnload from '@/hooks/useBeforeUnload';
 import { useIsMounted } from '@/hooks/useIsMounted';
 import { useOnceFlag } from '@/hooks/useOnceFlag';
 import { ROUTES } from '@/shared/constants/routes';
@@ -41,6 +42,7 @@ const Layout = ({ children }: LayoutProps) => {
   const isMounted = useIsMounted();
   const [usedOnce, disableOnceFlag] = useOnceFlag();
   const username = useUserNickname();
+  useBeforUnload();
 
   const { isOpen: isAI진입조건모달Open, onOpen: AI진입조건모달Open, onClose: AI진입조건모달Close } = useDisclosure();
   const { isOpen: is이탈방지모달Open, onOpen: 이탈방지모달Open, onClose: 이탈방지모달Close } = useDisclosure();
