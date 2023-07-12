@@ -12,6 +12,7 @@ import Tag from '@/components/Tag/Tag';
 import AICapabilityKeyword from '@/feature/analyze/verify/AICapabilityKeyword';
 import SelectedKeywordContainer from '@/feature/analyze/verify/SelectedKeywordContainer';
 import { useCreateRecommendResume } from '@/hooks/reactQuery/ai/mutation';
+import { useUserNickname } from '@/shared/store/user';
 
 import { CapabilitiesType, ExperienceFormValues } from '../types';
 import AIResumeLoading from './AIResumeLoading';
@@ -28,6 +29,7 @@ export const renderRecommendKeyword = (arr: CapabilitiesType[]) => {
 
 const VerifyPage = () => {
   const { back } = useRouter();
+  const username = useUserNickname();
   const { getValues, setValue } = useFormContext<ExperienceFormValues>();
   const [situation, task, action, result, keywordList, experienceId, recommendKeywordList, resume, writeStatus] =
     getValues([
@@ -75,7 +77,7 @@ const VerifyPage = () => {
             autoSize
             rows={10}
             placeholder="ex.개발 기간이 짧아서 빠른 기간 내 런칭을 완료해야 했음"
-            chipTitle="OOO님의 IT동아리 협업"
+            chipTitle={`${username}님의 IT동아리 협업`}
             maxLength={400}
             value={`${situation}\n\n${task}\n\n${action}\n\n${result}`}
           />

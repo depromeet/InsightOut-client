@@ -27,6 +27,7 @@ import { useUpdateKeyword } from '@/hooks/reactQuery/keyword/mutation';
 import { useIsMounted } from '@/hooks/useIsMounted';
 import { useOnceFlag } from '@/hooks/useOnceFlag';
 import { ROUTES } from '@/shared/constants/routes';
+import { useUserNickname } from '@/shared/store/user';
 import formatYYMMDDhhmm from '@/shared/utils/date/formatYYMMDDhhmm';
 
 export interface LayoutProps {
@@ -38,6 +39,7 @@ const Layout = ({ children }: LayoutProps) => {
   const prevPathname = usePrevious(pathname);
   const isMounted = useIsMounted();
   const [usedOnce, disableOnceFlag] = useOnceFlag();
+  const username = useUserNickname();
 
   const { isOpen: isAI진입조건모달Open, onOpen: AI진입조건모달Open, onClose: AI진입조건모달Close } = useDisclosure();
   const {
@@ -108,7 +110,7 @@ const Layout = ({ children }: LayoutProps) => {
   const { mutateAsync: createRecommendKeyword } = useCreateRecommendKeyword();
 
   const TOOLTIP_CONTENTS = [
-    `“000님 좋은 시작이에요”`,
+    `“${username}님 좋은 시작이에요”`,
     '“뭐든지 시작이 반이에요”',
     '“내용을 풍부하게 작성할수록 다양한 AI 직무 역량 키워드를 받을 수 있어요 최선을 다해 작성해주세요 :)”',
     '“AI 직무역량 키워드 추천을 통해 나의 직무역량을 다각도로 넓혀보세요”',
