@@ -17,15 +17,17 @@ const ResumeAnswerModalCard = ({ isOpen, onClose, updatedAt, title, answer }: Pr
       <ModalOverlay />
       <ModalContent p={50} textAlign={'left'}>
         <ModalHeader className="w-full rounded-t-[24px]" m={0}>
-          <b className="b4 mb-[20px]">{formatUpdatedAt(updatedAt)}</b>
+          <p className="b4 mb-[20px] text-sub">{formatUpdatedAt(updatedAt)}</p>
           <h6 className="h6">{title || '문항 질문을 적어보세요'}</h6>
         </ModalHeader>
         <ModalBody m={0} mt={'10px'} w={'full'}>
-          <textarea className="w-full h-[500px] mt-[8px] pr-[24px] b1 resize-none">{answer}</textarea>
+          <textarea readOnly className="w-full h-[500px] overflow-y-scroll mt-[8px] pr-[24px] b1 resize-none">
+            {answer}
+          </textarea>
         </ModalBody>
         <ModalFooter className="flex justify-end" w={'full'} m={0} p={0}>
           <b className="b3 text-light">
-            <span className="text-secondary-500">{answer.length}자</span>/{MAX_LENGTH.QUESTION}자
+            <span className="text-secondary-500">{answer?.length}자</span>/{MAX_LENGTH.QUESTION}자
           </b>
         </ModalFooter>
       </ModalContent>
