@@ -3,6 +3,7 @@
 import React, { useRef } from 'react';
 
 import { useDisclosure } from '@chakra-ui/react';
+import { useRouter } from 'next/navigation';
 
 import ActionList from '@/components/ActionList/ActionList';
 import IconMoreVertical from '@/components/Icon/IconMoreVertical';
@@ -12,6 +13,7 @@ import ModalFooter from '@/components/Modal/ModalFooter';
 import ModalHeader from '@/components/Modal/ModalHeader';
 import { QuestionData } from '@/features/resume/types/question';
 import { MAX_LENGTH } from '@/shared/constants/maxLength';
+import { ROUTES } from '@/shared/constants/routes';
 import formatUpdatedAt from '@/shared/utils/formatUpdateAt';
 
 import ResumeAnswerModalCard from './ResumeAnswerModalCard';
@@ -20,7 +22,7 @@ type Props = {
   question: QuestionData;
 };
 
-const ResumeCard = ({ question: { answer, title, updatedAt } }: Props) => {
+const ResumeCard = ({ question: { id: questionId, answer, title, updatedAt } }: Props) => {
   const answerPRef = useRef<HTMLParagraphElement>(null);
 
   const {
@@ -34,6 +36,13 @@ const ResumeCard = ({ question: { answer, title, updatedAt } }: Props) => {
     onClose: onCloseResumeAnswerModalCard,
   } = useDisclosure();
 
+  const handleActionListClick = (e: React.MouseEvent<HTMLDivElement | HTMLButtonElement>) => e.stopPropagation();
+
+  const { push } = useRouter();
+  const handleEditButtonClick = () => {
+    push(`${ROUTES.RESUMES}/${questionId}`);
+  };
+
   return (
     <>
       <div className="border rounded-[24px] hover:shadow-S4 p-[24px]" onClick={onOpenResumeAnswerModalCard}>
@@ -42,13 +51,11 @@ const ResumeCard = ({ question: { answer, title, updatedAt } }: Props) => {
           <b className="b4 mb-[5px]">{formatUpdatedAt(updatedAt) + ' 마지막 수정'}</b>
           <h6 className="h6">{title || '문항 질문을 적어보세요'}</h6>
           <ActionList>
-            <ActionList.Button
-              className="absolute top-0 right-0"
-              onClick={(e: React.MouseEvent<HTMLButtonElement>) => e.stopPropagation()}>
+            <ActionList.Button className="absolute top-0 right-0" onClick={handleActionListClick}>
               <IconMoreVertical />
             </ActionList.Button>
-            <ActionList.ItemWrapper>
-              <ActionList.Item>수정하기</ActionList.Item>
+            <ActionList.ItemWrapper onClick={handleActionListClick}>
+              <ActionList.Item onClick={handleEditButtonClick}>수정하기</ActionList.Item>
               <ActionList.Item onClick={onOpenActionListModal}>삭제하기</ActionList.Item>
             </ActionList.ItemWrapper>
           </ActionList>
@@ -59,7 +66,7 @@ const ResumeCard = ({ question: { answer, title, updatedAt } }: Props) => {
           </p>
         </div>
         <footer className="flex flex-row-reverse mt-[8px] ">
-          <TextLengthMessage currentLength={answer.length} maxLength={MAX_LENGTH.QUESTION} />
+          <TextLengthMessage currentLength={answer?.length} maxLength={MAX_LENGTH.QUESTION} />
         </footer>
       </div>
       <Modal size="md" isOpen={isOpenActionListModal} onClose={onCloseActionListModal}>
