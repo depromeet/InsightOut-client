@@ -32,8 +32,8 @@ const AICapabilityKeyword = ({ recommendKeywordList }: Props) => {
       </p>
       <div className="flex gap-[12px] mb-[18px]">
         {recommendKeywordList
-          .map(({ keyword }) => (
-            <Tag key={keyword} variant="secondary500" size="L">
+          .map(({ keyword, id }) => (
+            <Tag key={id} variant="secondary500" size="L">
               {keyword}
             </Tag>
           ))

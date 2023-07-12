@@ -248,7 +248,8 @@ const Layout = ({ children }: LayoutProps) => {
   };
 
   const readyToAIRecommendation = async () => {
-    const [writeStatus, situation, task, action, result] = methods.getValues([
+    const { getValues, setValue } = methods;
+    const [writeStatus, situation, task, action, result] = getValues([
       'writeStatus',
       'situation',
       'task',
@@ -268,7 +269,7 @@ const Layout = ({ children }: LayoutProps) => {
         action,
         result,
       });
-      methods.setValue('capabilities', capabilities);
+      setValue('capabilities', capabilities);
       disableOnceFlag();
       경험분석로딩모달Close();
       push('/analyze/verify');
