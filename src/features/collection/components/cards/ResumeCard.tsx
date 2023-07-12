@@ -12,6 +12,7 @@ import Modal from '@/components/Modal/Modal';
 import ModalFooter from '@/components/Modal/ModalFooter';
 import ModalHeader from '@/components/Modal/ModalHeader';
 import { QuestionData } from '@/features/resume/types/question';
+import { useDeleteResume } from '@/hooks/reactQuery/resume/mutation';
 import { MAX_LENGTH } from '@/shared/constants/maxLength';
 import { ROUTES } from '@/shared/constants/routes';
 import formatUpdatedAt from '@/shared/utils/formatUpdateAt';
@@ -19,10 +20,11 @@ import formatUpdatedAt from '@/shared/utils/formatUpdateAt';
 import ResumeAnswerModalCard from './ResumeAnswerModalCard';
 
 type Props = {
+  resumeId: number;
   question: QuestionData;
 };
 
-const ResumeCard = ({ question: { id: questionId, answer, title, updatedAt } }: Props) => {
+const ResumeCard = ({ resumeId, question: { id: questionId, answer, title, updatedAt } }: Props) => {
   const answerPRef = useRef<HTMLParagraphElement>(null);
 
   const {
@@ -41,6 +43,11 @@ const ResumeCard = ({ question: { id: questionId, answer, title, updatedAt } }: 
   const { push } = useRouter();
   const handleEditButtonClick = () => {
     push(`${ROUTES.RESUMES}/${questionId}`);
+  };
+
+  const { mutate: deleteResume } = useDeleteResume(resumeId);
+  const handleDeleteButtonClick = () => {
+    deleteResume({ resumeId });
   };
 
   return (
@@ -78,9 +85,7 @@ const ResumeCard = ({ question: { id: questionId, answer, title, updatedAt } }: 
           leftTextContent="취소하기"
           handleLeftClick={onCloseActionListModal}
           rightTextContent="삭제하기"
-          handleRightClick={() => {
-            console.log('삭제하기');
-          }}
+          handleRightClick={handleDeleteButtonClick}
         />
       </Modal>
       <ResumeAnswerModalCard
