@@ -16,6 +16,7 @@ import TooltipRelativeContent from '@/components/Tooltip/TooltipRelativeContent'
 import { initialValue, STEPS } from '@/feature/analyze/constants';
 import StepMenu from '@/feature/analyze/layout/StepMenu';
 import AI진입조건모달 from '@/feature/analyze/modal/BaseDialog';
+import 이탈방지모달 from '@/feature/analyze/modal/BaseDialog';
 import 경험분석로딩모달 from '@/feature/analyze/modal/LoadingModal';
 import PrevNextButton from '@/feature/analyze/PrevNextButton/PrevNextButton';
 import { ExperienceFormValues, WriteStatusType } from '@/feature/analyze/types';
@@ -42,6 +43,8 @@ const Layout = ({ children }: LayoutProps) => {
   const username = useUserNickname();
 
   const { isOpen: isAI진입조건모달Open, onOpen: AI진입조건모달Open, onClose: AI진입조건모달Close } = useDisclosure();
+  const { isOpen: is이탈방지모달Open, onOpen: 이탈방지모달Open, onClose: 이탈방지모달Close } = useDisclosure();
+
   const {
     isOpen: is경험분석로딩모달Open,
     onOpen: 경험분석로딩모달Open,
@@ -337,8 +340,19 @@ const Layout = ({ children }: LayoutProps) => {
         title={`앞의 단계를 작성해야 AI 직무역량 추천과\n경험카드를 받을 수 있어요`}
         textContent="확인했어요"
       />
-      {/* 경험 분석 로딩 모달 */}
       <경험분석로딩모달 size="3xl" isOpen={is경험분석로딩모달Open} onClose={경험분석로딩모달Close} />
+      <이탈방지모달
+        size="3xl"
+        isOpen={is이탈방지모달Open}
+        onClose={이탈방지모달Close}
+        title={`그만 작성하실 건가요? 지금까지 작성한 내용은\n모아보기 탭에서 확인할 수 있어요`}
+        leftTextContent="계속 작성하기"
+        rightTextContent="임시저장하고 나가기"
+        handleLeftClick={() => console.log('계속 작성하기')}
+        handleRightClick={() => console.log('임시저장하고 나가기')}
+        closeOnOverlayClick={false}
+        closeOnEsc={false}
+      />
     </FormProvider>
   );
 };
