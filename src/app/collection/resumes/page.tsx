@@ -46,7 +46,7 @@ const Page = () => {
           {questions
             ? questions.map((question) => (
                 <li key={question.id}>
-                  <ResumeCard question={question} />
+                  <ResumeCard resumeId={selectedResume.id} question={question} />
                 </li>
               ))
             : ''}

@@ -14,6 +14,7 @@ export type ExperienceParams = {
     result?: boolean;
   };
   post: Partial<ExperienceFormValues>;
+  delete: { experienceId: number };
 };
 
 export type ExperiencesResponse = {
