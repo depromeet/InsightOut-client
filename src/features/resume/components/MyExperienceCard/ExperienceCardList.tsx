@@ -21,17 +21,15 @@ const ExperienceCardList = () => {
     { take: CARD_COUNT_PER_LOAD },
     {
       onSuccess: ({ pages }) => {
-        const firstExperienceId = pages[0].data[0].id;
-        setExperienceId(firstExperienceId);
+        const firstDoneExperienceId = pages
+          .flatMap(({ data }) => data)
+          .find(({ experienceStatus }) => experienceStatus === 'DONE')?.id;
+        if (firstDoneExperienceId) setExperienceId(firstDoneExperienceId);
       },
     }
   );
 
-  const experiences = useMemo(
-    () =>
-      data ? data.pages.flatMap(({ data }) => data.filter(({ experienceStatus }) => experienceStatus === 'DONE')) : [],
-    [data]
-  );
+  const experiences = useMemo(() => (data ? data.pages.flatMap(({ data }) => data) : []), [data]);
 
   const ref = useIntersection((entry, observer) => {
     observer.unobserve(entry.target);
@@ -46,12 +44,16 @@ const ExperienceCardList = () => {
       ? experiences
       : getFilteredExperiences(experiences, selectedCapabilitykeyword);
 
+  const completedExperiences = filteredExperiencesByKeyword.filter(
+    ({ experienceStatus }) => experienceStatus === 'DONE'
+  );
+
   if (experiences?.length === 0) return <NotFoundExperienceCard />;
 
   return (
     <div className="relative after:content-[''] after:absolute after:bottom-0 after:w-[100%] after:h-[62px] after:bg-gradient-to-t after:from-[#F1F7FE] after:to-[rgba(243, 249, 255, 0.00)]">
       <ul className="flex flex-col w-[370px] h-[100%] overflow-y-scroll gap-[16px] px-[29px] py-[16px] bg-gradient-to-b from-[#E9E8FF] to-[#F2F9FF]">
-        {filteredExperiencesByKeyword?.map(({ id, startDate, endDate, title, summaryKeywords }) => (
+        {completedExperiences?.map(({ id, startDate, endDate, title, summaryKeywords }) => (
           <li key={id} onClick={() => setExperienceId(id)}>
             <ExperienceCard
               selected={id === experienceId}

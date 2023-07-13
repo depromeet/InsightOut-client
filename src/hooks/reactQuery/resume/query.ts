@@ -7,11 +7,14 @@ import resumeTitleApi from '@/apis/resume/title';
 import { CountResponse } from '@/apis/resume/types/count';
 import { ResumeParams, ResumeResponse } from '@/apis/resume/types/resume';
 import { TitleResponse } from '@/apis/resume/types/title';
+import { useIsSignedIn } from '@/features/auth/store';
 import { RESUME_KEY } from '@/shared/constants/querykeys';
 
 export const useGetResumes = (options?: UseQueryOptions<ResumeResponse['get'], AxiosError>) => {
+  const isSignedIn = useIsSignedIn();
   return useQuery<ResumeResponse['get'], AxiosError>(RESUME_KEY.lists(), () => resumeApi.get(), {
     ...options,
+    enabled: isSignedIn,
   });
 };
 
