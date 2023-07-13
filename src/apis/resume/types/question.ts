@@ -9,4 +9,7 @@ export type QuestionParams = {
 
 export interface QuestionResponse {
   get: QuestionData;
+  post: Omit<QuestionData, 'answer'> & {
+    resumeId: number;
+  };
 }

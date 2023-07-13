@@ -1,5 +1,8 @@
 import React from 'react';
 
+import Image from 'next/image';
+import AIFlight from 'public/images/ai-flight.png';
+
 import AlertCircleLine from '@/components/Icon/AlertCircleLine';
 import Tag from '@/components/Tag/Tag';
 
@@ -13,7 +16,9 @@ interface Props {
 const AICapabilityKeyword = ({ recommendKeywordList }: Props) => {
   return (
     <div className="flex flex-col flex-center border-[1px] border-secondary-400 rounded-[16px] bg-secondary-50 px-[22px] py-[32px] ">
-      <div className="w-[132px] h-[132px] border-[1px] border-secondary-300 bg-white rounded-[50%] mb-[7px]"></div>
+      <div className="relative w-[132px] h-[132px] border-[1px] border-secondary-300 bg-white rounded-[50%] mb-[7px]">
+        <Image src={AIFlight} alt="lumos-flight" fill />
+      </div>
       <div className="h6 break-keep mb-[16px]">
         잠깐, OOO님! <br />
         직무역량 키워드에 <RecommendKeyword keywordList={recommendKeywordList} />을 추가해보면 어때요?

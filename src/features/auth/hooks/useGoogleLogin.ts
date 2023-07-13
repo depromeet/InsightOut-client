@@ -8,6 +8,7 @@ import { useRouter } from 'next/navigation';
 
 import authApi from '@/apis/auth/auth';
 import userApi from '@/apis/user/user';
+import { SIGN_UP_ROUTES } from '@/shared/constants/routes';
 import { useUserActions } from '@/shared/store/user';
 
 import { useIsSignedIn } from '../store';
@@ -43,7 +44,7 @@ const useGoogleLogin = () => {
       const userInfo = { userId, nickname, onboarding, email, imageUrl };
       setUserInfo(userInfo);
       setIsLoading(false);
-      router.push('/?steps=welcome');
+      router.push(SIGN_UP_ROUTES.WELCOME);
     } catch (error) {
       setIsLoading(false);
     }

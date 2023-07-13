@@ -2,18 +2,19 @@ import { useMutation, UseMutationOptions, useQueryClient } from '@tanstack/react
 import { AxiosError, AxiosResponse } from 'axios';
 
 import questionApi from '@/apis/resume/question';
-import { QuestionParams } from '@/apis/resume/types/question';
+import { QuestionParams, QuestionResponse } from '@/apis/resume/types/question';
 import { QUESTION_KEY, RESUME_KEY } from '@/shared/constants/querykeys';
 
 export const useCreateQuestion = (
-  options?: UseMutationOptions<AxiosResponse, AxiosError, QuestionParams['post']['payload']['resumeId']>
+  options?: UseMutationOptions<QuestionResponse['post'], AxiosError, QuestionParams['post']['payload']['resumeId']>
 ) => {
   const queryClient = useQueryClient();
 
   return useMutation((resumeId) => questionApi.post({ payload: { resumeId } }), {
     ...options,
-    onSuccess: () => {
+    onSuccess: (data, variables, context) => {
       queryClient.invalidateQueries({ queryKey: RESUME_KEY.lists() });
+      options?.onSuccess?.(data, variables, context);
     },
   });
 };

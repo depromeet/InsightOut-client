@@ -1,10 +1,11 @@
 import Tag from '@/components/Tag/Tag';
+import { Experience } from '@/features/collection/types';
 
 type ExperienceCardProps = {
   selected?: boolean;
-  date: string;
-  title: string;
-  summaryKeywords: string[];
+  date: string | null;
+  title: Experience['title'];
+  summaryKeywords: Experience['summaryKeywords'];
 };
 
 const ExperienceCard = ({ selected, date, title, summaryKeywords }: ExperienceCardProps) => {
@@ -18,7 +19,7 @@ const ExperienceCard = ({ selected, date, title, summaryKeywords }: ExperienceCa
         {title}
       </h3>
       <ul className="flex gap-[10px]">
-        {summaryKeywords.map((keyword) => (
+        {summaryKeywords?.map((keyword) => (
           <li key={keyword}>
             <Tag variant="primary50" size="M">
               {keyword}
