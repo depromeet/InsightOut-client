@@ -28,6 +28,9 @@ export const useCreateRecommendResume = (
       queryClient.invalidateQueries(AI_KEY.list(['resume']));
       options?.onSuccess?.(data, variables, context);
     },
+    onError: (error) => {
+      if (error.status === 500) queryClient.refetchQueries(AI_KEY.list(['resume']));
+    },
   });
 };
 

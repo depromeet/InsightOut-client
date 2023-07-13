@@ -6,6 +6,7 @@ import type { Modal as ModalWrapperType } from '@chakra-ui/react';
 import { Modal as ModalWrapper, ModalContent, ModalOverlay } from '@chakra-ui/react';
 
 import Lottie from '@/components/Lottie/Lottie';
+import { useUserNickname } from '@/shared/store/user';
 
 type ModalProps = MergeComponentProps<
   typeof ModalWrapperType,
@@ -16,6 +17,7 @@ type ModalProps = MergeComponentProps<
 >;
 
 const LoadingModal = ({ isOpen, onClose, size }: ModalProps) => {
+  const username = useUserNickname();
   return (
     <>
       <ModalWrapper
@@ -31,7 +33,7 @@ const LoadingModal = ({ isOpen, onClose, size }: ModalProps) => {
             <Lottie src="/lotties/lumos-loading.json" />
           </div>
           <h5 className="whitespace-pre h6 text-main">
-            인사이트 아웃 AI 000이 [랜덤닉네임]님의 경험을 분석하고 있어요
+            인사이트 아웃 AI 루모스가 {username}님의 경험을 분석하고 있어요
           </h5>
         </ModalContent>
       </ModalWrapper>

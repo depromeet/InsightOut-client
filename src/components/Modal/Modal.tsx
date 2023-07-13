@@ -14,11 +14,11 @@ type ModalProps = MergeComponentProps<
 >;
 
 const Modal = (props: ModalProps) => {
-  const { isOpen, onClose, size, children } = props;
+  const { isOpen, onClose, size, children, ...rest } = props;
 
   return (
     <>
-      <ModalWrapper isOpen={isOpen} onClose={onClose} size={size} isCentered>
+      <ModalWrapper isOpen={isOpen} onClose={onClose} size={size} isCentered {...rest}>
         <ModalOverlay />
         <ModalContent>
           <ModalCloseButton />
