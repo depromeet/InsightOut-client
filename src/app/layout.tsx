@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     type: 'website',
   },
   verification: {
-    google: 'google',
+    google: META.GOOGLE_VERIFICATION,
   },
   twitter: {
     title: META.TITLE,
