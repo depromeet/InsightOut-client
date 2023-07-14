@@ -19,7 +19,7 @@ const replacePatternToComponent = (text: string, pattern: RegExp, Component: Ele
   return splitText.reduce(
     (arr: (string | JSX.Element)[], element, index) =>
       matches[index]
-        ? [...arr, element, <Component key={`${matches[index]}`}>{matches[index]}</Component>]
+        ? [...arr, element, <Component key={`${index}-${matches[index]}`}>{matches[index]}</Component>]
         : [...arr, element],
     []
   );
