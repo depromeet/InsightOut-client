@@ -19,7 +19,7 @@ const SpellCheckContainer = ({ children }: PropsWithChildren) => (
 const BUTTON_CONTENT = {
   idle: '검사하기',
   loading: '',
-  success: '초기화',
+  correct: '초기화',
   error: '초기화',
 } as const;
 
@@ -55,7 +55,7 @@ const SpellChecker = () => {
           )
         }
         className="absolute right-[24px] top-[15px] min-w-[71px]">
-        {BUTTON_CONTENT[status]}
+        {BUTTON_CONTENT[spellCheckResult]}
       </Button>
     </SpellCheckContainer>
   );

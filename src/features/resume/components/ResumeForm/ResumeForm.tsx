@@ -31,8 +31,8 @@ const ResumeForm = () => {
     { questionId },
     {
       onSuccess({ title, answer }) {
-        setTitle(title ?? ''); // NOTE: answer이 없을 때 서버에서 null을 보내줘서 빈 문자열로 바꿨습니다
-        setAnswer(answer ?? '');
+        setTitle(title);
+        setAnswer(answer);
       },
     }
   );
@@ -40,20 +40,27 @@ const ResumeForm = () => {
 
   const titleTextareaRef = useRef<HTMLTextAreaElement>(null);
 
+  const debouncedUpdateTitle = useDebounce(() => updateQuestion({ title }), AUTO_SAVE_TIME);
+
   const handleTitleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     resizeHeight(titleTextareaRef);
     setTitle(e.target.value);
+    debouncedUpdateTitle();
   };
 
-  const debouncedUpdateQuestion = useDebounce(() => updateQuestion({ title, answer }), AUTO_SAVE_TIME);
+  const handleTitleBlur = () => {
+    updateQuestion({ title });
+  };
+
+  const debouncedUpdateAnswer = useDebounce(() => updateQuestion({ answer }), AUTO_SAVE_TIME);
 
   const handleAnswerChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setAnswer(e.target.value);
-    debouncedUpdateQuestion();
+    debouncedUpdateAnswer();
   };
 
   const handleAnswerBlur = () => {
-    updateQuestion({ title, answer });
+    updateQuestion({ answer });
   };
 
   const handleResumeSubmit = (e: FormEvent<HTMLFormElement>) => {
@@ -69,8 +76,8 @@ const ResumeForm = () => {
       <header className="flex items-center justify-between mb-[14px]">
         <SavingCaption updatedAt={formatYYMMDDhhmm(question.updatedAt)} currentSavingStatus={status} />
         <div className="flex items-center gap-4">
-          <TextLengthMessage currentLength={answer.length} maxLength={MAX_LENGTH.QUESTION} />
-          <Button variant="gray900" size="M" disabled={answer.length === 0}>
+          <TextLengthMessage currentLength={answer?.length} maxLength={MAX_LENGTH.QUESTION} />
+          <Button variant="gray900" size="M" disabled={answer?.length === 0}>
             임시 저장
           </Button>
         </div>
@@ -79,6 +86,7 @@ const ResumeForm = () => {
         ref={titleTextareaRef}
         value={title}
         onChange={handleTitleChange}
+        onBlur={handleTitleBlur}
         maxLength={MAX_LENGTH.TITLE}
         placeholder="문항 질문을 적어보세요."
         className="w-full min-h-[96px] py-[6px] resize-none subhead2 placeholder:text-light"
