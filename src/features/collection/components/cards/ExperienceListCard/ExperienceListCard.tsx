@@ -4,6 +4,7 @@
 import { Fragment } from 'react';
 
 import { Divider, useDisclosure } from '@chakra-ui/react';
+import { useRouter } from 'next/navigation';
 
 import ActionList from '@/components/ActionList/ActionList';
 import Badge from '@/components/Badge/Badge';
@@ -14,6 +15,7 @@ import ModalHeader from '@/components/Modal/ModalHeader';
 import Tag from '@/components/Tag/Tag';
 import { MESSAGE } from '@/features/collection/constants';
 import { useDeleteExperience } from '@/hooks/reactQuery/experience/mutation';
+import { ROUTES } from '@/shared/constants/routes';
 
 import { Experience, ExperienceStatus } from '../../../types';
 import getExperiencePeriod from '../../../utils/getExperiencePeriod';
@@ -44,6 +46,11 @@ const ExperienceListCard = ({
     onClose: onCloseExperienceCardModal,
   } = useDisclosure();
 
+  const { push } = useRouter();
+  const handleEditButtonClick = () => {
+    push(ROUTES.EXPERIENCE);
+  };
+
   const { mutate: deleteExperience } = useDeleteExperience(id);
   const onDeleteButtonClick = () => {
     deleteExperience();
@@ -64,6 +71,7 @@ const ExperienceListCard = ({
           experienceStatus={experienceStatus}
           summaryKeywords={summaryKeywords}
           onOpenActionListModal={onOpenActionListModal}
+          onEditButtonClick={handleEditButtonClick}
         />
         <ExperienceListCard.Summary
           experiencePeriod={experiencePeriod}
@@ -108,6 +116,7 @@ type ExperienceListCardTopProps = {
   onOpenActionListModal: () => void;
   summaryKeywords?: string[];
   keyword: string;
+  onEditButtonClick: () => void;
 };
 
 ExperienceListCard.Top = ({
@@ -116,6 +125,7 @@ ExperienceListCard.Top = ({
   onOpenActionListModal,
   summaryKeywords,
   keyword,
+  onEditButtonClick,
 }: ExperienceListCardTopProps) => {
   const handleActionListClick = (e: React.MouseEvent<HTMLDivElement | HTMLButtonElement>) => e.stopPropagation();
 
@@ -137,7 +147,7 @@ ExperienceListCard.Top = ({
           <IconMoreVertical />
         </ActionList.Button>
         <ActionList.ItemWrapper onClick={handleActionListClick}>
-          <ActionList.Item>수정하기</ActionList.Item>
+          <ActionList.Item onClick={onEditButtonClick}>수정하기</ActionList.Item>
           <ActionList.Item onClick={onOpenActionListModal}>삭제하기</ActionList.Item>
         </ActionList.ItemWrapper>
       </ActionList>
