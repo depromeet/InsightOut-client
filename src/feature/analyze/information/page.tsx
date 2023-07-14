@@ -1,7 +1,9 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
+
+import { useRouter } from 'next/navigation';
 
 import TextAreaField from '@/components/Input/TextAreaField/TextAreaField';
 import QuestionCard from '@/components/QuestionCard/QuestionCard';
@@ -10,6 +12,11 @@ import { callbackRefWithResizeHeight } from '@/shared/utils/callbackRefWithResiz
 
 const InformationPage = () => {
   const { control } = useFormContext<ExperienceFormValues>();
+  const { prefetch } = useRouter();
+
+  useEffect(() => {
+    prefetch('/analyze/verify');
+  }, [prefetch]);
   return (
     <>
       <QuestionCard

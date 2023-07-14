@@ -28,6 +28,10 @@ const config: StorybookConfig = {
       to: '/images',
     },
     {
+      from: '../public/lotties',
+      to: '/lotties',
+    },
+    {
       from: '../src/app/fonts',
       to: 'src/app/fonts',
     },

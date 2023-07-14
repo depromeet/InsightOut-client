@@ -6,6 +6,7 @@ import Button from '@/components/Button/Button';
 import IconGoogleLogo from '@/components/Icon/IconGoogleLogo';
 import ModalFooter from '@/components/Modal/ModalFooter';
 import ModalHeader from '@/components/Modal/ModalHeader';
+import { ROUTES } from '@/shared/constants/routes';
 
 type SignUpContentsProps = {
   signIn: () => void;
@@ -31,11 +32,11 @@ const SignUpContents = ({ signIn }: SignUpContentsProps) => {
         <Flex flexDir={'column'}>
           <span className="text-light text-[10px] font-medium leading-[14px]">
             로그인 시&nbsp;
-            <Link href={'#' as Route} className="underline text-primary-500">
+            <Link href={ROUTES.PRIVACY_POLICY as Route} className="underline text-primary-500" target="_blank">
               개인정보보호 정책
             </Link>
             &nbsp;및&nbsp;
-            <Link href={'#' as Route} className="underline text-primary-500">
+            <Link href={ROUTES.TERMS_OF_SERVICE as Route} className="underline text-primary-500" target="_blank">
               서비스 약관
             </Link>
             에 동의하는 것으로 간주하며,
