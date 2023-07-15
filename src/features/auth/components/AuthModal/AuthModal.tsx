@@ -32,7 +32,10 @@ const AuthModal = ({ isOpen, onClose, onAbortSignUp }: AuthModalProps) => {
   const { setIsSignedIn, setIsTokenRequired } = useAuthActions();
   const { signIn, isLoading } = useGoogleLogin();
 
-  const [selectedCategory, setSelectedCategory] = useState<{ title: string; field: Field }>({ title: '', field: null });
+  const [selectedCategory, setSelectedCategory] = useState<{ title: string; field: Field }>({
+    title: '',
+    field: Field.NOT_SELECTED,
+  });
 
   const handleCloseModal = () => {
     const isLastStep = !!searchParams.get('startnow');

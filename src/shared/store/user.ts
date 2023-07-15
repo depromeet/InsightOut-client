@@ -1,5 +1,6 @@
 import { create } from 'zustand';
 
+import { Field } from '../constants/user';
 import { UserInfoParams, UserState } from './types/user';
 
 export const userStore = create<UserState>((set) => ({
@@ -15,6 +16,7 @@ export const userStore = create<UserState>((set) => ({
     },
     email: '',
     imageUrl: '',
+    field: Field.NOT_SELECTED,
   },
   actions: {
     setUserInfo: (params: UserInfoParams) =>
@@ -25,6 +27,7 @@ export const userStore = create<UserState>((set) => ({
           onboarding: params.onboarding ?? state.userInfo.onboarding,
           email: params.email ?? state.userInfo.email,
           imageUrl: params.imageUrl ?? state.userInfo.imageUrl,
+          field: params.field ?? state.userInfo.field,
         },
       })),
   },
@@ -37,6 +40,7 @@ export const useUserNickname = () => userStore((state) => state.userInfo.nicknam
 export const useUserOnboarding = () => userStore((state) => state.userInfo.onboarding);
 export const useUserEmail = () => userStore((state) => state.userInfo.email);
 export const useUserImageUrl = () => userStore((state) => state.userInfo.imageUrl);
+export const useUserField = () => userStore((state) => state.userInfo.field);
 
 // Actions
 export const useUserActions = () => userStore((state) => state.actions);

@@ -8,6 +8,7 @@ import OnboardingProvider from '@/components/Providers/OnboardingProvider';
 import AuthModal from '@/features/auth/components/AuthModal/AuthModal';
 import AuthProvider from '@/features/auth/components/Providers/AuthProvider';
 import { useAuthActions, useIsOpenSignUpModal, useIsRequesting, useIsSignedIn } from '@/features/auth/store';
+import { Field } from '@/shared/constants/user';
 import { useUserNickname } from '@/shared/store/user';
 
 export default function Template({ children }: StrictPropsWithChildren) {
@@ -24,7 +25,7 @@ export default function Template({ children }: StrictPropsWithChildren) {
   };
 
   const handleAbortSignUp = async () => {
-    await userApi.patch({ nickname, field: null });
+    await userApi.patch({ nickname, field: Field.NOT_SELECTED });
     setIsSignedIn(true);
   };
 
