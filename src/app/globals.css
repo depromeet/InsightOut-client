@@ -127,10 +127,6 @@
     @apply w-full border-[1px] border-primary-100 rounded-[24px] bg-white;
   }
 
-  .s1 {
-    box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.14);
-  }
-
   .menulist {
     box-shadow: 0px 8px 24px 0px rgba(0, 0, 0, 0.16);
   }

@@ -1,5 +1,6 @@
 .root {
-  @apply fixed flex items-center justify-between bg-dark w-full h-[56px] px-[120px] z-10 s1;
+  @apply fixed flex items-center justify-between bg-dark w-full h-[56px] px-[120px] z-10;
+  box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.14);
 }
 
 .link {
