@@ -1,6 +1,5 @@
 import axios, { AxiosResponse } from 'axios';
 
-import { authStore } from '@/features/auth/store';
 import { HTTP_BASE_URL } from '@/shared/constants/http';
 import { isAccessTokenExpired, isRefreshTokenExpired, isTokenNotExist } from '@/shared/utils/http';
 
@@ -28,12 +27,11 @@ instance.interceptors.response.use(
     }
 
     /**
-     * @description Refresh Token까지 만료되거나 토큰이 존재하지 않을 경우 로그인 화면으로 리다이렉트
+     * @description Refresh Token까지 만료되거나 토큰이 존재하지 않을 경우 로그아웃 처리
      */
     if (isRefreshTokenExpired(statusCode, title) || isTokenNotExist(statusCode, title)) {
-      const { setIsTokenRequired, setIsSignedIn } = authStore.getState().actions;
-      setIsTokenRequired(true);
-      setIsSignedIn(false);
+      await authApi.signOut();
+      if (window !== undefined) window.location.href = '/';
     }
 
     return Promise.reject(error);
