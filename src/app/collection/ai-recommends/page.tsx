@@ -1,9 +1,9 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
+import Chip from '@/components/Chip/Chip';
 import AiRecommendResumeListCard from '@/features/collection/components/cards/AiRecommendResumeCard';
-import ChipListNav from '@/features/collection/components/nav/ChipListNav';
 import { useGetAiResumes } from '@/hooks/reactQuery/ai/query';
 
 const Page = () => {
@@ -16,15 +16,22 @@ const Page = () => {
 
   const [selectedAiRecommend, setSelectedAiRecommend] = useState(initialAiRecommenedKeyword);
 
-  useEffect(() => {
-    setSelectedAiRecommend(initialAiRecommenedKeyword);
-  }, [initialAiRecommenedKeyword]);
-
   const shownAiResumes = aiRecommend.filter(({ AiCapabilities }) => AiCapabilities.includes(selectedAiRecommend));
 
   return (
     <div>
-      <ChipListNav items={aiRecommendKeyword} selectedItem={selectedAiRecommend} changeItem={setSelectedAiRecommend} />
+      <nav className="flex flex-row items-center gap-[8px] h-[54px] overflow-x-auto whitespace-nowrap scrollbar-hide">
+        {aiRecommendKeyword.map((keyword, index) => (
+          <li key={`${index}-${keyword}`} className="list-none">
+            <Chip
+              size="M"
+              variant={selectedAiRecommend === keyword ? 'secondary-pressed' : 'secondary'}
+              onClick={() => setSelectedAiRecommend(keyword)}>
+              {keyword}
+            </Chip>
+          </li>
+        ))}
+      </nav>
       <section>
         <ul className="flex flex-col gap-[40px]">
           {shownAiResumes.map(({ id, updatedAt, content, AiCapabilities }) => (
