@@ -162,7 +162,9 @@ const ExperiencePage = () => {
           )}
         />
       </QuestionCard>
-      <OnboardingModal isOpen={isOnboardingModalOpen} onClose={onBoardingModalClose} nickname={username} />
+      {!experienceCount && (
+        <OnboardingModal isOpen={isOnboardingModalOpen} onClose={onBoardingModalClose} nickname={username} />
+      )}
     </>
   );
 };
