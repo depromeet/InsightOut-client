@@ -49,7 +49,7 @@ const SpellErrorResult = () => {
         <AccordionPanel paddingX="26px" css={textStyles.b4}>
           <ul>
             {spellErrors.map(({ id, error, correct }) => (
-              <li key={error} className="flex items-center justify-between py-[7px] b3">
+              <li key={`${id}-${error}`} className="flex items-center justify-between py-[7px] b3">
                 <Flex>
                   <span className="line-through text-error">{error}</span>
                   <span className="text-success">&nbsp;{correct}</span>
