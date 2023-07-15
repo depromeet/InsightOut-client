@@ -1,5 +1,4 @@
 import Image from 'next/image';
-import Link from 'next/link';
 
 import { ROUTES } from '@/shared/constants/routes';
 
@@ -13,6 +12,7 @@ import SvgIconChevronRight from '../Icon/IconChevronRight';
 import SvgIconPairQuotation from '../Icon/IconPairQuotation';
 import AnalyzeCard from './AnalyzeCard';
 import FeedbackForm from './FeedbackForm';
+import FooterNav from './FooterNav';
 import Looper from './Looper';
 import StartButton from './StartButton';
 
@@ -191,22 +191,7 @@ const Home = () => {
           {'인사이트아웃은 모든 초보 구직자들을 응원합니다.\n더 나은 서비스를 위해 피드백 해주세요!'}
         </p>
         <FeedbackForm />
-        <nav className="max-w-[1200px] w-full pt-[22px] pb-[9.5px] mb-[23.5px] border-solid border-b-[1px] border-b-white">
-          <ul className="flex items-center justify-center text-white b4">
-            <li className="flex justify-center items-center w-[92px] h-[48px] text-center">
-              <Link href={{ pathname: ROUTES.HOME }}>홈</Link>
-            </li>
-            <li className="flex justify-center items-center w-[108px] h-[48px] text-center">
-              <Link href={{ pathname: ROUTES.EXPERIENCE }}>경험 분해</Link>
-            </li>
-            <li className="flex justify-center items-center w-[108px] h-[48px] text-center">
-              <Link href={{ pathname: ROUTES.RESUMES }}>자기소개서 작성</Link>
-            </li>
-            <li className="flex justify-center items-center w-[92px] h-[48px] text-center">
-              <Link href={{ pathname: '/collection/experiences' }}>모아보기</Link>
-            </li>
-          </ul>
-        </nav>
+        <FooterNav />
         <div className="flex justify-between items-center max-w-[1200px] w-full">
           <span className="text-white c1">Copyrighted © insightout all rights reserved.</span>
           <span className="text-white c1">

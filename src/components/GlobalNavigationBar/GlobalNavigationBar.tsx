@@ -1,17 +1,21 @@
 import { ComponentPropsWithoutRef } from 'react';
 
-import { Flex } from '@chakra-ui/react';
+import { Flex, useToast } from '@chakra-ui/react';
 import cn from 'classnames';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 
+import AuthModal from '@/features/auth/components/AuthModal/AuthModal';
 import { useAuthActions } from '@/features/auth/store';
 import GnbMyPage from '@/features/myPage/components/GlobalNavigationBar/GnbMyPage';
 import { ROUTES } from '@/shared/constants/routes';
 import { useUserEmail, useUserImageUrl, useUserNickname } from '@/shared/store/user';
+import getResumeRoute from '@/features/resume/utils/getResumeRoute';
+import { ROUTES, SIGN_UP_ROUTES } from '@/shared/constants/routes';
 import { tw } from '@/shared/utils/tailwindMerge';
 
+import HomeLogo from '../../../public/images/home/img-home-logo.png';
 import Button from '../Button/Button';
 import IconGoogleLogo from '../Icon/IconGoogleLogo';
 import Spinner from '../Spinner/Spinner';
@@ -26,9 +30,20 @@ type GlobalNavigationBarProps = ComponentPropsWithoutRef<'header'> & {
    * Auth 관련 요청이 진행 중인지 여부 (스피너 출력을 위해 필요)
    */
   isRequesting: boolean;
+  isOpenSignUpModal: boolean;
+  onCloseAuthModal: () => void;
+  onAbortSignUp: () => void;
 };
 
-const GlobalNavigationBar = ({ className, isSignedIn, isRequesting, ...props }: GlobalNavigationBarProps) => {
+const GlobalNavigationBar = ({
+  className,
+  isSignedIn,
+  isRequesting,
+  isOpenSignUpModal,
+  onCloseAuthModal,
+  onAbortSignUp,
+  ...props
+}: GlobalNavigationBarProps) => {
   const rootClassName = tw(styles.root, className);
   const pathName = usePathname();
   const profileImgUrl = useUserImageUrl();
@@ -36,10 +51,34 @@ const GlobalNavigationBar = ({ className, isSignedIn, isRequesting, ...props }: 
   const userEmail = useUserEmail();
   const { setIsOpenSignUpModal } = useAuthActions();
   const router = useRouter();
+  const toast = useToast();
+  const resumeRoute = getResumeRoute();
 
   const handleClickLoginButton = () => {
     setIsOpenSignUpModal(true);
-    router.push('/?steps=signUp');
+    router.push(SIGN_UP_ROUTES.SIGN_UP);
+  };
+
+  const handleClickMyPage = () => {
+    toast({
+      title: '마이 페이지는 준비 중이에요',
+      status: 'info',
+      duration: 2000,
+      isClosable: true,
+      position: 'top',
+    });
+  };
+
+  const checkIsSignedIn = () => {
+    if (isSignedIn) return true;
+    setIsOpenSignUpModal(true);
+    router.push(SIGN_UP_ROUTES.SIGN_UP);
+    return false;
+  };
+
+  const handleRouter = (route: Route) => {
+    if (!checkIsSignedIn()) return;
+    router.push(route);
   };
 
   return (

@@ -3,19 +3,20 @@
 
 import { useState } from 'react';
 
-import Image from 'next/image';
-
+import Badge from '@/components/Badge/Badge';
 import Button from '@/components/Button/Button';
 import TextAreaField from '@/components/Input/TextAreaField/TextAreaField';
 import Tag from '@/components/Tag/Tag';
+import { ExperienceStatus } from '@/feature/analyze/types';
 
-import cardImage from '../../../../../../public/images/card1.png';
 import { Capability } from '../../../types';
+import CapabilityImage from '../CapabilityImage';
 import MotionBox from '../MotionBox';
 
 type Props = {
   period: string;
   title: string;
+  experienceStatus: ExperienceStatus;
   summaryKeywords?: string[];
   experienceCapabilityKeywords?: string[];
   aiRecommendKeywords?: string[];
@@ -41,9 +42,14 @@ const aiRecommendQuestions = [
 const aiRecommend =
   '디자이너로서 개발팀과 각각의 전문성을 최대한 활용하여 높은 퀄리티의 앱을 만들어내기 위해 커뮤니케이션 능력을 뽐내셨군요! 빠른 기간안에 앱 서비스를 런칭해야하는 상황에서 디자인 시스템 제작, 런칭일 정해서 린하게 개발하는 방법을 제의한 것은 프로젝트 관리 능력의 일환이었습니다.';
 
-const ExperienceCard = (props: Props) => {
-  const { period, title, summaryKeywords, experienceCapabilityKeywords, aiRecommendKeywords } = props;
-
+const ExperienceCard = ({
+  period,
+  title,
+  summaryKeywords,
+  experienceCapabilityKeywords,
+  aiRecommendKeywords,
+  experienceStatus,
+}: Props) => {
   const [isBack, setIsBack] = useState(false);
 
   const handleFlipClick = () => {
@@ -77,6 +83,7 @@ const ExperienceCard = (props: Props) => {
           {!isBack ? (
             <ExperienceCard.BodyFront
               summaries={summaryKeywords}
+              experienceStatus={experienceStatus}
               aiRecommend={aiRecommend}
               experienceCapabilityKeywords={experienceCapabilityKeywords}
               aiRecommendKeywords={aiRecommendKeywords}
@@ -114,6 +121,7 @@ ExperienceCard.Header = ({ title, period, isBack, handleFlipClick }: ExperienceC
 
 type ExperienceCardBodyFrontProps = {
   summaries?: string[];
+  experienceStatus: ExperienceStatus;
   experienceCapabilityKeywords?: string[];
   aiRecommendKeywords?: string[];
   aiRecommend?: string;
@@ -121,6 +129,7 @@ type ExperienceCardBodyFrontProps = {
 
 ExperienceCard.BodyFront = ({
   summaries,
+  experienceStatus,
   experienceCapabilityKeywords,
   aiRecommendKeywords,
   aiRecommend,
@@ -128,7 +137,11 @@ ExperienceCard.BodyFront = ({
   return (
     <>
       <div className="w-[560px]">
-        <ExperienceCard.Image summaries={summaries} />
+        <ExperienceCard.Image
+          summaries={summaries}
+          experienceStatus={experienceStatus}
+          keyword={experienceCapabilityKeywords ? experienceCapabilityKeywords[0] : ''}
+        />
       </div>
       <div className="w-[589px] flex flex-col text-left px-[40px]">
         <ExperienceCard.Keyword title="내가 선택한 역량 키워드" capabilities={experienceCapabilityKeywords} />
@@ -146,25 +159,36 @@ ExperienceCard.BodyFront = ({
 
 type ExperienceCardImageProps = {
   summaries?: string[];
+  keyword: string;
+  experienceStatus: ExperienceStatus;
 };
 
-ExperienceCard.Image = ({ summaries }: ExperienceCardImageProps) => (
+ExperienceCard.Image = ({ summaries, keyword, experienceStatus }: ExperienceCardImageProps) => (
   <div className="relative bg-black rounded-[24px] w-[480px] h-[616px]">
     <div className="w-[480px] h-[616px] flex items-center justify-center">
-      <Image src={cardImage} alt="경험카드" width={432} height={453} />
+      <CapabilityImage keyword={keyword} experienceStatus={experienceStatus} width={432} height={453} />
+      {experienceStatus === 'INPROGRESS' && (
+        <Badge variant="gray100-outline" size="M" className="absolute top-[24px] left-[24px]">
+          작성중
+        </Badge>
+      )}
       <div className="absolute flex flex-col bottom-[24px] left-[24px]">
-        <span className="text-left text-white b4 mb-[6px]">경험요약</span>
-        <ul className="flex flex-row gap-[8px]">
-          {summaries
-            ? summaries.map((summary, index) => (
+        {summaries?.length ? (
+          <>
+            <span className="text-left text-white b4 mb-[6px]">경험요약</span>
+            <ul className="flex flex-row gap-[8px]">
+              {summaries.map((summary, index) => (
                 <li key={`ExperienceCardModal-${index}-${summary}`}>
                   <Tag variant="gray800" size="L">
                     {summary}
                   </Tag>
                 </li>
-              ))
-            : ''}
-        </ul>
+              ))}
+            </ul>
+          </>
+        ) : (
+          ''
+        )}
       </div>
     </div>
   </div>

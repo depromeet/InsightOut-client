@@ -2,6 +2,8 @@ import React from 'react';
 
 import { Modal, ModalContent, ModalOverlay } from '@chakra-ui/react';
 
+import { ExperienceStatus } from '@/feature/analyze/types';
+
 import ExperienceCard from './ExperienceCard';
 
 type Props = {
@@ -9,6 +11,7 @@ type Props = {
   onClose: () => void;
   period: string;
   title: string;
+  experienceStatus: ExperienceStatus;
   summaryKeywords?: string[];
   experienceCapabilityKeywords?: string[];
   aiRecommendKeywords?: string[];
@@ -20,6 +23,7 @@ const ExperienceModal = ({
   title,
   period,
   summaryKeywords,
+  experienceStatus,
   experienceCapabilityKeywords,
   aiRecommendKeywords,
 }: Props) => {
@@ -30,6 +34,7 @@ const ExperienceModal = ({
         <ExperienceCard
           title={title}
           period={period}
+          experienceStatus={experienceStatus}
           summaryKeywords={summaryKeywords}
           experienceCapabilityKeywords={experienceCapabilityKeywords}
           aiRecommendKeywords={aiRecommendKeywords}

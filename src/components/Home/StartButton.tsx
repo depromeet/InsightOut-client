@@ -3,6 +3,8 @@
 import { Route } from 'next';
 import { useRouter } from 'next/navigation';
 
+import { useAuthActions, useIsSignedIn } from '@/features/auth/store';
+
 import Button from '../Button/Button';
 
 type StartButtonProps = {
@@ -11,10 +13,24 @@ type StartButtonProps = {
 };
 
 const StartButton = ({ route, children }: StartButtonProps) => {
+  const isSignedIn = useIsSignedIn();
+  const { setIsOpenSignUpModal } = useAuthActions();
   const router = useRouter();
 
+  const checkIsSignedIn = () => {
+    if (isSignedIn) return true;
+    setIsOpenSignUpModal(true);
+    router.push('/?steps=signUp');
+    return false;
+  };
+
+  const handleClickButton = () => {
+    if (!checkIsSignedIn()) return;
+    router.push(route);
+  };
+
   return (
-    <Button variant="primary" size="XL" onClick={() => router.push(route)}>
+    <Button variant="primary" size="XL" onClick={handleClickButton}>
       {children}
     </Button>
   );

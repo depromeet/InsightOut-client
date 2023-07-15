@@ -3,6 +3,8 @@
 import React, { KeyboardEvent } from 'react';
 import { useFormContext, useWatch } from 'react-hook-form';
 
+import { useDisclosure } from '@chakra-ui/react';
+
 import Button from '@/components/Button/Button';
 import TextAreaField from '@/components/Input/TextAreaField/TextAreaField';
 import QuestionCard from '@/components/QuestionCard/QuestionCard';
@@ -13,15 +15,15 @@ import { useGetKeywordList } from '@/hooks/reactQuery/keyword/query';
 import useInput from '@/hooks/useInput';
 import { exceptEnter } from '@/shared/utils/exceptEnter';
 
+import BaseDialog from '../modal/BaseDialog';
 import { ExperienceFormValues, KeywordEntriesType } from '../types';
 
 const deDuplicatedTwoDimensionalArray = (arr: KeywordEntriesType) => Object.entries(Object.fromEntries(arr));
 
-// TODO: 경험 분해 키워드 임시 저장 API (/experience/capability) 로 요청 보내기, 요청body: Object.fromEntries(keywordList.filter(([, isSelected]) => keyword[1] === true))
-
 const KeywordPage = () => {
   const [text, onChangeText, setText] = useInput('');
   const { setValue, control } = useFormContext<ExperienceFormValues>();
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   const [experienceId, keywordList] = useWatch({
     name: ['experienceId', 'keywords'],
@@ -59,12 +61,16 @@ const KeywordPage = () => {
 
   const addKeywordAndInitializeTextField = async () => {
     if (!text.trim()) return;
-    const deDuplicatedKeywordList = deDuplicatedTwoDimensionalArray([...keywordList, [text, false]]);
-    // TODO: 중복된 키워드면 토스트 띄워주기
-    setValue('keywords', deDuplicatedKeywordList);
-    if (deDuplicatedKeywordList.length !== keywordList.length) {
-      await saveKeyword({ keywords: Object.fromEntries(keywordList.filter(([, isSelected]) => isSelected === true)) });
+
+    const addKeywordList = deDuplicatedTwoDimensionalArray([...keywordList, [text, false]]);
+    const isDuplicated = addKeywordList.length === keywordList.length;
+    if (isDuplicated) {
+      onOpen();
+    } else {
+      setValue('keywords', addKeywordList);
+
       await createKeyword({ keyword: text });
+      await saveKeyword({ keywords: Object.fromEntries(keywordList.filter(([, isSelected]) => isSelected === true)) });
     }
     setText('');
   };
@@ -112,6 +118,13 @@ const KeywordPage = () => {
             추가하기
           </Button>
         </div>
+        <BaseDialog
+          size="3xl"
+          isOpen={isOpen}
+          onClose={onClose}
+          title={`중복된 키워드는 추가할 수 없어요`}
+          textContent="확인했어요"
+        />
       </>
     </QuestionCard>
   );

@@ -4,7 +4,7 @@
 }
 
 .link {
-  @apply font-medium text-[20px] leading-[28px] text-light shrink-0;
+  @apply font-medium text-[20px] leading-[28px] text-light shrink-0 cursor-pointer;
 
   // Hover
   @apply hover:text-primary-400;

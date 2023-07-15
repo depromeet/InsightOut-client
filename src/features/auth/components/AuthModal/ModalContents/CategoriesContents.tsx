@@ -3,33 +3,34 @@ import { Dispatch, SetStateAction } from 'react';
 import { Grid, GridItem } from '@chakra-ui/react';
 
 import { JobCategories } from '@/apis/user/types/user';
-import SvgIconAdvertising from '@/components/Icon/jobCategories/IconAdvertising';
-import SvgIconBio from '@/components/Icon/jobCategories/IconBio';
-import SvgIconConstruction from '@/components/Icon/jobCategories/IconConstruction';
-import SvgIconCustomerService from '@/components/Icon/jobCategories/IconCustomerService';
-import SvgIconDesign from '@/components/Icon/jobCategories/IconDesign';
-import SvgIconDevelopment from '@/components/Icon/jobCategories/IconDevelopment';
-import SvgIconEducation from '@/components/Icon/jobCategories/IconEducation';
-import SvgIconEngineering from '@/components/Icon/jobCategories/IconEngineering';
-import SvgIconFinance from '@/components/Icon/jobCategories/IconFinance';
-import SvgIconGameProduction from '@/components/Icon/jobCategories/IconGameProduction';
-import SvgIconHumanResource from '@/components/Icon/jobCategories/IconHumanResource';
-import SvgIconLaw from '@/components/Icon/jobCategories/IconLaw';
-import SvgIconLogistics from '@/components/Icon/jobCategories/IconLogistics';
-import SvgIconManagement from '@/components/Icon/jobCategories/IconManagement';
-import SvgIconManufacturing from '@/components/Icon/jobCategories/IconManufacturing';
-import SvgIconMarketing from '@/components/Icon/jobCategories/IconMarketing';
-import SvgIconMedia from '@/components/Icon/jobCategories/IconMedia';
-import SvgIconMedical from '@/components/Icon/jobCategories/IconMedical';
-import SvgIconPublicWelfare from '@/components/Icon/jobCategories/IconPublicWelfare';
-import SvgIconRetail from '@/components/Icon/jobCategories/IconRetail';
-import SvgIconSales from '@/components/Icon/jobCategories/IconSales';
-import SvgIconTrade from '@/components/Icon/jobCategories/IconTrade';
+import {
+  SvgIconAdvertising,
+  SvgIconBio,
+  SvgIconConstruction,
+  SvgIconCustomerService,
+  SvgIconDesign,
+  SvgIconDevelopment,
+  SvgIconEducation,
+  SvgIconEngineering,
+  SvgIconFinance,
+  SvgIconGameProduction,
+  SvgIconHumanResource,
+  SvgIconLaw,
+  SvgIconLogistics,
+  SvgIconManagement,
+  SvgIconManufacturing,
+  SvgIconMarketing,
+  SvgIconMedia,
+  SvgIconMedical,
+  SvgIconPublicWelfare,
+  SvgIconRetail,
+  SvgIconSales,
+  SvgIconTrade,
+} from '@/components/Icon/jobCategories';
 import ModalFooter from '@/components/Modal/ModalFooter';
 import ModalHeader from '@/components/Modal/ModalHeader';
+import Category from '@/features/auth/components/AuthModal/Category/Category';
 import { Field } from '@/shared/constants/user';
-
-import CategoryCard from '../CategoryCard/CategoryCard';
 
 type CategoriesContentsProps = {
   nickname: string;
@@ -82,7 +83,7 @@ const CategoriesContents = ({
       <Grid templateColumns={'repeat(4, 1fr)'} gap={13}>
         {JOB_CATEGORIES.map(({ title, icon, field }) => (
           <GridItem key={title}>
-            <CategoryCard
+            <Category
               title={title}
               icon={icon}
               isSelected={title === selectedCategory.title}
