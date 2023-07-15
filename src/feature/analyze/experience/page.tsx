@@ -3,15 +3,29 @@
 import React from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 
+import { useDisclosure } from '@chakra-ui/react';
+
 import TextAreaField from '@/components/Input/TextAreaField/TextAreaField';
 import TextField from '@/components/Input/TextField/TextField';
 import QuestionCard from '@/components/QuestionCard/QuestionCard';
 import PickerFieldContainer from '@/feature/analyze/experience/PickerFieldContainer';
 import { ExperienceFormValues } from '@/feature/analyze/types';
+import { useGetExperienceCount } from '@/hooks/reactQuery/experience/qeury';
+import { useUserNickname } from '@/shared/store/user';
 import { callbackRefWithResizeHeight } from '@/shared/utils/callbackRefWithResizeHeight';
+
+import OnboardingModal from '../modal/OnboardingModal';
 
 const ExperiencePage = () => {
   const { control, setFocus } = useFormContext<ExperienceFormValues>();
+  const username = useUserNickname();
+  const { isOpen: isOnboardingModalOpen, onOpen: onBoardingModalOpen, onClose: onBoardingModalClose } = useDisclosure();
+
+  const { data: experienceCount } = useGetExperienceCount({
+    onSuccess: (data) => {
+      if (!data.experience) onBoardingModalOpen();
+    },
+  });
 
   const handlePeriodChange =
     (
@@ -148,6 +162,7 @@ const ExperiencePage = () => {
           )}
         />
       </QuestionCard>
+      <OnboardingModal isOpen={isOnboardingModalOpen} onClose={onBoardingModalClose} nickname={username} />
     </>
   );
 };
