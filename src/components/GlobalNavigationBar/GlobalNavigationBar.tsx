@@ -95,7 +95,7 @@ const GlobalNavigationBar = ({
               경험분해
             </li>
             <li
-              className={cn(styles.link, { [styles.focus]: pathName === ROUTES.RESUMES })}
+              className={cn(styles.link, { [styles.focus]: pathName.startsWith(ROUTES.RESUMES) })}
               onClick={() => handleRouter(resumeRoute as Route)}>
               자기소개서 작성하기
             </li>
