@@ -8,7 +8,7 @@ const userApi = {
   /**
    * 유저 정보 조회
    */
-  get: () => instance.get<unknown, GetUserInfo>(USER_API.GET_USER_INFO),
+  get: async () => await instance.get<unknown, GetUserInfo>(USER_API.GET_USER_INFO),
   /**
    * 유저 정보 업데이트
    */
@@ -22,7 +22,7 @@ const userApi = {
   /**
    * 피드백 제출
    */
-  postFeedback: (param: FeedbackContent) => instance.post<FeedbackContent>(USER_API.POST_FEEDBACK, param),
+  postFeedback: async (param: FeedbackContent) => await instance.post<FeedbackContent>(USER_API.POST_FEEDBACK, param),
 };
 
 export default userApi;
