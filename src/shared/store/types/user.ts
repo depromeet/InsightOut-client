@@ -1,5 +1,7 @@
 /* eslint-disable unused-imports/no-unused-vars */
 
+import { Field } from '@/shared/constants/user';
+
 /**
  * 유저 온보딩 수행 여부
  */
@@ -23,6 +25,7 @@ export interface UserInfo {
   onboarding: OnboardingInfo;
   email: string;
   imageUrl: string;
+  field: Field;
 }
 
 /**

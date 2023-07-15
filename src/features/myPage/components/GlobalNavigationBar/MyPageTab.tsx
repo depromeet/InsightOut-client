@@ -1,6 +1,6 @@
 import { forwardRef } from 'react';
 
-import { Route } from 'next/dist/server/router';
+import { Route } from 'next';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 

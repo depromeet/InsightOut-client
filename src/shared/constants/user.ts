@@ -24,9 +24,10 @@ export const Field = {
   LAW: 'LAW',
   CONSTRUCTION: 'CONSTRUCTION',
   PUBLIC_WELFARE: 'PUBLIC_WELFARE',
+  NOT_SELECTED: 'NOT_SELECTED',
 } as const;
 
 /**
  * 유저 직무 데이터 타입
  */
-export type Field = (typeof Field)[keyof typeof Field] | null;
+export type Field = (typeof Field)[keyof typeof Field];

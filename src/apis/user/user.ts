@@ -1,4 +1,5 @@
 import { USER_API } from '@/shared/constants/api';
+import { Field } from '@/shared/constants/user';
 
 import instance from '..';
 import { FeedbackContent, GetUserInfo, UpdateUserInfo } from './types/user';
@@ -11,7 +12,13 @@ const userApi = {
   /**
    * 유저 정보 업데이트
    */
-  patch: (param: Partial<UpdateUserInfo>) => instance.patch<UpdateUserInfo, never>(USER_API.UPDATE_USER_INFO, param),
+  patch: async (param: Partial<UpdateUserInfo>) => {
+    const field = param.field === Field.NOT_SELECTED ? null : param.field;
+    return await instance.patch<UpdateUserInfo, UpdateUserInfo>(USER_API.UPDATE_USER_INFO, {
+      nickname: param.nickname,
+      field,
+    });
+  },
   /**
    * 피드백 제출
    */
