@@ -29,6 +29,7 @@ import useBeforUnload from '@/hooks/useBeforeUnload';
 import { useIsMounted } from '@/hooks/useIsMounted';
 import { useOnceFlag } from '@/hooks/useOnceFlag';
 import { ROUTES } from '@/shared/constants/routes';
+import { experienceIdStore } from '@/shared/store/experienceId';
 import { useUserNickname } from '@/shared/store/user';
 import formatYYMMDDhhmm from '@/shared/utils/date/formatYYMMDDhhmm';
 
@@ -42,6 +43,8 @@ const Layout = ({ children }: LayoutProps) => {
   const isMounted = useIsMounted();
   const [usedOnce, disableOnceFlag] = useOnceFlag();
   const username = useUserNickname();
+  const { experienceId, setExperienceId, resetExperienceId } = experienceIdStore();
+
   useBeforUnload();
 
   const { isOpen: isAI진입조건모달Open, onOpen: AI진입조건모달Open, onClose: AI진입조건모달Close } = useDisclosure();
@@ -61,8 +64,8 @@ const Layout = ({ children }: LayoutProps) => {
     defaultValues: initialValue,
   });
 
-  const [writeStatus, experienceId] = useWatch({
-    name: ['writeStatus', 'experienceId'],
+  const writeStatus = useWatch({
+    name: 'writeStatus',
     control: methods.control,
   });
 
@@ -70,11 +73,14 @@ const Layout = ({ children }: LayoutProps) => {
   const { mutate: saveKeyword } = useUpdateKeyword({ experienceId });
 
   useEffect(() => {
-    (async () => {
-      const { experienceId } = await createExperience();
-      methods.setValue('experienceId', experienceId);
-    })();
-  }, [createExperience, methods]);
+    if (Number.isNaN(experienceId)) {
+      (async () => {
+        const { experienceId } = await createExperience();
+        setExperienceId(experienceId);
+      })();
+    }
+    methods.setValue('experienceId', experienceId);
+  }, [createExperience, experienceId, methods, setExperienceId]);
 
   const { data } = useGetExperience(
     { experienceId },
@@ -109,6 +115,13 @@ const Layout = ({ children }: LayoutProps) => {
       },
     }
   );
+
+  // 경험분해 페이지 이탈 시 experienceId 초기화
+  useEffect(() => {
+    return () => {
+      resetExperienceId();
+    };
+  }, [resetExperienceId]);
 
   const { mutate: updateExperience, status: updateExperienceStatus } = useUpdateExperience(experienceId);
   const { mutateAsync: submitExperience } = useSubmitExperience();
