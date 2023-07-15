@@ -77,7 +77,7 @@ const GlobalNavigationBar = ({ className, isSignedIn, isRequesting, ...props }: 
       ) : isSignedIn ? (
         <div className="relative">
           <GnbMyPage
-            className={cn(styles.link, styles.myPage, { [styles.focus]: pathName === '/demo' })}
+            className={cn(styles.link, styles.myPage)}
             profileImgUrl={profileImgUrl}
             nickname={userNickname}
             email={userEmail}
