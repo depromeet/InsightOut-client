@@ -5,6 +5,7 @@ import cn from 'classnames';
 import { Route } from 'next';
 import Image from 'next/image';
 import { usePathname, useRouter } from 'next/navigation';
+import HomeLogo from 'public/images/home/img-home-logo.png';
 
 import AuthModal from '@/features/auth/components/AuthModal/AuthModal';
 import { useAuthActions } from '@/features/auth/store';
@@ -14,7 +15,6 @@ import { ROUTES, SIGN_UP_ROUTES } from '@/shared/constants/routes';
 import { useUserEmail, useUserImageUrl, useUserNickname } from '@/shared/store/user';
 import { tw } from '@/shared/utils/tailwindMerge';
 
-import HomeLogo from '../../../public/images/home/img-home-logo.png';
 import Button from '../Button/Button';
 import IconGoogleLogo from '../Icon/IconGoogleLogo';
 import Spinner from '../Spinner/Spinner';
