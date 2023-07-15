@@ -75,7 +75,7 @@ export type AiResponse = {
   };
 };
 
-type AiResume = {
+export type AiResume = {
   id: number;
   content: string;
   updatedAt: string;

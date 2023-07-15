@@ -23,12 +23,6 @@ const Page = () => {
 
   const _capabilites = capabilities || [];
 
-  /**
-   * 무한스크롤 적용을 위해 주석처리했습니다.
-   * - 무한스크롤 관련 코드: 32 ~ 39줄
-   */
-  // const { data: experiences } = useGetExperiences();
-
   const { data, fetchNextPage, hasNextPage, isFetching } = useGetInfiniteExperiences();
   const experiences = useMemo(() => (data ? data.pages.flatMap(({ data }) => data) : []), [data]);
 
@@ -37,9 +31,6 @@ const Page = () => {
 
     if (hasNextPage && !isFetching) fetchNextPage();
   });
-
-  // TODO: notFound 처리
-  // if (!experiences) notFound();
 
   const allCapability = getAllCapability(_capabilites);
 
@@ -52,7 +43,6 @@ const Page = () => {
     setSortBy(() => (sortBy === 'EXPERIENCE_TIME' ? 'UPDATED_AT' : 'EXPERIENCE_TIME'));
   };
 
-  // TODO: 백엔드와 경험 시간 값을 논의 refactor
   let __experiences = experiences || [];
   if (experiences) {
     const _experiences =
