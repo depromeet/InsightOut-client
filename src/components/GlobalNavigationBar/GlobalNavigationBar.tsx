@@ -1,4 +1,4 @@
-import { ComponentPropsWithoutRef } from 'react';
+import { ComponentPropsWithoutRef, Suspense } from 'react';
 
 import { Flex, useToast } from '@chakra-ui/react';
 import cn from 'classnames';
@@ -136,7 +136,9 @@ const GlobalNavigationBar = ({
           </Button>
         )}
       </header>
-      <AuthModal isOpen={isOpenSignUpModal} onClose={onCloseAuthModal} onAbortSignUp={onAbortSignUp} />
+      <Suspense>
+        <AuthModal isOpen={isOpenSignUpModal} onClose={onCloseAuthModal} onAbortSignUp={onAbortSignUp} />
+      </Suspense>
     </>
   );
 };
