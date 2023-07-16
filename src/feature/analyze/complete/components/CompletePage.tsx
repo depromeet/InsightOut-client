@@ -1,5 +1,7 @@
 'use client';
 
+import { useEffect, useState } from 'react';
+
 import { useSearchParams } from 'next/navigation';
 
 import ExperienceCard from '@/features/collection/components/cards/ExperienceCard/ExperienceCard';
@@ -9,12 +11,25 @@ import Loading from '@/features/experience/Loading';
 import { useGetExperience } from '@/hooks/reactQuery/analyze/query';
 
 const CompletePage = () => {
+  const [showLoading, setShowLoading] = useState(true);
+
   const experienceId = Number(useSearchParams().get('experienceId')) ?? '0';
 
-  const { data: experience } = useGetExperience({ experienceId }, { onError: () => console.log('어떻게할까') });
+  const { data: experience, isFetching } = useGetExperience(
+    { experienceId },
+    { enabled: !showLoading, onError: () => console.log('어떻게할까') }
+  );
 
-  console.log(experience);
-  console.log(experience?.AiResume?.AiResumeCapabilities.map(({ Capability }) => Capability));
+  useEffect(() => {
+    if (showLoading) {
+      setTimeout(() => {
+        setShowLoading(false);
+      }, 3000);
+    }
+  }, [showLoading]);
+
+  if (showLoading || isFetching) return <Loading className="mx-auto mt-[250px]" />;
+
   const experienceCardProps = {
     period:
       experience?.startDate && experience?.endDate
@@ -29,7 +44,6 @@ const CompletePage = () => {
 
   return (
     <div>
-      <Loading className="mx-auto mt-[250px]" />
       <div className="mx-auto mt-[250px] w-fit">
         <ExperienceCard {...experienceCardProps} />
       </div>
