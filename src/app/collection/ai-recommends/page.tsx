@@ -2,12 +2,14 @@
 
 import { useEffect, useState } from 'react';
 
+import { notFound } from 'next/navigation';
+
 import Chip from '@/components/Chip/Chip';
 import AiRecommendResumeList from '@/features/collection/components/lists/AiRecommendResumeList';
 import { useGetAiResumes } from '@/hooks/reactQuery/ai/query';
 
 const Page = () => {
-  const { data } = useGetAiResumes(undefined, { staleTime: Infinity });
+  const { data, isSuccess } = useGetAiResumes(undefined, { staleTime: Infinity });
 
   const aiRecommendKeyword = data?.availableKeywords || [];
   const aiRecommend = data?.AiResumes || [];
@@ -21,6 +23,10 @@ const Page = () => {
   }, [initialAiRecommenedKeyword]);
 
   const shownAiResumes = aiRecommend.filter(({ AiCapabilities }) => AiCapabilities.includes(selectedAiRecommend));
+
+  if (isSuccess && !data.AiResumes.length) {
+    notFound();
+  }
 
   return (
     <div>

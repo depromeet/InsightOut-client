@@ -2,6 +2,8 @@
 
 import { useMemo, useState } from 'react';
 
+import { notFound } from 'next/navigation';
+
 import Badge from '@/components/Badge/Badge';
 import TextButton from '@/components/Button/TextButton';
 import Chip from '@/components/Chip/Chip';
@@ -16,7 +18,7 @@ import useIntersection from '@/hooks/useIntersection';
 import addPlusMarkOver99 from '@/shared/utils/addPlusMarkOver99';
 
 const Page = () => {
-  const { data: capabilities } = useGetExperienceCapabilities();
+  const { data: capabilities, isSuccess } = useGetExperienceCapabilities();
 
   const { data, fetchNextPage, hasNextPage, isFetching } = useGetInfiniteExperiences();
 
@@ -43,6 +45,10 @@ const Page = () => {
         : getFilteredExperiences(experiences, selectedCapabilityKeyword);
 
     shownExperiences = getSortedExperiences(_experiences, sortBy);
+  }
+
+  if (isSuccess && !capabilities.length) {
+    notFound();
   }
 
   return (
