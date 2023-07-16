@@ -8,13 +8,13 @@ import Modal from '@/components/Modal/Modal';
 import ModalFooter from '@/components/Modal/ModalFooter';
 import ModalHeader from '@/components/Modal/ModalHeader';
 
-type OnboardingModal = {
+type OnboardingModalProps = {
   isOpen: boolean;
   onClose: () => void;
   nickname: string;
 };
 
-const OnboardingModal = ({ isOpen, onClose, nickname }: OnboardingModal) => {
+const OnboardingModal = ({ isOpen, onClose, nickname }: OnboardingModalProps) => {
   return (
     <Modal isOpen={isOpen} onClose={onClose} size={'5xl'}>
       <ModalHeader>
