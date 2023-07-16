@@ -10,6 +10,7 @@ export interface BaseDialogProps {
   isOpen: boolean;
   onClose: () => void;
   closeOnOverlayClick?: boolean;
+  closeOnEsc?: boolean;
   size: ThemingProps<'Modal'>['size'];
   title: string;
   textContent?: string;
@@ -24,6 +25,7 @@ const BaseDialog = (props: BaseDialogProps) => {
     isOpen,
     onClose,
     closeOnOverlayClick = true,
+    closeOnEsc = true,
     size,
     title,
     textContent,
@@ -33,7 +35,12 @@ const BaseDialog = (props: BaseDialogProps) => {
     rightTextContent,
   } = props;
   return (
-    <Modal size={size} isOpen={isOpen} onClose={onClose} closeOnOverlayClick={closeOnOverlayClick}>
+    <Modal
+      size={size}
+      isOpen={isOpen}
+      onClose={onClose}
+      closeOnOverlayClick={closeOnOverlayClick}
+      closeOnEsc={closeOnEsc}>
       <ModalHeader.Title title={title} />
       {leftTextContent && rightTextContent ? (
         <ModalFooter.TwoButton

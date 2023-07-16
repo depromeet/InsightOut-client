@@ -12,7 +12,9 @@ import Tag from '@/components/Tag/Tag';
 import AICapabilityKeyword from '@/feature/analyze/verify/AICapabilityKeyword';
 import SelectedKeywordContainer from '@/feature/analyze/verify/SelectedKeywordContainer';
 import { useCreateRecommendResume } from '@/hooks/reactQuery/ai/mutation';
+import { useUserNickname } from '@/shared/store/user';
 
+import { STEP } from '../constants';
 import { CapabilitiesType, ExperienceFormValues } from '../types';
 import AIResumeLoading from './AIResumeLoading';
 
@@ -28,6 +30,7 @@ export const renderRecommendKeyword = (arr: CapabilitiesType[]) => {
 
 const VerifyPage = () => {
   const { back } = useRouter();
+  const username = useUserNickname();
   const { getValues, setValue } = useFormContext<ExperienceFormValues>();
   const [situation, task, action, result, keywordList, experienceId, recommendKeywordList, resume, writeStatus] =
     getValues([
@@ -47,7 +50,9 @@ const VerifyPage = () => {
   useEffect(() => {
     const isReadyToAIRecommendation = writeStatus?.slice(0, 3).every((status) => status === '작성완료');
     if (!isReadyToAIRecommendation) back();
-  }, [back, writeStatus]);
+    else if (writeStatus?.[STEP.verify - 1] === '작성완료') return;
+    else setValue(`writeStatus.${STEP.verify - 1}`, '작성중');
+  }, [back, setValue, writeStatus]);
 
   useEffect(() => {
     if (resume) return;
@@ -62,6 +67,7 @@ const VerifyPage = () => {
           result,
         });
         setValue('resume', resume);
+        setValue(`writeStatus.${STEP.verify - 1}`, '작성완료');
       }
     })();
   }, [action, experienceId, result, situation, task, setValue, createRecommendResume, recommendKeywordList, resume]);
@@ -75,7 +81,7 @@ const VerifyPage = () => {
             autoSize
             rows={10}
             placeholder="ex.개발 기간이 짧아서 빠른 기간 내 런칭을 완료해야 했음"
-            chipTitle="OOO님의 IT동아리 협업"
+            chipTitle={`${username}님의 IT동아리 협업`}
             maxLength={400}
             value={`${situation}\n\n${task}\n\n${action}\n\n${result}`}
           />
