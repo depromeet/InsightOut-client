@@ -1,4 +1,4 @@
-import { PropsWithChildren } from 'react';
+import { PropsWithChildren, Suspense } from 'react';
 
 import classNames from 'classnames';
 import { Metadata } from 'next';
@@ -41,7 +41,9 @@ export default function RootLayout({ children }: PropsWithChildren) {
         suppressContentEditableWarning
         suppressHydrationWarning>
         <TanstackQueryProvider>
-          <ChakraUIProvider>{children}</ChakraUIProvider>
+          <ChakraUIProvider>
+            <Suspense>{children}</Suspense>
+          </ChakraUIProvider>
         </TanstackQueryProvider>
       </body>
     </html>
