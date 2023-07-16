@@ -1,5 +1,4 @@
-import { ExperienceFormValues } from '@/feature/analyze/types';
-import { Experience } from '@/features/collection/types';
+import { ExperienceFormValues, ExperienceStatus } from '@/feature/analyze/types';
 
 export type ExperienceParams = {
   get: { experienceId: number };
@@ -7,4 +6,27 @@ export type ExperienceParams = {
   submit: Partial<ExperienceFormValues>;
 };
 
-export type ExperienceResponse = Experience;
+export type ExperienceResponse = {
+  experienceId: number;
+  title: string;
+  startDate: string;
+  endDate: string;
+  situation: string;
+  task: string;
+  action: string;
+  result: string;
+  experienceStatus: ExperienceStatus;
+  experienceCapabilityKeywords?: string[];
+  ExperienceInfo: {
+    experienceInfoId: number;
+    motivation: string;
+    experienceRole: string;
+    analysis: string;
+  };
+  summaryKeywords: string[];
+  updatedAt: string;
+  AiResume?: {
+    content: string;
+    AiResumeCapabilities: { Capability: { keyword: string } }[];
+  };
+};

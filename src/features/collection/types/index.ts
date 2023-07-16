@@ -1,7 +1,7 @@
 export type Capability = {
-  id?: number;
-  keyword?: string;
-  count?: number;
+  id: number;
+  keyword: string;
+  count: number;
 };
 export interface Experience {
   id: number;
@@ -25,9 +25,10 @@ export interface Experience {
 }
 
 export type ExperienceInfo = {
-  experienceId: number;
+  experienceInfoId: number;
   experienceRole: string;
   motivation: string;
+  analysis: string;
 };
 
 export type ExperienceStatus = 'INPROGRESS' | 'DONE';
