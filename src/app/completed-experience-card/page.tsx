@@ -1,5 +1,3 @@
-'use client';
-
 import ExperienceCard from '@/features/collection/components/cards/ExperienceCard/ExperienceCard';
 import Loading from '@/features/experience/Loading';
 
@@ -11,6 +9,7 @@ const page = () => {
         <ExperienceCard
           period={'2023.04 - 2023.08'}
           title={'첫번째 경험카드'}
+          experienceStatus={'DONE'}
           summaryKeywords={['키워드1', '키워드2']}
           experienceCapabilityKeywords={['일이삼사오육칠팔구', '일이삼사오육칠팔구']}
           aiRecommendKeywords={['일이삼사오육칠팔구', '일이삼사오육칠팔구']}
