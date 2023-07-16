@@ -16,6 +16,7 @@ import Tag from '@/components/Tag/Tag';
 import { MESSAGE } from '@/features/collection/constants';
 import { useDeleteExperience } from '@/hooks/reactQuery/experience/mutation';
 import { ROUTES } from '@/shared/constants/routes';
+import { experienceIdStore } from '@/shared/store/experienceId';
 
 import { Experience, ExperienceStatus } from '../../../types';
 import getExperiencePeriod from '../../../utils/getExperiencePeriod';
@@ -47,7 +48,9 @@ const ExperienceListCard = ({
   } = useDisclosure();
 
   const { push } = useRouter();
+  const { setExperienceId } = experienceIdStore();
   const handleEditButtonClick = () => {
+    setExperienceId(id);
     push(ROUTES.EXPERIENCE);
   };
 
