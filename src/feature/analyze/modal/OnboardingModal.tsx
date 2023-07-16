@@ -10,11 +10,12 @@ import ModalHeader from '@/components/Modal/ModalHeader';
 
 type OnboardingModalProps = {
   isOpen: boolean;
-  onClose: () => void;
   nickname: string;
+  onClose: () => void;
+  onClickMainButton: () => void;
 };
 
-const OnboardingModal = ({ isOpen, onClose, nickname }: OnboardingModalProps) => {
+const OnboardingModal = ({ isOpen, nickname, onClose, onClickMainButton }: OnboardingModalProps) => {
   return (
     <Modal isOpen={isOpen} onClose={onClose} size={'5xl'}>
       <ModalHeader>
@@ -56,7 +57,7 @@ const OnboardingModal = ({ isOpen, onClose, nickname }: OnboardingModalProps) =>
         </div>
       </section>
       <ModalFooter>
-        <ModalFooter.OneButton textContent="시작해볼게요" handleClick={onClose} />
+        <ModalFooter.OneButton textContent="시작해볼게요" handleClick={onClickMainButton} />
       </ModalFooter>
     </Modal>
   );
