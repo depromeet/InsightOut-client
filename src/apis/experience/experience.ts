@@ -20,6 +20,9 @@ export const EXPERIENCE_API = {
   getById: async ({ id }: ExperienceParams['get']) => {
     return await instance.get<ExperiencesResponse, ExperiencesResponse>(`${EXPERIENCE_API_URL}/${id}`);
   },
+  delete: async ({ experienceId }: ExperienceParams['delete']) => {
+    return await instance.delete(`${EXPERIENCE_API_URL}/${experienceId}`);
+  },
 };
 
 export const EXPERIENCE_CAPABILITY_API = {
