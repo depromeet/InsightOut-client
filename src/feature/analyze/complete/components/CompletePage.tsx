@@ -7,6 +7,7 @@ import { useSearchParams } from 'next/navigation';
 import ExperienceCard from '@/features/collection/components/cards/ExperienceCard/ExperienceCard';
 import { MESSAGE } from '@/features/collection/constants';
 import getExperiencePeriod from '@/features/collection/utils/getExperiencePeriod';
+import Confetti from '@/features/experience/Confetti';
 import Loading from '@/features/experience/Loading';
 import { useGetExperience } from '@/hooks/reactQuery/analyze/query';
 
@@ -43,11 +44,12 @@ const CompletePage = () => {
   };
 
   return (
-    <div>
+    <>
       <div className="mx-auto mt-[250px] w-fit">
         <ExperienceCard {...experienceCardProps} />
       </div>
-    </div>
+      <Confetti />
+    </>
   );
 };
 
