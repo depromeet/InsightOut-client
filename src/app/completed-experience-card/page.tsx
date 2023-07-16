@@ -1,4 +1,4 @@
-import CompletePage from '@/feature/analyze/complete/CompletePage';
+import CompletePage from '@/feature/analyze/complete/components/CompletePage';
 
 const page = () => <CompletePage />;
 

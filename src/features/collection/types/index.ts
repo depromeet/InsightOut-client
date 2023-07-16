@@ -1,7 +1,11 @@
 export type Capability = {
-  id: number;
-  keyword: string;
-  count: number;
+  id?: number;
+  keyword?: string;
+  count?: number;
+};
+
+export type ResponseCapability = {
+  Capability: { keyword: string }[];
 };
 
 export interface Experience {
@@ -18,6 +22,15 @@ export interface Experience {
   summaryKeywords?: string[];
   experienceCapabilityKeywords?: string[];
   aiRecommendKeywords?: string[];
+  AiResume?: {
+    content: string;
+    AiResumeCapabilities: ResponseCapability[];
+  };
+  ExperienceInfo?: {
+    experienceId: number;
+    experienceRole: string;
+    motivation: string;
+  };
 }
 
 export type ExperienceStatus = 'INPROGRESS' | 'DONE';
