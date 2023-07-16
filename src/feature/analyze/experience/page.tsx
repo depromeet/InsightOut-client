@@ -3,15 +3,32 @@
 import React from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 
+import { useDisclosure } from '@chakra-ui/react';
+
 import TextAreaField from '@/components/Input/TextAreaField/TextAreaField';
 import TextField from '@/components/Input/TextField/TextField';
 import QuestionCard from '@/components/QuestionCard/QuestionCard';
 import PickerFieldContainer from '@/feature/analyze/experience/PickerFieldContainer';
 import { ExperienceFormValues } from '@/feature/analyze/types';
+import { useUpdateOnboarding } from '@/hooks/reactQuery/onboarding/mutation';
+import { useGetOnboarding } from '@/hooks/reactQuery/onboarding/query';
+import { useUserActions, useUserNickname, useUserOnboarding } from '@/shared/store/user';
 import { callbackRefWithResizeHeight } from '@/shared/utils/callbackRefWithResizeHeight';
+
+import OnboardingModal from '../modal/OnboardingModal';
 
 const ExperiencePage = () => {
   const { control, setFocus } = useFormContext<ExperienceFormValues>();
+  const username = useUserNickname();
+  const userOnboarding = useUserOnboarding();
+  const { setUserInfo } = useUserActions();
+  const { isOpen: isOnBoardingModalOpen, onOpen: onBoardingModalOpen, onClose: onBoardingModalClose } = useDisclosure();
+  const { data, isSuccess } = useGetOnboarding({
+    onSuccess: ({ experience }) => {
+      if (!experience) onBoardingModalOpen();
+    },
+  });
+  const { mutate: updateExperienceOnboarding } = useUpdateOnboarding();
 
   const handlePeriodChange =
     (
@@ -28,6 +45,12 @@ const ExperiencePage = () => {
       }
       onChange(e);
     };
+
+  const handleClickOnboardingButton = () => {
+    updateExperienceOnboarding({ experience: true });
+    setUserInfo({ onboarding: { ...userOnboarding, experience: true } });
+    onBoardingModalClose();
+  };
 
   return (
     <>
@@ -148,6 +171,14 @@ const ExperiencePage = () => {
           )}
         />
       </QuestionCard>
+      {isSuccess && !data.experience && (
+        <OnboardingModal
+          isOpen={isOnBoardingModalOpen}
+          nickname={username}
+          onClose={onBoardingModalClose}
+          onClickMainButton={handleClickOnboardingButton}
+        />
+      )}
     </>
   );
 };
