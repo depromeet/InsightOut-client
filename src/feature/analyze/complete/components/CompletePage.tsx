@@ -31,16 +31,22 @@ const CompletePage = () => {
 
   if (showLoading || isFetching) return <Loading className="mx-auto mt-[250px]" />;
 
+  const period =
+    experience?.startDate && experience?.endDate
+      ? getExperiencePeriod(experience?.startDate, experience?.endDate)
+      : MESSAGE.HAS_NOT_PERIOD;
+  const star = [experience?.situation, experience?.task, experience?.action, experience?.result].join('\n\n');
+
   const experienceCardProps = {
-    period:
-      experience?.startDate && experience?.endDate
-        ? getExperiencePeriod(experience?.startDate, experience?.endDate)
-        : MESSAGE.HAS_NOT_PERIOD,
+    period: period,
     title: experience?.title!,
     summaryKeywords: experience?.summaryKeywords,
     experienceCapabilityKeywords: experience?.experienceCapabilityKeywords,
     aiRecommendKeywords: experience?.AiResume?.AiResumeCapabilities.map(({ Capability }) => Capability.keyword),
     experienceStatus: experience?.experienceStatus!,
+    experienceInfo: experience?.ExperienceInfo,
+    star: star,
+    aiResume: experience?.AiResume?.content,
   };
 
   return (

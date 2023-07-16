@@ -21,12 +21,14 @@ export interface Experience {
     content: string;
     AiResumeCapabilities: { Capability: { keyword: string } }[];
   };
-  ExperienceInfo?: {
-    experienceId: number;
-    experienceRole: string;
-    motivation: string;
-  };
+  ExperienceInfo?: ExperienceInfo;
 }
+
+export type ExperienceInfo = {
+  experienceId: number;
+  experienceRole: string;
+  motivation: string;
+};
 
 export type ExperienceStatus = 'INPROGRESS' | 'DONE';
 export type Capacity = {
