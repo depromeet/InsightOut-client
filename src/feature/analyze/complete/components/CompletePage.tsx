@@ -20,11 +20,11 @@ const CompletePage = () => {
       experience?.startDate && experience?.endDate
         ? getExperiencePeriod(experience?.startDate, experience?.endDate)
         : MESSAGE.HAS_NOT_PERIOD,
-    title: experience?.title,
+    title: experience?.title!,
     summaryKeywords: experience?.summaryKeywords,
     experienceCapabilityKeywords: experience?.experienceCapabilityKeywords,
     aiRecommendKeywords: experience?.AiResume?.AiResumeCapabilities.map(({ Capability }) => Capability.keyword),
-    experienceStatus: experience?.experienceStatus,
+    experienceStatus: experience?.experienceStatus!,
   };
 
   return (

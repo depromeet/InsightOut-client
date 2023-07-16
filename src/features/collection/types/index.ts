@@ -3,11 +3,6 @@ export type Capability = {
   keyword?: string;
   count?: number;
 };
-
-export type ResponseCapability = {
-  Capability: { keyword: string }[];
-};
-
 export interface Experience {
   id: number;
   title?: string | null;
@@ -24,7 +19,7 @@ export interface Experience {
   aiRecommendKeywords?: string[];
   AiResume?: {
     content: string;
-    AiResumeCapabilities: ResponseCapability[];
+    AiResumeCapabilities: { Capability: { keyword: string } }[];
   };
   ExperienceInfo?: {
     experienceId: number;
