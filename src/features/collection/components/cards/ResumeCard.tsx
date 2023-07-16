@@ -59,7 +59,7 @@ const ResumeCard = ({ question: { answer, title, updatedAt } }: Props) => {
           </p>
         </div>
         <footer className="flex flex-row-reverse mt-[8px] ">
-          <TextLengthMessage currentLength={answer.length} maxLength={MAX_LENGTH.QUESTION} />
+          <TextLengthMessage currentLength={answer?.length} maxLength={MAX_LENGTH.QUESTION} />
         </footer>
       </div>
       <Modal size="md" isOpen={isOpenActionListModal} onClose={onCloseActionListModal}>

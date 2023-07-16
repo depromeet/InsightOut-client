@@ -31,7 +31,7 @@ const ResumeAnswerModalCard = ({ isOpen, onClose, updatedAt, title, answer }: Pr
           <ModalFooter className="flex flex-col" w={'full'} m={0} p={0}>
             <div className="flex justify-end w-full">
               <b className="b3 text-light">
-                <span className="text-secondary-500">{answer.length}자</span>/{MAX_LENGTH.QUESTION}자
+                <span className="text-secondary-500">{answer?.length}자</span>/{MAX_LENGTH.QUESTION}자
               </b>
             </div>
           </ModalFooter>

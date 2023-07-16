@@ -12,7 +12,7 @@ export const ANSWER_MAX_LENGTH = 2000;
 
 export const INITIAL_RESUME: ResumeTitle = {
   createdAt: '',
-  id: -100,
+  id: 0,
   updatedAt: '',
   title: '',
 };
