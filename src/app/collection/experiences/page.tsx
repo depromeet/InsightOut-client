@@ -2,28 +2,24 @@
 
 import { useMemo, useState } from 'react';
 
+import Badge from '@/components/Badge/Badge';
 import TextButton from '@/components/Button/TextButton';
+import Chip from '@/components/Chip/Chip';
 import IconClock from '@/components/Icon/IconClock';
 import ExperienceListCard from '@/features/collection/components/cards/ExperienceListCard/ExperienceListCard';
-import ChipListNav from '@/features/collection/components/nav/ChipListNav';
 import { EXPERIENCE_SORT_BY } from '@/features/collection/constants';
-import { Capability, Experience } from '@/features/collection/types';
-import getAllCapability from '@/features/collection/utils/getAllCapabilityBadgeItem';
+import { Experience } from '@/features/collection/types';
 import getFilteredExperiences from '@/features/collection/utils/getFilteredExperiences';
 import getSortedExperiences from '@/features/collection/utils/getSortedExperiences';
-import {
-  useGetExperienceCapabilities,
-  // useGetExperiences,
-  useGetInfiniteExperiences,
-} from '@/hooks/reactQuery/experience/qeury';
+import { useGetExperienceCapabilities, useGetInfiniteExperiences } from '@/hooks/reactQuery/experience/qeury';
 import useIntersection from '@/hooks/useIntersection';
+import addPlusMarkOver99 from '@/shared/utils/addPlusMarkOver99';
 
 const Page = () => {
   const { data: capabilities } = useGetExperienceCapabilities();
 
-  const _capabilites = capabilities || [];
-
   const { data, fetchNextPage, hasNextPage, isFetching } = useGetInfiniteExperiences();
+
   const experiences = useMemo(() => (data ? data.pages.flatMap(({ data }) => data) : []), [data]);
 
   const ref = useIntersection((entry, observer) => {
@@ -32,44 +28,54 @@ const Page = () => {
     if (hasNextPage && !isFetching) fetchNextPage();
   });
 
-  const allCapability = getAllCapability(_capabilites);
-
-  const shownCapabilities: Capability[] = [allCapability, ..._capabilites];
-
   const [sortBy, setSortBy] = useState<keyof typeof EXPERIENCE_SORT_BY>('EXPERIENCE_TIME');
-  const [selectedCapability, setSelectedCapability] = useState(allCapability);
+  const [selectedCapabilityKeyword, setSelectedCapabilityKeyword] = useState('전체');
 
   const handleTimeSortClick = () => {
     setSortBy(() => (sortBy === 'EXPERIENCE_TIME' ? 'UPDATED_AT' : 'EXPERIENCE_TIME'));
   };
 
-  let __experiences = experiences || [];
+  let shownExperiences = experiences ?? [];
   if (experiences) {
     const _experiences =
-      selectedCapability.keyword === allCapability.keyword
+      selectedCapabilityKeyword === '전체'
         ? experiences ?? []
-        : getFilteredExperiences(experiences ?? [], selectedCapability.keyword);
+        : getFilteredExperiences(experiences, selectedCapabilityKeyword);
 
-    __experiences = getSortedExperiences(_experiences, sortBy);
+    shownExperiences = getSortedExperiences(_experiences, sortBy);
   }
 
   return (
     <>
-      <ChipListNav
-        items={shownCapabilities}
-        selectedItem={selectedCapability.keyword}
-        changeItem={setSelectedCapability}
-        Right={
-          <div>
-            <TextButton size="L" leftIcon={<IconClock className="fill-none" />} onClick={handleTimeSortClick}>
-              {EXPERIENCE_SORT_BY[sortBy]}
-            </TextButton>
-          </div>
-        }
-      />
+      <section className="flex flex-row justify-between items-center my-[24px]">
+        <nav className="w-full flex flex-row gap-[8px] flex-shrink-0 overflow-x-auto whitespace-nowrap scrollbar-hide p-[1px]">
+          {capabilities?.map(({ id, keyword, count }) => (
+            <li key={id} className="list-none">
+              <Chip
+                size="M"
+                variant={keyword === selectedCapabilityKeyword ? 'secondary-pressed' : 'secondary'}
+                badge={
+                  count ? (
+                    <Badge variant="gray100-outline" size="S">
+                      {addPlusMarkOver99(count)}
+                    </Badge>
+                  ) : undefined
+                }
+                onClick={() => setSelectedCapabilityKeyword(keyword)}>
+                {keyword}
+              </Chip>
+            </li>
+          ))}
+        </nav>
+        <div className="flex-shrink-0">
+          <TextButton size="L" leftIcon={<IconClock className="fill-none" />} onClick={handleTimeSortClick}>
+            {EXPERIENCE_SORT_BY[sortBy]}
+          </TextButton>
+        </div>
+      </section>
       <section className="mt-[24px]">
         <ul className="grid grid-cols-3 gap-[16px]">
-          {__experiences.map((experience: Experience) => (
+          {shownExperiences.map((experience: Experience) => (
             <li key={experience.id}>
               <ExperienceListCard {...experience} />
             </li>
