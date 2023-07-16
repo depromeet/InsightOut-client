@@ -46,7 +46,7 @@ const Page = () => {
   }
 
   return (
-    <>
+    <div>
       <section className="flex flex-row justify-between items-center my-[24px]">
         <nav className="w-full flex flex-row gap-[8px] flex-shrink-0 overflow-x-auto whitespace-nowrap scrollbar-hide p-[1px]">
           {capabilities?.map(({ id, keyword, count }) => (
@@ -83,7 +83,7 @@ const Page = () => {
           <div ref={ref}></div>
         </ul>
       </section>
-    </>
+    </div>
   );
 };
 

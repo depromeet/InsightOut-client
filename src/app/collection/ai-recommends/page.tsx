@@ -24,18 +24,20 @@ const Page = () => {
 
   return (
     <div>
-      <nav className="flex flex-row items-center gap-[8px] h-[54px] overflow-x-auto whitespace-nowrap scrollbar-hide p-[1px] my-[24px]">
-        {aiRecommendKeyword.map((keyword, index) => (
-          <li key={`${index}-${keyword}`} className="list-none">
-            <Chip
-              size="M"
-              variant={selectedAiRecommend === keyword ? 'secondary-pressed' : 'secondary'}
-              onClick={() => setSelectedAiRecommend(keyword)}>
-              {keyword}
-            </Chip>
-          </li>
-        ))}
-      </nav>
+      <section>
+        <nav className="flex flex-row items-center gap-[8px] overflow-x-auto whitespace-nowrap scrollbar-hide p-[1px] my-[24px]">
+          {aiRecommendKeyword.map((keyword, index) => (
+            <li key={`${index}-${keyword}`} className="list-none">
+              <Chip
+                size="M"
+                variant={selectedAiRecommend === keyword ? 'secondary-pressed' : 'secondary'}
+                onClick={() => setSelectedAiRecommend(keyword)}>
+                {keyword}
+              </Chip>
+            </li>
+          ))}
+        </nav>
+      </section>
       <section>
         <AiRecommendResumeList shownAiResumes={shownAiResumes} />
       </section>
