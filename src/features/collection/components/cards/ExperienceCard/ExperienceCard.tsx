@@ -4,18 +4,21 @@
 import { useState } from 'react';
 
 import Image from 'next/image';
+import AIKeywordRecommend from 'public/images/ai-keyword-recommend.png';
 
+import Badge from '@/components/Badge/Badge';
 import Button from '@/components/Button/Button';
 import TextAreaField from '@/components/Input/TextAreaField/TextAreaField';
 import Tag from '@/components/Tag/Tag';
+import { ExperienceStatus } from '@/feature/analyze/types';
 
-import cardImage from '../../../../../../public/images/card1.png';
-import { Capability } from '../../../types';
+import CapabilityImage from '../CapabilityImage';
 import MotionBox from '../MotionBox';
 
 type Props = {
   period: string;
   title: string;
+  experienceStatus: ExperienceStatus;
   summaryKeywords?: string[];
   experienceCapabilityKeywords?: string[];
   aiRecommendKeywords?: string[];
@@ -41,9 +44,14 @@ const aiRecommendQuestions = [
 const aiRecommend =
   '디자이너로서 개발팀과 각각의 전문성을 최대한 활용하여 높은 퀄리티의 앱을 만들어내기 위해 커뮤니케이션 능력을 뽐내셨군요! 빠른 기간안에 앱 서비스를 런칭해야하는 상황에서 디자인 시스템 제작, 런칭일 정해서 린하게 개발하는 방법을 제의한 것은 프로젝트 관리 능력의 일환이었습니다.';
 
-const ExperienceCard = (props: Props) => {
-  const { period, title, summaryKeywords, experienceCapabilityKeywords, aiRecommendKeywords } = props;
-
+const ExperienceCard = ({
+  period,
+  title,
+  summaryKeywords,
+  experienceCapabilityKeywords,
+  aiRecommendKeywords,
+  experienceStatus,
+}: Props) => {
   const [isBack, setIsBack] = useState(false);
 
   const handleFlipClick = () => {
@@ -72,17 +80,21 @@ const ExperienceCard = (props: Props) => {
         <ExperienceCard.Header title={title} period={period} isBack={isBack} handleFlipClick={handleFlipClick} />
         <div
           className={`flex flex-row justify-between w-full overflow-auto h-[720px] m-0 p-[50px] ${
-            isBack && '[transform:rotateY(180deg)]'
+            isBack && '[transform:rotateY(180deg)] py-[20px] px-[40px]'
           }`}>
           {!isBack ? (
             <ExperienceCard.BodyFront
               summaries={summaryKeywords}
+              experienceStatus={experienceStatus}
               aiRecommend={aiRecommend}
               experienceCapabilityKeywords={experienceCapabilityKeywords}
               aiRecommendKeywords={aiRecommendKeywords}
             />
           ) : (
-            <ExperienceCard.BodyBack capabilities={[]} />
+            <ExperienceCard.BodyBack
+              experienceCapabilityKeywords={experienceCapabilityKeywords}
+              aiRecommendKeywords={aiRecommendKeywords}
+            />
           )}
         </div>
       </MotionBox>
@@ -114,6 +126,7 @@ ExperienceCard.Header = ({ title, period, isBack, handleFlipClick }: ExperienceC
 
 type ExperienceCardBodyFrontProps = {
   summaries?: string[];
+  experienceStatus: ExperienceStatus;
   experienceCapabilityKeywords?: string[];
   aiRecommendKeywords?: string[];
   aiRecommend?: string;
@@ -121,6 +134,7 @@ type ExperienceCardBodyFrontProps = {
 
 ExperienceCard.BodyFront = ({
   summaries,
+  experienceStatus,
   experienceCapabilityKeywords,
   aiRecommendKeywords,
   aiRecommend,
@@ -128,7 +142,11 @@ ExperienceCard.BodyFront = ({
   return (
     <>
       <div className="w-[560px]">
-        <ExperienceCard.Image summaries={summaries} />
+        <ExperienceCard.Image
+          summaries={summaries}
+          experienceStatus={experienceStatus}
+          keyword={experienceCapabilityKeywords ? experienceCapabilityKeywords[0] : ''}
+        />
       </div>
       <div className="w-[589px] flex flex-col text-left px-[40px]">
         <ExperienceCard.Keyword title="내가 선택한 역량 키워드" capabilities={experienceCapabilityKeywords} />
@@ -146,25 +164,36 @@ ExperienceCard.BodyFront = ({
 
 type ExperienceCardImageProps = {
   summaries?: string[];
+  keyword: string;
+  experienceStatus: ExperienceStatus;
 };
 
-ExperienceCard.Image = ({ summaries }: ExperienceCardImageProps) => (
+ExperienceCard.Image = ({ summaries, keyword, experienceStatus }: ExperienceCardImageProps) => (
   <div className="relative bg-black rounded-[24px] w-[480px] h-[616px]">
     <div className="w-[480px] h-[616px] flex items-center justify-center">
-      <Image src={cardImage} alt="경험카드" width={432} height={453} />
+      <CapabilityImage keyword={keyword} experienceStatus={experienceStatus} width={432} height={453} />
+      {experienceStatus === 'INPROGRESS' && (
+        <Badge variant="gray100-outline" size="M" className="absolute top-[24px] left-[24px]">
+          작성중
+        </Badge>
+      )}
       <div className="absolute flex flex-col bottom-[24px] left-[24px]">
-        <span className="text-left text-white b4 mb-[6px]">경험요약</span>
-        <ul className="flex flex-row gap-[8px]">
-          {summaries
-            ? summaries.map((summary, index) => (
+        {summaries?.length ? (
+          <>
+            <span className="text-left text-white b4 mb-[6px]">경험요약</span>
+            <ul className="flex flex-row gap-[8px]">
+              {summaries.map((summary, index) => (
                 <li key={`ExperienceCardModal-${index}-${summary}`}>
                   <Tag variant="gray800" size="L">
                     {summary}
                   </Tag>
                 </li>
-              ))
-            : ''}
-        </ul>
+              ))}
+            </ul>
+          </>
+        ) : (
+          ''
+        )}
       </div>
     </div>
   </div>
@@ -214,19 +243,19 @@ ExperienceCard.AIQuestions = ({ aiRecommendQuestions }: ExperienceCardAIQuestion
 );
 
 type ExperienceCardBodyBackProps = {
-  capabilities?: Capability[];
-  aiCapabilities?: Capability[];
+  experienceCapabilityKeywords?: string[];
+  aiRecommendKeywords?: string[];
 };
 
-ExperienceCard.BodyBack = ({ capabilities, aiCapabilities }: ExperienceCardBodyBackProps) => {
+ExperienceCard.BodyBack = ({ experienceCapabilityKeywords, aiRecommendKeywords }: ExperienceCardBodyBackProps) => {
   return (
     <div className="h-full">
       <div className="flex flex-col w-[690px] text-left">
-        <div className="mb-[47px]">
+        <div className="mb-[20px]">
           {/* // TODO: API 연동 */}
           <TextAreaField chipTitle="나의 역할" maxLength={20} readOnly value={'UIUX 디자이너'} />
         </div>
-        <div className="mb-[47px]">
+        <div className="mb-[20px]">
           <TextAreaField
             chipTitle="경험 수행 이유"
             maxLength={100}
@@ -242,8 +271,8 @@ ExperienceCard.BodyBack = ({ capabilities, aiCapabilities }: ExperienceCardBodyB
             </Tag>
           </div>
           <ul className="flex flex-row gap-[8px]">
-            {capabilities
-              ? capabilities.map(({ keyword }, index) => (
+            {experienceCapabilityKeywords
+              ? experienceCapabilityKeywords.map((keyword, index) => (
                   <li key={`back-capability-${keyword}-${index}`}>
                     <Tag variant="primary500" size="M">
                       {keyword}
@@ -253,17 +282,52 @@ ExperienceCard.BodyBack = ({ capabilities, aiCapabilities }: ExperienceCardBodyB
               : ''}
           </ul>
         </div>
-        <div>
-          <div className="mb-[8px]">
-            {/* 닉네임 님의 title */}
-            <Tag variant="gray100" size="S">
-              올때메로나님의 IT동아리 협업
-            </Tag>
-          </div>
-          <p className={`mb-[50px] bg-gray-50 p-[16px] rounded-[16px]`}>
-            텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요
-          </p>
+        <div className="mb-[20px]">
+          <TextAreaField
+            chipTitle="올때메로나님의 IT동아리 협업"
+            maxLength={100}
+            readOnly
+            autoSize
+            // TODO: API 연동
+            value={
+              '텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요'
+            }
+          />
         </div>
+        <section className="flex flex-col gap-[20px]">
+          <h2 className="subhead2 flex items-center gap-[4px]">
+            <Image src={AIKeywordRecommend} alt="ai keyword recommend icon" />
+            AI 직무역량 추천
+          </h2>
+          <div>
+            <div className="mb-[8px]">
+              <Tag variant="gray100" size="S">
+                AI 직무역량 키워드
+              </Tag>
+            </div>
+            <ul className="flex flex-row gap-[8px]">
+              {aiRecommendKeywords
+                ? aiRecommendKeywords.map((keyword, index) => (
+                    <li key={`back-capability-${keyword}-${index}`}>
+                      <Tag variant="secondary50-outline" size="M">
+                        {keyword}
+                      </Tag>
+                    </li>
+                  ))
+                : ''}
+            </ul>
+          </div>
+          <TextAreaField
+            chipTitle="AI 자기소개서 예시"
+            maxLength={100}
+            readOnly
+            autoSize
+            // TODO: API 연동
+            value={
+              '저는 UX 디자인 직무에 지원하려는 [이름]입니다. 창의력과 협동력을 바탕으로 사람들의 사용자 경험을 개선하는 일에 열정을 갖고 있습니다. [학력/경력] IT 동아리에서의 경험을 통해 앱 서비스를 출시하는 과정에 참여하였습니다. 이를 통해 사용자들의 니즈를 파악하고, 사용자 중심의 디자인 접근 방법을 익히는 기회를 가졌습니다. 이 경험을 통해 UX 디자인의 중요성과 영향력을 깨닫게 되었습니다. 창의력은 문제 해결과 혁신적인 아이디어를 도출하는 능력입니다. 다양한 관점에서 사용자의 니즈를 파악하고, 새로운 디자인 솔루션을 제시하는 데에 주력하였습니다. 이를 통해 사용자들의 경험을 향상시킬 수 있는 독특하고 창의적인 아이디어를 개발하였습니다.  또한, 협동력은 효과적인 팀워크와 의사 소통을 통해 목표 달성을 이루는 능력입니다. 동아리에서 팀원들과 긴밀하게 협력하여 프로젝트를 성공적으로 마무리하였습니다. 상호작용을 통해 팀의 목표를 이루고, 팀원들의 의견을 수렴하며 적극적으로 피드백을 주고받는 과정에서 협동력을 발휘하였습니다. 저는 사용자의 니즈를 이해하고, 창의적인 디자인 아이디어를 통해 사용자 경험을 개선하는 UX 디자인 직무에 대한 역량을 갖추고 있습니다. 저의 열정과 노력으로 팀과 함께 일하며 더 나은 사용자 경험을 만들어내고 싶습니다.'
+            }
+          />
+        </section>
       </div>
     </div>
   );

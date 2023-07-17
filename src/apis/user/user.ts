@@ -15,7 +15,7 @@ const userApi = {
   /**
    * 피드백 제출
    */
-  postFeedback: () => instance.post<FeedbackContent>(USER_API.POST_FEEDBACK),
+  postFeedback: (param: FeedbackContent) => instance.post<FeedbackContent>(USER_API.POST_FEEDBACK, param),
 };
 
 export default userApi;

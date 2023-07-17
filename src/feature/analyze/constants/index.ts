@@ -48,6 +48,6 @@ export const STEPS = [
     title: 'AI 직무역량 추천',
     route: ROUTES.VERIFY,
   },
-];
+] as const;
 
 export const WRITE_STATUS = ['미작성', '작성중', '작성완료'] as const;

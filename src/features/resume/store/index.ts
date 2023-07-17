@@ -1,6 +1,8 @@
 import { create } from 'zustand';
 
-import { QuestionStore } from '../types/store';
+import { ALL_CAPABILITY_KEYWORD } from '@/features/collection/constants';
+
+import { ExperienceStore, QuestionStore } from '../types/store';
 
 export const useQuestionStore = create<QuestionStore>((set) => ({
   title: '',
@@ -21,3 +23,16 @@ export const useIsSpellCheckMode = () => useQuestionStore((state) => state.isSpe
 export const useSpellErrors = () => useQuestionStore((state) => state.spellErrors);
 
 export const useQuestionActions = () => useQuestionStore((state) => state.actions);
+
+export const useExperienceStore = create<ExperienceStore>((set) => ({
+  experienceId: 0,
+  capabilityKeyword: ALL_CAPABILITY_KEYWORD,
+  actions: {
+    setExperienceId: (experienceId) => set(() => ({ experienceId })),
+    setCapabilityKeyword: (capabilityKeyword) => set(() => ({ capabilityKeyword })),
+  },
+}));
+
+export const useExperienceId = () => useExperienceStore((state) => state.experienceId);
+export const useCapabilityKeyword = () => useExperienceStore((state) => state.capabilityKeyword);
+export const useExperienceActions = () => useExperienceStore((state) => state.actions);

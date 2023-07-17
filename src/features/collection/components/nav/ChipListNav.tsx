@@ -1,4 +1,4 @@
-import { Dispatch, ReactNode, SetStateAction } from 'react';
+import { ReactNode } from 'react';
 
 import Badge from '@/components/Badge/Badge';
 import Chip from '@/components/Chip/Chip';
@@ -7,8 +7,9 @@ import addPlusMarkOver99 from '@/shared/utils/addPlusMarkOver99';
 type Props<T> = {
   items: T[];
   selectedItem: string | undefined;
-  changeItem?: Dispatch<SetStateAction<T>>;
+  changeItem?: (keyword: T) => void;
   Right?: ReactNode;
+  chipSize?: ChipSize;
 };
 
 type Item = {

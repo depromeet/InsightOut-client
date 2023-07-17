@@ -1,17 +1,20 @@
-import { ComponentPropsWithoutRef } from 'react';
+import { ComponentPropsWithoutRef, Suspense } from 'react';
 
-import { Flex } from '@chakra-ui/react';
+import { Flex, useToast } from '@chakra-ui/react';
 import cn from 'classnames';
 import { Route } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 
+import AuthModal from '@/features/auth/components/AuthModal/AuthModal';
 import { useAuthActions } from '@/features/auth/store';
-import { ROUTES } from '@/shared/constants/routes';
+import getResumeRoute from '@/features/resume/utils/getResumeRoute';
+import { ROUTES, SIGN_UP_ROUTES } from '@/shared/constants/routes';
 import { useUserImageUrl } from '@/shared/store/user';
 import { tw } from '@/shared/utils/tailwindMerge';
 
+import HomeLogo from '../../../public/images/home/img-home-logo.png';
 import Button from '../Button/Button';
 import SvgIconGnbMyPage from '../Icon/IconGnbMyPage';
 import IconGoogleLogo from '../Icon/IconGoogleLogo';
@@ -27,49 +30,82 @@ type GlobalNavigationBarProps = ComponentPropsWithoutRef<'header'> & {
    * Auth 관련 요청이 진행 중인지 여부 (스피너 출력을 위해 필요)
    */
   isRequesting: boolean;
+  isOpenSignUpModal: boolean;
+  onCloseAuthModal: () => void;
+  onAbortSignUp: () => void;
 };
 
-const GlobalNavigationBar = ({ className, isSignedIn, isRequesting, ...props }: GlobalNavigationBarProps) => {
+const GlobalNavigationBar = ({
+  className,
+  isSignedIn,
+  isRequesting,
+  isOpenSignUpModal,
+  onCloseAuthModal,
+  onAbortSignUp,
+  ...props
+}: GlobalNavigationBarProps) => {
   const rootClassName = tw(styles.root, className);
   const pathName = usePathname();
   const profileImgUrl = useUserImageUrl();
   const { setIsOpenSignUpModal } = useAuthActions();
   const router = useRouter();
+  const toast = useToast();
+  const resumeRoute = getResumeRoute();
 
   const handleClickLoginButton = () => {
     setIsOpenSignUpModal(true);
-    router.push('/?steps=signUp');
+    router.push(SIGN_UP_ROUTES.SIGN_UP);
+  };
+
+  const handleClickMyPage = () => {
+    toast({
+      title: '마이 페이지는 준비 중이에요',
+      status: 'info',
+      duration: 2000,
+      isClosable: true,
+      position: 'top',
+    });
+  };
+
+  const checkIsSignedIn = () => {
+    if (isSignedIn) return true;
+    setIsOpenSignUpModal(true);
+    router.push(SIGN_UP_ROUTES.SIGN_UP);
+    return false;
+  };
+
+  const handleRouter = (route: Route) => {
+    if (!checkIsSignedIn()) return;
+    router.push(route);
   };
 
   return (
     <>
       <header {...props} className={rootClassName}>
-        <Flex alignItems={'center'} gap={'115px'}>
-          <Link className={styles.link} href={{ pathname: ROUTES.HOME }}>
-            <Image
-              src={'/images/home/img-home-logo.png'}
-              className="w-[142px] h-[31px]"
-              width={142}
-              height={31}
-              alt="home-logo"
-            />
-          </Link>
-          <Flex alignItems={'center'} gap={'24px'}>
-            <Link
+        <nav className="flex items-center gap-[115px]">
+          <ul>
+            <li className={styles.link} onClick={() => router.push(ROUTES.HOME)}>
+              <Image src={HomeLogo} className="w-[142px] h-[31px]" alt="home-logo" />
+            </li>
+          </ul>
+          <ul className="flex items-center gap-[24px]">
+            <li
               className={cn(styles.link, { [styles.focus]: pathName === ROUTES.EXPERIENCE })}
-              href={{ pathname: ROUTES.EXPERIENCE }}>
+              onClick={() => handleRouter(ROUTES.EXPERIENCE as Route)}>
               경험분해
-            </Link>
-            <Link className={cn(styles.link, { [styles.focus]: pathName === '/demo' })} href={{ pathname: '/demo' }}>
+            </li>
+            <li
+              className={cn(styles.link, { [styles.focus]: pathName === ROUTES.RESUMES })}
+              onClick={() => handleRouter(resumeRoute as Route)}>
               자기소개서 작성하기
-            </Link>
-            <Link
+            </li>
+            <li
               className={cn(styles.link, { [styles.focus]: pathName === '/collection/experiences' })}
-              href={{ pathname: '/collection/experiences' }}>
+              onClick={() => handleRouter('/collection/experiences' as Route)}>
               모아보기
-            </Link>
-          </Flex>
-        </Flex>
+            </li>
+          </ul>
+        </nav>
         {isRequesting ? (
           <Flex width={140} justifyContent={'center'}>
             <Spinner size="L" style="primary500" />
@@ -78,7 +114,7 @@ const GlobalNavigationBar = ({ className, isSignedIn, isRequesting, ...props }: 
           <Link
             className={cn(styles.link, styles.myPage, { [styles.focus]: pathName === '/demo' })}
             href={'#' as Route}>
-            <Flex justifyContent={'space-between'} alignItems={'center'} gap={'10px'}>
+            <Flex justifyContent={'space-between'} alignItems={'center'} gap={'10px'} onClick={handleClickMyPage}>
               {profileImgUrl.length > 0 ? (
                 <div className={styles['user-profile']}>
                   <Image src={profileImgUrl} width={20} height={20} alt="use-profile" />
@@ -100,6 +136,9 @@ const GlobalNavigationBar = ({ className, isSignedIn, isRequesting, ...props }: 
           </Button>
         )}
       </header>
+      <Suspense>
+        <AuthModal isOpen={isOpenSignUpModal} onClose={onCloseAuthModal} onAbortSignUp={onAbortSignUp} />
+      </Suspense>
     </>
   );
 };

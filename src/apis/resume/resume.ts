@@ -10,7 +10,7 @@ const resumeApi = {
     const pathname = resumeId ? `/${resumeId}` : '';
     return await instance.get<ResumeResponse['getById'], ResumeResponse['getById']>(`${API_URL + pathname}`);
   },
-  post: async () => await instance.post(API_URL),
+  post: async () => await instance.post<ResumeResponse['post'], ResumeResponse['post']>(API_URL),
   patch: async ({ resumeId, payload }: ResumeParams['patch']) =>
     await instance.patch(`${API_URL}/${resumeId}`, payload),
   delete: async ({ resumeId }: ResumeParams['delete']) => await instance.delete(`${API_URL}/${resumeId}`),
