@@ -14,7 +14,7 @@ const BADGE_CONTENT = {
 
 const ExperienceCardDetail = () => {
   const experienceId = useExperienceId();
-  const { data: experience } = useGetExperience({ experienceId });
+  const { data: experience } = useGetExperience({ experienceId }, { enabled: !!experienceId });
 
   const { title, situation, task, action, result } = experience ?? {
     title: '',

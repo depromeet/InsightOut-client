@@ -45,10 +45,10 @@ export const useDeleteResume = (
     onSuccess: async () => {
       const resumeList = queryClient.getQueryData<ResumeData[]>(RESUME_KEY.lists());
       if (resumeList) {
-        const deletedResumeIndex = resumeList.findIndex(({ id }) => id === resumeId);
-        const nextResumeIndex = deletedResumeIndex === 0 ? 1 : deletedResumeIndex - 1;
+        const nextResume = resumeList.find(({ id, questions }) => id !== resumeId && questions.length !== 0);
+        const nextQuestionId = nextResume?.questions[0].id;
 
-        router.push(`/resumes/${resumeList[nextResumeIndex].id}`);
+        router.push(`/resumes/${nextQuestionId}`);
       }
 
       await queryClient.invalidateQueries({ queryKey: RESUME_KEY.lists() });

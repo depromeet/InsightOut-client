@@ -1,8 +1,10 @@
 import { useMutation, UseMutationOptions, useQueryClient } from '@tanstack/react-query';
 import { AxiosError, AxiosResponse } from 'axios';
+import { useRouter } from 'next/navigation';
 
 import questionApi from '@/apis/resume/question';
 import { QuestionParams, QuestionResponse } from '@/apis/resume/types/question';
+import { ResumeData } from '@/features/resume/types/resume';
 import { QUESTION_KEY, RESUME_KEY } from '@/shared/constants/querykeys';
 
 export const useCreateQuestion = (
@@ -29,20 +31,29 @@ export const useUpdateQuestion = (
     ...options,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: RESUME_KEY.lists() });
-      queryClient.invalidateQueries({ queryKey: QUESTION_KEY.detail([questionId]) });
+      queryClient.invalidateQueries({ queryKey: QUESTION_KEY.detail([{ questionId }]) });
     },
   });
 };
 
 export const useDeleteQuestion = (
+  questionId: QuestionParams['delete']['questionId'],
   options?: UseMutationOptions<AxiosResponse, AxiosError, QuestionParams['delete']['questionId']>
 ) => {
   const queryClient = useQueryClient();
+  const router = useRouter();
 
-  return useMutation((questionId) => questionApi.delete({ questionId }), {
+  return useMutation(() => questionApi.delete({ questionId }), {
     ...options,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: RESUME_KEY.lists() });
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({ queryKey: RESUME_KEY.lists() });
+
+      const resumeList = queryClient.getQueryData<ResumeData[]>(RESUME_KEY.lists());
+      if (resumeList) {
+        const firstQuestionId = resumeList?.filter(({ questions }) => questions.length)[0]?.questions[0].id;
+
+        router.push(`/resumes/${firstQuestionId}`);
+      }
     },
   });
 };
