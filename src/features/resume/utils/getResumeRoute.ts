@@ -8,7 +8,7 @@ import { ROUTES } from '@/shared/constants/routes';
 const getResumeRoute = () => {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const { data: resumeList } = useGetResumes();
-  const firstQuestionId = resumeList?.filter(({ questions }) => questions.length)[0].questions[0].id;
+  const firstQuestionId = resumeList?.filter(({ questions }) => questions.length)[0]?.questions[0].id;
 
   return `${ROUTES.RESUMES}/${firstQuestionId}`;
 };

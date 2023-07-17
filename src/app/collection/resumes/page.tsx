@@ -11,11 +11,7 @@ import { ResumeTitle } from '@/features/collection/types';
 import { useGetResume, useGetResumesTitle } from '@/hooks/reactQuery/resume/query';
 
 const Page = () => {
-  const { data: resumes, isSuccess } = useGetResumesTitle({
-    onSuccess: () => {
-      if (!resume) notFound();
-    },
-  });
+  const { data: resumes, isSuccess } = useGetResumesTitle();
 
   const initialResumes = resumes ? resumes[0] : INITIAL_RESUME;
 
