@@ -1,9 +1,11 @@
 'use client';
 
 import Image from 'next/image';
-import lumosCry from '../../../public/images/lumos-cry.png';
 import { usePathname } from 'next/navigation';
+
 import Button from '@/components/Button/Button';
+
+import lumosCry from '../../../public/images/lumos-cry.png';
 
 const NotFound = () => {
   //TODO: type 다듬기

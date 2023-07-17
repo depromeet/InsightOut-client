@@ -102,6 +102,7 @@ const ExperienceListCard = ({
       <ExperienceModal
         isOpen={isOpenExperienceCardModal}
         onClose={onCloseExperienceCardModal}
+        experienceId={id}
         period={experiencePeriod}
         experienceStatus={experienceStatus}
         title={title || ''}

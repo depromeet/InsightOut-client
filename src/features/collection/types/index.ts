@@ -3,7 +3,6 @@ export type Capability = {
   keyword: string;
   count: number;
 };
-
 export interface Experience {
   id: number;
   title?: string | null;
@@ -18,7 +17,19 @@ export interface Experience {
   summaryKeywords?: string[];
   experienceCapabilityKeywords?: string[];
   aiRecommendKeywords?: string[];
+  AiResume?: {
+    content: string;
+    AiResumeCapabilities: { Capability: { keyword: string } }[];
+  };
+  ExperienceInfo?: ExperienceInfo;
 }
+
+export type ExperienceInfo = {
+  experienceInfoId: number;
+  experienceRole: string;
+  motivation: string;
+  analysis: string;
+};
 
 export type ExperienceStatus = 'INPROGRESS' | 'DONE';
 export type Capacity = {
