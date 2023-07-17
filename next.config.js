@@ -6,6 +6,7 @@ const nextConfig = {
         hostname: 'lh3.googleusercontent.com',
       },
     ],
+    minimumCacheTTL: 31560000,
   },
   experimental: {
     typedRoutes: true,
