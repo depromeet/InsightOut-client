@@ -15,11 +15,12 @@ import SignUpContents from '@/features/auth/components/AuthModal/ModalContents/S
 import StartNowContents from '@/features/auth/components/AuthModal/ModalContents/StartNowContents';
 import WelcomeContents from '@/features/auth/components/AuthModal/ModalContents/WelcomeContents';
 import { ROUTES, SIGN_UP_ROUTES } from '@/shared/constants/routes';
+import { Field } from '@/shared/constants/user';
 import { useUserNickname, useUserOnboarding } from '@/shared/store/user';
 
 import useGoogleLogin from '../../hooks/useGoogleLogin';
 import { useAuthActions } from '../../store';
-import { Category, SignUpConfig, SignUpSteps } from '../../types/signUp';
+import { SignUpConfig, SignUpSteps } from '../../types/signUp';
 
 type AuthModalProps = {
   isOpen: boolean;
@@ -35,7 +36,10 @@ const AuthModal = ({ isOpen, onClose, onAbortSignUp }: AuthModalProps) => {
   const { setIsSignedIn, setIsTokenRequired } = useAuthActions();
   const { signIn, isLoading } = useGoogleLogin();
 
-  const [selectedCategory, setSelectedCategory] = useState<Category>({ title: '', field: null });
+  const [selectedCategory, setSelectedCategory] = useState<{ title: string; field: Field }>({
+    title: '',
+    field: Field.NOT_SELECTED,
+  });
 
   const currentStep = searchParams.get('steps') as SignUpSteps | null;
 

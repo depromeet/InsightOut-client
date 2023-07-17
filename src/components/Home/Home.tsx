@@ -1,12 +1,13 @@
 import Image from 'next/image';
+import Home1 from 'public/images/home/img-home-1.png';
+import Home2 from 'public/images/home/img-home-2.png';
+import Home3 from 'public/images/home/img-home-3.png';
+import HomeEllipsisLeft from 'public/images/home/img-home-ellipsis-left.png';
+import HomeEllipsisRight from 'public/images/home/img-home-ellipsis-right.png';
+import HomeLogo from 'public/images/home/img-home-logo.png';
 
 import { ROUTES } from '@/shared/constants/routes';
 
-import Home1 from '../../../public/images/home/img-home-1.png';
-import Home2 from '../../../public/images/home/img-home-2.png';
-import HomeEllipsisLeft from '../../../public/images/home/img-home-ellipsis-left.png';
-import HomeEllipsisRight from '../../../public/images/home/img-home-ellipsis-right.png';
-import HomeLogo from '../../../public/images/home/img-home-logo.png';
 import Badge from '../Badge/Badge';
 import SvgIconChevronRight from '../Icon/IconChevronRight';
 import SvgIconPairQuotation from '../Icon/IconPairQuotation';
@@ -126,7 +127,7 @@ const Home = () => {
             </div>
           </div>
           <div className="relative max-w-[1200px] w-full h-[462px]">
-            <Image src={'/images/home/img-home-3.png'} fill alt="Home-3" />
+            <Image src={Home3} fill alt="Home-3" />
           </div>
           <Image
             src={HomeEllipsisRight}
