@@ -5,20 +5,22 @@ import { useEffect } from 'react';
 import { useDisclosure } from '@chakra-ui/react';
 import { usePathname, useRouter } from 'next/navigation';
 
+import userApi from '@/apis/user/user';
 import GlobalNavigationBar from '@/components/GlobalNavigationBar/GlobalNavigationBar';
 import OnboardingProvider from '@/components/Providers/OnboardingProvider';
 import ExperienceNotice from '@/feature/analyze/modal/BaseDialog';
 import AuthProvider from '@/features/auth/components/Providers/AuthProvider';
 import { useAuthActions, useIsOpenSignUpModal, useIsRequesting, useIsSignedIn } from '@/features/auth/store';
 import { ROUTES } from '@/shared/constants/routes';
+import { Field } from '@/shared/constants/user';
 import { useBoolean } from '@/shared/store/boolean';
-import { useUserId } from '@/shared/store/user';
+import { useUserNickname } from '@/shared/store/user';
 
 export default function Template({ children }: StrictPropsWithChildren) {
   const isSignedIn = useIsSignedIn();
   const isRequesting = useIsRequesting();
   const isOpenSignUpModal = useIsOpenSignUpModal();
-  const userId = useUserId();
+  const nickname = useUserNickname();
   const { setIsOpenSignUpModal, setIsSignedIn } = useAuthActions();
   const router = useRouter();
   const pathname = usePathname();
@@ -36,8 +38,8 @@ export default function Template({ children }: StrictPropsWithChildren) {
     router.replace(ROUTES.HOME);
   };
 
-  const handleAbortSignUp = () => {
-    if (!userId) return;
+  const handleAbortSignUp = async () => {
+    await userApi.patch({ nickname, field: Field.NOT_SELECTED });
     setIsSignedIn(true);
   };
 

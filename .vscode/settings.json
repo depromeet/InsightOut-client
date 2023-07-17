@@ -1,5 +1,5 @@
 {
   "css.lint.unknownAtRules": "ignore",
   "scss.lint.unknownAtRules": "ignore",
-  "cSpell.words": ["googleusercontent", "lumos", "signout", "startnow", "insightout", "nbps", "UXUI"]
+  "cSpell.words": ["googleusercontent", "insightout", "lumos", "mypage", "nbps", "signout", "startnow", "UXUI"]
 }
