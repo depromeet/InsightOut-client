@@ -1,4 +1,4 @@
-import { PropsWithChildren } from 'react';
+import { PropsWithChildren, useState } from 'react';
 
 import { Spinner } from '@chakra-ui/react';
 
@@ -6,8 +6,8 @@ import Button from '@/components/Button/Button';
 import IconReset from '@/components/Icon/IconReset';
 import { useSpellCheck } from '@/hooks/reactQuery/resume/spellCheck/mutation';
 
-import useSpellCheckResult from '../../hooks/useSpellCheckResult';
 import { useAnswer, useQuestionActions } from '../../store';
+import { SpellCheckResult } from '../../types/question';
 import SpellCheckTitle from './SpellCheckTitle';
 
 const SpellCheckContainer = ({ children }: PropsWithChildren) => (
@@ -25,18 +25,25 @@ const BUTTON_CONTENT = {
 
 const SpellChecker = () => {
   const answer = useAnswer();
-  const { setIsSpellCheckMode } = useQuestionActions();
+  const { setIsSpellCheckMode, setSpellErrors } = useQuestionActions();
 
-  const { mutate: spellCheck, data: result, status } = useSpellCheck();
-  const { spellCheckResult, setSpellCheckResult } = useSpellCheckResult(status, result ?? []);
+  const { mutateAsync: spellCheck } = useSpellCheck();
+  const [spellCheckResult, setSpellCheckResult] = useState<SpellCheckResult>('idle');
 
-  const handleSpellCheckButtonClick = () => {
-    spellCheck(answer);
+  const handleSpellCheckButtonClick = async () => {
+    const result = await spellCheck(answer);
+
+    setIsSpellCheckMode(true);
+    setSpellErrors(result ?? []);
+
+    if (result?.length === 0) setSpellCheckResult('correct');
+    else setSpellCheckResult('error');
   };
 
   const handleResetButtonClick = () => {
     setSpellCheckResult('idle');
     setIsSpellCheckMode(false);
+    setSpellErrors([]);
   };
 
   return (
