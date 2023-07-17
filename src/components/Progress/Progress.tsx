@@ -3,8 +3,8 @@
 import React from 'react';
 import { useFormContext } from 'react-hook-form';
 
-import { STEPS } from '@/feature/analyze/constants';
-import { ExperienceFormValues, WriteStatusType } from '@/feature/analyze/types';
+import { STEPS } from '@/features/analyze/constants';
+import { ExperienceFormValues, WriteStatusType } from '@/features/analyze/types';
 
 import Tag from '../Tag/Tag';
 import ProgressBar from './ProgressBar';

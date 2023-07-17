@@ -1,4 +1,4 @@
-import { ExperienceFormValues } from '@/feature/analyze/types';
+import { ExperienceFormValues } from '@/features/analyze/types';
 
 import instance from '..';
 import { ExperienceParams, ExperienceResponse } from './types/experience';

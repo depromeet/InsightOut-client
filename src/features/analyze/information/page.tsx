@@ -7,7 +7,7 @@ import { useRouter } from 'next/navigation';
 
 import TextAreaField from '@/components/Input/TextAreaField/TextAreaField';
 import QuestionCard from '@/components/QuestionCard/QuestionCard';
-import { ExperienceFormValues } from '@/feature/analyze/types';
+import { ExperienceFormValues } from '@/features/analyze/types';
 import { callbackRefWithResizeHeight } from '@/shared/utils/callbackRefWithResizeHeight';
 
 const InformationPage = () => {
