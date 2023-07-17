@@ -6,7 +6,7 @@ interface experienceIdState {
   resetExperienceId: () => void;
 }
 
-export const experienceIdStore = create<experienceIdState>((set) => ({
+const experienceIdStore = create<experienceIdState>((set) => ({
   experienceId: NaN,
   setExperienceId: (experienceId) =>
     set(() => ({
@@ -14,3 +14,5 @@ export const experienceIdStore = create<experienceIdState>((set) => ({
     })),
   resetExperienceId: () => set(() => ({ experienceId: NaN })),
 }));
+
+export const useExperienceId = experienceIdStore;
