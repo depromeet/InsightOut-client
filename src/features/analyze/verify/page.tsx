@@ -9,8 +9,8 @@ import { useRouter } from 'next/navigation';
 import TextAreaField from '@/components/Input/TextAreaField/TextAreaField';
 import QuestionCard from '@/components/QuestionCard/QuestionCard';
 import Tag from '@/components/Tag/Tag';
-import AICapabilityKeyword from '@/feature/analyze/verify/AICapabilityKeyword';
-import SelectedKeywordContainer from '@/feature/analyze/verify/SelectedKeywordContainer';
+import AICapabilityKeyword from '@/features/analyze/verify/AICapabilityKeyword';
+import SelectedKeywordContainer from '@/features/analyze/verify/SelectedKeywordContainer';
 import { useCreateRecommendResume } from '@/hooks/reactQuery/ai/mutation';
 import { useUserNickname } from '@/shared/store/user';
 

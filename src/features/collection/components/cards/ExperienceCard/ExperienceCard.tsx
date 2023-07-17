@@ -10,7 +10,8 @@ import Badge from '@/components/Badge/Badge';
 import Button from '@/components/Button/Button';
 import TextAreaField from '@/components/Input/TextAreaField/TextAreaField';
 import Tag from '@/components/Tag/Tag';
-import { ExperienceStatus } from '@/feature/analyze/types';
+import { ExperienceStatus } from '@/features/analyze/types';
+import { ExperienceInfo } from '@/features/collection/types';
 
 import CapabilityImage from '../CapabilityImage';
 import MotionBox from '../MotionBox';
@@ -22,6 +23,9 @@ type Props = {
   summaryKeywords?: string[];
   experienceCapabilityKeywords?: string[];
   aiRecommendKeywords?: string[];
+  experienceInfo?: ExperienceInfo;
+  star?: string;
+  aiResume?: string;
 };
 
 const aiRecommendQuestions = [
@@ -51,6 +55,9 @@ const ExperienceCard = ({
   experienceCapabilityKeywords,
   aiRecommendKeywords,
   experienceStatus,
+  experienceInfo,
+  star,
+  aiResume,
 }: Props) => {
   const [isBack, setIsBack] = useState(false);
 
@@ -94,6 +101,9 @@ const ExperienceCard = ({
             <ExperienceCard.BodyBack
               experienceCapabilityKeywords={experienceCapabilityKeywords}
               aiRecommendKeywords={aiRecommendKeywords}
+              experienceInfo={experienceInfo}
+              star={star}
+              aiResume={aiResume}
             />
           )}
         </div>
@@ -242,27 +252,21 @@ ExperienceCard.AIQuestions = ({ aiRecommendQuestions }: ExperienceCardAIQuestion
   </div>
 );
 
-type ExperienceCardBodyBackProps = {
-  experienceCapabilityKeywords?: string[];
-  aiRecommendKeywords?: string[];
-};
-
-ExperienceCard.BodyBack = ({ experienceCapabilityKeywords, aiRecommendKeywords }: ExperienceCardBodyBackProps) => {
+ExperienceCard.BodyBack = ({
+  experienceCapabilityKeywords,
+  aiRecommendKeywords,
+  experienceInfo,
+  star,
+  aiResume,
+}: Pick<Props, 'experienceCapabilityKeywords' | 'aiRecommendKeywords' | 'experienceInfo' | 'star' | 'aiResume'>) => {
   return (
     <div className="h-full">
       <div className="flex flex-col w-[690px] text-left">
         <div className="mb-[20px]">
-          {/* // TODO: API 연동 */}
-          <TextAreaField chipTitle="나의 역할" maxLength={20} readOnly value={'UIUX 디자이너'} />
+          <TextAreaField chipTitle="나의 역할" maxLength={20} readOnly value={experienceInfo?.experienceRole} />
         </div>
         <div className="mb-[20px]">
-          <TextAreaField
-            chipTitle="경험 수행 이유"
-            maxLength={100}
-            readOnly
-            // TODO: API 연동
-            value={'개발자와 협업 역량을 기르기 위해서'}
-          />
+          <TextAreaField chipTitle="경험 수행 이유" maxLength={100} readOnly value={experienceInfo?.motivation} />
         </div>
         <div className="mb-[20px]">
           <div className="mb-[8px]">
@@ -283,16 +287,7 @@ ExperienceCard.BodyBack = ({ experienceCapabilityKeywords, aiRecommendKeywords }
           </ul>
         </div>
         <div className="mb-[20px]">
-          <TextAreaField
-            chipTitle="올때메로나님의 IT동아리 협업"
-            maxLength={100}
-            readOnly
-            autoSize
-            // TODO: API 연동
-            value={
-              '텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요'
-            }
-          />
+          <TextAreaField chipTitle="올때메로나님의 IT동아리 협업" maxLength={100} readOnly autoSize value={star} />
         </div>
         <section className="flex flex-col gap-[20px]">
           <h2 className="subhead2 flex items-center gap-[4px]">
@@ -317,16 +312,7 @@ ExperienceCard.BodyBack = ({ experienceCapabilityKeywords, aiRecommendKeywords }
                 : ''}
             </ul>
           </div>
-          <TextAreaField
-            chipTitle="AI 자기소개서 예시"
-            maxLength={100}
-            readOnly
-            autoSize
-            // TODO: API 연동
-            value={
-              '저는 UX 디자인 직무에 지원하려는 [이름]입니다. 창의력과 협동력을 바탕으로 사람들의 사용자 경험을 개선하는 일에 열정을 갖고 있습니다. [학력/경력] IT 동아리에서의 경험을 통해 앱 서비스를 출시하는 과정에 참여하였습니다. 이를 통해 사용자들의 니즈를 파악하고, 사용자 중심의 디자인 접근 방법을 익히는 기회를 가졌습니다. 이 경험을 통해 UX 디자인의 중요성과 영향력을 깨닫게 되었습니다. 창의력은 문제 해결과 혁신적인 아이디어를 도출하는 능력입니다. 다양한 관점에서 사용자의 니즈를 파악하고, 새로운 디자인 솔루션을 제시하는 데에 주력하였습니다. 이를 통해 사용자들의 경험을 향상시킬 수 있는 독특하고 창의적인 아이디어를 개발하였습니다.  또한, 협동력은 효과적인 팀워크와 의사 소통을 통해 목표 달성을 이루는 능력입니다. 동아리에서 팀원들과 긴밀하게 협력하여 프로젝트를 성공적으로 마무리하였습니다. 상호작용을 통해 팀의 목표를 이루고, 팀원들의 의견을 수렴하며 적극적으로 피드백을 주고받는 과정에서 협동력을 발휘하였습니다. 저는 사용자의 니즈를 이해하고, 창의적인 디자인 아이디어를 통해 사용자 경험을 개선하는 UX 디자인 직무에 대한 역량을 갖추고 있습니다. 저의 열정과 노력으로 팀과 함께 일하며 더 나은 사용자 경험을 만들어내고 싶습니다.'
-            }
-          />
+          <TextAreaField chipTitle="AI 자기소개서 예시" maxLength={800} readOnly autoSize value={aiResume} />
         </section>
       </div>
     </div>

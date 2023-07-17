@@ -1,4 +1,4 @@
-import VerifyPage from '@/feature/analyze/verify/page';
+import VerifyPage from '@/features/analyze/verify/page';
 
 const Verify = () => {
   return <VerifyPage />;
