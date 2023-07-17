@@ -1,4 +1,4 @@
-import KeywordPage from '@/feature/analyze/keyword/page';
+import KeywordPage from '@/features/analyze/keyword/page';
 
 const Keyword = () => {
   return <KeywordPage />;

@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Modal, ModalContent, ModalOverlay } from '@chakra-ui/react';
 
-import { ExperienceStatus } from '@/feature/analyze/types';
+import { ExperienceStatus } from '@/features/analyze/types';
 
 import ExperienceCard from './ExperienceCard';
 
