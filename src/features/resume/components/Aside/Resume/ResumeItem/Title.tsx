@@ -6,6 +6,7 @@ import ActionList from '@/components/ActionList/ActionList';
 import IconFolder from '@/components/Icon/IconFolder';
 import IconMoreVertical from '@/components/Icon/IconMoreVertical';
 import { useDeleteResume, useUpdateResumeTitle } from '@/hooks/reactQuery/resume/mutation';
+import { MAX_LENGTH } from '@/shared/constants/maxLength';
 
 import DeleteModal from '../../DeleteModal';
 
@@ -69,6 +70,7 @@ const Title = ({ resumeId, title = '자기소개서 예시', selected }: TitlePr
           <input
             autoFocus
             defaultValue={title}
+            maxLength={MAX_LENGTH.RESUME_TITLE}
             onBlur={handleEditInputBlur}
             onClick={handleEditInputClick}
             onKeyUp={handleEditInputEnterKeyPress}
