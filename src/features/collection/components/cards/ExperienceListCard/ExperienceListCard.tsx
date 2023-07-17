@@ -35,6 +35,7 @@ const ExperienceListCard = ({
   endDate,
   experienceCapabilityKeywords,
   aiRecommendKeywords,
+  AiRecommendQuestions,
 }: Props) => {
   const {
     isOpen: isOpenActionListModal,
@@ -109,6 +110,7 @@ const ExperienceListCard = ({
         summaryKeywords={summaryKeywords}
         experienceCapabilityKeywords={experienceCapabilityKeywords}
         aiRecommendKeywords={aiRecommendKeywords}
+        aiRecommendQuestions={AiRecommendQuestions}
       />
     </>
   );
