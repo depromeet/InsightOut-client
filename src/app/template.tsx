@@ -3,7 +3,7 @@
 import { useEffect } from 'react';
 
 import { useDisclosure } from '@chakra-ui/react';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 
 import GlobalNavigationBar from '@/components/GlobalNavigationBar/GlobalNavigationBar';
 import OnboardingProvider from '@/components/Providers/OnboardingProvider';
@@ -21,6 +21,7 @@ export default function Template({ children }: StrictPropsWithChildren) {
   const userId = useUserId();
   const { setIsOpenSignUpModal, setIsSignedIn } = useAuthActions();
   const router = useRouter();
+  const pathname = usePathname();
 
   const {
     isOpen: isexperienceNoticeOpen,
@@ -41,10 +42,17 @@ export default function Template({ children }: StrictPropsWithChildren) {
   };
 
   useEffect(() => {
-    if (isNoticeOpen) {
-      experienceNoticeOpen();
+    // 경험분해 페이지 -> 경험카드 완성페이지로 라우팅시에는 notice 모달 띄우지 않도록 예외처리
+    if (pathname === '/completed-experience-card') {
+      setTimeout(() => {
+        setNoticeOpen(false);
+      }, 0);
+      return;
     }
-  }, [isNoticeOpen, experienceNoticeOpen]);
+
+    // 경험분해 페이지 이탈시에 notice 모달 띄우기
+    if (isNoticeOpen) experienceNoticeOpen();
+  }, [isNoticeOpen, experienceNoticeOpen, pathname, setNoticeOpen]);
 
   return (
     <>

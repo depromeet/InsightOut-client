@@ -20,7 +20,7 @@ import 경험분석로딩모달 from '@/feature/analyze/modal/LoadingModal';
 import PrevNextButton from '@/feature/analyze/PrevNextButton/PrevNextButton';
 import { ExperienceFormValues, WriteStatusType } from '@/feature/analyze/types';
 import SavingCaption from '@/features/resume/components/ResumeForm/SavingCaption';
-import { useCreateRecommendKeyword, useSubmitExperience } from '@/hooks/reactQuery/ai/mutation';
+import { useCreateRecommendKeyword } from '@/hooks/reactQuery/ai/mutation';
 import { useCreateExperience, useUpdateExperience } from '@/hooks/reactQuery/analyze/mutation';
 import { useGetExperience } from '@/hooks/reactQuery/analyze/query';
 import { useUpdateKeyword } from '@/hooks/reactQuery/keyword/mutation';
@@ -130,7 +130,6 @@ const Layout = ({ children }: LayoutProps) => {
   }, [resetExperienceId]);
 
   const { mutate: updateExperience, status: updateExperienceStatus } = useUpdateExperience(experienceId);
-  const { mutateAsync: submitExperience } = useSubmitExperience();
   const { mutateAsync: createRecommendKeyword } = useCreateRecommendKeyword();
 
   const TOOLTIP_CONTENTS = [
@@ -252,23 +251,13 @@ const Layout = ({ children }: LayoutProps) => {
   }, [methods, pathname, prevPathname, setWriteStatus]);
 
   const submit = async (data: ExperienceFormValues) => {
-    const { experienceId, situation, task, action, result, writeStatus } = data;
+    const { writeStatus } = data;
     const isReadyToSubmit = writeStatus?.slice(0, 3).every((status) => status === '작성완료');
     if (!isReadyToSubmit) {
       return;
     }
 
-    const response = await submitExperience({
-      experienceId,
-      situation,
-      task,
-      action,
-      result,
-    });
-
-    // FIXME: 성공하면 보내는 곳은 준하님이 이어서 작업해주시면 됩니다.
-    // TODO: 경험카드 페이지로 보내고 제출하는 로직으로 변경하기 or 제출하고 여기서 로딩 모달을 띄우고 완료하면 경험카드 페이지로 보내기
-    if ('ExperienceInfo' in response) push('/');
+    push('/completed-experience-card');
   };
 
   const readyToAIRecommendation = async () => {
