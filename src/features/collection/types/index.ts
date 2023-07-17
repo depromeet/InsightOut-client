@@ -22,7 +22,15 @@ export interface Experience {
     AiResumeCapabilities: { Capability: { keyword: string } }[];
   };
   ExperienceInfo?: ExperienceInfo;
+  AiRecommendQuestions?: AiRecommendQuestions[];
 }
+
+export type AiRecommendQuestions = {
+  id: number;
+  title: string;
+  createedAt: string;
+  updatedAt: string;
+};
 
 export type ExperienceInfo = {
   experienceInfoId: number;

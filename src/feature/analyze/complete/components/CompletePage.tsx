@@ -47,6 +47,7 @@ const CompletePage = () => {
     experienceInfo: experience?.ExperienceInfo,
     star: star,
     aiResume: experience?.AiResume?.content,
+    aiRecommendQuestions: experience?.AiRecommendQuestions,
   };
 
   return (

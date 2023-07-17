@@ -11,7 +11,8 @@ import Button from '@/components/Button/Button';
 import TextAreaField from '@/components/Input/TextAreaField/TextAreaField';
 import Tag from '@/components/Tag/Tag';
 import { ExperienceStatus } from '@/feature/analyze/types';
-import { ExperienceInfo } from '@/features/collection/types';
+import { AiRecommendQuestions, ExperienceInfo } from '@/features/collection/types';
+import { MAX_LENGTH } from '@/shared/constants/maxLength';
 
 import CapabilityImage from '../CapabilityImage';
 import MotionBox from '../MotionBox';
@@ -26,24 +27,8 @@ type Props = {
   experienceInfo?: ExperienceInfo;
   star?: string;
   aiResume?: string;
+  aiRecommendQuestions?: AiRecommendQuestions[];
 };
-
-const aiRecommendQuestions = [
-  {
-    id: 10,
-    question:
-      'Q. 본인이 팀 프로젝트에서 어려운 의견 충돌 상황을 어떻게 관리했고, 해결책을 도출하는 과정을 설명해주세요.',
-  },
-  {
-    id: 11,
-    question:
-      'Q. 본인이 팀 프로젝트에서 어려운 의견 충돌 상황을 어떻게 관리했고, 해결책을 도출하는 과정을 설명해주세요.',
-  },
-  {
-    id: 12,
-    question: 'Q. 본인이 고객과의 원활한 커뮤니케이션을 통해 성과를 이뤄낸 경험에 대해 알려주세요.',
-  },
-];
 
 const aiRecommend =
   '디자이너로서 개발팀과 각각의 전문성을 최대한 활용하여 높은 퀄리티의 앱을 만들어내기 위해 커뮤니케이션 능력을 뽐내셨군요! 빠른 기간안에 앱 서비스를 런칭해야하는 상황에서 디자인 시스템 제작, 런칭일 정해서 린하게 개발하는 방법을 제의한 것은 프로젝트 관리 능력의 일환이었습니다.';
@@ -58,6 +43,7 @@ const ExperienceCard = ({
   experienceInfo,
   star,
   aiResume,
+  aiRecommendQuestions,
 }: Props) => {
   const [isBack, setIsBack] = useState(false);
 
@@ -96,6 +82,7 @@ const ExperienceCard = ({
               aiRecommend={aiRecommend}
               experienceCapabilityKeywords={experienceCapabilityKeywords}
               aiRecommendKeywords={aiRecommendKeywords}
+              aiRecommendQuestions={aiRecommendQuestions}
             />
           ) : (
             <ExperienceCard.BodyBack
@@ -140,6 +127,7 @@ type ExperienceCardBodyFrontProps = {
   experienceCapabilityKeywords?: string[];
   aiRecommendKeywords?: string[];
   aiRecommend?: string;
+  aiRecommendQuestions?: AiRecommendQuestions[];
 };
 
 ExperienceCard.BodyFront = ({
@@ -148,6 +136,7 @@ ExperienceCard.BodyFront = ({
   experienceCapabilityKeywords,
   aiRecommendKeywords,
   aiRecommend,
+  aiRecommendQuestions,
 }: ExperienceCardBodyFrontProps) => {
   return (
     <>
@@ -236,16 +225,16 @@ ExperienceCard.Keyword = ({ title, capabilities, aiRecommend, isAi = false }: Ex
 );
 
 type ExperienceCardAIQuestionsProps = {
-  aiRecommendQuestions: typeof aiRecommendQuestions;
+  aiRecommendQuestions?: AiRecommendQuestions[];
 };
 
 ExperienceCard.AIQuestions = ({ aiRecommendQuestions }: ExperienceCardAIQuestionsProps) => (
   <div>
     <h6 className="h6 mb-[8px]">이 경험과 잘 맞는 자기소개서 문항</h6>
     <ul className="flex flex-col gap-[8px]">
-      {aiRecommendQuestions.map(({ id, question }) => (
-        <li key={`${id}-${question}`} className=" border-[1px] rounded-[8px] border-gray-300 py-[8px] px-[16px]">
-          <p className="w-full">{question}</p>
+      {aiRecommendQuestions?.map(({ id, createedAt, title }) => (
+        <li key={`${id}-${createedAt}`} className=" border-[1px] rounded-[8px] border-gray-300 py-[8px] px-[16px]">
+          <p className="w-full">{title}</p>
         </li>
       ))}
     </ul>
@@ -312,7 +301,13 @@ ExperienceCard.BodyBack = ({
                 : ''}
             </ul>
           </div>
-          <TextAreaField chipTitle="AI 자기소개서 예시" maxLength={800} readOnly autoSize value={aiResume} />
+          <TextAreaField
+            chipTitle="AI 자기소개서 예시"
+            maxLength={MAX_LENGTH.AI_RESUME}
+            readOnly
+            autoSize
+            value={aiResume}
+          />
         </section>
       </div>
     </div>
