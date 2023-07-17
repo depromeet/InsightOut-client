@@ -3,13 +3,16 @@
 
 import { useState } from 'react';
 
+import Image from 'next/image';
+import AIKeywordRecommend from 'public/images/ai-keyword-recommend.png';
+
 import Badge from '@/components/Badge/Badge';
 import Button from '@/components/Button/Button';
 import TextAreaField from '@/components/Input/TextAreaField/TextAreaField';
 import Tag from '@/components/Tag/Tag';
-import { ExperienceStatus } from '@/feature/analyze/types';
+import { ExperienceStatus } from '@/features/analyze/types';
+import { ExperienceInfo } from '@/features/collection/types';
 
-import { Capability } from '../../../types';
 import CapabilityImage from '../CapabilityImage';
 import MotionBox from '../MotionBox';
 
@@ -20,6 +23,9 @@ type Props = {
   summaryKeywords?: string[];
   experienceCapabilityKeywords?: string[];
   aiRecommendKeywords?: string[];
+  experienceInfo?: ExperienceInfo;
+  star?: string;
+  aiResume?: string;
 };
 
 const aiRecommendQuestions = [
@@ -49,6 +55,9 @@ const ExperienceCard = ({
   experienceCapabilityKeywords,
   aiRecommendKeywords,
   experienceStatus,
+  experienceInfo,
+  star,
+  aiResume,
 }: Props) => {
   const [isBack, setIsBack] = useState(false);
 
@@ -78,7 +87,7 @@ const ExperienceCard = ({
         <ExperienceCard.Header title={title} period={period} isBack={isBack} handleFlipClick={handleFlipClick} />
         <div
           className={`flex flex-row justify-between w-full overflow-auto h-[720px] m-0 p-[50px] ${
-            isBack && '[transform:rotateY(180deg)]'
+            isBack && '[transform:rotateY(180deg)] py-[20px] px-[40px]'
           }`}>
           {!isBack ? (
             <ExperienceCard.BodyFront
@@ -89,7 +98,13 @@ const ExperienceCard = ({
               aiRecommendKeywords={aiRecommendKeywords}
             />
           ) : (
-            <ExperienceCard.BodyBack capabilities={[]} />
+            <ExperienceCard.BodyBack
+              experienceCapabilityKeywords={experienceCapabilityKeywords}
+              aiRecommendKeywords={aiRecommendKeywords}
+              experienceInfo={experienceInfo}
+              star={star}
+              aiResume={aiResume}
+            />
           )}
         </div>
       </MotionBox>
@@ -237,27 +252,21 @@ ExperienceCard.AIQuestions = ({ aiRecommendQuestions }: ExperienceCardAIQuestion
   </div>
 );
 
-type ExperienceCardBodyBackProps = {
-  capabilities?: Capability[];
-  aiCapabilities?: Capability[];
-};
-
-ExperienceCard.BodyBack = ({ capabilities, aiCapabilities }: ExperienceCardBodyBackProps) => {
+ExperienceCard.BodyBack = ({
+  experienceCapabilityKeywords,
+  aiRecommendKeywords,
+  experienceInfo,
+  star,
+  aiResume,
+}: Pick<Props, 'experienceCapabilityKeywords' | 'aiRecommendKeywords' | 'experienceInfo' | 'star' | 'aiResume'>) => {
   return (
     <div className="h-full">
       <div className="flex flex-col w-[690px] text-left">
-        <div className="mb-[47px]">
-          {/* // TODO: API 연동 */}
-          <TextAreaField chipTitle="나의 역할" maxLength={20} readOnly value={'UIUX 디자이너'} />
+        <div className="mb-[20px]">
+          <TextAreaField chipTitle="나의 역할" maxLength={20} readOnly value={experienceInfo?.experienceRole} />
         </div>
-        <div className="mb-[47px]">
-          <TextAreaField
-            chipTitle="경험 수행 이유"
-            maxLength={100}
-            readOnly
-            // TODO: API 연동
-            value={'개발자와 협업 역량을 기르기 위해서'}
-          />
+        <div className="mb-[20px]">
+          <TextAreaField chipTitle="경험 수행 이유" maxLength={100} readOnly value={experienceInfo?.motivation} />
         </div>
         <div className="mb-[20px]">
           <div className="mb-[8px]">
@@ -266,8 +275,8 @@ ExperienceCard.BodyBack = ({ capabilities, aiCapabilities }: ExperienceCardBodyB
             </Tag>
           </div>
           <ul className="flex flex-row gap-[8px]">
-            {capabilities
-              ? capabilities.map(({ keyword }, index) => (
+            {experienceCapabilityKeywords
+              ? experienceCapabilityKeywords.map((keyword, index) => (
                   <li key={`back-capability-${keyword}-${index}`}>
                     <Tag variant="primary500" size="M">
                       {keyword}
@@ -277,17 +286,34 @@ ExperienceCard.BodyBack = ({ capabilities, aiCapabilities }: ExperienceCardBodyB
               : ''}
           </ul>
         </div>
-        <div>
-          <div className="mb-[8px]">
-            {/* 닉네임 님의 title */}
-            <Tag variant="gray100" size="S">
-              올때메로나님의 IT동아리 협업
-            </Tag>
-          </div>
-          <p className={`mb-[50px] bg-gray-50 p-[16px] rounded-[16px]`}>
-            텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요텍스트를입력해주세요
-          </p>
+        <div className="mb-[20px]">
+          <TextAreaField chipTitle="올때메로나님의 IT동아리 협업" maxLength={100} readOnly autoSize value={star} />
         </div>
+        <section className="flex flex-col gap-[20px]">
+          <h2 className="subhead2 flex items-center gap-[4px]">
+            <Image src={AIKeywordRecommend} alt="ai keyword recommend icon" />
+            AI 직무역량 추천
+          </h2>
+          <div>
+            <div className="mb-[8px]">
+              <Tag variant="gray100" size="S">
+                AI 직무역량 키워드
+              </Tag>
+            </div>
+            <ul className="flex flex-row gap-[8px]">
+              {aiRecommendKeywords
+                ? aiRecommendKeywords.map((keyword, index) => (
+                    <li key={`back-capability-${keyword}-${index}`}>
+                      <Tag variant="secondary50-outline" size="M">
+                        {keyword}
+                      </Tag>
+                    </li>
+                  ))
+                : ''}
+            </ul>
+          </div>
+          <TextAreaField chipTitle="AI 자기소개서 예시" maxLength={800} readOnly autoSize value={aiResume} />
+        </section>
       </div>
     </div>
   );

@@ -4,24 +4,20 @@ import { useEffect, useState } from 'react';
 
 import { notFound } from 'next/navigation';
 
+import Chip from '@/components/Chip/Chip';
 import ResumeCard from '@/features/collection/components/cards/ResumeCard';
-import ChipListNav from '@/features/collection/components/nav/ChipListNav';
 import { INITIAL_RESUME } from '@/features/collection/constants';
 import { ResumeTitle } from '@/features/collection/types';
 import { useGetResume, useGetResumesTitle } from '@/hooks/reactQuery/resume/query';
 
 const Page = () => {
-  const { data: resumes, isLoading: isTitleLoading } = useGetResumesTitle({
-    onSuccess: () => {
-      if (!resume) notFound();
-    },
-  });
+  const { data: resumes, isSuccess } = useGetResumesTitle();
 
   const initialResumes = resumes ? resumes[0] : INITIAL_RESUME;
 
-  const [selectedResume, setSelectedResume] = useState<ResumeTitle>(initialResumes);
+  const [selectedResume, setSelectedResume] = useState<ResumeTitle>(INITIAL_RESUME);
 
-  const { data: resume, isLoading: isQuestionsLoading } = useGetResume(
+  const { data: resume } = useGetResume(
     { resumeId: selectedResume ? selectedResume?.id : 0 },
     {
       enabled: !!initialResumes,
@@ -32,21 +28,37 @@ const Page = () => {
     setSelectedResume(initialResumes);
   }, [initialResumes]);
 
-  if (isTitleLoading || isQuestionsLoading) return <p>Loading...</p>;
-
   const questions = resume ? resume.questions : [];
+
+  if (isSuccess && !resumes.length) {
+    notFound();
+  }
 
   return (
     <>
-      {/* 자기소개서 제목 목록 */}
-      <ChipListNav items={resumes || []} selectedItem={selectedResume?.title} changeItem={setSelectedResume} />
-      {/* 자기소개서 상세 */}
+      <section>
+        <nav className="flex flex-row items-center gap-[8px] overflow-x-auto whitespace-nowrap scrollbar-hide p-[1px] my-[24px]">
+          {resumes?.map((resume, index) => {
+            const { id, title } = resume;
+            return (
+              <li key={`${index}-${id}`} className="list-none">
+                <Chip
+                  size="M"
+                  variant={selectedResume?.title === title ? 'secondary-pressed' : 'secondary'}
+                  onClick={() => setSelectedResume(resume)}>
+                  {title || ''}
+                </Chip>
+              </li>
+            );
+          })}
+        </nav>
+      </section>
       <section>
         <ul className="flex flex-col gap-[40px]">
           {questions
             ? questions.map((question) => (
                 <li key={question.id}>
-                  <ResumeCard question={question} />
+                  <ResumeCard resumeId={selectedResume.id} question={question} />
                 </li>
               ))
             : ''}

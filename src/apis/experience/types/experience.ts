@@ -1,4 +1,4 @@
-import { ExperienceFormValues } from '@/feature/analyze/types';
+import { ExperienceFormValues } from '@/features/analyze/types';
 import { Capability, Experience } from '@/features/collection/types';
 
 export type ExperienceParams = {
@@ -14,6 +14,7 @@ export type ExperienceParams = {
     result?: boolean;
   };
   post: Partial<ExperienceFormValues>;
+  delete: { experienceId: number };
 };
 
 export type ExperiencesResponse = {

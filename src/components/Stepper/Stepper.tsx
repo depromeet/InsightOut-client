@@ -2,7 +2,7 @@ import React from 'react';
 
 import { usePathname } from 'next/navigation';
 
-import { STEP, STEPS } from '@/feature/analyze/constants';
+import { STEP, STEPS } from '@/features/analyze/constants';
 
 const Stepper = () => {
   const pathname = usePathname();
