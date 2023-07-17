@@ -14,7 +14,7 @@ const Wrapper = ({ children }: PropsWithChildren) => {
   // const { color } = useBackgroundColorTransition([255, 255, 255], [37, 39, 48], 4000);
 
   return (
-    <div className="relative h-auto overflow-hidden bg-dark">
+    <div className="relative h-full overflow-auto bg-dark">
       <div className="absolute top-[0] right-0">
         <Image src={ellipseSecondary} alt="" width={456} height={437} />
       </div>

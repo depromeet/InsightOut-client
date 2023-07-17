@@ -1,4 +1,4 @@
-import { ExperienceFormValues } from '@/features/analyze/types';
+import { ExperienceFormValues, ExperienceStatus } from '@/features/analyze/types';
 
 export type ExperienceParams = {
   get: { experienceId: number };
@@ -15,7 +15,8 @@ export type ExperienceResponse = {
   task: string;
   action: string;
   result: string;
-  experienceStatus: string;
+  experienceStatus: ExperienceStatus;
+  experienceCapabilityKeywords?: string[];
   ExperienceInfo: {
     experienceInfoId: number;
     motivation: string;
@@ -24,23 +25,8 @@ export type ExperienceResponse = {
   };
   summaryKeywords: string[];
   updatedAt: string;
-  AiResume: [
-    {
-      content: string;
-      AiResumeCapability: [
-        {
-          Capability: {
-            keyword: string;
-            keywordType: string;
-          };
-        },
-        {
-          Capability: {
-            keyword: string;
-            keywordType: string;
-          };
-        }
-      ];
-    }
-  ];
+  AiResume?: {
+    content: string;
+    AiResumeCapabilities: { Capability: { keyword: string } }[];
+  };
 };

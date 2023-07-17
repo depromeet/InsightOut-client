@@ -16,12 +16,11 @@ import TooltipRelativeContent from '@/components/Tooltip/TooltipRelativeContent'
 import { initialValue, STEPS } from '@/features/analyze/constants';
 import StepMenu from '@/features/analyze/layout/StepMenu';
 import AI진입조건모달 from '@/features/analyze/modal/BaseDialog';
-import 이탈방지모달 from '@/features/analyze/modal/BaseDialog';
 import 경험분석로딩모달 from '@/features/analyze/modal/LoadingModal';
 import PrevNextButton from '@/features/analyze/PrevNextButton/PrevNextButton';
 import { ExperienceFormValues, WriteStatusType } from '@/features/analyze/types';
 import SavingCaption from '@/features/resume/components/ResumeForm/SavingCaption';
-import { useCreateRecommendKeyword, useSubmitExperience } from '@/hooks/reactQuery/ai/mutation';
+import { useCreateRecommendKeyword } from '@/hooks/reactQuery/ai/mutation';
 import { useCreateExperience, useUpdateExperience } from '@/hooks/reactQuery/analyze/mutation';
 import { useGetExperience } from '@/hooks/reactQuery/analyze/query';
 import { useUpdateKeyword } from '@/hooks/reactQuery/keyword/mutation';
@@ -29,7 +28,8 @@ import useBeforUnload from '@/hooks/useBeforeUnload';
 import { useIsMounted } from '@/hooks/useIsMounted';
 import { useOnceFlag } from '@/hooks/useOnceFlag';
 import { ROUTES } from '@/shared/constants/routes';
-import { experienceIdStore } from '@/shared/store/experienceId';
+import { useBoolean } from '@/shared/store/boolean';
+import { useExperienceId } from '@/shared/store/experienceId';
 import { useUserNickname } from '@/shared/store/user';
 import formatYYMMDDhhmm from '@/shared/utils/date/formatYYMMDDhhmm';
 
@@ -43,18 +43,24 @@ const Layout = ({ children }: LayoutProps) => {
   const isMounted = useIsMounted();
   const [usedOnce, disableOnceFlag] = useOnceFlag();
   const username = useUserNickname();
-  const { experienceId, setExperienceId, resetExperienceId } = experienceIdStore();
-
-  useBeforUnload();
+  const { experienceId, setExperienceId, resetExperienceId } = useExperienceId();
 
   const { isOpen: isAI진입조건모달Open, onOpen: AI진입조건모달Open, onClose: AI진입조건모달Close } = useDisclosure();
-  const { isOpen: is이탈방지모달Open, onOpen: 이탈방지모달Open, onClose: 이탈방지모달Close } = useDisclosure();
-
   const {
     isOpen: is경험분석로딩모달Open,
     onOpen: 경험분석로딩모달Open,
     onClose: 경험분석로딩모달Close,
   } = useDisclosure();
+
+  const { setValue: setNoticeOpen } = useBoolean();
+
+  useEffect(() => {
+    return () => {
+      setNoticeOpen(true);
+    };
+  }, [setNoticeOpen]);
+
+  useBeforUnload();
 
   const currentStepIndex = (STEPS.find((v) => v.route === pathname)?.id ?? 1) - 1;
   const prevStepIndex = (STEPS.find((v) => v.route === prevPathname)?.id ?? 1) - 1;
@@ -124,7 +130,6 @@ const Layout = ({ children }: LayoutProps) => {
   }, [resetExperienceId]);
 
   const { mutate: updateExperience, status: updateExperienceStatus } = useUpdateExperience(experienceId);
-  const { mutateAsync: submitExperience } = useSubmitExperience();
   const { mutateAsync: createRecommendKeyword } = useCreateRecommendKeyword();
 
   const TOOLTIP_CONTENTS = [
@@ -246,23 +251,13 @@ const Layout = ({ children }: LayoutProps) => {
   }, [methods, pathname, prevPathname, setWriteStatus]);
 
   const submit = async (data: ExperienceFormValues) => {
-    const { experienceId, situation, task, action, result, writeStatus } = data;
+    const { writeStatus } = data;
     const isReadyToSubmit = writeStatus?.slice(0, 3).every((status) => status === '작성완료');
     if (!isReadyToSubmit) {
       return;
     }
 
-    const response = await submitExperience({
-      experienceId,
-      situation,
-      task,
-      action,
-      result,
-    });
-
-    // FIXME: 성공하면 보내는 곳은 준하님이 이어서 작업해주시면 됩니다.
-    // TODO: 경험카드 페이지로 보내고 제출하는 로직으로 변경하기 or 제출하고 여기서 로딩 모달을 띄우고 완료하면 경험카드 페이지로 보내기
-    if ('ExperienceInfo' in response) push('/');
+    push('/completed-experience-card');
   };
 
   const readyToAIRecommendation = async () => {
@@ -356,18 +351,6 @@ const Layout = ({ children }: LayoutProps) => {
         textContent="확인했어요"
       />
       <경험분석로딩모달 size="3xl" isOpen={is경험분석로딩모달Open} onClose={경험분석로딩모달Close} />
-      <이탈방지모달
-        size="3xl"
-        isOpen={is이탈방지모달Open}
-        onClose={이탈방지모달Close}
-        title={`그만 작성하실 건가요? 지금까지 작성한 내용은\n모아보기 탭에서 확인할 수 있어요`}
-        leftTextContent="계속 작성하기"
-        rightTextContent="임시저장하고 나가기"
-        handleLeftClick={() => console.log('계속 작성하기')}
-        handleRightClick={() => console.log('임시저장하고 나가기')}
-        closeOnOverlayClick={false}
-        closeOnEsc={false}
-      />
     </FormProvider>
   );
 };
