@@ -47,7 +47,7 @@ export const MESSAGE = {
 
 export const INITIAL_RESUME: ResumeTitle = {
   createdAt: '',
-  id: -100,
+  id: 0,
   updatedAt: '',
   title: '',
 };
