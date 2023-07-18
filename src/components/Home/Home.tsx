@@ -1,3 +1,4 @@
+import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import Home1 from 'public/images/home/img-home-1.png';
 import Home2 from 'public/images/home/img-home-2.png';
@@ -17,6 +18,7 @@ import FooterNav from './FooterNav';
 import Looper from './Looper';
 import StartButton from './StartButton';
 
+const Lottie = dynamic(() => import('@/components/Lottie/Lottie'));
 const ANALYZE_CARD = ['직무 선택', '경험 작성', '직무 역량 추진', '경험카드 생성'];
 
 const Home = () => {
@@ -203,6 +205,11 @@ const Home = () => {
           </span>
         </div>
       </footer>
+      <div className="hidden">
+        <Lottie src="/lotties/lumos-loading.json" />
+        <Lottie src="/lotties/lumos-hi.json" />
+        <Lottie src="/lotties/lumos-smile.json" />
+      </div>
     </>
   );
 };
