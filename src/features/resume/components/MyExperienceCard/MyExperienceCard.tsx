@@ -14,7 +14,6 @@ const MyExperienceCard = () => {
       <PrefetchHydration queryKey={EXPERIENCE_CAPABILITY_KEY.lists()} queryFn={() => EXPERIENCE_CAPABILITY_API.get()}>
         <MyExperienceCardHeader />
       </PrefetchHydration>
-      <hr aria-orientation="horizontal" className="border-gray-200" />
       <div className="flex h-[100%] overflow-hidden">
         {/* @ts-expect-error Server Component */}
         <PrefetchHydration
