@@ -5,46 +5,12 @@ import Image from 'next/image';
 import { usePathname, useRouter } from 'next/navigation';
 
 import Button from '@/components/Button/Button';
-import { ROUTES } from '@/shared/constants/routes';
+import { PAGE_TEXTCONTENT } from '@/features/collection/constants';
 
 import lumosCry from '/public/images/lumos-cry.png';
 
 const NotFound = () => {
   const [pathname] = usePathname().split('/').slice(-1) as Route[];
-
-  type PageInfo = {
-    keyword: string;
-    subMessage: string;
-    buttonText: string;
-    redirectUrl: Route;
-  };
-
-  type PageTextcontent = {
-    // eslint-disable-next-line unused-imports/no-unused-vars
-    [key: string]: PageInfo;
-  };
-
-  const PAGE_TEXTCONTENT: PageTextcontent = {
-    experiences: {
-      keyword: '경험카드',
-      subMessage: '경험분해부터 시작해볼까요?',
-      buttonText: '경험분해',
-      redirectUrl: ROUTES.EXPERIENCE,
-    },
-    resumes: {
-      keyword: '자기소개서',
-      subMessage: '자기소개서 작성하러 가볼까요?',
-      buttonText: '자기소개서',
-      redirectUrl: ROUTES.RESUMES_UNDEFINED as Route,
-    },
-    'ai-recommends': {
-      keyword: '추천받은 자기소개서',
-      subMessage:
-        '경험분해를 하면 AI의 직무 역량 키워드 추천과 자기소개서 제안을 받을 수 있어요. \n경험분해를 시작해볼까요?',
-      buttonText: '경험분해',
-      redirectUrl: ROUTES.EXPERIENCE,
-    },
-  };
 
   const { push } = useRouter();
 
