@@ -1,6 +1,6 @@
 'use client';
 
-import { ChangeEvent, FormEvent, useRef } from 'react';
+import { ChangeEvent, FormEvent, useEffect, useRef } from 'react';
 
 import { useParams } from 'next/navigation';
 
@@ -40,6 +40,13 @@ const ResumeForm = () => {
   const { mutate: updateQuestion, status } = useUpdateQuestion(+questionId);
 
   const titleTextareaRef = useRef<HTMLTextAreaElement>(null);
+
+  /**
+   * 컴포넌트 마운트 시, 자기소개서 제목 높이 설정
+   */
+  useEffect(() => {
+    resizeHeight(titleTextareaRef);
+  }, [titleTextareaRef.current]);
 
   const debouncedUpdateTitle = useDebounce(() => updateQuestion({ title }), AUTO_SAVE_TIME);
 
