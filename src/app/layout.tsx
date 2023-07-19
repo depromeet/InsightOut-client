@@ -11,6 +11,7 @@ import META from '@/shared/constants/metadata';
 import './globals.css';
 
 export const metadata: Metadata = {
+  metadataBase: new URL(META.DOMAIN_URL),
   title: {
     default: META.TITLE,
     template: `%s | ${META.SITE_NAME}`,
@@ -23,6 +24,7 @@ export const metadata: Metadata = {
     siteName: META.SITE_NAME,
     locale: 'ko_KR',
     type: 'website',
+    url: META.DOMAIN_URL,
   },
   verification: {
     google: META.GOOGLE_VERIFICATION,
