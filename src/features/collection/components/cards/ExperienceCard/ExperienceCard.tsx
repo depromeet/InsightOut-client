@@ -30,9 +30,6 @@ type Props = {
   aiRecommendQuestions?: AiRecommendQuestions[];
 };
 
-const aiRecommend =
-  '디자이너로서 개발팀과 각각의 전문성을 최대한 활용하여 높은 퀄리티의 앱을 만들어내기 위해 커뮤니케이션 능력을 뽐내셨군요! 빠른 기간안에 앱 서비스를 런칭해야하는 상황에서 디자인 시스템 제작, 런칭일 정해서 린하게 개발하는 방법을 제의한 것은 프로젝트 관리 능력의 일환이었습니다.';
-
 const ExperienceCard = ({
   period,
   title,
@@ -79,7 +76,7 @@ const ExperienceCard = ({
             <ExperienceCard.BodyFront
               summaries={summaryKeywords}
               experienceStatus={experienceStatus}
-              aiRecommend={aiRecommend}
+              aiRecommend={experienceInfo?.analysis}
               experienceCapabilityKeywords={experienceCapabilityKeywords}
               aiRecommendKeywords={aiRecommendKeywords}
               aiRecommendQuestions={aiRecommendQuestions}
