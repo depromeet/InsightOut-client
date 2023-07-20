@@ -4,6 +4,7 @@ import classNames from 'classnames';
 import { Metadata } from 'next';
 import localFont from 'next/font/local';
 
+import GoogleAnalytics from '@/components/GoogleAnalytics/GoogleAnalytics';
 import ChakraUIProvider from '@/components/Providers/ChakraProvider';
 import TanstackQueryProvider from '@/components/Providers/TanstackQueryProvider';
 import META from '@/shared/constants/metadata';
@@ -42,6 +43,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
         className={classNames(pretendard.className, 'bg-[#f5f5f5]')}
         suppressContentEditableWarning
         suppressHydrationWarning>
+        <GoogleAnalytics />
         <TanstackQueryProvider>
           <ChakraUIProvider>{children}</ChakraUIProvider>
         </TanstackQueryProvider>
