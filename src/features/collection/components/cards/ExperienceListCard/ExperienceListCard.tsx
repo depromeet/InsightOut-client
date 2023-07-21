@@ -35,7 +35,6 @@ const ExperienceListCard = ({
   endDate,
   experienceCapabilityKeywords,
   aiRecommendKeywords,
-  AiRecommendQuestions,
 }: Props) => {
   const {
     isOpen: isOpenActionListModal,

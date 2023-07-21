@@ -25,7 +25,7 @@ type Props = {
   aiCapabilities: string[];
 };
 
-const AiRecommendResumeCard = ({ experienceId, id, title, answer, updatedAt, aiCapabilities }: Props) => {
+const AiRecommendResumeCard = ({ experienceId, title, answer, updatedAt, aiCapabilities }: Props) => {
   const { isOpen: isOpenActionListModal, onClose: onCloseActionListModal } = useDisclosure();
   const {
     isOpen: isOpenAiResumeAnswerModal,
