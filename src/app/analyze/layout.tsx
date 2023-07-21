@@ -257,7 +257,7 @@ const Layout = ({ children }: LayoutProps) => {
       return;
     }
 
-    push('/completed-experience-card');
+    push(`/completed-experience-card?experienceId=${experienceId}`);
   };
 
   const readyToAIRecommendation = async () => {
@@ -270,6 +270,13 @@ const Layout = ({ children }: LayoutProps) => {
       'result',
     ]);
     const isReadyToAIRecommendation = writeStatus?.slice(0, 3).every((status) => status === '작성완료');
+    updateExperience({
+      situation,
+      task,
+      action,
+      result,
+    });
+
     if (!isReadyToAIRecommendation) {
       AI진입조건모달Open();
       return;
