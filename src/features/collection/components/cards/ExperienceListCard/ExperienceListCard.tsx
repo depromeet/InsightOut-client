@@ -117,18 +117,7 @@ const ExperienceListCard = ({
           handleRightClick={onDeleteButtonClick}
         />
       </Modal>
-      <ExperienceModal
-        isOpen={isOpenExperienceCardModal}
-        onClose={onCloseExperienceCardModal}
-        experienceId={id}
-        period={experiencePeriod}
-        experienceStatus={experienceStatus}
-        title={title || ''}
-        summaryKeywords={summaryKeywords}
-        experienceCapabilityKeywords={experienceCapabilityKeywords}
-        aiRecommendKeywords={aiRecommendKeywords}
-        aiRecommendQuestions={AiRecommendQuestions}
-      />
+      <ExperienceModal isOpen={isOpenExperienceCardModal} onClose={onCloseExperienceCardModal} experienceId={id} />
     </>
   );
 };

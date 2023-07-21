@@ -12,6 +12,7 @@ const AiRecommendResumeList = ({ shownAiResumes }: Props) => {
         <li key={id}>
           <AiRecommendResumeListCard
             // API에 타이틀 추가
+            id={id}
             title={`[${AiCapabilities.map((capability) => capability).join(', ')}] 키워드로 AI가 추천한 자기소개서`}
             updatedAt={updatedAt}
             answer={content}

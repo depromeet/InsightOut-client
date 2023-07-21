@@ -1,5 +1,5 @@
 /* eslint-disable react/display-name */
-import React from 'react';
+import React, { MouseEvent } from 'react';
 
 import { Modal, useDisclosure } from '@chakra-ui/react';
 
@@ -13,21 +13,29 @@ import Tag from '@/components/Tag/Tag';
 import { MAX_LENGTH } from '@/shared/constants/maxLength';
 import formatUpdatedAt from '@/shared/utils/formatUpdateAt';
 
+import ExperienceModal from './ExperienceCard/ExperienceModal';
 import ResumeAnswerModalCard from './ResumeAnswerModalCard';
 
 type Props = {
+  id: number;
   updatedAt: string;
   title: string;
   answer: string;
   aiCapabilities: string[];
 };
 
-const AiRecommendResumeCard = ({ title, answer, updatedAt, aiCapabilities }: Props) => {
+const AiRecommendResumeCard = ({ id, title, answer, updatedAt, aiCapabilities }: Props) => {
   const { isOpen: isOpenActionListModal, onClose: onCloseActionListModal } = useDisclosure();
   const {
     isOpen: isOpenAiResumeAnswerModal,
     onOpen: onOpenAiResumeAnswerModal,
     onClose: onCloseAiResumeAnswerModal,
+  } = useDisclosure();
+
+  const {
+    isOpen: isOpenExperienceCardModal,
+    onOpen: onOpenExperienceCardModal,
+    onClose: onCloseExperienceCardModal,
   } = useDisclosure();
 
   return (
@@ -40,7 +48,13 @@ const AiRecommendResumeCard = ({ title, answer, updatedAt, aiCapabilities }: Pro
         <div className="flex flex-row-reverse mt-[8px] text-[14px]">
           <TextLengthMessage currentLength={answer.length} maxLength={MAX_LENGTH.AI_RESUME} />
         </div>
-        <AiRecommendResumeCard.Footer aiCapabilities={aiCapabilities} />
+        <AiRecommendResumeCard.Footer
+          id={id}
+          aiCapabilities={aiCapabilities}
+          isOpenExperienceCardModal={isOpenExperienceCardModal}
+          onOpenExperienceCardModal={onOpenExperienceCardModal}
+          onCloseExperienceCardModal={onCloseExperienceCardModal}
+        />
       </div>
       <ResumeAnswerModalCard
         isOpen={isOpenAiResumeAnswerModal}
@@ -91,28 +105,47 @@ AiRecommendResumeCard.Header = ({ title, updatedAt }: AiRecommendResumeCardHeade
 );
 
 type FooterProps = {
+  id: number;
   aiCapabilities: string[];
+  isOpenExperienceCardModal: boolean;
+  onOpenExperienceCardModal: () => void;
+  onCloseExperienceCardModal: () => void;
 };
 
-AiRecommendResumeCard.Footer = ({ aiCapabilities }: FooterProps) => {
+AiRecommendResumeCard.Footer = ({
+  id,
+  aiCapabilities,
+  isOpenExperienceCardModal,
+  onOpenExperienceCardModal,
+  onCloseExperienceCardModal,
+}: FooterProps) => {
   return (
-    <div className="mt-[8px]">
-      <h4 className="subhead4 mb-[4px]">AI 추천 키워드</h4>
-      <div className="flex flex-row justify-between">
-        <ul className="flex flex-row gap-[4px]">
-          {aiCapabilities.map((aiCapability, index) => (
-            <li key={`ai-${aiCapabilities}-${index}`}>
-              <Tag size="M" variant="secondary50-outline">
-                {aiCapability}
-              </Tag>
-            </li>
-          ))}
-        </ul>
-        <Button size="M" variant="gray200">
-          경험카드 확인하기
-        </Button>
+    <>
+      <div className="mt-[8px]">
+        <h4 className="subhead4 mb-[4px]">AI 추천 키워드</h4>
+        <div className="flex flex-row justify-between">
+          <ul className="flex flex-row gap-[4px]">
+            {aiCapabilities.map((aiCapability, index) => (
+              <li key={`ai-${aiCapabilities}-${index}`}>
+                <Tag size="M" variant="secondary50-outline">
+                  {aiCapability}
+                </Tag>
+              </li>
+            ))}
+          </ul>
+          <Button
+            size="M"
+            variant="gray200"
+            onClick={(e: MouseEvent<HTMLButtonElement>) => {
+              e.stopPropagation();
+              onOpenExperienceCardModal();
+            }}>
+            경험카드 확인하기
+          </Button>
+        </div>
       </div>
-    </div>
+      <ExperienceModal isOpen={isOpenExperienceCardModal} onClose={onCloseExperienceCardModal} experienceId={id} />
+    </>
   );
 };
 
