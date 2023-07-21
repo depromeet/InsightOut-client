@@ -7,7 +7,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import Button from '@/components/Button/Button';
 import { PAGE_TEXTCONTENT } from '@/features/collection/constants';
 
-import lumosCry from '/public/images/lumos-cry.png';
+import LumosNocard from '/public/images/lumos-nocard.png';
 
 const NotFound = () => {
   const [pathname] = usePathname().split('/').slice(-1) as Route[];
@@ -18,7 +18,7 @@ const NotFound = () => {
     <div>
       <div className="">
         <div className="flex justify-center w-full mt-[119px]">
-          <Image src={lumosCry} alt="경험 카드가 없습니다." width={225} height={174} />
+          <Image src={LumosNocard} alt="경험 카드가 없습니다." width={225} height={174} />
         </div>
         <div className="flex flex-col text-center mt-[17px]">
           <h3 className="text-light h3 mb-[8px]">

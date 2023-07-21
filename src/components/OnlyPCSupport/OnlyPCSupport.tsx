@@ -4,7 +4,7 @@ import Image from 'next/image';
 import ExperienceImg3 from 'public/images/home/img-home-experience-2.png';
 import ExperienceImg1 from 'public/images/home/img-home-experience-3.png';
 import ExperienceImg2 from 'public/images/home/img-home-experience-4.png';
-import LumosCry from 'public/images/lumos-cry.png';
+import LumosNocard from 'public/images/lumos-nocard.png';
 
 import Tag from '../Tag/Tag';
 
@@ -29,7 +29,7 @@ const ServiceList = [
 const OnlyPCSupport = () => {
   return (
     <div className="flex-center flex-col mx-auto max-w-[360px] px-[20px] h-full">
-      <Image src={LumosCry} alt="lumos-cry" width={173} placeholder="blur" />
+      <Image src={LumosNocard} alt="lumos-nocard" width={173} placeholder="blur" />
       <span className="subhead1 mb-[4px] mt-[10px]">PC에서 접속해주세요</span>
       <p className="text-center b3 text-light mb-[48px]">
         아쉽게도 모바일은 지원하지 않아요🥲
