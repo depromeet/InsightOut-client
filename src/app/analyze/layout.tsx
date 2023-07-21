@@ -311,7 +311,7 @@ const Layout = ({ children }: LayoutProps) => {
             </div>
 
             {/* Aside */}
-            <div className="experience flex flex-col items-center min-w-[384px] mb-[16px] px-[14px] py-[32px] h-[100%] top-[88px] sticky">
+            <div className="experience sticky flex flex-col items-center min-w-[384px] mb-[182px] px-[14px] py-[32px] h-[100%] top-[88px]">
               <div className="mb-[8px]">
                 <TooltipRelativeContent
                   type="primary"
