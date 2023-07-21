@@ -108,7 +108,7 @@ const ResumeForm = () => {
           onBlur={handleAnswerBlur}
           maxLength={MAX_LENGTH.QUESTION}
           placeholder="질문에 대한 답변을 적어보세요."
-          className="w-[612px] h-[660px] resize-none b1 text-main placeholder:text-light"
+          className="w-[612px] h-[660px] resize-none b1 text-main placeholder:text-light mb-[32px]"
         />
       )}
       <SpellChecker />
