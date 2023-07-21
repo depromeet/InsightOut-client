@@ -37,9 +37,11 @@ export const useCreateRecommendResume = (
 export const useSubmitExperience = (
   options?: UseMutationOptions<AiResponse['submit'], AxiosError, AiParams['submit']>
 ) => {
+  const queryClient = useQueryClient();
   return useMutation((payload) => aiApi.submit(payload), {
     ...options,
     onSuccess: (data, variables, context) => {
+      queryClient.invalidateQueries(AI_KEY.detail(['submit']));
       options?.onSuccess?.(data, variables, context);
     },
   });

@@ -4,22 +4,44 @@ import { useEffect, useState } from 'react';
 
 import { useSearchParams } from 'next/navigation';
 
+import { AiResponse } from '@/apis/ai/types/ai';
 import ExperienceCard from '@/features/collection/components/cards/ExperienceCard/ExperienceCard';
 import { MESSAGE } from '@/features/collection/constants';
 import getExperiencePeriod from '@/features/collection/utils/getExperiencePeriod';
 import Confetti from '@/features/experience/Confetti';
 import Loading from '@/features/experience/Loading';
+import { useSubmitExperience } from '@/hooks/reactQuery/ai/mutation';
 import { useGetExperience } from '@/hooks/reactQuery/analyze/query';
 
 const CompletePage = () => {
   const [showLoading, setShowLoading] = useState(true);
+  const [aiExperience, setAiExperience] = useState<AiResponse['submit']>();
+  // const { experienceId } = useExperienceId();
 
   const experienceId = Number(useSearchParams().get('experienceId')) ?? '0';
+  const { mutateAsync: createAiExperienceCard, isLoading: isLogingExperienceCard } = useSubmitExperience();
 
-  const { data: experience, isFetching } = useGetExperience(
+  const { data: experience, isLoading: isLoadingSTAR } = useGetExperience(
     { experienceId },
-    { enabled: !showLoading, onError: () => console.log('어떻게할까') }
+    {
+      enabled: !showLoading,
+      onSuccess: async (data) => {
+        console.log('test');
+        const payload = {
+          experienceId,
+          situation: data?.situation,
+          task: data?.task,
+          action: data?.action,
+          result: data?.result,
+        };
+        const _aiExpeience = await createAiExperienceCard(payload);
+        setAiExperience(_aiExpeience);
+      },
+    }
   );
+
+  console.log(aiExperience);
+  console.log(experience);
 
   useEffect(() => {
     if (showLoading) {
@@ -29,7 +51,7 @@ const CompletePage = () => {
     }
   }, [showLoading]);
 
-  if (showLoading || isFetching) return <Loading className="mx-auto mt-[250px]" />;
+  if (showLoading || isLoadingSTAR || isLogingExperienceCard) return <Loading className="mx-auto mt-[250px]" />;
 
   const period =
     experience?.startDate && experience?.endDate
@@ -40,9 +62,9 @@ const CompletePage = () => {
   const experienceCardProps = {
     period: period,
     title: experience?.title!,
-    summaryKeywords: experience?.summaryKeywords,
-    experienceCapabilityKeywords: experience?.experienceCapabilityKeywords,
-    aiRecommendKeywords: experience?.AiResume?.AiResumeCapabilities.map(({ Capability }) => Capability.keyword),
+    summaryKeywords: aiExperience?.summaryKeywords,
+    experienceCapabilityKeywords: aiExperience?.ExperienceCapability,
+    aiRecommendKeywords: aiExperience?.AiResume?.AiResumeCapability.map((capability) => capability),
     experienceStatus: experience?.experienceStatus!,
     experienceInfo: experience?.ExperienceInfo,
     star: star,
