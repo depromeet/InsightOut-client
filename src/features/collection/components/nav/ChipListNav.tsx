@@ -31,7 +31,7 @@ const ChipListNav = <T extends Item | string>({
 }: Props<T>) => {
   return (
     <section className={tw('flex flex-row justify-between items-center my-[24px]', className)}>
-      <nav className="flex flex-row items-center gap-[8px] h-[54px] overflow-x-auto whitespace-nowrap scrollbar-hide">
+      <nav className="flex flex-row items-center gap-[8px] h-[54px] overflow-x-auto whitespace-nowrap scrollbar-hide pl-[1px]">
         {items.map((item: T) => {
           if (typeof item === 'string') {
             return (
