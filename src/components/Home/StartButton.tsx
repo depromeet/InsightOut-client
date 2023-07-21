@@ -30,7 +30,7 @@ const StartButton = ({ route, children }: StartButtonProps) => {
   };
 
   return (
-    <Button variant="primary" size="XL" onClick={handleClickButton}>
+    <Button variant="gray900" size="XL" onClick={handleClickButton}>
       {children}
     </Button>
   );
