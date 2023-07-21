@@ -25,8 +25,14 @@ const OnboardingModal = ({ isOpen, nickname, onClose, onClickMainButton }: Onboa
         />
       </ModalHeader>
       <section className="flex justify-center items-center py-[40px] px-[30px] rounded-[24px] border border-primary-100 bg-primary-50 gap-[28px]">
-        <Image src={AnalyzeOnboarding} alt="analyze-onboarding" className="w-[389px] h-[246px]" />
-        <div className="flex flex-col gap-[12px]">
+        <div className="relative w-[389px] h-[246px]">
+          <Image
+            src={AnalyzeOnboarding}
+            alt="analyze-onboarding"
+            className="absolute top-[-16px] bottom-0 left-0 right-0"
+          />
+        </div>
+        <div className="flex flex-col items-start gap-[12px]">
           <h1 className="subhead2 text-main">{nickname}님은 이런 점을 얻을 수 있어요!</h1>
           <div className="flex gap-[8px]">
             <SvgIconNumber1 />
@@ -48,7 +54,7 @@ const OnboardingModal = ({ isOpen, nickname, onClose, onClickMainButton }: Onboa
               직무역량 별로 <span className="text-main subhead4">경험을 아카이빙</span>해요
             </h2>
           </div>
-          <div>
+          <div className="text-start">
             <p className="text-sub c1">*경험내용 작성 시 문항 당 100자 글자수 제한이 있습니다.</p>
             <p className="text-sub c1">
               *경험내용 작성이 끝나면 AI 직무역량 키워드와 AI 추천 자기소개서 를 받을 수 있어요.
