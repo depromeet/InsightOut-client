@@ -19,14 +19,13 @@ const CompletePage = () => {
   // const { experienceId } = useExperienceId();
 
   const experienceId = Number(useSearchParams().get('experienceId')) ?? '0';
-  const { mutateAsync: createAiExperienceCard, isLoading: isLogingExperienceCard } = useSubmitExperience();
+  const { mutateAsync: createAiExperienceCard, isLoading: isLoadingExperienceCard } = useSubmitExperience();
 
   const { data: experience, isLoading: isLoadingSTAR } = useGetExperience(
     { experienceId },
     {
       enabled: !showLoading,
       onSuccess: async (data) => {
-        console.log('test');
         const payload = {
           experienceId,
           situation: data?.situation,
@@ -51,12 +50,12 @@ const CompletePage = () => {
     }
   }, [showLoading]);
 
-  if (showLoading || isLoadingSTAR || isLogingExperienceCard) return <Loading className="mx-auto mt-[250px]" />;
+  if (showLoading || isLoadingSTAR || isLoadingExperienceCard) return <Loading className="mx-auto mt-[250px]" />;
 
   const period =
     experience?.startDate && experience?.endDate
       ? getExperiencePeriod(experience?.startDate, experience?.endDate)
-      : MESSAGE.HAS_NOT_PERIOD;
+      : MESSAGE.NOT_HAS_PERIOD;
   const star = [experience?.situation, experience?.task, experience?.action, experience?.result].join('\n\n');
 
   const experienceCardProps = {
@@ -65,7 +64,7 @@ const CompletePage = () => {
     summaryKeywords: aiExperience?.summaryKeywords,
     experienceCapabilityKeywords: aiExperience?.ExperienceCapability,
     aiRecommendKeywords: aiExperience?.AiResume?.AiResumeCapability.map((capability) => capability),
-    experienceStatus: experience?.experienceStatus!,
+    experienceStatus: aiExperience?.experienceStatus!,
     experienceInfo: experience?.ExperienceInfo,
     star: star,
     aiResume: experience?.AiResume?.content,

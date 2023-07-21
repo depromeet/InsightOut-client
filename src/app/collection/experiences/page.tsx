@@ -19,8 +19,14 @@ import addPlusMarkOver99 from '@/shared/utils/addPlusMarkOver99';
 
 const Page = () => {
   const { data: capabilities, isSuccess } = useGetExperienceCapabilities();
+  const [sortBy, setSortBy] = useState<keyof typeof EXPERIENCE_SORT_BY>('createdAt');
 
-  const { data, fetchNextPage, hasNextPage, isFetching } = useGetInfiniteExperiences();
+  const params = {
+    take: 10,
+    criteria: sortBy,
+  };
+
+  const { data, fetchNextPage, hasNextPage, isFetching } = useGetInfiniteExperiences(params);
 
   const experiences = useMemo(() => (data ? data.pages.flatMap(({ data }) => data) : []), [data]);
 
@@ -30,11 +36,10 @@ const Page = () => {
     if (hasNextPage && !isFetching) fetchNextPage();
   });
 
-  const [sortBy, setSortBy] = useState<keyof typeof EXPERIENCE_SORT_BY>('EXPERIENCE_TIME');
   const [selectedCapabilityKeyword, setSelectedCapabilityKeyword] = useState('전체');
 
   const handleTimeSortClick = () => {
-    setSortBy(() => (sortBy === 'EXPERIENCE_TIME' ? 'UPDATED_AT' : 'EXPERIENCE_TIME'));
+    setSortBy(() => (sortBy === 'createdAt' ? 'startDate' : 'createdAt'));
   };
 
   let shownExperiences = experiences ?? [];

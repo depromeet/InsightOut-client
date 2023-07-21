@@ -1,3 +1,4 @@
+import { ExperienceStatus } from '@/features/analyze/types';
 export type AiParams = {
   aiKeyword?: {
     aiKeyword?: string;
@@ -56,6 +57,7 @@ export type AiResponse = {
         title: string;
       }
     ];
+    experienceStatus: ExperienceStatus;
     ExperienceInfo: {
       analysis: string;
     };
