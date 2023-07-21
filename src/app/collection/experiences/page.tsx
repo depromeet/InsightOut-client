@@ -19,7 +19,7 @@ import addPlusMarkOver99 from '@/shared/utils/addPlusMarkOver99';
 
 const Page = () => {
   const { data: capabilities, isSuccess } = useGetExperienceCapabilities();
-  const [sortBy, setSortBy] = useState<keyof typeof EXPERIENCE_SORT_BY>('startDate');
+  const [sortBy, setSortBy] = useState<keyof typeof EXPERIENCE_SORT_BY>('createdAt');
 
   const params = {
     take: 10,
@@ -39,7 +39,7 @@ const Page = () => {
   const [selectedCapabilityKeyword, setSelectedCapabilityKeyword] = useState('전체');
 
   const handleTimeSortClick = () => {
-    setSortBy(() => (sortBy === 'startDate' ? 'createdAt' : 'startDate'));
+    setSortBy(() => (sortBy === 'createdAt' ? 'startDate' : 'createdAt'));
   };
 
   let shownExperiences = experiences ?? [];

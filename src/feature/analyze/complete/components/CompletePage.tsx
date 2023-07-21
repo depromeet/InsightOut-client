@@ -55,7 +55,7 @@ const CompletePage = () => {
   const period =
     experience?.startDate && experience?.endDate
       ? getExperiencePeriod(experience?.startDate, experience?.endDate)
-      : MESSAGE.HAS_NOT_PERIOD;
+      : MESSAGE.NOT_HAS_PERIOD;
   const star = [experience?.situation, experience?.task, experience?.action, experience?.result].join('\n\n');
 
   const experienceCardProps = {
