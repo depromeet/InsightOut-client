@@ -1,6 +1,6 @@
 'use client';
 
-import { ChangeEvent, FormEvent, useRef } from 'react';
+import { ChangeEvent, FormEvent, useEffect, useRef } from 'react';
 
 import { useParams } from 'next/navigation';
 
@@ -27,18 +27,26 @@ const ResumeForm = () => {
   const { setTitle, setAnswer } = useQuestionActions();
   const { questionId } = useParams();
 
-  const { data: question } = useGetQuestion(
+  const { data: question, status: questionStatus } = useGetQuestion(
     { questionId },
     {
       onSuccess({ title, answer }) {
         setTitle(title);
         setAnswer(answer);
       },
+      retry: false,
     }
   );
   const { mutate: updateQuestion, status } = useUpdateQuestion(+questionId);
 
   const titleTextareaRef = useRef<HTMLTextAreaElement>(null);
+
+  /**
+   * 컴포넌트 마운트 시, 자기소개서 제목 높이 설정
+   */
+  useEffect(() => {
+    resizeHeight(titleTextareaRef);
+  }, [titleTextareaRef.current]);
 
   const debouncedUpdateTitle = useDebounce(() => updateQuestion({ title }), AUTO_SAVE_TIME);
 
@@ -69,12 +77,12 @@ const ResumeForm = () => {
     updateQuestion({ title, answer });
   };
 
-  if (!question) return <NotFoundResume />;
+  if (!question && questionStatus !== 'loading') return <NotFoundResume />;
 
   return (
     <form onSubmit={handleResumeSubmit}>
       <header className="flex items-center justify-between mb-[14px]">
-        <SavingCaption updatedAt={formatYYMMDDhhmm(question.updatedAt)} currentSavingStatus={status} />
+        <SavingCaption updatedAt={formatYYMMDDhhmm(question?.updatedAt)} currentSavingStatus={status} />
         <div className="flex items-center gap-4">
           <TextLengthMessage currentLength={answer?.length} maxLength={MAX_LENGTH.QUESTION} />
           <Button variant="gray900" size="M" disabled={answer?.length === 0}>
@@ -84,7 +92,7 @@ const ResumeForm = () => {
       </header>
       <textarea
         ref={titleTextareaRef}
-        value={title}
+        value={title ?? ''}
         onChange={handleTitleChange}
         onBlur={handleTitleBlur}
         maxLength={MAX_LENGTH.TITLE}
@@ -95,12 +103,12 @@ const ResumeForm = () => {
         <SpellErrorPreview />
       ) : (
         <textarea
-          value={answer}
+          value={answer ?? ''}
           onChange={handleAnswerChange}
           onBlur={handleAnswerBlur}
           maxLength={MAX_LENGTH.QUESTION}
           placeholder="질문에 대한 답변을 적어보세요."
-          className="w-[612px] h-[660px] resize-none b1 text-main placeholder:text-light"
+          className="w-[612px] h-[660px] resize-none b1 text-main placeholder:text-light mb-[32px]"
         />
       )}
       <SpellChecker />

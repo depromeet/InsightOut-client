@@ -1,22 +1,21 @@
 import { ComponentPropsWithoutRef, Suspense } from 'react';
 
-import { Flex, useToast } from '@chakra-ui/react';
+import { Flex } from '@chakra-ui/react';
 import cn from 'classnames';
 import { Route } from 'next';
 import Image from 'next/image';
-import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
+import HomeLogo from 'public/images/home/img-home-logo.png';
 
 import AuthModal from '@/features/auth/components/AuthModal/AuthModal';
 import { useAuthActions } from '@/features/auth/store';
+import GnbMyPage from '@/features/myPage/components/GlobalNavigationBar/GnbMyPage';
 import getResumeRoute from '@/features/resume/utils/getResumeRoute';
 import { ROUTES, SIGN_UP_ROUTES } from '@/shared/constants/routes';
-import { useUserImageUrl } from '@/shared/store/user';
+import { useUserEmail, useUserImageUrl, useUserNickname } from '@/shared/store/user';
 import { tw } from '@/shared/utils/tailwindMerge';
 
-import HomeLogo from '../../../public/images/home/img-home-logo.png';
 import Button from '../Button/Button';
-import SvgIconGnbMyPage from '../Icon/IconGnbMyPage';
 import IconGoogleLogo from '../Icon/IconGoogleLogo';
 import Spinner from '../Spinner/Spinner';
 import styles from './GlobalNavigationBar.module.scss';
@@ -49,22 +48,13 @@ const GlobalNavigationBar = ({
   const profileImgUrl = useUserImageUrl();
   const { setIsOpenSignUpModal } = useAuthActions();
   const router = useRouter();
-  const toast = useToast();
+  const userNickname = useUserNickname();
+  const userEmail = useUserEmail();
   const resumeRoute = getResumeRoute();
 
   const handleClickLoginButton = () => {
     setIsOpenSignUpModal(true);
     router.push(SIGN_UP_ROUTES.SIGN_UP);
-  };
-
-  const handleClickMyPage = () => {
-    toast({
-      title: '마이 페이지는 준비 중이에요',
-      status: 'info',
-      duration: 2000,
-      isClosable: true,
-      position: 'top',
-    });
   };
 
   const checkIsSignedIn = () => {
@@ -95,7 +85,7 @@ const GlobalNavigationBar = ({
               경험분해
             </li>
             <li
-              className={cn(styles.link, { [styles.focus]: pathName === ROUTES.RESUMES })}
+              className={cn(styles.link, { [styles.focus]: pathName.startsWith(ROUTES.RESUMES) })}
               onClick={() => handleRouter(resumeRoute as Route)}>
               자기소개서 작성하기
             </li>
@@ -111,20 +101,14 @@ const GlobalNavigationBar = ({
             <Spinner size="L" style="primary500" />
           </Flex>
         ) : isSignedIn ? (
-          <Link
-            className={cn(styles.link, styles.myPage, { [styles.focus]: pathName === '/demo' })}
-            href={'#' as Route}>
-            <Flex justifyContent={'space-between'} alignItems={'center'} gap={'10px'} onClick={handleClickMyPage}>
-              {profileImgUrl.length > 0 ? (
-                <div className={styles['user-profile']}>
-                  <Image src={profileImgUrl} width={20} height={20} alt="use-profile" />
-                </div>
-              ) : (
-                <SvgIconGnbMyPage width={32} height={32} />
-              )}
-              마이 페이지
-            </Flex>
-          </Link>
+          <div className="relative">
+            <GnbMyPage
+              className={cn(styles.link, styles.myPage, { [styles.focus]: pathName === ROUTES.MY_PAGE })}
+              profileImgUrl={profileImgUrl}
+              nickname={userNickname}
+              email={userEmail}
+            />
+          </div>
         ) : (
           <Button
             variant="outlined"

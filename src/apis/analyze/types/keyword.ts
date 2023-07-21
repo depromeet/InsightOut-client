@@ -1,4 +1,4 @@
-import { Keyword } from '@/feature/analyze/types';
+import { Keyword } from '@/features/analyze/types';
 
 export type KeywordParams = {
   get: { experienceId: number };

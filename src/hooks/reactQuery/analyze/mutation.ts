@@ -3,7 +3,7 @@ import { AxiosError } from 'axios';
 
 import experienceApi from '@/apis/analyze/experience';
 import { ExperienceResponse } from '@/apis/analyze/types/experience';
-import { ExperienceFormValues } from '@/feature/analyze/types';
+import { ExperienceFormValues } from '@/features/analyze/types';
 import { ANALYZE_KEY } from '@/shared/constants/querykeys';
 
 export const useCreateExperience = (options?: UseMutationOptions<ExperienceResponse, AxiosError>) => {

@@ -1,4 +1,4 @@
-import InformationPage from '@/feature/analyze/information/page';
+import InformationPage from '@/features/analyze/information/page';
 
 const Information = () => {
   return <InformationPage />;

@@ -9,7 +9,7 @@ import Button from '@/components/Button/Button';
 import TextAreaField from '@/components/Input/TextAreaField/TextAreaField';
 import QuestionCard from '@/components/QuestionCard/QuestionCard';
 import Tag from '@/components/Tag/Tag';
-import KeywordContainer from '@/feature/analyze/keyword/KeywordContainer';
+import KeywordContainer from '@/features/analyze/keyword/KeywordContainer';
 import { useCreateKeyword, useUpdateKeyword } from '@/hooks/reactQuery/keyword/mutation';
 import { useGetKeywordList } from '@/hooks/reactQuery/keyword/query';
 import useInput from '@/hooks/useInput';

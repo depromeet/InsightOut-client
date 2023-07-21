@@ -40,7 +40,7 @@ type CategoriesContentsProps = {
   onClickRightButton: () => void;
 };
 
-const JOB_CATEGORIES: JobCategories = [
+export const JOB_CATEGORIES: JobCategories = [
   { title: '개발', icon: <SvgIconDevelopment />, field: Field['DEVELOPMENT'] },
   { title: '경영', icon: <SvgIconManagement />, field: Field['MANAGEMENT'] },
   { title: '마케팅', icon: <SvgIconMarketing />, field: Field['MARKETING'] },

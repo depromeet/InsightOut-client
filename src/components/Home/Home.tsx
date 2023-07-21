@@ -1,148 +1,128 @@
+import dynamic from 'next/dynamic';
 import Image from 'next/image';
+import Home1 from 'public/images/home/img-home-1.png';
+import Home2 from 'public/images/home/img-home-2.png';
+import Home3 from 'public/images/home/img-home-3.png';
+import Home4 from 'public/images/home/img-home-4.png';
+import Home5 from 'public/images/home/img-home-5.png';
+import Home6 from 'public/images/home/img-home-6.png';
+import HomeEllipsisLeft from 'public/images/home/img-home-ellipsis-left.png';
+import HomeLogo from 'public/images/home/img-home-logo.png';
+import LumosCry from 'public/images/lumos-cry.png';
 
 import { ROUTES } from '@/shared/constants/routes';
 
-import Home1 from '../../../public/images/home/img-home-1.png';
-import Home2 from '../../../public/images/home/img-home-2.png';
-import HomeEllipsisLeft from '../../../public/images/home/img-home-ellipsis-left.png';
-import HomeEllipsisRight from '../../../public/images/home/img-home-ellipsis-right.png';
-import HomeLogo from '../../../public/images/home/img-home-logo.png';
 import Badge from '../Badge/Badge';
 import SvgIconChevronRight from '../Icon/IconChevronRight';
 import SvgIconPairQuotation from '../Icon/IconPairQuotation';
 import AnalyzeCard from './AnalyzeCard';
 import FeedbackForm from './FeedbackForm';
 import FooterNav from './FooterNav';
-import Looper from './Looper';
 import StartButton from './StartButton';
 
+const Lottie = dynamic(() => import('@/components/Lottie/Lottie'));
 const ANALYZE_CARD = ['직무 선택', '경험 작성', '직무 역량 추진', '경험카드 생성'];
 
 const Home = () => {
   return (
     <>
       <main className="overflow-hidden">
-        <section className="flex flex-col justify-center items-center pt-[230px] pb-[63px] bg-white">
-          <h1 className="text-center text-[60px] font-bold leading-[80px] whitespace-pre-line mb-[26px]">
-            {'자기소개서가 막막한 순간,\n그 시작을 함께하는\n인사이트 아웃'}
+        <section className="flex flex-col justify-center items-center pt-[154px] pb-[40px] bg-white">
+          <h1 className="text-center h1 whitespace-pre-line mb-[24px]">
+            {'자기소개서가 막막한 순간,\n그 시작을 함께하는 인사이트 아웃'}
           </h1>
-          <p className="text-center whitespace-pre-line mb-[52px]">
-            {
-              '인사이트 아웃을 통해 질문으로 나의 프로젝트를 정리하며 경험을 파헤치고\n나만의 경험 역량 카드로 만들어 자기소개서를 작성해보세요.'
-            }
+          <p className="text-center subhead3 mb-[48px]">
+            경험분해부터, AI 직무역량 키워드 추천, AI 자기소개서 작성까지 취업 준비 과정의 고민을 해결해보세요
           </p>
           <StartButton route={ROUTES.EXPERIENCE}>경험 분해 시작하기</StartButton>
         </section>
-        <section className="relative h-[1014px] bg-white">
-          <Image src={Home1} fill alt="Home-1" className="object-contain w-full h-full" priority loading={'eager'} />
+
+        <section className="relative h-[944px] bg-gradient-to-t from-[#958CFF] via-[#BDB8FC] to-[#FFF]">
+          <Image src={Home1} fill alt="Home-1" className="object-contain" priority loading={'eager'} />
         </section>
-        <section className="relative flex flex-col justify-center items-center pt-[170px] pb-[283px] bg-white z-[-1]">
-          <div className="flex justify-center items-center mb-[286px] gap-[102px]">
-            <div className="flex flex-col gap-[44px]">
-              <div className="flex flex-col w-[588px] gap-[30px]">
-                <Badge variant="primary50-outline" size="L">
-                  경험분해 4 STEPS
-                </Badge>
-                <h2 className="text-main text-[44px] font-bold whitespace-pre-line">
-                  {'질의응답으로\n 경험을 분해해요'}
-                </h2>
-                <div className="flex flex-col gap-[16px]">
-                  <p className="text-light text-[16px] font-medium whitespace-pre-line">
-                    {
-                      '자기소개서 쓰기 전 경험분해를 통해 나의 직무 역량과 강점을 파악하고\n 면접으로 이어지는 것까지 고려하여 직무 강점을 어필할 수 있는 경험으로 분해 해야합니다.'
-                    }
-                  </p>
-                  <p className="text-light text-[16px] font-medium whitespace-pre-line">
-                    {
-                      '인사이트 아웃을 통해 질문으로 나의 이력, 프로젝트를 정리하며 경험을 파헤치고\n나만의 경험 역량 카드로 만들어 자기소개서를 작성해보세요.'
-                    }
-                  </p>
-                </div>
-              </div>
-              <div className="flex items-center w-[612px] py-[24px] border-y-[1px] border-solid border-gray-200 gap-[14px]">
-                {ANALYZE_CARD.map((title, index) => (
-                  <>
-                    <AnalyzeCard key={title} index={index + 1} title="직무 선택" />
-                    {index + 1 < ANALYZE_CARD.length && <SvgIconChevronRight />}
-                  </>
-                ))}
+
+        <section className="flex-center flex-col pt-[114px] pb-[160px] bg-[#2B2D36] text-white">
+          <Image src={LumosCry} alt="루모스" />
+          <h2 className="h2 mt-[27px] mb-[12px]">자기소개서 작성이 고민인 취업준비생이신가요?</h2>
+          <p className="subhead3">인사이트아웃에서 고민을 해결해보세요!</p>
+        </section>
+
+        <section className="relative flex items-center justify-between pt-[194px] bg-white z-[-1]">
+          <Image src={HomeEllipsisLeft} alt="ellipsis" className="z-[-1]" />
+          <div className="flex flex-col gap-[44px] mb-[476px]">
+            <div className="flex flex-col w-[588px] gap-[30px]">
+              <Badge variant="primary200-outline" size="L">
+                경험분해 4 STEPS
+              </Badge>
+              <h2 className="whitespace-pre-line h2">{'4가지 질문으로 끝내는\n 직무 경험분해'}</h2>
+              <div className="flex flex-col gap-[16px]">
+                <p className="text-light text-[16px] font-medium whitespace-pre-line">
+                  {
+                    '자기소개서를 쓰기 전 나의 직무 역량과 강점을 파악해보세요.\n경험분해를 통해 직무 경험을 논리적으로 구조화하고 경험 카드를\n바탕으로 자기소개서를 작성해보세요.'
+                  }
+                </p>
               </div>
             </div>
-            <Image src={Home2} className="w-[486px] h-[486px]" alt="Home-2" />
+            <div className="flex items-center w-[612px] py-[24px] border-y-[1px] border-solid border-gray-200 gap-[14px]">
+              {ANALYZE_CARD.map((title, index) => (
+                <>
+                  <AnalyzeCard key={title} index={index + 1} title="직무 선택" />
+                  {index + 1 < ANALYZE_CARD.length && <SvgIconChevronRight />}
+                </>
+              ))}
+            </div>
           </div>
-          <div className="flex flex-col items-center gap-[30px] w-[588px] mb-[170px]">
-            <Badge variant="primary50-outline" size="L">
-              AI 역량키워드 추천
+          <div className="relative after:content-[''] after:absolute after:bottom-0 after:right-0 after:w-[100%] after:h-[264px] after:bg-gradient-to-t after:from-[#FFF] after:to-[rgba(255, 255, 255, 0.00))]">
+            <Image src={Home2} alt="경험분해-경험내용" />
+          </div>
+        </section>
+
+        <section className="flex-center flex-col pt-[113px] pb-[121px] bg-gradient-to-b from-[#F2F9FA] from-0% via-[rgba(243, 250, 251, 0.24)] via-[8.71%] to-[rgba(243, 251, 252, 0.00)] to-100% bg-white">
+          <div className="flex-center flex-col gap-[30px] mb-[68px]">
+            <Badge variant="secondary50-outline" size="L">
+              인공지능 기반 추천
             </Badge>
             <h2 className="text-center whitespace-pre-line h2">
-              {'인공지능이 내 경험과 어울리는\n직무 키워드를 뽑아줘요'}
+              {'입력한 경험을 바탕으로\nAI에게 직무역량 키워드와 자기소개서를 추천받아요'}
             </h2>
-            <div className="text-center text-light b1">
-              <p>겪었던 경험들을 편하게 이야기해주세요.</p>
-              <p>똑똑한 인공지능이 경험을 분석하고 어울리는 직무 역량 키워드를 추천해줄게요.</p>
-              <p>나도 몰랐던 나의 장점들을 발견해줘요!</p>
-            </div>
+            <p className="text-center whitespace-pre-line text-sub text-subhead3">
+              {
+                '겪었던 경험들을 편하게 이야기해주세요.\n똑똑한 인공지능이 경험을 분석하고 어울리는 직무 역량 키워드를 추천해줄게요.\n나도 몰랐던 나의 장점들을 발견해줘요!'
+              }
+            </p>
           </div>
-          <div className="flex flex-col gap-[32px] w-full bg-white z-[-1]">
-            <Looper speed={20} direction="right">
-              <Looper.Card name="일잘러" />
-              <Looper.Card name="집요함" />
-              <Looper.Card name="정의의 사도" />
-              <Looper.Card name="아이디어뱅크" />
-            </Looper>
-            <Looper speed={20} direction="left">
-              <Looper.Card name="이 시대의 리더" />
-              <Looper.Card name="집요함" />
-              <Looper.Card name="커뮤니케이터" />
-              <Looper.Card name="일잘러" />
-              <Looper.Card name="문제해결" />
-              <Looper.Card name="집요함" />
-            </Looper>
-          </div>
-          <Image
-            src={HomeEllipsisLeft}
-            className="absolute top-[413px] left-[-350px] w-[788px] h-[788px] z-[-1]"
-            alt="Home-ellipsis-left"
-            loading="eager"
-          />
+          <Image src={Home3} alt="경험분해-직무역량검증하기" width={2280} height={1507} />
         </section>
-        <section className="relative flex flex-col items-center justify-center pb-[296px] bg-white z-[-1]">
-          <div className="flex justify-center items-end h-[185px] mb-[103px] gap-[24px]">
-            <div className="flex flex-col w-[588px] pb-[12px] gap-[30px]">
-              <Badge variant="primary50-outline" size="L">
+
+        <section className="relative flex-center flex-col pb-[152px] bg-white z-[-1]">
+          <div className="flex-center flex-col mb-[68px] gap-[30px]">
+            <div className="flex-center flex-col pb-[12px] gap-[30px] text-center">
+              <Badge variant="primary200-outline" size="L">
                 자기소개서 작성까지 한번에
               </Badge>
-              <h2 className="whitespace-pre-line h2">{'쓰는게 막막할때,\n경험카드를 참고해요'}</h2>
+              <h2 className="whitespace-pre-line h2">{'자기소개서 작성이 막막할땐\n경험카드를 참고해요'}</h2>
             </div>
-            <div className="flex flex-col justify-end w-[588px] gap-[16px] b1 text-light">
-              <p>
-                설문조사 결과 과반수 이상의 구직자는 자기소개서 작성할 때 어떻게 시작할지 몰라서 어려움을 겪는다는
-                문제를 발견했습니다.
-              </p>
-              <p>
-                인사이트아웃에서 내 경험들을 역량별로 분류해서 불러올 수 있어요! 역량 키워드 태그를 통해서 문항과 잘
-                어울리는 경험카드들을 확인해보세요.
-              </p>
-            </div>
+            <p className="text-center whitespace-pre-line b1 text-sub text-subhead3">
+              {
+                '설문조사 결과 51%이상의 구직자는 자기소개서 작성할 때 어떻게 시작할지 몰라 어려움을 겪는다는 문제를 발견했습니다.\n작성한 경험을 역량별로 분류해서 자기소개서를 작성할때 확인해보세요.'
+              }
+            </p>
           </div>
-          <div className="relative max-w-[1200px] w-full h-[462px]">
-            <Image src={'/images/home/img-home-3.png'} fill alt="Home-3" />
+          <Image src={Home4} alt="자기소개서 작성" width={1800} height={990} />
+          <div className="flex gap-[34px] mt-[32px]">
+            <Image src={Home5} alt="경험카드" className="max-w-[1150px] max-h-[901px] basis-2/3" />
+            <Image src={Home6} alt="경험카드 이미지" className="max-w-[616px] max-h-[901px] basis-1/3" />
           </div>
-          <Image
-            src={HomeEllipsisRight}
-            className="absolute top-[413px] right-[-350px] w-[788px] h-[788px] z-[-1]"
-            alt="Home-ellipsis-right"
-            loading="eager"
-          />
         </section>
+
         <section
           className="flex flex-col w-full h-[1024px] pb-[144px] bg-no-repeat bg-center bg-cover"
-          style={{ backgroundImage: 'url("/images/home/img-home-4.png")' }}>
+          style={{ backgroundImage: 'url("/images/home/img-home-7.png")' }}>
           <div className="flex flex-col justify-center items-center h-full gap-[30px] text-white">
             <Badge size="L" variant="primary50-outline">
               사용자 후기
             </Badge>
-            <h2 className="text-center whitespace-pre-line h1">{'인사이트 아웃을 경험해본\n사용자들의 이야기 🎉'}</h2>
+            <h2 className="text-center whitespace-pre-line h2">{'인사이트 아웃을 경험해본\n사용자들의 이야기 🎉'}</h2>
             <p className="text-center b1">
               자기소개서 작성이 막막한 그 순간, 인사이트아웃에서 만든 경험카드가 큰 힘이 되어주었어요.
             </p>
@@ -185,6 +165,7 @@ const Home = () => {
           </div>
         </section>
       </main>
+
       <footer className="flex flex-col justify-center items-center h-[416px] bg-dark pt-[66px] pb-[35px]">
         <Image src={HomeLogo} className="w-[192px] h-[41px] mb-[35px]" alt="home-logo" />
         <p className="text-center text-white whitespace-pre-line b3 mb-[20px]">
@@ -202,6 +183,12 @@ const Home = () => {
           </span>
         </div>
       </footer>
+
+      <div className="hidden">
+        <Lottie src="/lotties/lumos-loading.json" />
+        <Lottie src="/lotties/lumos-hi.json" />
+        <Lottie src="/lotties/lumos-smile.json" />
+      </div>
     </>
   );
 };

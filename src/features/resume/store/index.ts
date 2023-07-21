@@ -25,7 +25,7 @@ export const useSpellErrors = () => useQuestionStore((state) => state.spellError
 export const useQuestionActions = () => useQuestionStore((state) => state.actions);
 
 export const useExperienceStore = create<ExperienceStore>((set) => ({
-  experienceId: 0,
+  experienceId: NaN,
   capabilityKeyword: ALL_CAPABILITY_KEYWORD,
   actions: {
     setExperienceId: (experienceId) => set(() => ({ experienceId })),

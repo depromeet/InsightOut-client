@@ -4,6 +4,8 @@ import classNames from 'classnames';
 import { Metadata } from 'next';
 import localFont from 'next/font/local';
 
+import GoogleAnalytics from '@/components/GoogleAnalytics/GoogleAnalytics';
+import Hotjar from '@/components/Hotjar/Hotjar';
 import ChakraUIProvider from '@/components/Providers/ChakraProvider';
 import TanstackQueryProvider from '@/components/Providers/TanstackQueryProvider';
 import META from '@/shared/constants/metadata';
@@ -11,6 +13,7 @@ import META from '@/shared/constants/metadata';
 import './globals.css';
 
 export const metadata: Metadata = {
+  metadataBase: new URL(META.DOMAIN_URL),
   title: {
     default: META.TITLE,
     template: `%s | ${META.SITE_NAME}`,
@@ -23,6 +26,7 @@ export const metadata: Metadata = {
     siteName: META.SITE_NAME,
     locale: 'ko_KR',
     type: 'website',
+    url: META.DOMAIN_URL,
   },
   verification: {
     google: META.GOOGLE_VERIFICATION,
@@ -43,6 +47,9 @@ export default function RootLayout({ children }: PropsWithChildren) {
         <TanstackQueryProvider>
           <ChakraUIProvider>{children}</ChakraUIProvider>
         </TanstackQueryProvider>
+
+        <GoogleAnalytics />
+        <Hotjar />
       </body>
     </html>
   );

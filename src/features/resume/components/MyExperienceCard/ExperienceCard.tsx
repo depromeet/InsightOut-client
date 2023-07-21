@@ -19,8 +19,8 @@ const ExperienceCard = ({ selected, date, title, summaryKeywords }: ExperienceCa
         {title}
       </h3>
       <ul className="flex gap-[10px]">
-        {summaryKeywords?.map((keyword) => (
-          <li key={keyword}>
+        {summaryKeywords?.map((keyword, index) => (
+          <li key={`${keyword}-${index}`}>
             <Tag variant="primary50" size="M">
               {keyword}
             </Tag>

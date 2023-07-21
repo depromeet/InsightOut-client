@@ -1,3 +1,5 @@
+import { Route } from 'next';
+
 export type Capability = {
   id: number;
   keyword: string;
@@ -52,3 +54,15 @@ export interface ResumeTitle {
   createdAt: string;
   updatedAt: string;
 }
+
+export type PageInfo = {
+  keyword: string;
+  subMessage: string;
+  buttonText: string;
+  redirectUrl: Route;
+};
+
+export type PageTextcontent = {
+  // eslint-disable-next-line unused-imports/no-unused-vars
+  [key: string]: PageInfo;
+};

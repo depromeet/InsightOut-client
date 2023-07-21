@@ -1,10 +1,13 @@
+import { Route } from 'next';
 import { StaticImageData } from 'next/image';
 import logical from 'public/images/capabilites/logical.png';
 import performance from 'public/images/capabilites/performance.png';
 import relationship from 'public/images/capabilites/relationship.png';
 import selfBased from 'public/images/capabilites/self_based.png';
 
-import { ResumeTitle } from '../types';
+import { ROUTES } from '@/shared/constants/routes';
+
+import { PageTextcontent, ResumeTitle } from '../types';
 
 export const ANSWER_MAX_LENGTH = 2000;
 
@@ -53,3 +56,25 @@ export const INITIAL_RESUME: ResumeTitle = {
 };
 
 export const ALL_CAPABILITY_KEYWORD = '전체';
+
+export const PAGE_TEXTCONTENT: PageTextcontent = {
+  experiences: {
+    keyword: '경험카드',
+    subMessage: '경험분해부터 시작해볼까요?',
+    buttonText: '경험분해',
+    redirectUrl: ROUTES.EXPERIENCE,
+  },
+  resumes: {
+    keyword: '자기소개서',
+    subMessage: '자기소개서 작성하러 가볼까요?',
+    buttonText: '자기소개서',
+    redirectUrl: ROUTES.RESUMES_UNDEFINED as Route,
+  },
+  'ai-recommends': {
+    keyword: '추천받은 자기소개서',
+    subMessage:
+      '경험분해를 하면 AI의 직무 역량 키워드 추천과 자기소개서 제안을 받을 수 있어요. \n경험분해를 시작해볼까요?',
+    buttonText: '경험분해',
+    redirectUrl: ROUTES.EXPERIENCE,
+  },
+};

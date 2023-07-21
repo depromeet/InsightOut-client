@@ -48,7 +48,14 @@ const ExperienceCardList = () => {
     ({ experienceStatus }) => experienceStatus === 'DONE'
   );
 
+  /**
+   * NotFound가 표시되는 경우
+   * 1. 아예 데이터 자체가 없는 경우
+   * 2. 데이터는 있지만 DONE 상태의 데이터가 없는 경우
+   *  - 마지막 페이지까지 요청했지만 DONE 상태가 없는 경우, NotFound를 보여줍니다.
+   */
   if (experiences?.length === 0) return <NotFoundExperienceCard />;
+  if (!hasNextPage && completedExperiences.length === 0) return <NotFoundExperienceCard />;
 
   return (
     <div className="relative after:content-[''] after:absolute after:bottom-0 after:w-[100%] after:h-[62px] after:bg-gradient-to-t after:from-[#F1F7FE] after:to-[rgba(243, 249, 255, 0.00)]">
