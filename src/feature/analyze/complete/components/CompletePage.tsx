@@ -74,7 +74,12 @@ const CompletePage = () => {
   return (
     <>
       <div className="mx-auto mt-[250px] w-fit">
-        <ExperienceCard {...experienceCardProps} />
+        {aiExperience && (
+          <>
+            <ExperienceCard {...experienceCardProps} />
+            <Confetti />
+          </>
+        )}
       </div>
       <Confetti />
     </>
