@@ -60,7 +60,7 @@ const ExperienceListCard = ({
     deleteExperience();
   };
 
-  const experiencePeriod = startDate && endDate ? getExperiencePeriod(startDate, endDate) : MESSAGE.HAS_NOT_PERIOD;
+  const experiencePeriod = startDate && endDate ? getExperiencePeriod(startDate, endDate) : MESSAGE.NOT_HAS_PERIOD;
 
   return (
     <>
@@ -79,13 +79,30 @@ const ExperienceListCard = ({
         />
         <ExperienceListCard.Summary
           experiencePeriod={experiencePeriod}
-          title={title || MESSAGE.HAS_NOT_TITLE}
+          title={title || MESSAGE.NOT_HAS_TITLE}
           situation={situation || ''}
         />
         <Divider my={'16px'} />
         <div>
-          <ExperienceListCard.Keyword id={id} title="직무영략 키워드" capabilities={experienceCapabilityKeywords} />
-          <ExperienceListCard.Keyword id={id} title="AI추천 키워드" capabilities={aiRecommendKeywords} isAi={true} />
+          <ExperienceListCard.Keyword
+            id={id}
+            title="직무역량 키워드"
+            capabilities={
+              experienceCapabilityKeywords && experienceCapabilityKeywords?.length > 0
+                ? experienceCapabilityKeywords
+                : MESSAGE.NOT_HAS_CAPACITY_KEYWORDS
+            }
+          />
+          <ExperienceListCard.Keyword
+            id={id}
+            title="AI추천 키워드"
+            capabilities={
+              aiRecommendKeywords && aiRecommendKeywords?.length > 0
+                ? aiRecommendKeywords
+                : MESSAGE.NOT_HAS_AI_RECOMMEND_KEYWORDS
+            }
+            isAi={true}
+          />
         </div>
       </section>
       <Modal size="md" isOpen={isOpenActionListModal} onClose={onCloseActionListModal}>
