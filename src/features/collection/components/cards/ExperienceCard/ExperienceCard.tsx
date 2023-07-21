@@ -11,6 +11,7 @@ import Button from '@/components/Button/Button';
 import TextAreaField from '@/components/Input/TextAreaField/TextAreaField';
 import Tag from '@/components/Tag/Tag';
 import { ExperienceStatus } from '@/features/analyze/types';
+import { MESSAGE } from '@/features/collection/constants';
 import { AiRecommendQuestions, ExperienceInfo } from '@/features/collection/types';
 import { MAX_LENGTH } from '@/shared/constants/maxLength';
 
@@ -67,7 +68,12 @@ const ExperienceCard = ({
         animate={!isBack ? 'flipInitial' : 'flipEnd'}
         bg={'white'}
         rounded={32}>
-        <ExperienceCard.Header title={title} period={period} isBack={isBack} handleFlipClick={handleFlipClick} />
+        <ExperienceCard.Header
+          title={title || MESSAGE.NOT_HAS_TITLE}
+          period={period}
+          isBack={isBack}
+          handleFlipClick={handleFlipClick}
+        />
         <div
           className={`flex flex-row justify-between w-full overflow-auto h-[720px] m-0 p-[50px] ${
             isBack && '[transform:rotateY(180deg)] py-[20px] px-[40px]'
@@ -77,8 +83,16 @@ const ExperienceCard = ({
               summaries={summaryKeywords}
               experienceStatus={experienceStatus}
               aiRecommend={experienceInfo?.analysis}
-              experienceCapabilityKeywords={experienceCapabilityKeywords}
-              aiRecommendKeywords={aiRecommendKeywords}
+              experienceCapabilityKeywords={
+                experienceCapabilityKeywords && experienceCapabilityKeywords.length
+                  ? experienceCapabilityKeywords
+                  : MESSAGE.NOT_HAS_CAPACITY_KEYWORDS
+              }
+              aiRecommendKeywords={
+                aiRecommendKeywords && aiRecommendKeywords.length
+                  ? aiRecommendKeywords
+                  : MESSAGE.NOT_HAS_AI_RECOMMEND_KEYWORDS
+              }
               aiRecommendQuestions={aiRecommendQuestions}
             />
           ) : (
@@ -205,7 +219,7 @@ type ExperienceKeywordProps = {
 ExperienceCard.Keyword = ({ title, capabilities, aiRecommend, isAi = false }: ExperienceKeywordProps) => (
   <div className="mb-[22px]">
     <h6 className="h6 mb-[16px]">{title}</h6>
-    <ul className={`flex flex-row flex-wrap gap-x-[8px] gap-y-[4px] ${isAi && 'mb-[16px]'}`}>
+    <ul className={`flex flex-row flex-wrap gap-x-[8px] gap-y-[4px] ${isAi ? 'mb-[16px]' : 'h-[96px]'}`}>
       {capabilities
         ? capabilities.map((capability, index) => (
             <li key={`${'EXPERIENCE_CARD'}-${index}-${capability}`}>
@@ -228,13 +242,19 @@ type ExperienceCardAIQuestionsProps = {
 ExperienceCard.AIQuestions = ({ aiRecommendQuestions }: ExperienceCardAIQuestionsProps) => (
   <div>
     <h6 className="h6 mb-[8px]">이 경험과 잘 맞는 자기소개서 문항</h6>
-    <ul className="flex flex-col gap-[8px]">
-      {aiRecommendQuestions?.map(({ id, createedAt, title }) => (
-        <li key={`${id}-${createedAt}`} className=" border-[1px] rounded-[8px] border-gray-300 py-[8px] px-[16px]">
-          <p className="w-full">{title}</p>
-        </li>
-      ))}
-    </ul>
+    {aiRecommendQuestions?.length ? (
+      <ul className="flex flex-col gap-[8px]">
+        {aiRecommendQuestions?.map(({ id, createedAt, title }) => (
+          <li key={`${id}-${createedAt}`} className=" border-[1px] rounded-[8px] border-gray-300 py-[8px] px-[16px]">
+            <p className="w-full">{title}</p>
+          </li>
+        ))}
+      </ul>
+    ) : (
+      <div className=" border-[1px] rounded-[8px] border-gray-300 py-[8px] px-[16px]">
+        {MESSAGE.NOT_HAS_AI_RECOMMEND_QUESTIONS}
+      </div>
+    )}
   </div>
 );
 
