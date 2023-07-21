@@ -8,7 +8,7 @@ import Home5 from 'public/images/home/img-home-5.png';
 import Home6 from 'public/images/home/img-home-6.png';
 import HomeEllipsisLeft from 'public/images/home/img-home-ellipsis-left.png';
 import HomeLogo from 'public/images/home/img-home-logo.png';
-import LumosCry from 'public/images/lumos-cry.png';
+import LumosNocard from 'public/images/lumos-nocard.png';
 
 import { ROUTES } from '@/shared/constants/routes';
 
@@ -42,7 +42,7 @@ const Home = () => {
         </section>
 
         <section className="flex-center flex-col pt-[114px] pb-[160px] bg-[#2B2D36] text-white">
-          <Image src={LumosCry} alt="루모스" />
+          <Image src={LumosNocard} alt="루모스" />
           <h2 className="h2 mt-[27px] mb-[12px]">자기소개서 작성이 고민인 취업준비생이신가요?</h2>
           <p className="subhead3">인사이트아웃에서 고민을 해결해보세요!</p>
         </section>
