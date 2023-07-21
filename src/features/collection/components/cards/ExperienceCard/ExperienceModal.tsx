@@ -3,6 +3,7 @@ import React from 'react';
 import { Modal, ModalContent, ModalOverlay } from '@chakra-ui/react';
 
 import { ExperienceStatus } from '@/features/analyze/types';
+import { AiRecommendQuestions } from '@/features/collection/types';
 import { useGetExperience } from '@/hooks/reactQuery/analyze/query';
 
 import ExperienceCard from './ExperienceCard';
@@ -17,6 +18,7 @@ type Props = {
   summaryKeywords?: string[];
   experienceCapabilityKeywords?: string[];
   aiRecommendKeywords?: string[];
+  aiRecommendQuestions?: AiRecommendQuestions[];
 };
 
 const ExperienceModal = ({
@@ -29,6 +31,7 @@ const ExperienceModal = ({
   experienceStatus,
   experienceCapabilityKeywords,
   aiRecommendKeywords,
+  aiRecommendQuestions,
 }: Props) => {
   const { data: experience } = useGetExperience({ experienceId });
 
@@ -49,6 +52,7 @@ const ExperienceModal = ({
           experienceInfo={experienceInfo}
           star={star}
           aiResume={aiResume}
+          aiRecommendQuestions={aiRecommendQuestions}
         />
       </ModalContent>
     </Modal>

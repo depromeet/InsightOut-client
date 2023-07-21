@@ -1,4 +1,5 @@
 import { ExperienceFormValues, ExperienceStatus } from '@/features/analyze/types';
+import { AiRecommendQuestions } from '@/features/collection/types';
 
 export type ExperienceParams = {
   get: { experienceId: number };
@@ -29,4 +30,5 @@ export type ExperienceResponse = {
     content: string;
     AiResumeCapabilities: { Capability: { keyword: string } }[];
   };
+  AiRecommendQuestions?: AiRecommendQuestions[];
 };
