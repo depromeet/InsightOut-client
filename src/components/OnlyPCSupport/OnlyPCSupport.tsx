@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import Image from 'next/image';
 import ExperienceImg3 from 'public/images/home/img-home-experience-2.png';
@@ -27,6 +27,12 @@ const ServiceList = [
 ];
 
 const OnlyPCSupport = () => {
+  useEffect(() => {
+    document.body.style.backgroundColor = '#fff';
+    return () => {
+      document.body.style.backgroundColor = '#f5f5f5';
+    };
+  }, []);
   return (
     <div className="flex-center flex-col mx-auto max-w-[360px] px-[20px] h-full">
       <Image src={LumosNocard} alt="lumos-nocard" width={173} placeholder="blur" />
