@@ -8,10 +8,12 @@ type Props = {
 const AiRecommendResumeList = ({ shownAiResumes }: Props) => {
   return (
     <ul className="flex flex-col gap-[40px]">
-      {shownAiResumes.map(({ id, updatedAt, content, AiCapabilities }) => (
+      {shownAiResumes.map(({ experienceId, id, updatedAt, content, AiCapabilities }) => (
         <li key={id}>
           <AiRecommendResumeListCard
             // API에 타이틀 추가
+            experienceId={experienceId}
+            id={id}
             title={`[${AiCapabilities.map((capability) => capability).join(', ')}] 키워드로 AI가 추천한 자기소개서`}
             updatedAt={updatedAt}
             answer={content}

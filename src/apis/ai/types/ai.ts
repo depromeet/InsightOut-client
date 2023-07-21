@@ -78,6 +78,7 @@ export type AiResponse = {
 };
 
 export type AiResume = {
+  experienceId: number;
   id: number;
   content: string;
   updatedAt: string;
