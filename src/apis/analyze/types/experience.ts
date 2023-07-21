@@ -1,4 +1,4 @@
-import { ExperienceFormValues, ExperienceStatus } from '@/feature/analyze/types';
+import { ExperienceFormValues, ExperienceStatus } from '@/features/analyze/types';
 import { AiRecommendQuestions } from '@/features/collection/types';
 
 export type ExperienceParams = {

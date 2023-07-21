@@ -10,7 +10,7 @@ import Badge from '@/components/Badge/Badge';
 import Button from '@/components/Button/Button';
 import TextAreaField from '@/components/Input/TextAreaField/TextAreaField';
 import Tag from '@/components/Tag/Tag';
-import { ExperienceStatus } from '@/feature/analyze/types';
+import { ExperienceStatus } from '@/features/analyze/types';
 import { AiRecommendQuestions, ExperienceInfo } from '@/features/collection/types';
 import { MAX_LENGTH } from '@/shared/constants/maxLength';
 

@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Modal, ModalContent, ModalOverlay } from '@chakra-ui/react';
 
-import { ExperienceStatus } from '@/feature/analyze/types';
+import { ExperienceStatus } from '@/features/analyze/types';
 import { AiRecommendQuestions } from '@/features/collection/types';
 import { useGetExperience } from '@/hooks/reactQuery/analyze/query';
 
