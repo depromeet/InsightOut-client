@@ -18,7 +18,7 @@ const ExperienceCardList = () => {
   const { setExperienceId } = useExperienceActions();
 
   const { data, fetchNextPage, hasNextPage, isFetching } = useGetInfiniteExperiences(
-    { take: CARD_COUNT_PER_LOAD },
+    { take: CARD_COUNT_PER_LOAD, situation: true, task: true, action: true, result: true },
     {
       onSuccess: ({ pages }) => {
         const firstDoneExperienceId = pages
