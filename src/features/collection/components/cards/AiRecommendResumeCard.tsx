@@ -17,6 +17,7 @@ import ExperienceModal from './ExperienceCard/ExperienceModal';
 import ResumeAnswerModalCard from './ResumeAnswerModalCard';
 
 type Props = {
+  experienceId: number;
   id: number;
   updatedAt: string;
   title: string;
@@ -24,7 +25,7 @@ type Props = {
   aiCapabilities: string[];
 };
 
-const AiRecommendResumeCard = ({ id, title, answer, updatedAt, aiCapabilities }: Props) => {
+const AiRecommendResumeCard = ({ experienceId, id, title, answer, updatedAt, aiCapabilities }: Props) => {
   const { isOpen: isOpenActionListModal, onClose: onCloseActionListModal } = useDisclosure();
   const {
     isOpen: isOpenAiResumeAnswerModal,
@@ -49,7 +50,7 @@ const AiRecommendResumeCard = ({ id, title, answer, updatedAt, aiCapabilities }:
           <TextLengthMessage currentLength={answer.length} maxLength={MAX_LENGTH.AI_RESUME} />
         </div>
         <AiRecommendResumeCard.Footer
-          id={id}
+          experienceId={experienceId}
           aiCapabilities={aiCapabilities}
           isOpenExperienceCardModal={isOpenExperienceCardModal}
           onOpenExperienceCardModal={onOpenExperienceCardModal}
@@ -105,7 +106,7 @@ AiRecommendResumeCard.Header = ({ title, updatedAt }: AiRecommendResumeCardHeade
 );
 
 type FooterProps = {
-  id: number;
+  experienceId: number;
   aiCapabilities: string[];
   isOpenExperienceCardModal: boolean;
   onOpenExperienceCardModal: () => void;
@@ -113,7 +114,7 @@ type FooterProps = {
 };
 
 AiRecommendResumeCard.Footer = ({
-  id,
+  experienceId,
   aiCapabilities,
   isOpenExperienceCardModal,
   onOpenExperienceCardModal,
@@ -144,7 +145,11 @@ AiRecommendResumeCard.Footer = ({
           </Button>
         </div>
       </div>
-      <ExperienceModal isOpen={isOpenExperienceCardModal} onClose={onCloseExperienceCardModal} experienceId={id} />
+      <ExperienceModal
+        isOpen={isOpenExperienceCardModal}
+        onClose={onCloseExperienceCardModal}
+        experienceId={experienceId}
+      />
     </>
   );
 };
