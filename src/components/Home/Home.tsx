@@ -42,7 +42,7 @@ const Home = () => {
         </section>
 
         <section className="flex-center flex-col pt-[114px] pb-[160px] bg-[#2B2D36] text-white">
-          <Image src={LumosNocard} alt="루모스" />
+          <Image src={LumosNocard} alt="루모스" width={264} height={203} />
           <h2 className="h2 mt-[27px] mb-[12px]">자기소개서 작성이 고민인 취업준비생이신가요?</h2>
           <p className="subhead3">인사이트아웃에서 고민을 해결해보세요!</p>
         </section>
