@@ -4,21 +4,24 @@ import React, { KeyboardEvent } from 'react';
 import { useFormContext, useWatch } from 'react-hook-form';
 
 import { useDisclosure } from '@chakra-ui/react';
+import { useQueryClient } from '@tanstack/react-query';
 
 import Button from '@/components/Button/Button';
 import TextAreaField from '@/components/Input/TextAreaField/TextAreaField';
 import QuestionCard from '@/components/QuestionCard/QuestionCard';
 import Tag from '@/components/Tag/Tag';
 import KeywordContainer from '@/features/analyze/keyword/KeywordContainer';
-import { useCreateKeyword, useUpdateKeyword } from '@/hooks/reactQuery/keyword/mutation';
+import { useCreateKeyword } from '@/hooks/reactQuery/keyword/mutation';
 import { useGetKeywordList } from '@/hooks/reactQuery/keyword/query';
 import useInput from '@/hooks/useInput';
+import { KEYWORD_KEY } from '@/shared/constants/querykeys';
 import { exceptEnter } from '@/shared/utils/exceptEnter';
 
 import BaseDialog from '../modal/BaseDialog';
-import { ExperienceFormValues, KeywordEntriesType } from '../types';
+import { ExperienceFormValues, Keyword, KeywordEntriesType } from '../types';
 
 const deDuplicatedTwoDimensionalArray = (arr: KeywordEntriesType) => Object.entries(Object.fromEntries(arr));
+const appendNewKeyword = (keywordList: Keyword, keyword: string) => Object.assign(keywordList, { [keyword]: false });
 
 const KeywordPage = () => {
   const [text, onChangeText, setText] = useInput('');
@@ -38,9 +41,15 @@ const KeywordPage = () => {
       },
     }
   );
-
-  const { mutateAsync: createKeyword } = useCreateKeyword();
-  const { mutateAsync: saveKeyword } = useUpdateKeyword({ experienceId });
+  const queryClient = useQueryClient();
+  const { mutate: createKeyword } = useCreateKeyword({
+    onSuccess: (_, variables) => {
+      queryClient.setQueryData(
+        KEYWORD_KEY.list([{ experienceId }]),
+        appendNewKeyword(Object.fromEntries(keywordList), variables.keyword)
+      );
+    },
+  });
 
   const getKeywordList = (newKeyword: string) => {
     const selectedKeywordList = keywordList.filter(([, isSelected]) => isSelected === true);
@@ -68,9 +77,7 @@ const KeywordPage = () => {
       onOpen();
     } else {
       setValue('keywords', addKeywordList);
-
-      await createKeyword({ keyword: text });
-      await saveKeyword({ keywords: Object.fromEntries(keywordList.filter(([, isSelected]) => isSelected === true)) });
+      createKeyword({ keyword: text });
     }
     setText('');
   };
