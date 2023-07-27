@@ -1,4 +1,5 @@
-'use Client';
+'use client';
+
 import React from 'react';
 
 import { CircularProgress } from '@chakra-ui/react';

@@ -1,4 +1,4 @@
-'use Client';
+'use client';
 
 import React, { HTMLAttributes } from 'react';
 
