@@ -10,7 +10,7 @@ import QuestionCard from '@/components/QuestionCard/QuestionCard';
 import { tw } from '@/shared/utils/tailwindMerge';
 
 interface PageErrorBoundary extends HTMLAttributes<HTMLDivElement> {
-  onClick: () => void;
+  onClick?: () => void;
 }
 
 const PageErrorBoundary = ({ onClick, className, ...props }: PageErrorBoundary) => {

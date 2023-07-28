@@ -2,14 +2,16 @@
 
 import React, { HTMLAttributes } from 'react';
 
-interface PageErrorBoundary extends HTMLAttributes<HTMLDivElement> {
+import PageErrorBoundary from '@/features/analyze/PageErrorBoundary/PageErrorBoundary';
+
+interface ErrorProps extends HTMLAttributes<HTMLDivElement> {
   error?: Error;
   reset?: () => void;
 }
 
-const PageErrorBoundary = ({ error, reset }: PageErrorBoundary) => {
+const Error = ({ error, reset }: ErrorProps) => {
   console.log({ error });
   return <PageErrorBoundary onClick={reset} />;
 };
 
-export default PageErrorBoundary;
+export default Error;
