@@ -8,7 +8,7 @@ import { useTitle } from '../store';
 import { ResumeData } from '../types/resume';
 
 /**
- * Aside에서 사용하는 자기소개서 목록을 반환하는 룩입니다
+ * Aside에서 사용하는 자기소개서 목록을 반환하는 훅입니다
  * - 사용자가 ResumeForm에서 자기소개서 제목을 변경하면 Aside에 해당 제목으로 업데이트된 자기소개서 목록을 반환합니다.
  * @returns resumeList Aside에서 사용하는 자기소개서 목록
  */
@@ -41,7 +41,7 @@ const useResumesWithUpdatedTitle = () => {
 
   useEffect(() => {
     updateResumeList();
-  }, [questionId, currentEditingTitle, data]);
+  }, [currentEditingTitle, data]);
 
   return {
     resumeList,
