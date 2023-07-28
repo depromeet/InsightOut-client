@@ -4,8 +4,8 @@ import React from 'react';
 
 import PageLoading from '@/features/analyze/PageLoading/PageLoading';
 
-const loading = () => {
+const Loading = () => {
   return <PageLoading />;
 };
 
-export default loading;
+export default Loading;
