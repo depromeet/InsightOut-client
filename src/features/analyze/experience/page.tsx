@@ -89,7 +89,6 @@ const ExperiencePage = () => {
             <Controller
               control={control}
               name="startMM"
-              rules={MMRules}
               render={({ field: { ref, onChange, value }, formState: { errors } }) => (
                 <TextField
                   type="number"
@@ -120,7 +119,6 @@ const ExperiencePage = () => {
             <Controller
               control={control}
               name="endMM"
-              rules={MMRules}
               render={({ field: { ref, onChange, value }, formState: { errors } }) => (
                 <TextField
                   type="number"
@@ -184,10 +182,3 @@ const ExperiencePage = () => {
 };
 
 export default ExperiencePage;
-
-const MMRules = {
-  pattern: {
-    value: /(0[1-9]|1[0-2])/,
-    message: '정확한 날짜를 입력해 주세요',
-  },
-};
