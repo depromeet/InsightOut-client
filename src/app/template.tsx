@@ -59,8 +59,6 @@ export default function Template({ children }: StrictPropsWithChildren) {
     if (isNoticeOpen) experienceNoticeOpen();
   }, [isNoticeOpen, experienceNoticeOpen, pathname, setNoticeOpen]);
 
-  if (isNotPC) return <OnlyPCSupport />;
-
   return (
     <>
       <AuthProvider>
@@ -71,7 +69,10 @@ export default function Template({ children }: StrictPropsWithChildren) {
           onCloseAuthModal={handleClickCloseButton}
           onAbortSignUp={handleAbortSignUp}
         />
-        <OnboardingProvider>{children}</OnboardingProvider>
+        <OnboardingProvider>
+          {isNotPC && <OnlyPCSupport />}
+          {children}
+        </OnboardingProvider>
       </AuthProvider>
       <ExperienceNotice
         size="3xl"
