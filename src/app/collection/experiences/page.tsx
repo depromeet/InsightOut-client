@@ -52,7 +52,7 @@ const Page = () => {
     shownExperiences = getSortedExperiences(_experiences, sortBy);
   }
 
-  if (isSuccess && !capabilities.length) {
+  if (isSuccess && !experiences.length) {
     notFound();
   }
 
