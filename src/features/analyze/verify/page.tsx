@@ -29,7 +29,7 @@ export const renderRecommendKeyword = (arr: CapabilitiesType[]) => {
 };
 
 const VerifyPage = () => {
-  const { back } = useRouter();
+  const { back, prefetch } = useRouter();
   const username = useUserNickname();
   const { getValues, setValue } = useFormContext<ExperienceFormValues>();
   const [situation, task, action, result, keywordList, experienceId, recommendKeywordList, resume, writeStatus] =
@@ -46,6 +46,10 @@ const VerifyPage = () => {
     ]);
 
   const { mutateAsync: createRecommendResume, isLoading: isRecommendResumeLoading } = useCreateRecommendResume();
+
+  useEffect(() => {
+    prefetch('/completed-experience-card');
+  }, [prefetch]);
 
   useEffect(() => {
     const isReadyToAIRecommendation = writeStatus?.slice(0, 3).every((status) => status === '작성완료');

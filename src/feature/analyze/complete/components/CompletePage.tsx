@@ -16,7 +16,6 @@ import { useGetExperience } from '@/hooks/reactQuery/analyze/query';
 const CompletePage = () => {
   const [showLoading, setShowLoading] = useState(true);
   const [aiExperience, setAiExperience] = useState<AiResponse['submit']>();
-  // const { experienceId } = useExperienceId();
 
   const experienceId = Number(useSearchParams().get('experienceId')) ?? '0';
   const { mutateAsync: createAiExperienceCard, isLoading: isLoadingExperienceCard } = useSubmitExperience();
@@ -38,9 +37,6 @@ const CompletePage = () => {
       },
     }
   );
-
-  console.log(aiExperience);
-  console.log(experience);
 
   useEffect(() => {
     if (showLoading) {
@@ -74,7 +70,12 @@ const CompletePage = () => {
   return (
     <>
       <div className="mx-auto mt-[250px] w-fit">
-        <ExperienceCard {...experienceCardProps} />
+        {aiExperience && (
+          <>
+            <ExperienceCard {...experienceCardProps} />
+            <Confetti />
+          </>
+        )}
       </div>
       <Confetti />
     </>

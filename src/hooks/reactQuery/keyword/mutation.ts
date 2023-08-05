@@ -8,11 +8,9 @@ import { KEYWORD_KEY } from '@/shared/constants/querykeys';
 export const useCreateKeyword = (
   options?: UseMutationOptions<keywordResponse['post'], AxiosError, KeywordParams['post']>
 ) => {
-  const queryClient = useQueryClient();
   return useMutation(({ keyword }) => keywordApi.post({ keyword }), {
     ...options,
     onSuccess: (data, variables, context) => {
-      queryClient.invalidateQueries(KEYWORD_KEY.lists());
       options?.onSuccess?.(data, variables, context);
     },
   });

@@ -22,7 +22,7 @@ const Page = () => {
   const [sortBy, setSortBy] = useState<keyof typeof EXPERIENCE_SORT_BY>('createdAt');
 
   const params = {
-    take: 10,
+    take: 3,
     criteria: sortBy,
   };
 
