@@ -5,6 +5,7 @@ import { Controller, useFormContext } from 'react-hook-form';
 
 import { useDisclosure } from '@chakra-ui/react';
 
+import { ErrorMessage } from '@/components/Input/ErrorMessage';
 import TextAreaField from '@/components/Input/TextAreaField/TextAreaField';
 import TextField from '@/components/Input/TextField/TextField';
 import QuestionCard from '@/components/QuestionCard/QuestionCard';
@@ -18,7 +19,12 @@ import { callbackRefWithResizeHeight } from '@/shared/utils/callbackRefWithResiz
 import OnboardingModal from '../modal/OnboardingModal';
 
 const ExperiencePage = () => {
-  const { control, setFocus, clearErrors } = useFormContext<ExperienceFormValues>();
+  const {
+    control,
+    setFocus,
+    trigger,
+    formState: { errors },
+  } = useFormContext<ExperienceFormValues>();
   const username = useUserNickname();
   const userOnboarding = useUserOnboarding();
   const { setUserInfo } = useUserActions();
@@ -75,7 +81,7 @@ const ExperiencePage = () => {
             <Controller
               control={control}
               name="startYYYY"
-              render={({ field: { ref, onChange, value } }) => (
+              render={({ field: { ref, onChange, value }, formState: { errors } }) => (
                 <TextField
                   type="number"
                   ref={ref}
@@ -83,14 +89,15 @@ const ExperiencePage = () => {
                   maxLength={4}
                   onChange={handlePeriodChange(
                     (e) => {
-                      /**@note endYYYY 유효성 검증에 의존하는 값인데 startYYYY 값을 변경할 때 endYYYY 검증 스키마를 trigger 할 수 없어서 에러 초기화 */
-                      clearErrors('endYYYY');
+                      /**@note endYYYY 유효성 검증에 의존하는 값인데 startYYYY 값을 변경할 때 endYYYY 검증 스키마를 trigger 할 수가 없어서 해당 값 변경 시 trigger */
+                      trigger('endYYYY');
                       onChange(e);
                     },
                     4,
                     'startMM'
                   )}
                   value={value || ''}
+                  error={!!errors.startYYYY}
                 />
               )}
             />
@@ -105,8 +112,8 @@ const ExperiencePage = () => {
                   maxLength={2}
                   onChange={handlePeriodChange(
                     (e) => {
-                      /**@note endMM 유효성 검증에 의존하는 값인데 startMM 값을 변경할 때 endMM 검증 스키마를 trigger 할 수 없어서 에러 초기화 */
-                      clearErrors('endMM');
+                      /**@note endMM 유효성 검증에 의존하는 값인데 startMM 값을 변경할 때 endMM 검증 스키마를 trigger 할 수가 없어서 해당 값 변경 시 trigger */
+                      trigger('endMM');
                       onChange(e);
                     },
                     2,
@@ -114,14 +121,13 @@ const ExperiencePage = () => {
                   )}
                   value={value || ''}
                   error={!!errors.startMM}
-                  errorMessage={errors.startMM?.message}
                 />
               )}
             />
             <Controller
               control={control}
               name="endYYYY"
-              render={({ field: { ref, onChange, value } }) => (
+              render={({ field: { ref, onChange, value }, formState: { errors } }) => (
                 <TextField
                   type="number"
                   ref={ref}
@@ -129,6 +135,7 @@ const ExperiencePage = () => {
                   onChange={handlePeriodChange(onChange, 4, 'endMM')}
                   maxLength={4}
                   value={value || ''}
+                  error={!!errors.endYYYY}
                 />
               )}
             />
@@ -144,11 +151,15 @@ const ExperiencePage = () => {
                   maxLength={2}
                   value={value || ''}
                   error={!!errors.endMM}
-                  errorMessage={errors.endMM?.message}
                 />
               )}
             />
           </PickerFieldContainer>
+          <ErrorMessage className="relative flex-col ml-0">
+            {Object.values(errors).map(({ message }, index) => (
+              <span key={index}>{message}</span>
+            ))}
+          </ErrorMessage>
         </>
       </QuestionCard>
       <QuestionCard title="내가 맡았던 역할은 무엇인가요?">
