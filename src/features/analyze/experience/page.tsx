@@ -18,7 +18,7 @@ import { callbackRefWithResizeHeight } from '@/shared/utils/callbackRefWithResiz
 import OnboardingModal from '../modal/OnboardingModal';
 
 const ExperiencePage = () => {
-  const { control, setFocus } = useFormContext<ExperienceFormValues>();
+  const { control, setFocus, clearErrors } = useFormContext<ExperienceFormValues>();
   const username = useUserNickname();
   const userOnboarding = useUserOnboarding();
   const { setUserInfo } = useUserActions();
@@ -81,7 +81,15 @@ const ExperiencePage = () => {
                   ref={ref}
                   placeholder="YYYY"
                   maxLength={4}
-                  onChange={handlePeriodChange(onChange, 4, 'startMM')}
+                  onChange={handlePeriodChange(
+                    (e) => {
+                      /**@note endYYYY 유효성 검증에 의존하는 값인데 startYYYY 값을 변경할 때 endYYYY 검증 스키마를 trigger 할 수 없어서 에러 초기화 */
+                      clearErrors('endYYYY');
+                      onChange(e);
+                    },
+                    4,
+                    'startMM'
+                  )}
                   value={value || ''}
                 />
               )}
@@ -95,7 +103,15 @@ const ExperiencePage = () => {
                   ref={ref}
                   placeholder="MM"
                   maxLength={2}
-                  onChange={handlePeriodChange(onChange, 2, 'endYYYY')}
+                  onChange={handlePeriodChange(
+                    (e) => {
+                      /**@note endMM 유효성 검증에 의존하는 값인데 startMM 값을 변경할 때 endMM 검증 스키마를 trigger 할 수 없어서 에러 초기화 */
+                      clearErrors('endMM');
+                      onChange(e);
+                    },
+                    2,
+                    'endYYYY'
+                  )}
                   value={value || ''}
                   error={!!errors.startMM}
                   errorMessage={errors.startMM?.message}
