@@ -4,7 +4,7 @@ import QuestionCard from '@/components/QuestionCard/QuestionCard';
 import Spinner from '@/components/Spinner/Spinner';
 
 import { CapabilitiesType } from '../types';
-import { renderRecommendKeyword } from './page';
+import { renderRecommendKeyword } from './AIRecommendResume';
 
 interface AIResumeLoadingProps {
   recommendKeywordList: CapabilitiesType[];
