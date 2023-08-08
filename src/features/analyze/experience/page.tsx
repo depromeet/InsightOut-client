@@ -23,7 +23,9 @@ const ExperiencePage = () => {
     control,
     setFocus,
     trigger,
-    formState: { errors },
+    formState: {
+      errors: { startYYYY, startMM, endYYYY, endMM },
+    },
   } = useFormContext<ExperienceFormValues>();
   const username = useUserNickname();
   const userOnboarding = useUserOnboarding();
@@ -156,8 +158,8 @@ const ExperiencePage = () => {
             />
           </PickerFieldContainer>
           <ErrorMessage className="relative flex-col ml-0">
-            {Object.values(errors).map(({ message }, index) => (
-              <span key={index}>{message}</span>
+            {Object.values({ startYYYY, startMM, endYYYY, endMM }).map((error, index) => (
+              <span key={index}>{error?.message}</span>
             ))}
           </ErrorMessage>
         </>
