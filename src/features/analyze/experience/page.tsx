@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { Controller, useFormContext } from 'react-hook-form';
+import { Controller, useFormContext, useWatch } from 'react-hook-form';
 
 import { useDisclosure } from '@chakra-ui/react';
 
@@ -24,7 +24,7 @@ const ExperiencePage = () => {
     setFocus,
     trigger,
     formState: {
-      errors: { startYYYY, startMM, endYYYY, endMM },
+      errors: { startYYYY: startYYYYError, startMM: startMMError, endYYYY: endYYYYError, endMM: endMMError },
     },
   } = useFormContext<ExperienceFormValues>();
   const username = useUserNickname();
@@ -37,6 +37,11 @@ const ExperiencePage = () => {
     },
   });
   const { mutate: updateExperienceOnboarding } = useUpdateOnboarding();
+
+  const [endMM, endYYYY] = useWatch({
+    name: ['endMM', 'endYYYY'],
+    control,
+  });
 
   const handlePeriodChange =
     (
@@ -92,7 +97,7 @@ const ExperiencePage = () => {
                   onChange={handlePeriodChange(
                     (e) => {
                       /**@note endYYYY 유효성 검증에 의존하는 값인데 startYYYY 값을 변경할 때 endYYYY 검증 스키마를 trigger 할 수가 없어서 해당 값 변경 시 trigger */
-                      trigger('endYYYY');
+                      if (endYYYY?.length === 4) trigger('endYYYY');
                       onChange(e);
                     },
                     4,
@@ -115,7 +120,7 @@ const ExperiencePage = () => {
                   onChange={handlePeriodChange(
                     (e) => {
                       /**@note endMM 유효성 검증에 의존하는 값인데 startMM 값을 변경할 때 endMM 검증 스키마를 trigger 할 수가 없어서 해당 값 변경 시 trigger */
-                      trigger('endMM');
+                      if (endMM?.length === 2) trigger('endMM');
                       onChange(e);
                     },
                     2,
@@ -158,7 +163,7 @@ const ExperiencePage = () => {
             />
           </PickerFieldContainer>
           <ErrorMessage className="relative flex-col ml-0">
-            {Object.values({ startYYYY, startMM, endYYYY, endMM }).map((error, index) => (
+            {Object.values({ startYYYYError, startMMError, endYYYYError, endMMError }).map((error, index) => (
               <span key={index}>{error?.message}</span>
             ))}
           </ErrorMessage>
