@@ -1,10 +1,11 @@
 'use client';
 
 import React from 'react';
-import { Controller, useFormContext } from 'react-hook-form';
+import { Controller, useFormContext, useWatch } from 'react-hook-form';
 
 import { useDisclosure } from '@chakra-ui/react';
 
+import { ErrorMessage } from '@/components/Input/ErrorMessage';
 import TextAreaField from '@/components/Input/TextAreaField/TextAreaField';
 import TextField from '@/components/Input/TextField/TextField';
 import QuestionCard from '@/components/QuestionCard/QuestionCard';
@@ -18,7 +19,14 @@ import { callbackRefWithResizeHeight } from '@/shared/utils/callbackRefWithResiz
 import OnboardingModal from '../modal/OnboardingModal';
 
 const ExperiencePage = () => {
-  const { control, setFocus } = useFormContext<ExperienceFormValues>();
+  const {
+    control,
+    setFocus,
+    trigger,
+    formState: {
+      errors: { startYYYY: startYYYYError, startMM: startMMError, endYYYY: endYYYYError, endMM: endMMError },
+    },
+  } = useFormContext<ExperienceFormValues>();
   const username = useUserNickname();
   const userOnboarding = useUserOnboarding();
   const { setUserInfo } = useUserActions();
@@ -29,6 +37,11 @@ const ExperiencePage = () => {
     },
   });
   const { mutate: updateExperienceOnboarding } = useUpdateOnboarding();
+
+  const [endMM, endYYYY] = useWatch({
+    name: ['endMM', 'endYYYY'],
+    control,
+  });
 
   const handlePeriodChange =
     (
@@ -75,38 +88,53 @@ const ExperiencePage = () => {
             <Controller
               control={control}
               name="startYYYY"
-              render={({ field: { ref, onChange, value } }) => (
+              render={({ field: { ref, onChange, value }, formState: { errors } }) => (
                 <TextField
                   type="number"
                   ref={ref}
                   placeholder="YYYY"
                   maxLength={4}
-                  onChange={handlePeriodChange(onChange, 4, 'startMM')}
+                  onChange={handlePeriodChange(
+                    (e) => {
+                      /**@note endYYYY 유효성 검증에 의존하는 값인데 startYYYY 값을 변경할 때 endYYYY 검증 스키마를 trigger 할 수가 없어서 해당 값 변경 시 trigger */
+                      if (endYYYY?.length === 4) trigger('endYYYY');
+                      onChange(e);
+                    },
+                    4,
+                    'startMM'
+                  )}
                   value={value || ''}
+                  error={!!errors.startYYYY}
                 />
               )}
             />
             <Controller
               control={control}
               name="startMM"
-              rules={MMRules}
               render={({ field: { ref, onChange, value }, formState: { errors } }) => (
                 <TextField
                   type="number"
                   ref={ref}
                   placeholder="MM"
                   maxLength={2}
-                  onChange={handlePeriodChange(onChange, 2, 'endYYYY')}
+                  onChange={handlePeriodChange(
+                    (e) => {
+                      /**@note endMM 유효성 검증에 의존하는 값인데 startMM 값을 변경할 때 endMM 검증 스키마를 trigger 할 수가 없어서 해당 값 변경 시 trigger */
+                      if (endMM?.length === 2) trigger('endMM');
+                      onChange(e);
+                    },
+                    2,
+                    'endYYYY'
+                  )}
                   value={value || ''}
                   error={!!errors.startMM}
-                  errorMessage={errors.startMM?.message}
                 />
               )}
             />
             <Controller
               control={control}
               name="endYYYY"
-              render={({ field: { ref, onChange, value } }) => (
+              render={({ field: { ref, onChange, value }, formState: { errors } }) => (
                 <TextField
                   type="number"
                   ref={ref}
@@ -114,13 +142,13 @@ const ExperiencePage = () => {
                   onChange={handlePeriodChange(onChange, 4, 'endMM')}
                   maxLength={4}
                   value={value || ''}
+                  error={!!errors.endYYYY}
                 />
               )}
             />
             <Controller
               control={control}
               name="endMM"
-              rules={MMRules}
               render={({ field: { ref, onChange, value }, formState: { errors } }) => (
                 <TextField
                   type="number"
@@ -130,11 +158,15 @@ const ExperiencePage = () => {
                   maxLength={2}
                   value={value || ''}
                   error={!!errors.endMM}
-                  errorMessage={errors.endMM?.message}
                 />
               )}
             />
           </PickerFieldContainer>
+          <ErrorMessage className="relative flex-col ml-0">
+            {Object.values({ startYYYYError, startMMError, endYYYYError, endMMError }).map((error, index) => (
+              <span key={index}>{error?.message}</span>
+            ))}
+          </ErrorMessage>
         </>
       </QuestionCard>
       <QuestionCard title="내가 맡았던 역할은 무엇인가요?">
@@ -184,10 +216,3 @@ const ExperiencePage = () => {
 };
 
 export default ExperiencePage;
-
-const MMRules = {
-  pattern: {
-    value: /(0[1-9]|1[0-2])/,
-    message: '정확한 날짜를 입력해 주세요',
-  },
-};
