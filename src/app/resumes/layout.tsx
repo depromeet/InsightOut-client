@@ -1,21 +1,14 @@
 import { PropsWithChildren, ReactNode } from 'react';
 
-import resumeApi from '@/apis/resume/resume';
-import PrefetchHydration from '@/components/tanstackQuery/PrefetchHydration';
-import Aside from '@/features/resume/components/Aside/Aside';
-import { RESUME_KEY } from '@/shared/constants/querykeys';
-
 type LayoutProps = PropsWithChildren & {
+  aside: ReactNode;
   myExperienceCard: ReactNode;
 };
 
-const Layout = ({ children, myExperienceCard }: LayoutProps) => {
+const Layout = ({ children, aside, myExperienceCard }: LayoutProps) => {
   return (
     <div className="flex h-full max-[1536px]:h-max bg-gray-50 pt-[56px]">
-      {/* @ts-expect-error Server Component */}
-      <PrefetchHydration queryKey={RESUME_KEY.lists()} queryFn={() => resumeApi.get()}>
-        <Aside />
-      </PrefetchHydration>
+      {aside}
       <div className="flex mt-[19px] gap-[20px] px-[10px] max-[1536px]:flex-col max-[1536px]:pl-[101px] ">
         {children}
         {myExperienceCard}
