@@ -54,7 +54,10 @@ const ExperienceListCard = ({
     push(ROUTES.EXPERIENCE);
   };
 
-  const { mutate: deleteExperience } = useDeleteExperience(id);
+  const { mutate: deleteExperience } = useDeleteExperience(id, {
+    onSuccess: () => onCloseActionListModal(),
+  });
+
   const onDeleteButtonClick = () => {
     deleteExperience();
   };
