@@ -51,8 +51,6 @@ const CompletePage = () => {
     }
   }, [showLoading]);
 
-  console.log(isShowConfetti);
-
   if (showLoading || isLoadingSTAR || isLoadingExperienceCard) return <Loading className="mx-auto mt-[250px]" />;
 
   const period =
