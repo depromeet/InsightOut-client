@@ -21,7 +21,6 @@ const CompletePage = () => {
   const experienceId = Number(useSearchParams().get('experienceId')) ?? '0';
   const { mutateAsync: createAiExperienceCard, isLoading: isLoadingExperienceCard } = useSubmitExperience({
     onSuccess: () => {
-      console.log('success');
       setIsShowConfetti(true);
     },
   });
