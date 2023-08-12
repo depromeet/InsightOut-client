@@ -18,7 +18,7 @@ import useIntersection from '@/hooks/useIntersection';
 import addPlusMarkOver99 from '@/shared/utils/addPlusMarkOver99';
 
 const Page = () => {
-  const { data: capabilities, isSuccess } = useGetExperienceCapabilities();
+  const { data: capabilities } = useGetExperienceCapabilities();
   const [sortBy, setSortBy] = useState<keyof typeof EXPERIENCE_SORT_BY>('createdAt');
 
   const params = {
@@ -26,7 +26,7 @@ const Page = () => {
     criteria: sortBy,
   };
 
-  const { data, fetchNextPage, hasNextPage, isFetching } = useGetInfiniteExperiences(params);
+  const { data, fetchNextPage, hasNextPage, isFetching, isSuccess } = useGetInfiniteExperiences(params);
 
   const experiences = useMemo(() => (data ? data.pages.flatMap(({ data }) => data) : []), [data]);
 
@@ -52,7 +52,7 @@ const Page = () => {
     shownExperiences = getSortedExperiences(_experiences, sortBy);
   }
 
-  if (isSuccess && !experiences.length) {
+  if (isSuccess && experiences.length === 0) {
     notFound();
   }
 
