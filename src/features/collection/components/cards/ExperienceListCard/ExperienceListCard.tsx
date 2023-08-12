@@ -201,8 +201,8 @@ type ExperienceListCardKeyWordProps = {
 };
 
 ExperienceListCard.Keyword = ({ id, title, capabilities, isAi = false }: ExperienceListCardKeyWordProps) => (
-  <div className={`${isAi ? 'h-[66px]' : 'h-[104px] gap-y-[2px]'}`}>
-    <span className="mb-4 subhead4">{title}</span>
+  <div className={`${isAi ? 'h-[66px]' : 'h-[104px] gap-y-[2px] mb-[16px]'}`}>
+    <span className="mb-16 subhead4">{title}</span>
     <div className={`flex flex-row flex-wrap gap-x-[4px] mb-[10px] ${isAi || 'gap-y-[2px]'}`}>
       {capabilities
         ? capabilities.map((capability, index) => (
