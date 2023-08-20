@@ -139,7 +139,14 @@ const ExperiencePage = () => {
                   type="number"
                   ref={ref}
                   placeholder="YYYY"
-                  onChange={handlePeriodChange(onChange, 4, 'endMM')}
+                  onChange={handlePeriodChange(
+                    (e) => {
+                      if (value?.length === 4) trigger('endMM');
+                      onChange(e);
+                    },
+                    4,
+                    'endMM'
+                  )}
                   maxLength={4}
                   value={value || ''}
                   error={!!errors.endYYYY}
@@ -154,7 +161,14 @@ const ExperiencePage = () => {
                   type="number"
                   ref={ref}
                   placeholder="MM"
-                  onChange={handlePeriodChange(onChange, 2, 'experienceRole')}
+                  onChange={handlePeriodChange(
+                    (e) => {
+                      if (value?.length === 2) trigger('endYYYY');
+                      onChange(e);
+                    },
+                    2,
+                    'experienceRole'
+                  )}
                   maxLength={2}
                   value={value || ''}
                   error={!!errors.endMM}

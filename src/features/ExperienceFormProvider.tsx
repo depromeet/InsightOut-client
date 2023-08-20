@@ -67,9 +67,12 @@ const schema = yup.object().shape({
     return value.length === 4 && startYYYY.length === 4 && value >= startYYYY;
   }),
   endMM: monthSchema.test('dateRules', '종료 기간은 시작 기간과 같거나 이후여야 합니다', (value, { resolve }) => {
+    const startYYYY = resolve(yup.ref<string>('startYYYY'));
     const startMM = resolve(yup.ref<string>('startMM'));
+    const endYYYY = resolve(yup.ref<string>('endYYYY'));
+    const isValidDate = `${startYYYY}-${startMM}` <= `${endYYYY}-${value}`;
     if (!value?.trim() || !startMM) return;
-    return value.length === 2 && startMM.length === 2 && value >= startMM;
+    return value.length === 2 && startMM.length === 2 && isValidDate;
   }),
 
   keywords: yup.mixed<KeywordEntriesType>().required(),
