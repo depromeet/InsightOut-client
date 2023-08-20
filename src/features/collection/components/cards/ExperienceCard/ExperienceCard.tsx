@@ -125,7 +125,7 @@ ExperienceCard.Header = ({ title, period, isBack, handleFlipClick }: ExperienceC
     <div className="flex flex-row justify-between mb-[12px]">
       <span>{period}</span>
       <Button variant="gray900" size="M" onClick={handleFlipClick}>
-        {!isBack ? '카드 뒷면보기' : '카드 앞면보기'}
+        {!isBack ? '작성내용 확인하기' : '앞면으로 돌아가기'}
       </Button>
     </div>
     <h3 className="text-left h3">{title}</h3>

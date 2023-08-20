@@ -16,9 +16,14 @@ import { useGetExperience } from '@/hooks/reactQuery/analyze/query';
 const CompletePage = () => {
   const [showLoading, setShowLoading] = useState(true);
   const [aiExperience, setAiExperience] = useState<AiResponse['submit']>();
+  const [isShowConfetti, setIsShowConfetti] = useState(false);
 
   const experienceId = Number(useSearchParams().get('experienceId')) ?? '0';
-  const { mutateAsync: createAiExperienceCard, isLoading: isLoadingExperienceCard } = useSubmitExperience();
+  const { mutateAsync: createAiExperienceCard, isLoading: isLoadingExperienceCard } = useSubmitExperience({
+    onSuccess: () => {
+      setIsShowConfetti(true);
+    },
+  });
 
   const { data: experience, isLoading: isLoadingSTAR } = useGetExperience(
     { experienceId },
@@ -59,7 +64,7 @@ const CompletePage = () => {
     title: experience?.title!,
     summaryKeywords: aiExperience?.summaryKeywords,
     experienceCapabilityKeywords: aiExperience?.ExperienceCapability,
-    aiRecommendKeywords: aiExperience?.AiResume?.AiResumeCapability.map((capability) => capability),
+    aiRecommendKeywords: aiExperience?.AiResume?.AiResumeCapability?.map((capability) => capability),
     experienceStatus: aiExperience?.experienceStatus!,
     experienceInfo: experience?.ExperienceInfo,
     star: star,
@@ -73,11 +78,10 @@ const CompletePage = () => {
         {aiExperience && (
           <>
             <ExperienceCard {...experienceCardProps} />
-            <Confetti />
+            {isShowConfetti && <Confetti />}
           </>
         )}
       </div>
-      <Confetti />
     </>
   );
 };
