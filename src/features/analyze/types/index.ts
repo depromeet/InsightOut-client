@@ -74,5 +74,5 @@ export interface ExperienceFormValues {
   /**
    * Chat GPT 자기소개서 생성 프롬프트 api response
    */
-  resume: string;
+  aiResume: string;
 }

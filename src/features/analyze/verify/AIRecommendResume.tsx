@@ -6,6 +6,7 @@ import { useChat } from 'ai/react';
 
 import QuestionCard from '@/components/QuestionCard/QuestionCard';
 import Tag from '@/components/Tag/Tag';
+import { useUpdateExperience } from '@/hooks/reactQuery/analyze/mutation';
 
 import { STEP } from '../constants';
 import { CapabilitiesType, ExperienceFormValues } from '../types';
@@ -21,16 +22,24 @@ export const renderRecommendKeyword = (arr: CapabilitiesType[]) => {
   );
 };
 
+const resumeContentGuard = (text: string) => {
+  if (text.length < 700) return;
+  return text.slice(0, 700);
+};
+
 const AIRecommendResume = () => {
   const { getValues, setValue } = useFormContext<ExperienceFormValues>();
-  const [situation, task, action, result, recommendKeywordList, resume] = getValues([
+  const [experienceId, situation, task, action, result, recommendKeywordList, aiResume] = getValues([
+    'experienceId',
     'situation',
     'task',
     'action',
     'result',
     'capabilities',
-    'resume',
+    'aiResume',
   ]);
+
+  const { mutate: updateExperience } = useUpdateExperience(experienceId);
 
   const { messages, setInput, handleSubmit } = useChat({
     body: {
@@ -41,8 +50,10 @@ const AIRecommendResume = () => {
       recommendKeywordList: recommendKeywordList.map(({ keyword }) => keyword),
     },
     onFinish: ({ content }) => {
-      // TODO: api를 통해 DB에 content 저장하기
-      setValue('resume', content);
+      updateExperience({
+        aiResume: resumeContentGuard(content),
+      });
+      setValue('aiResume', content);
       setValue(`writeStatus.${STEP.verify - 1}`, '작성완료');
     },
   });
@@ -50,12 +61,12 @@ const AIRecommendResume = () => {
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    if (resume) return;
+    if (aiResume) return;
     setInput((prev) => prev + ' ');
     setTimeout(() => {
       inputRef.current?.click();
     }, 1000);
-  }, [setInput, resume]);
+  }, [setInput, aiResume]);
 
   return (
     <>

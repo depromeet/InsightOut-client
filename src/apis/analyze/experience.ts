@@ -1,7 +1,7 @@
 import { ExperienceFormValues } from '@/features/analyze/types';
 
 import instance from '..';
-import { ExperienceParams, ExperienceResponse } from './types/experience';
+import type { ExperienceParams, ExperienceResponse } from './types/experience';
 
 const experienceApi = {
   /**

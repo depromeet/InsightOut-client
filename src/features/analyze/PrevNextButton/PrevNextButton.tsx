@@ -22,9 +22,9 @@ const PrevNextButton = ({ stepByStepSave, readyToAIRecommendation }: Props) => {
     control,
     formState: { errors },
   } = useFormContext<ExperienceFormValues>();
-  const [resume, capabilities] = useWatch({
+  const [aiResume, capabilities] = useWatch({
     control,
-    name: ['resume', 'capabilities'],
+    name: ['aiResume', 'capabilities'],
   });
 
   const handlePrevButton = () => {
@@ -61,7 +61,7 @@ const PrevNextButton = ({ stepByStepSave, readyToAIRecommendation }: Props) => {
           type="submit"
           variant="gray900"
           size="XL"
-          disabled={!capabilities.length || !resume || !!Object.entries(errors).length}>
+          disabled={!capabilities.length || !aiResume || !!Object.entries(errors).length}>
           경험카드 만들기
         </Button>
       ) : (
