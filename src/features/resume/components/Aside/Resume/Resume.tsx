@@ -1,5 +1,5 @@
 import { AccordionItem, AccordionPanel } from '@chakra-ui/react';
-import { useParams } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 
 import { useCreateQuestion } from '@/hooks/reactQuery/resume/question/mutation';
 import { colors } from '@/styles/theme/foundations/colors';
@@ -10,7 +10,8 @@ import QuestionAddButton from './ResumeItem/QuestionAddButton';
 import Title from './ResumeItem/Title';
 
 const Resume = ({ id, title, questions }: ResumeData) => {
-  const { questionId } = useParams();
+  const [, , questionId] = usePathname().split('/');
+
   const { mutate: createQuestion } = useCreateQuestion();
 
   const handleAddQuestionButtonClick = () => {

@@ -2,8 +2,6 @@
 
 import { ChangeEvent, FormEvent, useEffect, useRef } from 'react';
 
-import { useParams } from 'next/navigation';
-
 import Button from '@/components/Button/Button';
 import { TextLengthMessage } from '@/components/Input/TextLengthMessage';
 import { useUpdateQuestion } from '@/hooks/reactQuery/resume/question/mutation';
@@ -20,12 +18,15 @@ import SpellChecker from '../SpellChecker/SpellChecker';
 import SpellErrorPreview from '../SpellChecker/SpellErrorPreview';
 import SavingCaption from './SavingCaption';
 
-const ResumeForm = () => {
+type ResumeFormProps = {
+  questionId: number;
+};
+
+const ResumeForm = ({ questionId }: ResumeFormProps) => {
   const title = useTitle();
   const answer = useAnswer();
   const isSpellCheckMode = useIsSpellCheckMode();
   const { setTitle, setAnswer } = useQuestionActions();
-  const { questionId } = useParams();
 
   const { data: question, status: questionStatus } = useGetQuestion(
     { questionId },

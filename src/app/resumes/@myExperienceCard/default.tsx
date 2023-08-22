@@ -1,13 +1,12 @@
 import { EXPERIENCE_API } from '@/apis/experience/experience';
 import PrefetchHydration from '@/components/tanstackQuery/PrefetchHydration';
+import ExperienceCardDetail from '@/features/resume/components/MyExperienceCard/ExperienceCardDetail';
+import ExperienceCardList from '@/features/resume/components/MyExperienceCard/ExperienceCardList';
+import MyExperienceCardHeader from '@/features/resume/components/MyExperienceCard/MyExperienceCardHeader';
+import { CARD_COUNT_PER_LOAD } from '@/features/resume/constants/cardCountPerLoad';
 import { EXPERIENCE_CAPABILITY_KEY, EXPERIENCE_KEY } from '@/shared/constants/querykeys';
 
-import { CARD_COUNT_PER_LOAD } from '../../constants/cardCountPerLoad';
-import ExperienceCardDetail from './ExperienceCardDetail';
-import ExperienceCardList from './ExperienceCardList';
-import MyExperienceCardHeader from './MyExperienceCardHeader';
-
-const MyExperienceCard = () => {
+const Page = () => {
   return (
     <section className="resume-section h-[976px] shadow-toast">
       {/* @ts-expect-error Server Component */}
@@ -27,4 +26,4 @@ const MyExperienceCard = () => {
   );
 };
 
-export default MyExperienceCard;
+export default Page;

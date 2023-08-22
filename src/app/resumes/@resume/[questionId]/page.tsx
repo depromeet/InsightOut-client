@@ -10,7 +10,7 @@ const Page = ({ params: { questionId } }: { params: { questionId: string } }) =>
       <PrefetchHydration
         queryKey={QUESTION_KEY.detail([{ questionId }])}
         queryFn={() => questionApi.get({ questionId })}>
-        <ResumeForm />
+        <ResumeForm questionId={Number(questionId)} />
       </PrefetchHydration>
     </div>
   );
