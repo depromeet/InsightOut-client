@@ -40,7 +40,7 @@ const nextConfig = {
     return [
       {
         source: '/api/:path*',
-        destination: 'https://dev.insightout.kr/api/:path*',
+        destination: `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/:path*`,
       },
     ];
   },
