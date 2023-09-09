@@ -11,9 +11,10 @@ import Button from '@/components/Button/Button';
 import TextAreaField from '@/components/Input/TextAreaField/TextAreaField';
 import Tag from '@/components/Tag/Tag';
 import { ExperienceStatus } from '@/features/analyze/types';
-import { MESSAGE } from '@/features/collection/constants';
 import { AiRecommendQuestions, ExperienceInfo } from '@/features/collection/types';
 import { MAX_LENGTH } from '@/shared/constants/maxLength';
+import { EXPERIENCE_LIST_CARD_MESSAGE } from '@/shared/constants/messages';
+import { useUserNickname } from '@/shared/store/user';
 
 import CapabilityImage from '../CapabilityImage';
 import MotionBox from '../MotionBox';
@@ -43,6 +44,9 @@ const ExperienceCard = ({
   aiResume,
   aiRecommendQuestions,
 }: Props) => {
+  const username = useUserNickname();
+
+  console.log(username);
   const [isBack, setIsBack] = useState(false);
 
   const handleFlipClick = () => {
@@ -69,7 +73,7 @@ const ExperienceCard = ({
         bg={'white'}
         rounded={32}>
         <ExperienceCard.Header
-          title={title || MESSAGE.NOT_HAS_TITLE}
+          title={title || EXPERIENCE_LIST_CARD_MESSAGE.NOT_HAS_TITLE}
           period={period}
           isBack={isBack}
           handleFlipClick={handleFlipClick}
@@ -86,17 +90,19 @@ const ExperienceCard = ({
               experienceCapabilityKeywords={
                 experienceCapabilityKeywords && experienceCapabilityKeywords.length
                   ? experienceCapabilityKeywords
-                  : MESSAGE.NOT_HAS_CAPACITY_KEYWORDS
+                  : EXPERIENCE_LIST_CARD_MESSAGE.NOT_HAS_CAPACITY_KEYWORDS
               }
               aiRecommendKeywords={
                 aiRecommendKeywords && aiRecommendKeywords.length
                   ? aiRecommendKeywords
-                  : MESSAGE.NOT_HAS_AI_RECOMMEND_KEYWORDS
+                  : EXPERIENCE_LIST_CARD_MESSAGE.NOT_HAS_AI_RECOMMEND_KEYWORDS
               }
               aiRecommendQuestions={aiRecommendQuestions}
             />
           ) : (
             <ExperienceCard.BodyBack
+              username={username}
+              title={title}
               experienceCapabilityKeywords={experienceCapabilityKeywords}
               aiRecommendKeywords={aiRecommendKeywords}
               experienceInfo={experienceInfo}
@@ -252,19 +258,28 @@ ExperienceCard.AIQuestions = ({ aiRecommendQuestions }: ExperienceCardAIQuestion
       </ul>
     ) : (
       <div className=" border-[1px] rounded-[8px] border-gray-300 py-[8px] px-[16px]">
-        {MESSAGE.NOT_HAS_AI_RECOMMEND_QUESTIONS}
+        {EXPERIENCE_LIST_CARD_MESSAGE.NOT_HAS_AI_RECOMMEND_QUESTIONS}
       </div>
     )}
   </div>
 );
 
+type ExperienceBodyBackProps = Pick<
+  Props,
+  'title' | 'experienceCapabilityKeywords' | 'aiRecommendKeywords' | 'experienceInfo' | 'star' | 'aiResume'
+> & {
+  username: string;
+};
+
 ExperienceCard.BodyBack = ({
+  username,
+  title,
   experienceCapabilityKeywords,
   aiRecommendKeywords,
   experienceInfo,
   star,
   aiResume,
-}: Pick<Props, 'experienceCapabilityKeywords' | 'aiRecommendKeywords' | 'experienceInfo' | 'star' | 'aiResume'>) => {
+}: ExperienceBodyBackProps) => {
   return (
     <div className="h-full">
       <div className="flex flex-col w-[690px] text-left">
@@ -293,7 +308,7 @@ ExperienceCard.BodyBack = ({
           </ul>
         </div>
         <div className="mb-[20px]">
-          <TextAreaField chipTitle="올때메로나님의 IT동아리 협업" maxLength={100} readOnly autoSize value={star} />
+          <TextAreaField chipTitle={`${username}님의 ${title}`} maxLength={100} readOnly autoSize value={star} />
         </div>
         <section className="flex flex-col gap-[20px]">
           <h2 className="subhead2 flex items-center gap-[4px]">

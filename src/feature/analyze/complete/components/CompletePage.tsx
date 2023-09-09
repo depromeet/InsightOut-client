@@ -6,12 +6,12 @@ import { useSearchParams } from 'next/navigation';
 
 import { AiResponse } from '@/apis/ai/types/ai';
 import ExperienceCard from '@/features/collection/components/cards/ExperienceCard/ExperienceCard';
-import { MESSAGE } from '@/features/collection/constants';
 import getExperiencePeriod from '@/features/collection/utils/getExperiencePeriod';
 import Confetti from '@/features/experience/Confetti';
 import Loading from '@/features/experience/Loading';
 import { useSubmitExperience } from '@/hooks/reactQuery/ai/mutation';
 import { useGetExperience } from '@/hooks/reactQuery/analyze/query';
+import { EXPERIENCE_LIST_CARD_MESSAGE } from '@/shared/constants/messages';
 
 const CompletePage = () => {
   const [showLoading, setShowLoading] = useState(true);
@@ -56,7 +56,7 @@ const CompletePage = () => {
   const period =
     experience?.startDate && experience?.endDate
       ? getExperiencePeriod(experience?.startDate, experience?.endDate)
-      : MESSAGE.NOT_HAS_PERIOD;
+      : EXPERIENCE_LIST_CARD_MESSAGE.NOT_HAS_PERIOD;
   const star = [experience?.situation, experience?.task, experience?.action, experience?.result].join('\n\n');
 
   const experienceCardProps = {
