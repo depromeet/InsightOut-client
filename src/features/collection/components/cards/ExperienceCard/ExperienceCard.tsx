@@ -11,9 +11,9 @@ import Button from '@/components/Button/Button';
 import TextAreaField from '@/components/Input/TextAreaField/TextAreaField';
 import Tag from '@/components/Tag/Tag';
 import { ExperienceStatus } from '@/features/analyze/types';
-import { MESSAGE } from '@/features/collection/constants';
 import { AiRecommendQuestions, ExperienceInfo } from '@/features/collection/types';
 import { MAX_LENGTH } from '@/shared/constants/maxLength';
+import { EXPERIENCE_LIST_CARD_MESSAGE } from '@/shared/constants/messages';
 import { useUserNickname } from '@/shared/store/user';
 
 import CapabilityImage from '../CapabilityImage';
@@ -73,7 +73,7 @@ const ExperienceCard = ({
         bg={'white'}
         rounded={32}>
         <ExperienceCard.Header
-          title={title || MESSAGE.NOT_HAS_TITLE}
+          title={title || EXPERIENCE_LIST_CARD_MESSAGE.NOT_HAS_TITLE}
           period={period}
           isBack={isBack}
           handleFlipClick={handleFlipClick}
@@ -90,12 +90,12 @@ const ExperienceCard = ({
               experienceCapabilityKeywords={
                 experienceCapabilityKeywords && experienceCapabilityKeywords.length
                   ? experienceCapabilityKeywords
-                  : MESSAGE.NOT_HAS_CAPACITY_KEYWORDS
+                  : EXPERIENCE_LIST_CARD_MESSAGE.NOT_HAS_CAPACITY_KEYWORDS
               }
               aiRecommendKeywords={
                 aiRecommendKeywords && aiRecommendKeywords.length
                   ? aiRecommendKeywords
-                  : MESSAGE.NOT_HAS_AI_RECOMMEND_KEYWORDS
+                  : EXPERIENCE_LIST_CARD_MESSAGE.NOT_HAS_AI_RECOMMEND_KEYWORDS
               }
               aiRecommendQuestions={aiRecommendQuestions}
             />
@@ -258,7 +258,7 @@ ExperienceCard.AIQuestions = ({ aiRecommendQuestions }: ExperienceCardAIQuestion
       </ul>
     ) : (
       <div className=" border-[1px] rounded-[8px] border-gray-300 py-[8px] px-[16px]">
-        {MESSAGE.NOT_HAS_AI_RECOMMEND_QUESTIONS}
+        {EXPERIENCE_LIST_CARD_MESSAGE.NOT_HAS_AI_RECOMMEND_QUESTIONS}
       </div>
     )}
   </div>

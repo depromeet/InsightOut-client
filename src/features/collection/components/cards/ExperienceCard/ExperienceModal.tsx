@@ -2,10 +2,9 @@ import React from 'react';
 
 import { Modal, ModalContent, ModalOverlay } from '@chakra-ui/react';
 
-import { MESSAGE } from '@/features/collection/constants';
 import getExperiencePeriod from '@/features/collection/utils/getExperiencePeriod';
 import { useGetExperience } from '@/hooks/reactQuery/analyze/query';
-import { EXPERIENCE_CARD_MODAL_MESSAGE } from '@/shared/constants/messages';
+import { EXPERIENCE_LIST_CARD_MESSAGE } from '@/shared/constants/messages';
 
 import ExperienceCard from './ExperienceCard';
 
@@ -40,10 +39,12 @@ const ExperienceModal = ({ isOpen, onClose, experienceId }: Props) => {
   const star = [situation, task, action, result].join('\n\n');
   const aiResume = AiResume?.content;
   const aiRecommendKeywords =
-    AiResume?.AiResumeCapabilities.map(({ Capability }) => Capability.keyword) || MESSAGE.NOT_HAS_AI_RECOMMEND_KEYWORDS;
-  const experiencePeriod = startDate && endDate ? getExperiencePeriod(startDate, endDate) : MESSAGE.NOT_HAS_PERIOD;
+    AiResume?.AiResumeCapabilities.map(({ Capability }) => Capability.keyword) ||
+    EXPERIENCE_LIST_CARD_MESSAGE.NOT_HAS_AI_RECOMMEND_KEYWORDS;
+  const experiencePeriod =
+    startDate && endDate ? getExperiencePeriod(startDate, endDate) : EXPERIENCE_LIST_CARD_MESSAGE.NOT_HAS_PERIOD;
 
-  const renderedTitle = title || EXPERIENCE_CARD_MODAL_MESSAGE.DEFAULT_TITLE;
+  const renderedTitle = title || EXPERIENCE_LIST_CARD_MESSAGE.NOT_HAS_TITLE;
 
   return (
     <Modal isOpen={isOpen} onClose={onClose} isCentered>

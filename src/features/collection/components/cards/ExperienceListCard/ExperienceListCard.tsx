@@ -13,7 +13,6 @@ import Modal from '@/components/Modal/Modal';
 import ModalFooter from '@/components/Modal/ModalFooter';
 import ModalHeader from '@/components/Modal/ModalHeader';
 import Tag from '@/components/Tag/Tag';
-import { MESSAGE } from '@/features/collection/constants';
 import { useDeleteExperience } from '@/hooks/reactQuery/experience/mutation';
 import { EXPERIENCE_LIST_CARD_MESSAGE } from '@/shared/constants/messages';
 import { ROUTES } from '@/shared/constants/routes';
@@ -63,7 +62,8 @@ const ExperienceListCard = ({
     deleteExperience();
   };
 
-  const experiencePeriod = startDate && endDate ? getExperiencePeriod(startDate, endDate) : MESSAGE.NOT_HAS_PERIOD;
+  const experiencePeriod =
+    startDate && endDate ? getExperiencePeriod(startDate, endDate) : EXPERIENCE_LIST_CARD_MESSAGE.NOT_HAS_PERIOD;
 
   return (
     <>
@@ -82,7 +82,7 @@ const ExperienceListCard = ({
         />
         <ExperienceListCard.Summary
           experiencePeriod={experiencePeriod}
-          title={title || MESSAGE.NOT_HAS_TITLE}
+          title={title || EXPERIENCE_LIST_CARD_MESSAGE.NOT_HAS_TITLE}
           situation={situation || ''}
         />
         <Divider my={'16px'} />
@@ -93,7 +93,7 @@ const ExperienceListCard = ({
             capabilities={
               experienceCapabilityKeywords && experienceCapabilityKeywords?.length > 0
                 ? experienceCapabilityKeywords
-                : MESSAGE.NOT_HAS_CAPACITY_KEYWORDS
+                : EXPERIENCE_LIST_CARD_MESSAGE.NOT_HAS_CAPACITY_KEYWORDS
             }
           />
           <ExperienceListCard.Keyword
@@ -102,7 +102,7 @@ const ExperienceListCard = ({
             capabilities={
               aiRecommendKeywords && aiRecommendKeywords?.length > 0
                 ? aiRecommendKeywords
-                : MESSAGE.NOT_HAS_AI_RECOMMEND_KEYWORDS
+                : EXPERIENCE_LIST_CARD_MESSAGE.NOT_HAS_AI_RECOMMEND_KEYWORDS
             }
             isAi={true}
           />
@@ -110,8 +110,8 @@ const ExperienceListCard = ({
       </section>
       <Modal size="md" isOpen={isOpenActionListModal} onClose={onCloseActionListModal}>
         <ModalHeader.Title
-          title={MESSAGE.DELETE_EXPERIENCE_CARD_TITLE}
-          subTitle={MESSAGE.DELETE_EXPERIENCE_CARD_SUBTITLE}
+          title={EXPERIENCE_LIST_CARD_MESSAGE.DELETE_EXPERIENCE_CARD_TITLE}
+          subTitle={EXPERIENCE_LIST_CARD_MESSAGE.DELETE_EXPERIENCE_CARD_SUBTITLE}
         />
         <ModalFooter.TwoButton
           leftTextContent="취소하기"
@@ -187,7 +187,7 @@ type ExperienceListCardMidProps = {
 };
 
 ExperienceListCard.Summary = ({ experiencePeriod, title, situation }: ExperienceListCardMidProps) => {
-  const renderedSituation = situation || EXPERIENCE_LIST_CARD_MESSAGE.NO_SITUATION;
+  const renderedSituation = situation || EXPERIENCE_LIST_CARD_MESSAGE.NOT_HAS_SITUATION;
   return (
     <div className="mt-[24px] flex flex-col">
       <span className="b1 mb-[2px]">{experiencePeriod}</span>
