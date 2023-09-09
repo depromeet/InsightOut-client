@@ -1,13 +1,12 @@
 import axios, { AxiosResponse } from 'axios';
 
 import { authStore } from '@/features/auth/store';
-import { HTTP_BASE_URL } from '@/shared/constants/http';
 import { isAccessTokenExpired, isRefreshTokenExpired, isTokenNotExist } from '@/shared/utils/http';
 
 import authApi from './auth/auth';
 
 const instance = axios.create({
-  baseURL: HTTP_BASE_URL,
+  baseURL: '/api',
   withCredentials: true,
 });
 
