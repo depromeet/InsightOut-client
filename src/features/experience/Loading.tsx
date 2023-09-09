@@ -18,7 +18,7 @@ const Loading = ({ className }: Props) => {
           <Lottie src="/lotties/lumos-loading.json" />
         </div>
         <p className="text-main h6">여기까지 오느라 수고했어요 :)</p>
-        <p className="text-main h6">[{nickname}]님의 경험카드가 만들어지고 있어요</p>
+        <p className="text-main h6">{nickname}님의 경험카드가 만들어지고 있어요</p>
       </div>
     </section>
   );
