@@ -87,12 +87,12 @@ const Layout = ({ children }: LayoutProps) => {
     {
       enabled: isNumber(experienceId),
       onSuccess: (data) => {
-        const [situation, task, action, result, resume] = getValues([
+        const [situation, task, action, result, aiResume] = getValues([
           'situation',
           'task',
           'action',
           'result',
-          'resume',
+          'aiResume',
         ]);
         const [endYYYY, endMM] = data?.endDate?.split?.('-') ?? '';
         const [startYYYY, startMM] = data?.startDate?.split?.('-') ?? '';
@@ -110,7 +110,7 @@ const Layout = ({ children }: LayoutProps) => {
         setValue('action', action);
         setValue('result', result);
 
-        setValue('resume', resume);
+        setValue('aiResume', aiResume);
       },
     }
   );
@@ -228,10 +228,10 @@ const Layout = ({ children }: LayoutProps) => {
           }
           break;
         case ROUTES.VERIFY:
-          const [capabilities, resume] = getValues(['capabilities', 'resume']);
-          if (!!capabilities.length && !!resume) {
+          const [capabilities, aiResume] = getValues(['capabilities', 'aiResume']);
+          if (!!capabilities.length && !!aiResume) {
             setWriteStatus(copyWriteStatus, '작성완료');
-          } else if (!!capabilities.length || !!resume) {
+          } else if (!!capabilities.length || !!aiResume) {
             setWriteStatus(copyWriteStatus, '작성중');
           } else {
             setWriteStatus(copyWriteStatus, '미작성');

@@ -10,7 +10,6 @@ import HomeLogo from 'public/images/home/img-home-logo.png';
 import AuthModal from '@/features/auth/components/AuthModal/AuthModal';
 import { useAuthActions } from '@/features/auth/store';
 import GnbMyPage from '@/features/myPage/components/GlobalNavigationBar/GnbMyPage';
-import getResumeRoute from '@/features/resume/utils/getResumeRoute';
 import { ROUTES, SIGN_UP_ROUTES } from '@/shared/constants/routes';
 import { useUserEmail, useUserImageUrl, useUserNickname } from '@/shared/store/user';
 import { tw } from '@/shared/utils/tailwindMerge';
@@ -50,7 +49,6 @@ const GlobalNavigationBar = ({
   const router = useRouter();
   const userNickname = useUserNickname();
   const userEmail = useUserEmail();
-  const resumeRoute = getResumeRoute();
 
   const handleClickLoginButton = () => {
     setIsOpenSignUpModal(true);
@@ -86,7 +84,7 @@ const GlobalNavigationBar = ({
             </li>
             <li
               className={cn(styles.link, { [styles.focus]: pathName.startsWith(ROUTES.RESUMES) })}
-              onClick={() => handleRouter(resumeRoute as Route)}>
+              onClick={() => handleRouter(ROUTES.RESUMES as Route)}>
               자기소개서 작성하기
             </li>
             <li

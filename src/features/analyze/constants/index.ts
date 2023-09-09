@@ -17,7 +17,7 @@ export const initialValue: ExperienceFormValues = {
   experienceStatus: 'INPROGRESS',
   writeStatus: ['미작성', '미작성', '미작성', '미작성'],
   capabilities: [],
-  resume: '',
+  aiResume: '',
 };
 
 export const STEP = {

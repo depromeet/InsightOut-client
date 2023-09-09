@@ -12,6 +12,6 @@ export default meta;
 type Story = StoryObj<typeof ResumeForm>;
 
 export const Default: Story = {
-  render: () => <ResumeForm />,
+  render: () => <ResumeForm questionId={1} />,
   args: {},
 };

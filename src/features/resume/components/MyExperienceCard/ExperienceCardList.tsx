@@ -7,6 +7,7 @@ import getExperiencePeriod from '@/features/collection/utils/getExperiencePeriod
 import getFilteredExperiences from '@/features/collection/utils/getFilteredExperiences';
 import { useGetInfiniteExperiences } from '@/hooks/reactQuery/experience/qeury';
 import useIntersection from '@/hooks/useIntersection';
+import { useUpdateEffect } from '@/hooks/useUpdateEffect';
 
 import { CARD_COUNT_PER_LOAD } from '../../constants/cardCountPerLoad';
 import { useCapabilityKeyword, useExperienceActions, useExperienceId } from '../../store';
@@ -17,19 +18,21 @@ const ExperienceCardList = () => {
   const experienceId = useExperienceId();
   const { setExperienceId } = useExperienceActions();
 
-  const { data, fetchNextPage, hasNextPage, isFetching } = useGetInfiniteExperiences(
-    { take: CARD_COUNT_PER_LOAD, situation: true, task: true, action: true, result: true },
-    {
-      onSuccess: ({ pages }) => {
-        const firstDoneExperienceId = pages
-          .flatMap(({ data }) => data)
-          .find(({ experienceStatus }) => experienceStatus === 'DONE')?.id;
-        if (firstDoneExperienceId) setExperienceId(firstDoneExperienceId);
-      },
-    }
-  );
+  const { data, fetchNextPage, hasNextPage, isFetching } = useGetInfiniteExperiences({
+    take: CARD_COUNT_PER_LOAD,
+    situation: true,
+    task: true,
+    action: true,
+    result: true,
+  });
 
   const experiences = useMemo(() => (data ? data.pages.flatMap(({ data }) => data) : []), [data]);
+
+  useUpdateEffect(() => {
+    const firstDoneExperienceId = experiences.find(({ experienceStatus }) => experienceStatus === 'DONE')?.id;
+
+    if (firstDoneExperienceId) setExperienceId(firstDoneExperienceId);
+  }, [experiences]);
 
   const ref = useIntersection((entry, observer) => {
     observer.unobserve(entry.target);
