@@ -15,6 +15,7 @@ import ModalHeader from '@/components/Modal/ModalHeader';
 import Tag from '@/components/Tag/Tag';
 import { MESSAGE } from '@/features/collection/constants';
 import { useDeleteExperience } from '@/hooks/reactQuery/experience/mutation';
+import { EXPERIENCE_LIST_CARD_MESSAGE } from '@/shared/constants/messages';
 import { ROUTES } from '@/shared/constants/routes';
 import { useExperienceId } from '@/shared/store/experienceId';
 
@@ -185,13 +186,16 @@ type ExperienceListCardMidProps = {
   situation?: string;
 };
 
-ExperienceListCard.Summary = ({ experiencePeriod, title, situation }: ExperienceListCardMidProps) => (
-  <div className="mt-[24px] flex flex-col">
-    <span className="b1 mb-[2px]">{experiencePeriod}</span>
-    <h5 className="h5 mb-[8px]">{title}</h5>
-    <p className="b2 line-clamp-1">{situation}</p>
-  </div>
-);
+ExperienceListCard.Summary = ({ experiencePeriod, title, situation }: ExperienceListCardMidProps) => {
+  const renderedSituation = situation || EXPERIENCE_LIST_CARD_MESSAGE.NO_SITUATION;
+  return (
+    <div className="mt-[24px] flex flex-col">
+      <span className="b1 mb-[2px]">{experiencePeriod}</span>
+      <h5 className="h5 mb-[8px]">{title}</h5>
+      <p className="b2 line-clamp-1">{renderedSituation}</p>
+    </div>
+  );
+};
 
 type ExperienceListCardKeyWordProps = {
   id: number;

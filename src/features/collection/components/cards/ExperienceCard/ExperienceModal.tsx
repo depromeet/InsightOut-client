@@ -5,6 +5,7 @@ import { Modal, ModalContent, ModalOverlay } from '@chakra-ui/react';
 import { MESSAGE } from '@/features/collection/constants';
 import getExperiencePeriod from '@/features/collection/utils/getExperiencePeriod';
 import { useGetExperience } from '@/hooks/reactQuery/analyze/query';
+import { EXPERIENCE_CARD_MODAL_MESSAGE } from '@/shared/constants/messages';
 
 import ExperienceCard from './ExperienceCard';
 
@@ -42,12 +43,14 @@ const ExperienceModal = ({ isOpen, onClose, experienceId }: Props) => {
     AiResume?.AiResumeCapabilities.map(({ Capability }) => Capability.keyword) || MESSAGE.NOT_HAS_AI_RECOMMEND_KEYWORDS;
   const experiencePeriod = startDate && endDate ? getExperiencePeriod(startDate, endDate) : MESSAGE.NOT_HAS_PERIOD;
 
+  const renderedTitle = title || EXPERIENCE_CARD_MODAL_MESSAGE.DEFAULT_TITLE;
+
   return (
     <Modal isOpen={isOpen} onClose={onClose} isCentered>
       <ModalOverlay />
       <ModalContent bg={'none'} shadow={'none'}>
         <ExperienceCard
-          title={title}
+          title={renderedTitle}
           period={experiencePeriod}
           experienceStatus={experienceStatus}
           summaryKeywords={summaryKeywords}
