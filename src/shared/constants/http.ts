@@ -1,5 +1,5 @@
 export const HTTP_BASE_URL =
-  process.env.NODE_ENV === 'production' ? 'https://api-prod.insightout.kr/api' : 'http://localhost:3000/api';
+  process.env.NODE_ENV === 'production' ? 'https://www.insightout.kr/api' : 'http://localhost:3000/api';
 
 export const HTTP_STATUS_CODE = {
   BAD_REQUEST: 400,
