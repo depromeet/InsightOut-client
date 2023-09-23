@@ -46,7 +46,6 @@ const ExperienceCard = ({
 }: Props) => {
   const username = useUserNickname();
 
-  console.log(username);
   const [isBack, setIsBack] = useState(false);
 
   const handleFlipClick = () => {
@@ -250,8 +249,8 @@ ExperienceCard.AIQuestions = ({ aiRecommendQuestions }: ExperienceCardAIQuestion
     <h6 className="h6 mb-[8px]">이 경험과 잘 맞는 자기소개서 문항</h6>
     {aiRecommendQuestions?.length ? (
       <ul className="flex flex-col gap-[8px]">
-        {aiRecommendQuestions?.map(({ id, createedAt, title }) => (
-          <li key={`${id}-${createedAt}`} className=" border-[1px] rounded-[8px] border-gray-300 py-[8px] px-[16px]">
+        {aiRecommendQuestions?.map(({ id, title }) => (
+          <li key={`${id}-${title}`} className=" border-[1px] rounded-[8px] border-gray-300 py-[8px] px-[16px]">
             <p className="w-full">{title}</p>
           </li>
         ))}
