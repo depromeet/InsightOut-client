@@ -51,7 +51,7 @@ const Aside = () => {
           </Tooltip>
         )}
       </header>
-      <ResumeListContainer expandedResumeCount={resumeList?.length}>
+      <ResumeListContainer>
         {resumeList?.map((resume) => (
           <Resume key={resume.id} {...resume} />
         ))}
