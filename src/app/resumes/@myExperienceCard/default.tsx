@@ -1,4 +1,4 @@
-import { EXPERIENCE_API } from '@/apis/experience/experience';
+import { EXPERIENCE_API, EXPERIENCE_CAPABILITY_API } from '@/apis/experience/experience';
 import PrefetchHydration from '@/components/tanstackQuery/PrefetchHydration';
 import ExperienceCardDetail from '@/features/resume/components/MyExperienceCard/ExperienceCardDetail';
 import ExperienceCardList from '@/features/resume/components/MyExperienceCard/ExperienceCardList';
