@@ -19,9 +19,10 @@ const CompletePage = () => {
   const [isShowConfetti, setIsShowConfetti] = useState(false);
 
   const experienceId = Number(useSearchParams().get('experienceId')) ?? '0';
-  const { mutateAsync: createAiExperienceCard, isLoading: isLoadingExperienceCard } = useSubmitExperience({
-    onSuccess: () => {
+  const { mutate: createAiExperienceCard, isLoading: isLoadingExperienceCard } = useSubmitExperience({
+    onSuccess: (data) => {
       setIsShowConfetti(true);
+      setAiExperience(data);
     },
   });
 
@@ -29,7 +30,7 @@ const CompletePage = () => {
     { experienceId },
     {
       enabled: !showLoading,
-      onSuccess: async (data) => {
+      onSuccess: (data) => {
         const payload = {
           experienceId,
           situation: data?.situation,
@@ -37,8 +38,7 @@ const CompletePage = () => {
           action: data?.action,
           result: data?.result,
         };
-        const _aiExpeience = await createAiExperienceCard(payload);
-        setAiExperience(_aiExpeience);
+        createAiExperienceCard(payload);
       },
     }
   );
@@ -68,8 +68,8 @@ const CompletePage = () => {
     experienceStatus: aiExperience?.experienceStatus!,
     experienceInfo: experience?.ExperienceInfo,
     star: star,
-    aiResume: experience?.AiResume?.content,
-    aiRecommendQuestions: experience?.AiRecommendQuestions,
+    aiResume: aiExperience?.AiResume?.content,
+    aiRecommendQuestions: aiExperience?.AiRecommendQuestion,
   };
 
   return (
