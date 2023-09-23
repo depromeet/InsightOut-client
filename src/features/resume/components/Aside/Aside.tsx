@@ -27,7 +27,7 @@ const Aside = () => {
   };
 
   return (
-    <aside className="min-w-[363px] py-12 px-[30px]">
+    <aside className="min-w-[363px] py-12 px-[30px] overflow-y-scroll">
       <header className="flex items-center justify-between mb-7">
         <h1 className="flex gap-[6px] subhead1">
           <IconPencil />
@@ -51,7 +51,7 @@ const Aside = () => {
           </Tooltip>
         )}
       </header>
-      <ResumeListContainer expandedResumeCount={resumeList?.length}>
+      <ResumeListContainer>
         {resumeList?.map((resume) => (
           <Resume key={resume.id} {...resume} />
         ))}
