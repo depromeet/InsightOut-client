@@ -10,12 +10,12 @@ import Chip from '@/components/Chip/Chip';
 import IconClock from '@/components/Icon/IconClock';
 import ExperienceListCard from '@/features/collection/components/cards/ExperienceListCard/ExperienceListCard';
 import { EXPERIENCE_SORT_BY } from '@/features/collection/constants';
-import { Experience } from '@/features/collection/types';
 import getFilteredExperiences from '@/features/collection/utils/getFilteredExperiences';
 import getSortedExperiences from '@/features/collection/utils/getSortedExperiences';
 import { useGetExperienceCapabilities, useGetInfiniteExperiences } from '@/hooks/reactQuery/experience/qeury';
 import useIntersection from '@/hooks/useIntersection';
 import addPlusMarkOver99 from '@/shared/utils/addPlusMarkOver99';
+import { generateId } from '@/shared/utils/generateId';
 
 const Page = () => {
   const { data: capabilities } = useGetExperienceCapabilities();
@@ -86,8 +86,8 @@ const Page = () => {
       </section>
       <section className="mt-[24px]">
         <ul className="grid grid-cols-3 gap-[16px]">
-          {shownExperiences.map((experience: Experience) => (
-            <li key={experience.id}>
+          {shownExperiences.map((experience) => (
+            <li key={generateId()}>
               <ExperienceListCard {...experience} />
             </li>
           ))}
