@@ -2,12 +2,14 @@
 
 import { useMemo, useState } from 'react';
 
+import { Flex } from '@chakra-ui/react';
 import { notFound } from 'next/navigation';
 
 import Badge from '@/components/Badge/Badge';
 import TextButton from '@/components/Button/TextButton';
 import Chip from '@/components/Chip/Chip';
 import IconClock from '@/components/Icon/IconClock';
+import Spinner from '@/components/Spinner/Spinner';
 import ExperienceListCard from '@/features/collection/components/cards/ExperienceListCard/ExperienceListCard';
 import { EXPERIENCE_SORT_BY } from '@/features/collection/constants';
 import getFilteredExperiences from '@/features/collection/utils/getFilteredExperiences';
@@ -26,7 +28,8 @@ const Page = () => {
     criteria: sortBy,
   };
 
-  const { data, fetchNextPage, hasNextPage, isFetching, isSuccess } = useGetInfiniteExperiences(params);
+  const { data, fetchNextPage, hasNextPage, isFetching, isFetchingNextPage, isSuccess } =
+    useGetInfiniteExperiences(params);
 
   const experiences = useMemo(
     () => (data ? data.pages.flatMap(({ data }) => getFilteredExperiences(data, selectedCapabilityKeyword)) : []),
@@ -84,6 +87,9 @@ const Page = () => {
           ))}
           <div ref={ref}></div>
         </ul>
+        <Flex justifyContent="center" alignItems="center" height="70px">
+          {(isFetchingNextPage || hasNextPage) && <Spinner size="L" style="primary500" />}
+        </Flex>
       </section>
     </div>
   );
