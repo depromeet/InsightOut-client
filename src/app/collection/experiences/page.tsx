@@ -11,7 +11,6 @@ import IconClock from '@/components/Icon/IconClock';
 import ExperienceListCard from '@/features/collection/components/cards/ExperienceListCard/ExperienceListCard';
 import { EXPERIENCE_SORT_BY } from '@/features/collection/constants';
 import getFilteredExperiences from '@/features/collection/utils/getFilteredExperiences';
-import getSortedExperiences from '@/features/collection/utils/getSortedExperiences';
 import { useGetExperienceCapabilities, useGetInfiniteExperiences } from '@/hooks/reactQuery/experience/qeury';
 import useIntersection from '@/hooks/useIntersection';
 import addPlusMarkOver99 from '@/shared/utils/addPlusMarkOver99';
@@ -20,6 +19,7 @@ import { generateId } from '@/shared/utils/generateId';
 const Page = () => {
   const { data: capabilities } = useGetExperienceCapabilities();
   const [sortBy, setSortBy] = useState<keyof typeof EXPERIENCE_SORT_BY>('createdAt');
+  const [selectedCapabilityKeyword, setSelectedCapabilityKeyword] = useState('전체');
 
   const params = {
     take: 3,
@@ -28,7 +28,10 @@ const Page = () => {
 
   const { data, fetchNextPage, hasNextPage, isFetching, isSuccess } = useGetInfiniteExperiences(params);
 
-  const experiences = useMemo(() => (data ? data.pages.flatMap(({ data }) => data) : []), [data]);
+  const experiences = useMemo(
+    () => (data ? data.pages.flatMap(({ data }) => getFilteredExperiences(data, selectedCapabilityKeyword)) : []),
+    [data, selectedCapabilityKeyword]
+  );
 
   const ref = useIntersection((entry, observer) => {
     observer.unobserve(entry.target);
@@ -36,21 +39,9 @@ const Page = () => {
     if (hasNextPage && !isFetching) fetchNextPage();
   });
 
-  const [selectedCapabilityKeyword, setSelectedCapabilityKeyword] = useState('전체');
-
   const handleTimeSortClick = () => {
     setSortBy(() => (sortBy === 'createdAt' ? 'startDate' : 'createdAt'));
   };
-
-  let shownExperiences = experiences ?? [];
-  if (experiences) {
-    const _experiences =
-      selectedCapabilityKeyword === '전체'
-        ? experiences ?? []
-        : getFilteredExperiences(experiences, selectedCapabilityKeyword);
-
-    shownExperiences = getSortedExperiences(_experiences, sortBy);
-  }
 
   if (isSuccess && experiences.length === 0) {
     notFound();
@@ -86,7 +77,7 @@ const Page = () => {
       </section>
       <section className="mt-[24px]">
         <ul className="grid grid-cols-3 gap-[16px]">
-          {shownExperiences.map((experience) => (
+          {experiences.map((experience) => (
             <li key={generateId()}>
               <ExperienceListCard {...experience} />
             </li>
