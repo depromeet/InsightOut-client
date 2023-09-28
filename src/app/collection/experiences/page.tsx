@@ -46,7 +46,7 @@ const Page = () => {
     setSortBy(() => (sortBy === 'createdAt' ? 'startDate' : 'createdAt'));
   };
 
-  if (isSuccess && experiences.length === 0) {
+  if (isSuccess && !hasNextPage && experiences.length === 0) {
     notFound();
   }
 
