@@ -2,33 +2,39 @@
 
 import { useMemo, useState } from 'react';
 
+import { Flex } from '@chakra-ui/react';
 import { notFound } from 'next/navigation';
 
 import Badge from '@/components/Badge/Badge';
 import TextButton from '@/components/Button/TextButton';
 import Chip from '@/components/Chip/Chip';
 import IconClock from '@/components/Icon/IconClock';
+import Spinner from '@/components/Spinner/Spinner';
 import ExperienceListCard from '@/features/collection/components/cards/ExperienceListCard/ExperienceListCard';
 import { EXPERIENCE_SORT_BY } from '@/features/collection/constants';
-import { Experience } from '@/features/collection/types';
 import getFilteredExperiences from '@/features/collection/utils/getFilteredExperiences';
-import getSortedExperiences from '@/features/collection/utils/getSortedExperiences';
 import { useGetExperienceCapabilities, useGetInfiniteExperiences } from '@/hooks/reactQuery/experience/qeury';
 import useIntersection from '@/hooks/useIntersection';
 import addPlusMarkOver99 from '@/shared/utils/addPlusMarkOver99';
+import { generateId } from '@/shared/utils/generateId';
 
 const Page = () => {
   const { data: capabilities } = useGetExperienceCapabilities();
   const [sortBy, setSortBy] = useState<keyof typeof EXPERIENCE_SORT_BY>('createdAt');
+  const [selectedCapabilityKeyword, setSelectedCapabilityKeyword] = useState('전체');
 
   const params = {
     take: 3,
     criteria: sortBy,
   };
 
-  const { data, fetchNextPage, hasNextPage, isFetching, isSuccess } = useGetInfiniteExperiences(params);
+  const { data, fetchNextPage, hasNextPage, isFetching, isFetchingNextPage, isSuccess } =
+    useGetInfiniteExperiences(params);
 
-  const experiences = useMemo(() => (data ? data.pages.flatMap(({ data }) => data) : []), [data]);
+  const experiences = useMemo(
+    () => (data ? data.pages.flatMap(({ data }) => getFilteredExperiences(data, selectedCapabilityKeyword)) : []),
+    [data, selectedCapabilityKeyword]
+  );
 
   const ref = useIntersection((entry, observer) => {
     observer.unobserve(entry.target);
@@ -36,23 +42,11 @@ const Page = () => {
     if (hasNextPage && !isFetching) fetchNextPage();
   });
 
-  const [selectedCapabilityKeyword, setSelectedCapabilityKeyword] = useState('전체');
-
   const handleTimeSortClick = () => {
     setSortBy(() => (sortBy === 'createdAt' ? 'startDate' : 'createdAt'));
   };
 
-  let shownExperiences = experiences ?? [];
-  if (experiences) {
-    const _experiences =
-      selectedCapabilityKeyword === '전체'
-        ? experiences ?? []
-        : getFilteredExperiences(experiences, selectedCapabilityKeyword);
-
-    shownExperiences = getSortedExperiences(_experiences, sortBy);
-  }
-
-  if (isSuccess && experiences.length === 0) {
+  if (isSuccess && !hasNextPage && experiences.length === 0) {
     notFound();
   }
 
@@ -86,13 +80,16 @@ const Page = () => {
       </section>
       <section className="mt-[24px]">
         <ul className="grid grid-cols-3 gap-[16px]">
-          {shownExperiences.map((experience: Experience) => (
-            <li key={experience.id}>
+          {experiences.map((experience) => (
+            <li key={generateId()}>
               <ExperienceListCard {...experience} />
             </li>
           ))}
           <div ref={ref}></div>
         </ul>
+        <Flex justifyContent="center" alignItems="center" height="70px">
+          {(isFetchingNextPage || hasNextPage) && <Spinner size="L" style="primary500" />}
+        </Flex>
       </section>
     </div>
   );
