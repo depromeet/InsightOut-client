@@ -26,12 +26,14 @@ const ResumeAnswerModalCard = ({ isOpen, onClose, updatedAt, title, answer }: Pr
             <h6 className="h6">{title || '문항 질문을 적어보세요'}</h6>
           </ModalHeader>
           <ModalBody m={0} mt={'10px'} w={'full'}>
-            <textarea className="w-full h-[500px] mt-[8px] pr-[24px] b1 resize-none">{answer}</textarea>
+            <textarea className="w-full h-[500px] mt-[8px] pr-[24px] b1 resize-none" readOnly>
+              {answer}
+            </textarea>
           </ModalBody>
           <ModalFooter className="flex flex-col" w={'full'} m={0} p={0}>
             <div className="flex justify-end w-full">
               <b className="b3 text-light">
-                <span className="text-secondary-500">{answer?.length}자</span>/{MAX_LENGTH.QUESTION}자
+                <span className="text-secondary-500">{answer?.length ?? 0}자</span>/{MAX_LENGTH.QUESTION}자
               </b>
             </div>
           </ModalFooter>
